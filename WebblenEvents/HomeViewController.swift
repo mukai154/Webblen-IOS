@@ -21,9 +21,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var currentBlock: FIRDatabaseReference!
     var modifiedDescription : String?
     
-    var userInterests = ["AMUSEMENT", "ART", "COMMUNITY", "ENTERTAINMENT", "NETWORKING"]
+    var userInterests = ["none"]
     var userBlocks = ["key"]
     var interestHandle: FIRDatabaseHandle?
+    var numberOfEvents = 0
     
     var defaultImageViewHeightConstraint:CGFloat = 225
     
@@ -33,15 +34,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var trailingMenuConstraint: NSLayoutConstraint!
     var menuShowing = false
 
+    @IBOutlet weak var noEventsView: UIView!
     @IBOutlet weak var menu: UIView!
     @IBOutlet weak var homeTableView: UITableView!
     @IBOutlet weak var navBack: UIView!
-    @IBOutlet weak var tabBack: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     
     var dataBaseRef: FIRDatabaseReference!
     var events = [Event]()
+
+
 
     fileprivate var _refHandle: FIRDatabaseHandle!
     
@@ -51,7 +54,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         menu.layer.shadowOpacity = 0.5
         menu.layer.shadowOffset = CGSize(width: 0, height: 3)
-
+        
+        noEventsView.isHidden = true
         homeTableView.isHidden = true
         //Activity Indicator
         activityIndicator.startAnimating()
@@ -380,7 +384,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.homeTableView.estimatedRowHeight = 250
         
         
-        
+        checkEvents()
+
+        activityIndicator.stopAnimating()
+
         
         
         
@@ -420,7 +427,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                             
                             
                             self.events.append(eventPost)
-        
+                            self.numberOfEvents += 1
+                            
                             
                             print(self.events)
                         }
@@ -436,7 +444,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         })
         dataBaseRef.removeAllObservers()
-        activityIndicator.stopAnimating()
     }
     
 
@@ -577,6 +584,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
 
         
+    }
+    
+    //Check if events loaded
+    func checkEvents(){
+        
+        if (numberOfEvents == 0){
+        
+            self.homeTableView.isHidden = true
+            self.noEventsView.isHidden = false
+            
+        }
     }
 
 
