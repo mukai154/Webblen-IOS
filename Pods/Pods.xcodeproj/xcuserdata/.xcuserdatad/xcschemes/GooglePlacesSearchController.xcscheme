@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '2D4F8458E5B7E23FDFC7FA89E5B3EF75'
+               BlueprintIdentifier = 'D424923B38A9B9256D68251269F79873'
                BlueprintName = 'GooglePlacesSearchController'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'GooglePlacesSearchController.framework'>

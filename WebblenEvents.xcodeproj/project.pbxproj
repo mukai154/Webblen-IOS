@@ -24,7 +24,6 @@
 		46621B7F1E218750005E5404 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46621B7E1E218750005E5404 /* InitialViewController.swift */; };
 		46621B811E21D11B005E5404 /* MyEventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46621B801E21D11B005E5404 /* MyEventsTableViewCell.swift */; };
 		46621B831E2E9E4A005E5404 /* EventInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46621B821E2E9E4A005E5404 /* EventInfoViewController.swift */; };
-		467E3EBB1F58F8C900AC843D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 467E3EBA1F58F8C900AC843D /* GoogleService-Info.plist */; };
 		4687A00D1DFCB9A80067F773 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4687A00C1DFCB9A80067F773 /* AppDelegate.swift */; };
 		4687A0121DFCB9A80067F773 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4687A0101DFCB9A80067F773 /* Main.storyboard */; };
 		4687A0151DFCB9A80067F773 /* WebblenEvents.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4687A0131DFCB9A80067F773 /* WebblenEvents.xcdatamodeld */; };
@@ -32,14 +31,13 @@
 		4687A01A1DFCB9A80067F773 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4687A0181DFCB9A80067F773 /* LaunchScreen.storyboard */; };
 		4687A0221DFCBC560067F773 /* Logo White No Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 4687A0211DFCBC560067F773 /* Logo White No Background.png */; };
 		469386DC1E2F2E51000AF3D4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469386DB1E2F2E51000AF3D4 /* SettingsViewController.swift */; };
-		469386DE1E2F3D19000AF3D4 /* logoReg.png in Resources */ = {isa = PBXBuildFile; fileRef = 469386DD1E2F3D19000AF3D4 /* logoReg.png */; };
 		46956C6F1E1DB3F9009A8F93 /* InterestSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46956C6E1E1DB3F9009A8F93 /* InterestSetupViewController.swift */; };
 		46956C711E1E0537009A8F93 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46956C701E1E0536009A8F93 /* SetupViewController.swift */; };
 		46956C731E1E10E5009A8F93 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46956C721E1E10E5009A8F93 /* SignUpViewController.swift */; };
-		469B3D6E1E309916007CC2E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 469B3D6D1E309916007CC2E9 /* Images.xcassets */; };
 		469E84831F355988002E07AA /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469E84821F355988002E07AA /* MapsViewController.swift */; };
 		469E84851F385180002E07AA /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469E84841F385180002E07AA /* DateViewController.swift */; };
 		46F113BC1E16044800FB7294 /* defaultEventImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 46F113BB1E16044800FB7294 /* defaultEventImage.png */; };
+		D40A129F1F6584F900392FF9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D40A129E1F6584F900392FF9 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,7 +57,6 @@
 		46621B7E1E218750005E5404 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		46621B801E21D11B005E5404 /* MyEventsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyEventsTableViewCell.swift; sourceTree = "<group>"; };
 		46621B821E2E9E4A005E5404 /* EventInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInfoViewController.swift; sourceTree = "<group>"; };
-		467E3EBA1F58F8C900AC843D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4687A0091DFCB9A80067F773 /* WebblenEvents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebblenEvents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4687A00C1DFCB9A80067F773 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4687A0111DFCB9A80067F773 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -69,17 +66,16 @@
 		4687A01B1DFCB9A80067F773 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4687A0211DFCBC560067F773 /* Logo White No Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo White No Background.png"; sourceTree = "<group>"; };
 		469386DB1E2F2E51000AF3D4 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		469386DD1E2F3D19000AF3D4 /* logoReg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logoReg.png; path = ../../webblenResources/logoReg.png; sourceTree = "<group>"; };
 		46956C6E1E1DB3F9009A8F93 /* InterestSetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestSetupViewController.swift; sourceTree = "<group>"; };
 		46956C701E1E0536009A8F93 /* SetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
 		46956C721E1E10E5009A8F93 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		46956C741E1E2519009A8F93 /* WebblenEvents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebblenEvents.entitlements; sourceTree = "<group>"; };
-		469B3D6D1E309916007CC2E9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		469E84821F355988002E07AA /* MapsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
 		469E84841F385180002E07AA /* DateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 		46F113BB1E16044800FB7294 /* defaultEventImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultEventImage.png; sourceTree = "<group>"; };
 		507F16388FC4FF4BC0B398A4 /* Pods-WebblenEvents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebblenEvents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents.debug.xcconfig"; sourceTree = "<group>"; };
 		5B69FC37BCC1F75D899C6C06 /* Pods_WebblenEvents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WebblenEvents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D40A129E1F6584F900392FF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D5000C66B9E08A7533D04650 /* Pods-WebblenEvents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebblenEvents.release.xcconfig"; path = "Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,7 +114,6 @@
 			isa = PBXGroup;
 			children = (
 				4642E74A1E20E90A00D65DA5 /* Constants.swift */,
-				469386DD1E2F3D19000AF3D4 /* logoReg.png */,
 				46956C741E1E2519009A8F93 /* WebblenEvents.entitlements */,
 				4687A00C1DFCB9A80067F773 /* AppDelegate.swift */,
 				4687A0101DFCB9A80067F773 /* Main.storyboard */,
@@ -143,9 +138,8 @@
 				46F113BB1E16044800FB7294 /* defaultEventImage.png */,
 				4687A0181DFCB9A80067F773 /* LaunchScreen.storyboard */,
 				4687A01B1DFCB9A80067F773 /* Info.plist */,
-				467E3EBA1F58F8C900AC843D /* GoogleService-Info.plist */,
+				D40A129E1F6584F900392FF9 /* GoogleService-Info.plist */,
 				4687A0131DFCB9A80067F773 /* WebblenEvents.xcdatamodeld */,
-				469B3D6D1E309916007CC2E9 /* Images.xcassets */,
 				469E84821F355988002E07AA /* MapsViewController.swift */,
 				469E84841F385180002E07AA /* DateViewController.swift */,
 				4617A7461F3D4C6600926160 /* confirmPostViewController.swift */,
@@ -179,7 +173,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4687A01E1DFCB9A80067F773 /* Build configuration list for PBXNativeTarget "WebblenEvents" */;
 			buildPhases = (
-				2A454104E3E9ED9A99204B67 /* 📦 Check Pods Manifest.lock */,
+				2A454104E3E9ED9A99204B67 /* [CP] Check Pods Manifest.lock */,
 				593CA02613C0E2188FF4D1B3 /* [CP] Check Pods Manifest.lock */,
 				4687A0051DFCB9A80067F773 /* Sources */,
 				4687A0061DFCB9A80067F773 /* Frameworks */,
@@ -256,11 +250,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				469B3D6E1E309916007CC2E9 /* Images.xcassets in Resources */,
+				D40A129F1F6584F900392FF9 /* GoogleService-Info.plist in Resources */,
 				4687A01A1DFCB9A80067F773 /* LaunchScreen.storyboard in Resources */,
 				46F113BC1E16044800FB7294 /* defaultEventImage.png in Resources */,
-				467E3EBB1F58F8C900AC843D /* GoogleService-Info.plist in Resources */,
-				469386DE1E2F3D19000AF3D4 /* logoReg.png in Resources */,
 				4687A0171DFCB9A80067F773 /* Assets.xcassets in Resources */,
 				4687A0221DFCBC560067F773 /* Logo White No Background.png in Resources */,
 				4687A0121DFCB9A80067F773 /* Main.storyboard in Resources */,
@@ -300,19 +292,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2A454104E3E9ED9A99204B67 /* 📦 Check Pods Manifest.lock */ = {
+		2A454104E3E9ED9A99204B67 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		593CA02613C0E2188FF4D1B3 /* [CP] Check Pods Manifest.lock */ = {
