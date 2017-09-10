@@ -16,16 +16,17 @@ class InterestSetupViewController: UIViewController {
 
 //Outlets
     @IBOutlet weak var navBackground: UIView!
-
+    
+    
     @IBOutlet weak var amusementView: UIView!
-    @IBOutlet weak var artView: UIView!
     @IBOutlet weak var communityView: UIView!
+    @IBOutlet weak var artView: UIView!
+    @IBOutlet weak var collegeView: UIView!
     @IBOutlet weak var competitionView: UIView!
     @IBOutlet weak var cultureView: UIView!
     @IBOutlet weak var educationView: UIView!
     @IBOutlet weak var entertainmentView: UIView!
     @IBOutlet weak var familyView: UIView!
-    @IBOutlet weak var fratView: UIView!
     @IBOutlet weak var foodDrinkView: UIView!
     @IBOutlet weak var gamingView: UIView!
     @IBOutlet weak var healthFitnessView: UIView!
@@ -33,23 +34,24 @@ class InterestSetupViewController: UIViewController {
     @IBOutlet weak var networkingView: UIView!
     @IBOutlet weak var outdoorsView: UIView!
     @IBOutlet weak var partyDanceView: UIView!
-    @IBOutlet weak var shoppingView: UIView!
-    @IBOutlet weak var sororityView: UIView!
     @IBOutlet weak var sportsView: UIView!
+    @IBOutlet weak var shoppingView: UIView!
     @IBOutlet weak var techView: UIView!
     @IBOutlet weak var theatreView: UIView!
-    @IBOutlet weak var updateInterestsButton: UIButton!
-    
+    @IBOutlet weak var wineBrewView: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+
+
     //Variables
     var amusement = false
     var art = false
+    var college = false
     var community = false
     var competition = false
     var culture = false
     var education = false
     var entertainment = false
     var family = false
-    var frat = false
     var foodDrink = false
     var gaming = false
     var healthFitness = false
@@ -58,20 +60,22 @@ class InterestSetupViewController: UIViewController {
     var outdoors = false
     var partyDance = false
     var shopping = false
-    var sorority = false
     var sports = false
     var technology = false
     var theatre = false
+    var wineBrew = false
     
-    var activityIndicator : UIActivityIndicatorView = UIActivityIndicatorView()
-    
+
     //Firebase references
     var dataBaseRef = FIRDatabase.database().reference()
     var currentUser: AnyObject?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
+    //Activity indicator starts
+    activityIndicator.startAnimating()
+    
     //Check for current user
     currentUser = FIRAuth.auth()?.currentUser
     
@@ -295,16 +299,16 @@ class InterestSetupViewController: UIViewController {
             self.theatreView.layer.cornerRadius = CGFloat(Float(25.0))
         }
         
-        self.frat = snapshot.childSnapshot(forPath: "FRATERNITYLIFE").value as! Bool
-        if (self.frat == true){
-            self.fratView.layer.borderColor = UIColor.orange.cgColor
-            self.fratView.layer.borderWidth = 1
-            self.fratView.layer.cornerRadius = CGFloat(Float(25.0))
+        self.college = snapshot.childSnapshot(forPath: "COLLEGELIFE").value as! Bool
+        if (self.college == true){
+            self.collegeView.layer.borderColor = UIColor.orange.cgColor
+            self.collegeView.layer.borderWidth = 1
+            self.collegeView.layer.cornerRadius = CGFloat(Float(25.0))
         }
         else{
-            self.fratView.layer.borderColor = UIColor.lightGray.cgColor
-            self.fratView.layer.borderWidth = 0.1
-            self.fratView.layer.cornerRadius = CGFloat(Float(25.0))
+            self.collegeView.layer.borderColor = UIColor.lightGray.cgColor
+            self.collegeView.layer.borderWidth = 0.1
+            self.collegeView.layer.cornerRadius = CGFloat(Float(25.0))
         }
         
         self.partyDance = snapshot.childSnapshot(forPath: "PARTYDANCE").value as! Bool
@@ -319,20 +323,22 @@ class InterestSetupViewController: UIViewController {
             self.partyDanceView.layer.cornerRadius = CGFloat(Float(25.0))
         }
         
-        self.sorority = snapshot.childSnapshot(forPath: "SORORITYLIFE").value as! Bool
-        if (self.sorority == true){
-            self.sororityView.layer.borderColor = UIColor.orange.cgColor
-            self.sororityView.layer.borderWidth = 1
-            self.sororityView.layer.cornerRadius = CGFloat(Float(25.0))
+        self.wineBrew = snapshot.childSnapshot(forPath: "WINEBREW").value as! Bool
+        if (self.wineBrew == true){
+            self.wineBrewView.layer.borderColor = UIColor.orange.cgColor
+            self.wineBrewView.layer.borderWidth = 1
+            self.wineBrewView.layer.cornerRadius = CGFloat(Float(25.0))
         }
         else{
-            self.sororityView.layer.borderColor = UIColor.lightGray.cgColor
-            self.sororityView.layer.borderWidth = 0.1
-            self.sororityView.layer.cornerRadius = CGFloat(Float(25.0))
+            self.wineBrewView.layer.borderColor = UIColor.lightGray.cgColor
+            self.wineBrewView.layer.borderWidth = 0.1
+            self.wineBrewView.layer.cornerRadius = CGFloat(Float(25.0))
         }
         
     })
         
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
         
     }
 
@@ -341,7 +347,10 @@ class InterestSetupViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func didPressAmusement(_ sender: Any) {
+    
+
+
+    @IBAction func didPressAmusment(_ sender: Any) {
         if (amusement == true){
             amusement = false
             self.amusementView.layer.borderColor = UIColor.lightGray.cgColor
@@ -353,7 +362,6 @@ class InterestSetupViewController: UIViewController {
             self.amusementView.layer.borderWidth = 1
     }
     }
-
     
     @IBAction func didPressArt(_ sender: Any) {
         if (art == true){
@@ -365,6 +373,19 @@ class InterestSetupViewController: UIViewController {
             art = true
             self.artView.layer.borderColor = UIColor.orange.cgColor
             self.artView.layer.borderWidth = 1
+        }
+    }
+    
+    @IBAction func didPressCollege(_ sender: Any) {
+        if (college == true){
+            college = false
+            self.collegeView.layer.borderColor = UIColor.lightGray.cgColor
+            self.collegeView.layer.borderWidth = 0.1
+        }
+        else{
+            college = true
+            self.collegeView.layer.borderColor = UIColor.orange.cgColor
+            self.collegeView.layer.borderWidth = 1
         }
     }
     
@@ -380,7 +401,6 @@ class InterestSetupViewController: UIViewController {
             self.communityView.layer.borderWidth = 1
         }
     }
-    
     @IBAction func didPressCompetition(_ sender: Any) {
         if (competition == true){
             competition = false
@@ -393,7 +413,6 @@ class InterestSetupViewController: UIViewController {
             self.competitionView.layer.borderWidth = 1
         }
     }
-
     @IBAction func didPressCulture(_ sender: Any) {
         if (culture == true){
             culture = false
@@ -446,19 +465,6 @@ class InterestSetupViewController: UIViewController {
         }
     }
     
-    @IBAction func didPressFrat(_ sender: Any) {
-        if (frat == true){
-            frat = false
-            self.fratView.layer.borderColor = UIColor.lightGray.cgColor
-            self.fratView.layer.borderWidth = 0.1
-        }
-        else{
-            frat = true
-            self.fratView.layer.borderColor = UIColor.orange.cgColor
-            self.fratView.layer.borderWidth = 1
-        }
-    }
-    
     @IBAction func didPressFoodDrink(_ sender: Any) {
         if (foodDrink == true){
             foodDrink = false
@@ -471,7 +477,6 @@ class InterestSetupViewController: UIViewController {
             self.foodDrinkView.layer.borderWidth = 1
         }
     }
-    
     @IBAction func didPressGaming(_ sender: Any) {
         if (gaming == true){
             gaming = false
@@ -497,7 +502,6 @@ class InterestSetupViewController: UIViewController {
             self.healthFitnessView.layer.borderWidth = 1
         }
     }
-    
     @IBAction func didPressMusic(_ sender: Any) {
         if (music == true){
             music = false
@@ -510,7 +514,6 @@ class InterestSetupViewController: UIViewController {
             self.musicView.layer.borderWidth = 1
         }
     }
-    
     @IBAction func didPressNetworking(_ sender: Any) {
         if (networking == true){
             networking = false
@@ -549,7 +552,7 @@ class InterestSetupViewController: UIViewController {
             self.partyDanceView.layer.borderWidth = 1
         }
     }
-    
+
     @IBAction func didPressShopping(_ sender: Any) {
         if (shopping == true){
             shopping = false
@@ -562,20 +565,6 @@ class InterestSetupViewController: UIViewController {
             self.shoppingView.layer.borderWidth = 1
         }
     }
-    
-    @IBAction func didPressSorority(_ sender: Any) {
-        if (sorority == true){
-            sorority = false
-            self.sororityView.layer.borderColor = UIColor.lightGray.cgColor
-            self.sororityView.layer.borderWidth = 0.1
-        }
-        else{
-            sorority = true
-            self.sororityView.layer.borderColor = UIColor.orange.cgColor
-            self.sororityView.layer.borderWidth = 1
-        }
-    }
-    
     @IBAction func didPressSports(_ sender: Any) {
         if (sports == true){
             sports = false
@@ -586,11 +575,10 @@ class InterestSetupViewController: UIViewController {
             sports = true
             self.sportsView.layer.borderColor = UIColor.orange.cgColor
             self.sportsView.layer.borderWidth = 1
-
+            
         }
     }
-    
-    @IBAction func didPressTech(_ sender: Any) {
+    @IBAction func didPressTechnology(_ sender: Any) {
         if (technology == true){
             technology = false
             self.techView.layer.borderColor = UIColor.lightGray.cgColor
@@ -603,7 +591,6 @@ class InterestSetupViewController: UIViewController {
             
         }
     }
-    
     @IBAction func didPressTheatre(_ sender: Any) {
         if (theatre == true){
             theatre = false
@@ -616,20 +603,27 @@ class InterestSetupViewController: UIViewController {
             self.theatreView.layer.borderWidth = 1
         }
     }
+
+    @IBAction func didPressWineBrew(_ sender: Any) {
+        if (wineBrew == true){
+            wineBrew = false
+            self.wineBrewView.layer.borderColor = UIColor.lightGray.cgColor
+            self.wineBrewView.layer.borderWidth = 0.1
+        }
+        else{
+            wineBrew = true
+            self.wineBrewView.layer.borderColor = UIColor.orange.cgColor
+            self.wineBrewView.layer.borderWidth = 1
+        }
+    }
     
-    
-    
-    
+
     
     @IBAction func didTapUpdateInterests(_ sender: Any) {
-        
         let updateInterestsData = dataBaseRef.child("Users").child(self.currentUser!.uid).child("interests")
         
         //Activity Indicator
-        activityIndicator.center = self.view.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-        view.addSubview(activityIndicator)
+        activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         
         updateInterestsData.child("AMUSEMENT").setValue(amusement)
@@ -651,15 +645,17 @@ class InterestSetupViewController: UIViewController {
         updateInterestsData.child("TECHNOLOGY").setValue(technology)
         updateInterestsData.child("THEATRE").setValue(theatre)
         
-        updateInterestsData.child("FRATERNITYLIFE").setValue(frat)
+        updateInterestsData.child("COLLEGELIFE").setValue(college)
         updateInterestsData.child("PARTYDANCE").setValue(partyDance)
-        updateInterestsData.child("SORORITYLIFE").setValue(sorority)
+        updateInterestsData.child("WINEBREW").setValue(wineBrew)
         
         activityIndicator.stopAnimating()
         
         returnHome()
-        
     }
+    
+    
+
 
 
     @IBAction func didTapCancel(_ sender: Any) {
