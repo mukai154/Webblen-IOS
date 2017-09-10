@@ -22,10 +22,8 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
     @IBOutlet weak var createEventButton: UIButton!
     @IBOutlet weak var dateTimeButton: UIButton!
     @IBOutlet weak var locationButton: UIButton!
-    @IBOutlet weak var distanceSlider: UISlider!
     @IBOutlet weak var imageSelectButton: UIButton!
-    @IBOutlet weak var notifyDistanceVal: UILabel!
-
+    @IBOutlet weak var modifyNotification: UIButton!
 
     //Firebase References
     var dataBaseRef = FIRDatabase.database().reference()
@@ -56,14 +54,6 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
     
     var imagePicker = UIImagePickerController()
     
-    
-    //Slider for notification distance
-    @IBAction func slider(_ sender: UISlider) {
-        let interval = 5
-        notifyDistanceVal.text = "Notify Distance: " + String(Int(sender.value) * interval) + " miles"
-        
-        notifyDistance = Int(sender.value) * interval
-    }
     
     
     override func viewDidLoad() {

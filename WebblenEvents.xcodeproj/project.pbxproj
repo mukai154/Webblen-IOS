@@ -38,6 +38,8 @@
 		469E84851F385180002E07AA /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469E84841F385180002E07AA /* DateViewController.swift */; };
 		46F113BC1E16044800FB7294 /* defaultEventImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 46F113BB1E16044800FB7294 /* defaultEventImage.png */; };
 		D40A129F1F6584F900392FF9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D40A129E1F6584F900392FF9 /* GoogleService-Info.plist */; };
+		D40A12A41F658F3E00392FF9 /* WhatsNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40A12A31F658F3E00392FF9 /* WhatsNewViewController.swift */; };
+		D40A12A61F659E7300392FF9 /* NotificationSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40A12A51F659E7300392FF9 /* NotificationSettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +78,8 @@
 		507F16388FC4FF4BC0B398A4 /* Pods-WebblenEvents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebblenEvents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents.debug.xcconfig"; sourceTree = "<group>"; };
 		5B69FC37BCC1F75D899C6C06 /* Pods_WebblenEvents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WebblenEvents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D40A129E1F6584F900392FF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D40A12A31F658F3E00392FF9 /* WhatsNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsNewViewController.swift; sourceTree = "<group>"; };
+		D40A12A51F659E7300392FF9 /* NotificationSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewController.swift; sourceTree = "<group>"; };
 		D5000C66B9E08A7533D04650 /* Pods-WebblenEvents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebblenEvents.release.xcconfig"; path = "Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,6 +148,8 @@
 				469E84841F385180002E07AA /* DateViewController.swift */,
 				4617A7461F3D4C6600926160 /* confirmPostViewController.swift */,
 				461FD2D21F43FBF9001C7279 /* homeCell.swift */,
+				D40A12A31F658F3E00392FF9 /* WhatsNewViewController.swift */,
+				D40A12A51F659E7300392FF9 /* NotificationSettingsViewController.swift */,
 			);
 			path = WebblenEvents;
 			sourceTree = "<group>";
@@ -366,6 +372,7 @@
 				4617A7471F3D4C6600926160 /* confirmPostViewController.swift in Sources */,
 				46621B811E21D11B005E5404 /* MyEventsTableViewCell.swift in Sources */,
 				4609990A1E384717000DE53F /* TermsViewController.swift in Sources */,
+				D40A12A41F658F3E00392FF9 /* WhatsNewViewController.swift in Sources */,
 				469E84851F385180002E07AA /* DateViewController.swift in Sources */,
 				4642E7411E2063B800D65DA5 /* Event.swift in Sources */,
 				4642E73F1E20604100D65DA5 /* MyEventsViewController.swift in Sources */,
@@ -379,6 +386,7 @@
 				4642E7371E1E6B6300D65DA5 /* SignInViewController.swift in Sources */,
 				469386DC1E2F2E51000AF3D4 /* SettingsViewController.swift in Sources */,
 				4609990C1E39E38A000DE53F /* BlockedUsersViewController.swift in Sources */,
+				D40A12A61F659E7300392FF9 /* NotificationSettingsViewController.swift in Sources */,
 				46956C731E1E10E5009A8F93 /* SignUpViewController.swift in Sources */,
 				469E84831F355988002E07AA /* MapsViewController.swift in Sources */,
 				46956C711E1E0537009A8F93 /* SetupViewController.swift in Sources */,
