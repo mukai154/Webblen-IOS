@@ -147,8 +147,8 @@ class SignInViewController: UIViewController,  FBSDKLoginButtonDelegate{
                         self.databaseRef.child("Users").child(user!.uid).child("interests").child("SPORTS").setValue(false)
                         self.databaseRef.child("Users").child(user!.uid).child("interests").child("TECHNOLOGY").setValue(false)
                         self.databaseRef.child("Users").child(user!.uid).child("interests").child("THEATRE").setValue(false)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("FRATERNITYLIFE").setValue(false)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("SORORITYLIFE").setValue(false)
+                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("COLLEGELIFE").setValue(false)
+                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("WINEBREW").setValue(false)
                         self.databaseRef.child("Users").child(user!.uid).child("interests").child("PARTYDANCE").setValue(false)
                         
                         self.performSegue(withIdentifier: "SetupSegue", sender: nil)

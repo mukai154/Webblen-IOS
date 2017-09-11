@@ -39,7 +39,7 @@ class DateViewController: UIViewController {
         
         //Date Format
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMMM dd, YYYY"
+        formatter.dateFormat = "dd/MM/yyyy"
         chosenDate = formatter.string(from: eventDatePicker.date)
         formatter.dateFormat = "h:mm a"
         

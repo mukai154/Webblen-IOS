@@ -41,11 +41,13 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
     var pathToImage = "null"
     var notifyDistance = 10
     var eventKey = "key"
+    var event18 = false
+    var event21 = false
 
     var image : UIImage?
  
     
-    var interests = ["Choose Category","Amusement", "Art", "Community", "Competition", "Culture", "Education", "Entertainment", "Family", "Food & Drink", "Fraternity Life", "Gaming", "Health & Fitness", "Music", "Networking", "Outdoors", "Party/Dance", "Shopping", "Sorority Life", "Sports", "Technology", "Theatre"]
+    var interests = ["Choose Category","Amusement", "Art", "College Life", "Community", "Competition", "Culture", "Education", "Entertainment", "Family", "Food & Drink", "Gaming", "Health & Fitness", "Music", "Networking", "Outdoors", "Party/Dance", "Shopping", "Sports", "Technology", "Theatre", "Wine & Brew"]
     
     var eventCategory: String?
 
@@ -283,12 +285,12 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
                             self.eventCategory = "FOODDRINK"
                         }
                         
-                        if(self.eventCategory == "Fraternity Life"){
-                            self.eventCategory = "FRATERNITYLIFE"
+                        if(self.eventCategory == "College Life"){
+                            self.eventCategory = "COLLEGELIFE"
                         }
                         
-                        if(self.eventCategory == "Sorority Life"){
-                            self.eventCategory = "SORORITYLIFE"
+                        if(self.eventCategory == "Wine & Brew"){
+                            self.eventCategory = "WINEBREW"
                         }
                         
                         if (self.eventCategory != "Choose Category"){
@@ -327,12 +329,12 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
                 self.eventCategory = "FOODDRINK"
             }
             
-            if(self.eventCategory == "Fraternity Life"){
-                self.eventCategory = "FRATERNITYLIFE"
+            if(self.eventCategory == "College Life"){
+                self.eventCategory = "COLLEGELIFE"
             }
             
-            if(self.eventCategory == "Sorority Life"){
-                self.eventCategory = "SORORITYLIFE"
+            if(self.eventCategory == "Wine & Brew"){
+                self.eventCategory = "WINEBREW"
             }
             
             if (self.eventCategory != "Choose Category"){
