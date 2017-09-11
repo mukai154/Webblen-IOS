@@ -46,6 +46,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     
     var dataBaseRef: FIRDatabaseReference!
+    var events = [Event]()
     var eventsToday = [Event]()
     var eventsThisWeek = [Event]()
     var eventsThisMonth = [Event]()
@@ -426,8 +427,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 if(!self.userBlocks.contains(eKey)){
                                 
                         //Event data
+                                    //WHEN ADDING TO CUSTOM ARRAY, PAY ATTENTION TO DATATYPE OF DATE
                         let eventPost = Event()
-                        if let category = event["category"] as? String, let date = event["date"] as? String, let eventDate = event["date"] as? Date, let evDescription = event["evDescription"] as? String, let time = event["time"] as? String, let title = event["title"] as? String, let uid = event["uid"] as? String, let username = event["username"] as? String, let pathToImage = event["pathToImage"] as? String, let verified = event["verified"] as? String, let eventKey = event["eventKey"] as? String, let paid = event["paid"] as? String, let radius = event["radius"] as? String{
+                        if let category = event["category"] as? String, let date = event["date"] as? String, let evDescription = event["evDescription"] as? String, let time = event["time"] as? String, let title = event["title"] as? String, let uid = event["uid"] as? String, let username = event["username"] as? String, let pathToImage = event["pathToImage"] as? String, let verified = event["verified"] as? String, let eventKey = event["eventKey"] as? String, let paid = event["paid"] as? String, let radius = event["radius"] as? String{
                             eventPost.category = category
                             eventPost.date = date
                             eventPost.evDescription = evDescription
@@ -440,20 +442,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                             eventPost.pathToImage = pathToImage
                             eventPost.verified = verified
                         
-                            if (self.currentDate.compare(eventDate) == .orderedDescending){
-                                
-                            }
-                            else if (self.currentDate.compare(eventDate) == .orderedSame && self.numberOfEvents < 50){
-                                self.eventsToday.append(eventPost)
-                                self.numberOfEvents += 1
-
-                            }
-                            else if (self.currentDate.days(from: eventDate) < 8){
-                                self.eventsThisWeek.append(eventPost)
-                            }
-                            else if (self.currentDate.days(from: eventDate) < 32){
-                                self.eventsThisMonth.append(eventPost)
-                            }
+                            self.events.append(eventPost)
+                            self.numberOfEvents += 1
                             
                             
                             
@@ -470,27 +460,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         })
         dataBaseRef.removeAllObservers()
-        print(eventsToday)
-        print(eventsThisMonth)
-        print(eventsThisWeek)
+
     }
     
 
     //Table view organization
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if (today == true){
-        return self.eventsToday.count
-        }
-        else if (thisWeek ==  true){
-        return self.eventsThisWeek.count
-        }
-        else if (thisMonth == true){
-        return self.eventsThisMonth.count
-        }
-        else {
-            return 0
-        }
+        return self.events.count
     }
     
     
@@ -498,265 +474,84 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! homeCell
         
-        if (today == true){
+        let photo = self.events[indexPath.row].pathToImage!
+        
+        if (self.events[indexPath.row].evDescription.characters.count > 100){
             
-            let photo = self.eventsToday[indexPath.row].pathToImage!
+            let index = self.events[indexPath.row].evDescription.index(self.events[indexPath.row].evDescription.startIndex, offsetBy: 100)
             
-            if (self.eventsToday[indexPath.row].evDescription.characters.count > 100){
+            
+            if ((self.events[indexPath.row].pathToImage) != "null"){
                 
-                let index = self.eventsToday[indexPath.row].evDescription.index(self.eventsToday[indexPath.row].evDescription.startIndex, offsetBy: 100)
+                cell.eventPhoto.isHidden = false
+                cell.imageViewHeightConstraint.constant = defaultImageViewHeightConstraint
                 
                 
-                if ((self.eventsToday[indexPath.row].pathToImage) != "null"){
-                    
-                    cell.eventPhoto.isHidden = false
-                    cell.imageViewHeightConstraint.constant = defaultImageViewHeightConstraint
-                    
-                    
-                    let url = NSURL(string:photo)
-                    
-                    cell.eventPhoto.layer.cornerRadius = 15
-                    
-                    
-                    cell.configure(eventTitle: self.eventsToday[indexPath.row].title,
-                                   eventDate: self.eventsToday[indexPath.row].date,
-                                   isVerified: self.eventsToday[indexPath.row].verified,
-                                   eventDescription: self.eventsToday[indexPath.row].evDescription.substring(to: index) + "...",
-                                   eventPhoto: self.eventsToday[indexPath.row].pathToImage)
-                    cell.eventPhoto.sd_setImage(with: url! as URL)
-                    cell.interestCategory.image = UIImage(named: self.eventsToday[indexPath.row].category)
-                    
-                }
-                    
-                else{
-                    cell.eventPhoto.isHidden = true
-                    cell.imageViewHeightConstraint.constant = 0
-                    cell.interestCategory.image = UIImage(named: self.eventsToday[indexPath.row].category)
-                    cell.eventTitle.text = self.eventsToday[indexPath.row].title
-                    cell.eventDate.text = self.eventsToday[indexPath.row].date
-                    cell.eventDescription.text = self.eventsToday[indexPath.row].evDescription.substring(to: index) + "..."
-                }
+                let url = NSURL(string:photo)
+                
+                cell.eventPhoto.layer.cornerRadius = 15
+                
+                
+                cell.configure(eventTitle: self.events[indexPath.row].title,
+                               eventDate: self.events[indexPath.row].date,
+                               isVerified: self.events[indexPath.row].verified,
+                               eventDescription: self.events[indexPath.row].evDescription.substring(to: index) + "...",
+                               eventPhoto: self.events[indexPath.row].pathToImage)
+                cell.eventPhoto.sd_setImage(with: url! as URL)
+                cell.interestCategory.image = UIImage(named: self.events[indexPath.row].category)
                 
             }
                 
-            else {
-                
-                if ((self.eventsToday[indexPath.row].pathToImage) != "null"){
-                    
-                    cell.eventPhoto.isHidden = false
-                    cell.imageViewHeightConstraint.constant = defaultImageViewHeightConstraint
-                    
-                    
-                    let url = NSURL(string:photo)
-                    
-                    cell.eventPhoto.layer.cornerRadius = 15
-                    
-                    
-                    cell.configure(eventTitle: self.eventsToday[indexPath.row].title,
-                                   eventDate: self.eventsToday[indexPath.row].date,
-                                   isVerified: self.eventsToday[indexPath.row].verified,
-                                   eventDescription: self.eventsToday[indexPath.row].evDescription,
-                                   eventPhoto: self.eventsToday[indexPath.row].pathToImage)
-                    cell.eventPhoto.sd_setImage(with: url! as URL)
-                    cell.interestCategory.image = UIImage(named: self.eventsToday[indexPath.row].category)
-                    
-                }
-                    
-                else{
-                    cell.eventPhoto.isHidden = true
-                    cell.imageViewHeightConstraint.constant = 0
-                    cell.interestCategory.image = UIImage(named: self.eventsToday[indexPath.row].category)
-                    cell.eventTitle.text = self.eventsToday[indexPath.row].title
-                    cell.eventDate.text = self.eventsToday[indexPath.row].date
-                    cell.eventDescription.text = self.eventsToday[indexPath.row].evDescription
-                }
-                
+            else{
+                cell.eventPhoto.isHidden = true
+                cell.imageViewHeightConstraint.constant = 0
+                cell.interestCategory.image = UIImage(named: self.events[indexPath.row].category)
+                cell.eventTitle.text = self.events[indexPath.row].title
+                cell.eventDate.text = self.events[indexPath.row].date
+                cell.eventDescription.text = self.events[indexPath.row].evDescription.substring(to: index) + "..."
             }
-            
             
         }
-        if (thisWeek == true){
             
-            let photo = self.eventsThisWeek[indexPath.row].pathToImage!
+        else {
             
-            if (self.eventsThisWeek[indexPath.row].evDescription.characters.count > 100){
+            if ((self.events[indexPath.row].pathToImage) != "null"){
                 
-                let index = self.eventsThisWeek[indexPath.row].evDescription.index(self.eventsThisWeek[indexPath.row].evDescription.startIndex, offsetBy: 100)
+                cell.eventPhoto.isHidden = false
+                cell.imageViewHeightConstraint.constant = defaultImageViewHeightConstraint
                 
                 
-                if ((self.eventsThisWeek[indexPath.row].pathToImage) != "null"){
-                    
-                    cell.eventPhoto.isHidden = false
-                    cell.imageViewHeightConstraint.constant = defaultImageViewHeightConstraint
-                    
-                    
-                    let url = NSURL(string:photo)
-                    
-                    cell.eventPhoto.layer.cornerRadius = 15
-                    
-                    
-                    cell.configure(eventTitle: self.eventsThisWeek[indexPath.row].title,
-                                   eventDate: self.eventsThisWeek[indexPath.row].date,
-                                   isVerified: self.eventsThisWeek[indexPath.row].verified,
-                                   eventDescription: self.eventsThisWeek[indexPath.row].evDescription.substring(to: index) + "...",
-                                   eventPhoto: self.eventsThisWeek[indexPath.row].pathToImage)
-                    cell.eventPhoto.sd_setImage(with: url! as URL)
-                    cell.interestCategory.image = UIImage(named: self.eventsThisWeek[indexPath.row].category)
-                    
-                }
-                    
-                else{
-                    cell.eventPhoto.isHidden = true
-                    cell.imageViewHeightConstraint.constant = 0
-                    cell.interestCategory.image = UIImage(named: self.eventsThisWeek[indexPath.row].category)
-                    cell.eventTitle.text = self.eventsThisWeek[indexPath.row].title
-                    cell.eventDate.text = self.eventsThisWeek[indexPath.row].date
-                    cell.eventDescription.text = self.eventsThisWeek[indexPath.row].evDescription.substring(to: index) + "..."
-                }
+                let url = NSURL(string:photo)
+                
+                cell.eventPhoto.layer.cornerRadius = 15
+                
+                
+                cell.configure(eventTitle: self.events[indexPath.row].title,
+                               eventDate: self.events[indexPath.row].date,
+                               isVerified: self.events[indexPath.row].verified,
+                               eventDescription: self.events[indexPath.row].evDescription,
+                               eventPhoto: self.events[indexPath.row].pathToImage)
+                cell.eventPhoto.sd_setImage(with: url! as URL)
+                cell.interestCategory.image = UIImage(named: self.events[indexPath.row].category)
                 
             }
                 
-            else {
-                
-                if ((self.eventsThisWeek[indexPath.row].pathToImage) != "null"){
-                    
-                    cell.eventPhoto.isHidden = false
-                    cell.imageViewHeightConstraint.constant = defaultImageViewHeightConstraint
-                    
-                    
-                    let url = NSURL(string:photo)
-                    
-                    cell.eventPhoto.layer.cornerRadius = 15
-                    
-                    
-                    cell.configure(eventTitle: self.eventsThisWeek[indexPath.row].title,
-                                   eventDate: self.eventsThisWeek[indexPath.row].date,
-                                   isVerified: self.eventsThisWeek[indexPath.row].verified,
-                                   eventDescription: self.eventsThisWeek[indexPath.row].evDescription,
-                                   eventPhoto: self.eventsThisWeek[indexPath.row].pathToImage)
-                    cell.eventPhoto.sd_setImage(with: url! as URL)
-                    cell.interestCategory.image = UIImage(named: self.eventsThisWeek[indexPath.row].category)
-                    
-                }
-                    
-                else{
-                    cell.eventPhoto.isHidden = true
-                    cell.imageViewHeightConstraint.constant = 0
-                    cell.interestCategory.image = UIImage(named: self.eventsThisWeek[indexPath.row].category)
-                    cell.eventTitle.text = self.eventsThisWeek[indexPath.row].title
-                    cell.eventDate.text = self.eventsThisWeek[indexPath.row].date
-                    cell.eventDescription.text = self.eventsThisWeek[indexPath.row].evDescription
-                }
-                
+            else{
+                cell.eventPhoto.isHidden = true
+                cell.imageViewHeightConstraint.constant = 0
+                cell.interestCategory.image = UIImage(named: self.events[indexPath.row].category)
+                cell.eventTitle.text = self.events[indexPath.row].title
+                cell.eventDate.text = self.events[indexPath.row].date
+                cell.eventDescription.text = self.events[indexPath.row].evDescription
             }
-            
-
-            
-        }
-        if (thisMonth == true){
-            
-            let photo = self.eventsThisMonth[indexPath.row].pathToImage!
-            
-            if (self.eventsThisMonth[indexPath.row].evDescription.characters.count > 100){
-                
-                let index = self.eventsThisMonth[indexPath.row].evDescription.index(self.eventsThisMonth[indexPath.row].evDescription.startIndex, offsetBy: 100)
-                
-                
-                if ((self.eventsThisMonth[indexPath.row].pathToImage) != "null"){
-                    
-                    cell.eventPhoto.isHidden = false
-                    cell.imageViewHeightConstraint.constant = defaultImageViewHeightConstraint
-                    
-                    
-                    let url = NSURL(string:photo)
-                    
-                    cell.eventPhoto.layer.cornerRadius = 15
-                    
-                    
-                    cell.configure(eventTitle: self.eventsThisMonth[indexPath.row].title,
-                                   eventDate: self.eventsThisMonth[indexPath.row].date,
-                                   isVerified: self.eventsThisMonth[indexPath.row].verified,
-                                   eventDescription: self.eventsThisMonth[indexPath.row].evDescription.substring(to: index) + "...",
-                                   eventPhoto: self.eventsThisMonth[indexPath.row].pathToImage)
-                    cell.eventPhoto.sd_setImage(with: url! as URL)
-                    cell.interestCategory.image = UIImage(named: self.eventsThisMonth[indexPath.row].category)
-                    
-                }
-                    
-                else{
-                    cell.eventPhoto.isHidden = true
-                    cell.imageViewHeightConstraint.constant = 0
-                    cell.interestCategory.image = UIImage(named: self.eventsThisMonth[indexPath.row].category)
-                    cell.eventTitle.text = self.eventsThisMonth[indexPath.row].title
-                    cell.eventDate.text = self.eventsThisMonth[indexPath.row].date
-                    cell.eventDescription.text = self.eventsThisMonth[indexPath.row].evDescription.substring(to: index) + "..."
-                }
-                
-            }
-                
-            else {
-                
-                if ((self.eventsThisMonth[indexPath.row].pathToImage) != "null"){
-                    
-                    cell.eventPhoto.isHidden = false
-                    cell.imageViewHeightConstraint.constant = defaultImageViewHeightConstraint
-                    
-                    
-                    let url = NSURL(string:photo)
-                    
-                    cell.eventPhoto.layer.cornerRadius = 15
-                    
-                    
-                    cell.configure(eventTitle: self.eventsThisMonth[indexPath.row].title,
-                                   eventDate: self.eventsThisMonth[indexPath.row].date,
-                                   isVerified: self.eventsThisMonth[indexPath.row].verified,
-                                   eventDescription: self.eventsThisMonth[indexPath.row].evDescription,
-                                   eventPhoto: self.eventsThisMonth[indexPath.row].pathToImage)
-                    cell.eventPhoto.sd_setImage(with: url! as URL)
-                    cell.interestCategory.image = UIImage(named: self.eventsThisMonth[indexPath.row].category)
-                    
-                }
-                    
-                else{
-                    cell.eventPhoto.isHidden = true
-                    cell.imageViewHeightConstraint.constant = 0
-                    cell.interestCategory.image = UIImage(named: self.eventsThisMonth[indexPath.row].category)
-                    cell.eventTitle.text = self.eventsThisMonth[indexPath.row].title
-                    cell.eventDate.text = self.eventsThisMonth[indexPath.row].date
-                    cell.eventDescription.text = self.eventsThisMonth[indexPath.row].evDescription
-                }
-                
-            }
-            
             
         }
         
         return (cell)
-
-
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if (today == true){
-            
-            performSegue(withIdentifier: "eventInfoSegue", sender: eventsToday[indexPath.row].eventKey)
-
-            
-        }
-        if (thisMonth == true){
-            
-            performSegue(withIdentifier: "eventInfoSegue", sender: eventsThisMonth[indexPath.row].eventKey)
-
-            
-        }
-        if (thisWeek == true){
-            
-            performSegue(withIdentifier: "eventInfoSegue", sender: eventsThisWeek[indexPath.row].eventKey)
-
-            
-        }
-        
+        performSegue(withIdentifier: "eventInfoSegue", sender: events[indexPath.row].eventKey)
         
     }
     

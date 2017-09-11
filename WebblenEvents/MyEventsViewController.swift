@@ -83,17 +83,29 @@ class MyEventsViewController: UIViewController, UITableViewDelegate, UITableView
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyEventsTableViewCell", for: indexPath) as! MyEventsTableViewCell
         
-        
-        cell.eventCategoryPic.image = UIImage(named: self.events[indexPath.row].category)
-        cell.eventTitle.text = self.events[indexPath.row].title
-        cell.eventDescription.text = self.events[indexPath.row].evDescription
-        cell.eventDate.text = self.events[indexPath.row].date
 
         
+        if (self.events[indexPath.row].evDescription.characters.count > 100){
+            
+            let index = self.events[indexPath.row].evDescription.index(self.events[indexPath.row].evDescription.startIndex, offsetBy: 100)
+            
+                cell.interestCategory.image = UIImage(named: self.events[indexPath.row].category)
+                cell.eventTitle.text = self.events[indexPath.row].title
+                cell.eventDate.text = self.events[indexPath.row].date
+                cell.eventDescription.text = self.events[indexPath.row].evDescription.substring(to: index) + "..."
+        }
         
-        
-        return cell    }
+        else {
     
+                cell.interestCategory.image = UIImage(named: self.events[indexPath.row].category)
+                cell.eventTitle.text = self.events[indexPath.row].title
+                cell.eventDate.text = self.events[indexPath.row].date
+                cell.eventDescription.text = self.events[indexPath.row].evDescription
+            }
+        
+                return (cell) 
+            
+        }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "myEventInfoSegue", sender: events[indexPath.row].eventKey)
     }

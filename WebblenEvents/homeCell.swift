@@ -27,13 +27,16 @@ class homeCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-
+        self.layoutIfNeeded()
         
         eventDescription.textContainerInset = UIEdgeInsetsMake(5, -1, 0, 0)
         eventDescription.translatesAutoresizingMaskIntoConstraints = true
         eventDescription.textColor = UIColor.lightGray
         isVerified.isHidden = true
         verifiedWidth.constant = 0
+        
+        eventPhoto.layer.cornerRadius = self.frame.height / 2.0
+        eventPhoto.layer.masksToBounds = true
 
         
         // Initialization code

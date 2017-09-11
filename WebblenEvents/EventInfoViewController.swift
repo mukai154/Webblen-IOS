@@ -15,6 +15,7 @@ class EventInfoViewController: UIViewController {
 
 
 
+    @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var eventUploadedPhoto: UIImageView!
     @IBOutlet weak var eventImage: UIImageView!
     @IBOutlet weak var eventTitle: UILabel!
@@ -55,6 +56,7 @@ class EventInfoViewController: UIViewController {
         
         eventDescription.textContainerInset = UIEdgeInsetsMake(10, 0, 0, 0)
         eventDescription.textColor = UIColor.lightGray
+        eventAddress.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0)
         self.editEventButton.layer.cornerRadius = CGFloat(5.0)
         self.deleteEventButton.layer.cornerRadius = CGFloat(5.0)
 
@@ -79,6 +81,16 @@ class EventInfoViewController: UIViewController {
                 let eTime = eDict["time"] as! String
                 let eCat = eDict["category"] as! String
                 let eAddress = eDict["address"] as! String
+                let ePhoto = eDict["pathToImage"] as! String
+                
+                if (ePhoto != "null"){
+                let url = NSURL(string: ePhoto)
+                self.eventUploadedPhoto.sd_setImage(with: url! as URL)
+                }
+                else {
+                self.eventUploadedPhoto.isHidden = true
+                self.imageViewHeightConstraint.constant = 0
+                }
                 self.eventAddress.text = eAddress
                 self.eventDate.text = eDate + " | " + eTime
                 self.eUid = eDict["uid"] as! String
