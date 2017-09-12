@@ -113,7 +113,7 @@ class confirmPostViewController: UIViewController {
     }
     
     @IBAction func didPressConfirm(_ sender: Any) {
-        purchase(purchase: event5)
+        performSegue(withIdentifier: "eventPurchasedSegue", sender: nil)
 
     }
     

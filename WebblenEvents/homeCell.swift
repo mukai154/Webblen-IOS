@@ -35,7 +35,7 @@ class homeCell: UITableViewCell {
         isVerified.isHidden = true
         verifiedWidth.constant = 0
         
-        eventPhoto.layer.cornerRadius = self.frame.height / 2.0
+        eventPhoto.layer.cornerRadius = 5
         eventPhoto.layer.masksToBounds = true
 
         

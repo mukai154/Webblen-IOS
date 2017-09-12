@@ -646,7 +646,9 @@
                                             <constraint firstAttribute="height" constant="30" id="cWU-Ym-GQ3"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                        <state key="normal" title="Today"/>
+                                        <state key="normal" title="Today">
+                                            <color key="titleColor" red="0.78932837040000003" green="0.78932837040000003" blue="0.78932837040000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iyH-bg-H6p">
                                         <rect key="frame" x="8" y="157" width="134" height="30"/>
@@ -654,7 +656,9 @@
                                             <constraint firstAttribute="height" constant="30" id="Gs1-BO-Ezc"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                        <state key="normal" title="This Week"/>
+                                        <state key="normal" title="This Week">
+                                            <color key="titleColor" red="0.78932837040000003" green="0.78932837040000003" blue="0.78932837040000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uY5-go-Tre">
                                         <rect key="frame" x="8" y="195" width="134" height="30"/>
@@ -662,7 +666,9 @@
                                             <constraint firstAttribute="height" constant="30" id="90i-uf-JFT"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                        <state key="normal" title="This Month"/>
+                                        <state key="normal" title="This Month">
+                                            <color key="titleColor" red="0.78932837040000003" green="0.78932837040000003" blue="0.78932837040000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5IS-Ex-XYt">
                                         <rect key="frame" x="0.0" y="233" width="150" height="1"/>
@@ -1862,7 +1868,7 @@ We are committed to conducting our business in accordance with these principles 
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6wD-tR-ybk">
-                                                <rect key="frame" x="8" y="189" width="82" height="85"/>
+                                                <rect key="frame" x="8" y="194" width="82" height="85"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FAMILY" translatesAutoresizingMaskIntoConstraints="NO" id="Kt5-X4-Dhb">
                                                         <rect key="frame" x="16" y="8" width="50" height="50"/>
@@ -1903,7 +1909,7 @@ We are committed to conducting our business in accordance with these principles 
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7N8-av-6EQ">
-                                                <rect key="frame" x="98" y="189" width="82" height="85"/>
+                                                <rect key="frame" x="98" y="194" width="82" height="85"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FOODDRINK" translatesAutoresizingMaskIntoConstraints="NO" id="cKs-zu-2da">
                                                         <rect key="frame" x="16" y="8" width="50" height="50"/>
@@ -1944,7 +1950,7 @@ We are committed to conducting our business in accordance with these principles 
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dms-rF-wGE">
-                                                <rect key="frame" x="195" y="189" width="82" height="85"/>
+                                                <rect key="frame" x="195" y="194" width="82" height="85"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GAMING" translatesAutoresizingMaskIntoConstraints="NO" id="mlr-iu-yCX">
                                                         <rect key="frame" x="16" y="8" width="50" height="50"/>
@@ -1985,7 +1991,7 @@ We are committed to conducting our business in accordance with these principles 
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yYL-tG-5m7">
-                                                <rect key="frame" x="285" y="189" width="82" height="85"/>
+                                                <rect key="frame" x="285" y="194" width="82" height="85"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HEALTHFITNESS" translatesAutoresizingMaskIntoConstraints="NO" id="PSa-QL-BIJ">
                                                         <rect key="frame" x="16" y="8" width="50" height="50"/>
@@ -2026,7 +2032,7 @@ We are committed to conducting our business in accordance with these principles 
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mfb-z5-Svy">
-                                                <rect key="frame" x="8" y="282" width="82" height="85"/>
+                                                <rect key="frame" x="8" y="287" width="82" height="85"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MUSIC" translatesAutoresizingMaskIntoConstraints="NO" id="FVO-8f-KzT">
                                                         <rect key="frame" x="16" y="8" width="50" height="50"/>
@@ -2067,7 +2073,7 @@ We are committed to conducting our business in accordance with these principles 
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oib-wE-yzB">
-                                                <rect key="frame" x="98" y="282" width="82" height="85"/>
+                                                <rect key="frame" x="98" y="287" width="82" height="85"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NETWORKING" translatesAutoresizingMaskIntoConstraints="NO" id="bbc-vv-Dh5">
                                                         <rect key="frame" x="16" y="8" width="50" height="50"/>
@@ -2108,7 +2114,7 @@ We are committed to conducting our business in accordance with these principles 
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dR8-r4-Csn">
-                                                <rect key="frame" x="195" y="282" width="82" height="85"/>
+                                                <rect key="frame" x="195" y="287" width="82" height="85"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="OUTDOORS" translatesAutoresizingMaskIntoConstraints="NO" id="dwG-VK-bjK">
                                                         <rect key="frame" x="16" y="8" width="50" height="50"/>
@@ -2149,7 +2155,7 @@ We are committed to conducting our business in accordance with these principles 
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dKl-x8-NBb">
-                                                <rect key="frame" x="285" y="282" width="82" height="85"/>
+                                                <rect key="frame" x="285" y="287" width="82" height="85"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PARTYDANCE" translatesAutoresizingMaskIntoConstraints="NO" id="AvU-MF-slD">
                                                         <rect key="frame" x="16" y="8" width="50" height="50"/>
@@ -2190,7 +2196,7 @@ We are committed to conducting our business in accordance with these principles 
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yai-Vu-WeB">
-                                                <rect key="frame" x="146" y="375" width="82" height="85"/>
+                                                <rect key="frame" x="146" y="380" width="82" height="85"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SPORTS" translatesAutoresizingMaskIntoConstraints="NO" id="7QV-yb-RTz">
                                                         <rect key="frame" x="16" y="8" width="50" height="50"/>
@@ -2231,7 +2237,7 @@ We are committed to conducting our business in accordance with these principles 
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ix-el-5aJ">
-                                                <rect key="frame" x="56" y="375" width="82" height="85"/>
+                                                <rect key="frame" x="56" y="380" width="82" height="85"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SHOPPING" translatesAutoresizingMaskIntoConstraints="NO" id="YkQ-LY-4Rc">
                                                         <rect key="frame" x="16" y="8" width="50" height="50"/>
@@ -2272,7 +2278,7 @@ We are committed to conducting our business in accordance with these principles 
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OMX-HO-i42">
-                                                <rect key="frame" x="236" y="375" width="82" height="85"/>
+                                                <rect key="frame" x="236" y="380" width="82" height="85"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TECHNOLOGY" translatesAutoresizingMaskIntoConstraints="NO" id="Bcf-9P-a49">
                                                         <rect key="frame" x="16" y="8" width="50" height="50"/>
@@ -2313,7 +2319,7 @@ We are committed to conducting our business in accordance with these principles 
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SMw-39-vlo">
-                                                <rect key="frame" x="98" y="468" width="82" height="85"/>
+                                                <rect key="frame" x="98" y="473" width="82" height="85"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="THEATRE" translatesAutoresizingMaskIntoConstraints="NO" id="g8h-Ha-iG9">
                                                         <rect key="frame" x="16" y="8" width="50" height="50"/>
@@ -2354,7 +2360,7 @@ We are committed to conducting our business in accordance with these principles 
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efp-Hd-Hb8">
-                                                <rect key="frame" x="195" y="468" width="82" height="85"/>
+                                                <rect key="frame" x="195" y="473" width="82" height="85"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WINEBREW" translatesAutoresizingMaskIntoConstraints="NO" id="GpO-gw-82u">
                                                         <rect key="frame" x="16" y="8" width="50" height="50"/>
@@ -2414,8 +2420,8 @@ We are committed to conducting our business in accordance with these principles 
                                             <constraint firstItem="Svr-bA-mNj" firstAttribute="top" secondItem="Kv3-OQ-Ny0" secondAttribute="bottom" constant="8" id="0Mx-DC-thD"/>
                                             <constraint firstItem="7N8-av-6EQ" firstAttribute="centerX" secondItem="0Vb-nv-ZoY" secondAttribute="centerX" id="4ru-OY-0Zq"/>
                                             <constraint firstAttribute="height" constant="640" id="6Ek-Tc-Bdk"/>
-                                            <constraint firstItem="6wD-tR-ybk" firstAttribute="top" secondItem="7d0-Ve-KKa" secondAttribute="bottom" constant="3" id="6aB-ch-W66"/>
-                                            <constraint firstItem="yYL-tG-5m7" firstAttribute="top" secondItem="yrt-tI-Qie" secondAttribute="bottom" constant="3" id="6ef-KT-oDv"/>
+                                            <constraint firstItem="6wD-tR-ybk" firstAttribute="top" secondItem="7d0-Ve-KKa" secondAttribute="bottom" constant="8" id="6aB-ch-W66"/>
+                                            <constraint firstItem="yYL-tG-5m7" firstAttribute="top" secondItem="yrt-tI-Qie" secondAttribute="bottom" constant="8" id="6ef-KT-oDv"/>
                                             <constraint firstItem="yai-Vu-WeB" firstAttribute="top" secondItem="2kI-iV-G22" secondAttribute="bottom" constant="8" id="83S-U6-qZN"/>
                                             <constraint firstItem="OMX-HO-i42" firstAttribute="centerY" secondItem="WVO-r4-d5N" secondAttribute="centerY" id="8cq-rm-5HU"/>
                                             <constraint firstItem="oib-wE-yzB" firstAttribute="centerX" secondItem="Iba-N7-8a3" secondAttribute="centerX" id="ACs-lc-esV"/>
@@ -2439,7 +2445,7 @@ We are committed to conducting our business in accordance with these principles 
                                             <constraint firstItem="OcJ-ip-jVE" firstAttribute="top" secondItem="g6S-Kz-AVb" secondAttribute="bottom" constant="8" id="TIh-u6-9I9"/>
                                             <constraint firstItem="Ak6-4y-vPl" firstAttribute="top" secondItem="b4i-fn-b8Z" secondAttribute="top" constant="8" id="U3B-5E-dAK"/>
                                             <constraint firstItem="Kv3-OQ-Ny0" firstAttribute="leading" secondItem="jyV-Nf-ckU" secondAttribute="trailing" constant="8" id="VsG-gK-VNf"/>
-                                            <constraint firstItem="7N8-av-6EQ" firstAttribute="top" secondItem="0Vb-nv-ZoY" secondAttribute="bottom" constant="3" id="XqD-Zj-DTM"/>
+                                            <constraint firstItem="7N8-av-6EQ" firstAttribute="top" secondItem="0Vb-nv-ZoY" secondAttribute="bottom" constant="8" id="XqD-Zj-DTM"/>
                                             <constraint firstItem="Mfb-z5-Svy" firstAttribute="top" secondItem="G3a-OT-QkW" secondAttribute="bottom" constant="8" id="ZNi-pb-as8"/>
                                             <constraint firstItem="iOZ-IP-GAa" firstAttribute="leading" secondItem="b4i-fn-b8Z" secondAttribute="leading" id="b8R-kO-BSh"/>
                                             <constraint firstItem="OcJ-ip-jVE" firstAttribute="centerX" secondItem="g6S-Kz-AVb" secondAttribute="centerX" id="bBT-1V-jdG"/>
@@ -2455,7 +2461,7 @@ We are committed to conducting our business in accordance with these principles 
                                             <constraint firstItem="tWk-Bp-VDG" firstAttribute="leading" secondItem="b4i-fn-b8Z" secondAttribute="leading" constant="8" id="mH3-do-OoC"/>
                                             <constraint firstItem="WVO-r4-d5N" firstAttribute="leading" secondItem="5Ix-el-5aJ" secondAttribute="trailing" constant="8" id="oBM-gQ-xuT"/>
                                             <constraint firstAttribute="bottom" secondItem="iOZ-IP-GAa" secondAttribute="bottom" id="qPG-cw-d19"/>
-                                            <constraint firstItem="dms-rF-wGE" firstAttribute="top" secondItem="3PF-gF-46x" secondAttribute="bottom" constant="3" id="qfQ-zM-N2t"/>
+                                            <constraint firstItem="dms-rF-wGE" firstAttribute="top" secondItem="3PF-gF-46x" secondAttribute="bottom" constant="8" id="qfQ-zM-N2t"/>
                                             <constraint firstItem="HDp-zR-gGh" firstAttribute="centerX" secondItem="qic-Jx-SOq" secondAttribute="centerX" id="r1f-9G-wO8"/>
                                             <constraint firstItem="efp-Hd-Hb8" firstAttribute="centerX" secondItem="WZ6-QB-OaJ" secondAttribute="centerX" id="t8N-ib-n0B"/>
                                             <constraint firstItem="dKl-x8-NBb" firstAttribute="top" secondItem="hwo-Rg-0Vy" secondAttribute="bottom" constant="8" id="ujU-0c-0el"/>
@@ -3251,22 +3257,22 @@ We appreciate any feedback you might have. Just let us know what's on your mind 
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="140" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="00P-fH-ttv">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="86" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="00P-fH-ttv">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyEventsTableViewCell" rowHeight="140" id="aAU-8w-Se5" customClass="MyEventsTableViewCell" customModule="WebblenEvents" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="140"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyEventsTableViewCell" rowHeight="86" id="aAU-8w-Se5" customClass="MyEventsTableViewCell" customModule="WebblenEvents" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="86"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aAU-8w-Se5" id="Ekm-Qf-aCs">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="139.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="85.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4F-Qx-aYg">
-                                                    <rect key="frame" x="45" y="35" width="322" height="97"/>
+                                                    <rect key="frame" x="45" y="35" width="322" height="47"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="97" id="58a-55-gLo"/>
+                                                        <constraint firstAttribute="height" constant="47" id="58a-55-gLo"/>
                                                     </constraints>
                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
@@ -3594,7 +3600,9 @@ We appreciate any feedback you might have. Just let us know what's on your mind 
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="IWV-JE-iOa"/>
                                         </constraints>
-                                        <state key="normal" title="Notification Settings"/>
+                                        <state key="normal" title="Notification Settings (Coming Soon)">
+                                            <color key="titleColor" red="0.78932837040000003" green="0.78932837040000003" blue="0.78932837040000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <connections>
                                             <segue destination="ZCr-cc-yzL" kind="presentation" id="B3K-NS-aks"/>
                                         </connections>
@@ -3897,7 +3905,7 @@ We appreciate any feedback you might have. Just let us know what's on your mind 
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="6" id="zN9-hi-gcR"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total: $4.99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9h-Bk-82e">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total: $0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9h-Bk-82e">
                                 <rect key="frame" x="8" y="194" width="359" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17.5" id="Zb1-wx-8GB"/>
@@ -3971,7 +3979,7 @@ We appreciate any feedback you might have. Just let us know what's on your mind 
                         <outlet property="eTitle" destination="z88-xO-Lg4" id="VIl-JY-3XJ"/>
                         <outlet property="eTotalCost" destination="A9h-Bk-82e" id="YLw-j9-qfW"/>
                         <outlet property="promoCode" destination="1Ss-0P-scj" id="mvs-co-ccs"/>
-                        <segue destination="Yeg-8v-Zyp" kind="presentation" identifier="eventPurchasedSegue" id="LFL-Av-5zo"/>
+                        <segue destination="TXl-HJ-wML" kind="presentation" identifier="eventPurchasedSegue" id="xdX-Va-LQa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tXb-za-SJE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4021,15 +4029,14 @@ We appreciate any feedback you might have. Just let us know what's on your mind 
         <image name="smallLogo" width="50" height="47"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Bqi-JM-BrF"/>
+        <segue reference="xdX-Va-LQa"/>
+        <segue reference="yUq-d1-VKm"/>
         <segue reference="tjM-fg-28T"/>
-        <segue reference="N0j-mk-4uV"/>
-        <segue reference="cAV-TR-Sf9"/>
         <segue reference="ED8-Oa-sS9"/>
-        <segue reference="LFL-Av-5zo"/>
+        <segue reference="cAV-TR-Sf9"/>
+        <segue reference="DMs-YS-mFP"/>
         <segue reference="Wrz-Vm-n6a"/>
         <segue reference="1zS-lf-rXT"/>
-        <segue reference="DMs-YS-mFP"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.2554709020374385" blue="0.0072951618259343709" alpha="1" colorSpace="calibratedRGB"/>
 </document>

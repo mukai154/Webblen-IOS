@@ -476,6 +476,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let photo = self.events[indexPath.row].pathToImage!
         
+        let imageTap = UITapGestureRecognizer(target: self, action: #selector(didTapEventPhoto))
+        
+        cell.eventPhoto.isUserInteractionEnabled = true
+        
+        cell.eventPhoto.addGestureRecognizer(imageTap)
+        
         if (self.events[indexPath.row].evDescription.characters.count > 100){
             
             let index = self.events[indexPath.row].evDescription.index(self.events[indexPath.row].evDescription.startIndex, offsetBy: 100)
@@ -489,8 +495,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 
                 let url = NSURL(string:photo)
                 
-                cell.eventPhoto.layer.cornerRadius = 15
-                
                 
                 cell.configure(eventTitle: self.events[indexPath.row].title,
                                eventDate: self.events[indexPath.row].date,
@@ -499,6 +503,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                eventPhoto: self.events[indexPath.row].pathToImage)
                 cell.eventPhoto.sd_setImage(with: url! as URL)
                 cell.interestCategory.image = UIImage(named: self.events[indexPath.row].category)
+                
                 
             }
                 
@@ -523,7 +528,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 
                 let url = NSURL(string:photo)
                 
-                cell.eventPhoto.layer.cornerRadius = 15
                 
                 
                 cell.configure(eventTitle: self.events[indexPath.row].title,
@@ -551,6 +555,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        var selectedCell:UITableViewCell = tableView.cellForRow(at: indexPath)!
+        selectedCell.contentView.backgroundColor = UIColor.white
         performSegue(withIdentifier: "eventInfoSegue", sender: events[indexPath.row].eventKey)
         
     }
@@ -612,6 +619,29 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.noEventsView.isHidden = false
             
         }
+    }
+    
+    func didTapEventPhoto(sender: UITapGestureRecognizer){
+        
+        let imageView = sender.view as! UIImageView
+        let newImageView = UIImageView(image: imageView.image)
+        
+        newImageView.frame = self.view.frame
+        
+        newImageView.backgroundColor = UIColor.black
+        newImageView.contentMode = .scaleAspectFit
+        newImageView.isUserInteractionEnabled = true
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.dismissFullScreenImage))
+        
+        newImageView.addGestureRecognizer(tap)
+        self.view.addSubview(newImageView)
+        
+    }
+    
+    func dismissFullScreenImage(sender: UITapGestureRecognizer){
+        sender.view?.removeFromSuperview()
+        
     }
 
 

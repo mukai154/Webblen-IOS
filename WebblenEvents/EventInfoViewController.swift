@@ -54,6 +54,9 @@ class EventInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        eventUploadedPhoto.layer.cornerRadius = 5
+        eventUploadedPhoto.layer.masksToBounds = true
+        
         eventDescription.textContainerInset = UIEdgeInsetsMake(10, 0, 0, 0)
         eventDescription.textColor = UIColor.lightGray
         eventAddress.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0)
@@ -97,8 +100,8 @@ class EventInfoViewController: UIViewController {
                 let eUsername = eDict["username"] as! String
                 if (self.eUid == self.currentUser?.uid || self.currentUser?.uid == "hwTLttjkAN327gLPriXXFhx9Z12" ){
                     if(eCat != "WARNING"){
-                    self.editEventButton.isHidden = false
-                    self.editEventButton.isEnabled = true
+                    //self.editEventButton.isHidden = false
+                    //self.editEventButton.isEnabled = true
                     }
                     self.deleteEventButton.isHidden = false
                     self.deleteEventButton.isEnabled = true
@@ -109,7 +112,11 @@ class EventInfoViewController: UIViewController {
         
         })
         
-
+        let imageTap = UITapGestureRecognizer(target: self, action: #selector(didTapEventPhoto))
+        
+        eventUploadedPhoto.isUserInteractionEnabled = true
+        
+        eventUploadedPhoto.addGestureRecognizer(imageTap)
         
         // Do any additional setup after loading the view.
     }
@@ -293,6 +300,12 @@ class EventInfoViewController: UIViewController {
         performSegue(withIdentifier: "editEventSegue", sender: eventKey)
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "editEventSegue"){
+            let editEvent = segue.destination as! NewEventViewController
+            editEvent.eventKey = sender as! String
+        }
+    }
 
 
     @IBAction func didPressDelete(_ sender: Any) {
@@ -308,5 +321,28 @@ class EventInfoViewController: UIViewController {
             eventEd.eventKey = sender as? String
         }
     } */
+    
+    func didTapEventPhoto(sender: UITapGestureRecognizer){
+        
+        let imageView = sender.view as! UIImageView
+        let newImageView = UIImageView(image: imageView.image)
+        
+        newImageView.frame = self.view.frame
+        
+        newImageView.backgroundColor = UIColor.black
+        newImageView.contentMode = .scaleAspectFit
+        newImageView.isUserInteractionEnabled = true
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.dismissFullScreenImage))
+        
+        newImageView.addGestureRecognizer(tap)
+        self.view.addSubview(newImageView)
+        
+    }
+    
+    func dismissFullScreenImage(sender: UITapGestureRecognizer){
+        sender.view?.removeFromSuperview()
+        
+    }
 
 }

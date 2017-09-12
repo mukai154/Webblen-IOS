@@ -61,6 +61,8 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        modifyNotification.isEnabled = false
         activityIndicator.isHidden = true
         
         //Looks for single or multiple taps.
