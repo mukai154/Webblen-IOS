@@ -10,6 +10,7 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 import FirebaseStorage
+import CoreLocation
 
 class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
 
@@ -120,7 +121,23 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
         view.endEditing(true)
     }
     
-    
+    //Class to convert address from String to Coordinates
+    /* func convertAddressToLatAndLong() -> String {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(eventAddress) {
+            placemarks, error in
+            let placemark = placemarks?.first
+            let lat = placemark?.location?.coordinate.latitude
+            let lon = placemark?.location?.coordinate.longitude
+            
+            let post:[String : AnyObject] = [
+                "latitude":lat as AnyObject,
+                "longitude":lon as AnyObject
+            ]
+        }
+        return post
+    }
+   */
     
     
     //Functions for Category Picker
@@ -317,8 +334,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
                             self.dataBaseRef.child("Event").child(key).child("paid").setValue("false")
                             self.dataBaseRef.child("Event").child(key).child("verified").setValue("false")
                             self.dataBaseRef.child("Event").child(key).child("pathToImage").setValue(downloadURL)
-                            
-                            
+                           //self.dataBaseRef.child("LocationCoordinates").childByAutoId().setValue(self.convertAddressToLatAndLong())
                         }
                     self.uploadPost()
                 }
@@ -361,7 +377,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
                 self.dataBaseRef.child("Event").child(key).child("paid").setValue("false")
                 self.dataBaseRef.child("Event").child(key).child("verified").setValue("false")
                 self.dataBaseRef.child("Event").child(key).child("pathToImage").setValue("null")
-                
+                //self.dataBaseRef.child("LocationCoordinates").childByAutoId().setValue(self.convertAddressToLatAndLong())
                 
             }
             uploadPost()
