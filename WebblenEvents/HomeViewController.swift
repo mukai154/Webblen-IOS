@@ -28,8 +28,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var defaultImageViewHeightConstraint:CGFloat = 225
     
-    var currentDate = Date()
-    var formatter = DateFormatter()
+
     
     
     
@@ -46,6 +45,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     
     var dataBaseRef: FIRDatabaseReference!
+    
+    
     var events = [Event]()
     var eventsToday = [Event]()
     var eventsThisWeek = [Event]()
@@ -64,7 +65,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        formatter.dateFormat = "dd/MM/yyyy"
         
         
         menu.layer.shadowOpacity = 0.5
@@ -422,15 +422,15 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             for (_,event) in eventSnap {
                 if let eventCategory = event["category"] as? String {
                     for each in self.userInterests {
-                        if (each == eventCategory){
+                        if (each == eventCategory ){
                             if let eKey = event["uid"] as? String {
-                                if(!self.userBlocks.contains(eKey)){
-                                
+                                if(event["paid"] as! String == "true"){
                         //Event data
                                     //WHEN ADDING TO CUSTOM ARRAY, PAY ATTENTION TO DATATYPE OF DATE
                         let eventPost = Event()
                         if let category = event["category"] as? String, let date = event["date"] as? String, let evDescription = event["evDescription"] as? String, let time = event["time"] as? String, let title = event["title"] as? String, let uid = event["uid"] as? String, let username = event["username"] as? String, let pathToImage = event["pathToImage"] as? String, let verified = event["verified"] as? String, let eventKey = event["eventKey"] as? String, let paid = event["paid"] as? String, let radius = event["radius"] as? String{
                             eventPost.category = category
+                            eventPost.paid = paid
                             eventPost.date = date
                             eventPost.evDescription = evDescription
                             self.modifiedDescription = evDescription
@@ -445,11 +445,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                             self.events.append(eventPost)
                             self.numberOfEvents += 1
                             
+                            print(self.events)
                             
-                            
-                        }
-                        
+                                    }
                                 }
+                            
+                                
                             }
                     }
                 }
@@ -488,6 +489,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             
             if ((self.events[indexPath.row].pathToImage) != "null"){
+                
                 
                 cell.eventPhoto.isHidden = false
                 cell.imageViewHeightConstraint.constant = defaultImageViewHeightConstraint

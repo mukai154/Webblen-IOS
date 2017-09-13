@@ -18,13 +18,18 @@ class MyEventsViewController: UIViewController, UITableViewDelegate, UITableView
     
     var dataBaseRef: FIRDatabaseReference!
     var events = [Event]()
+    var eventCount = 0
     
     
     @IBOutlet weak var myEventsTableView: UITableView!
-    @IBOutlet weak var interestButton: UIBarButtonItem!
+    @IBOutlet weak var noEventsView: UILabel!
+    @IBOutlet weak var aivLoading: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        aivLoading.startAnimating()
+        noEventsView.isHidden = true
 
         dataBaseRef = FIRDatabase.database().reference()
         
@@ -33,6 +38,11 @@ class MyEventsViewController: UIViewController, UITableViewDelegate, UITableView
 
         
         configureDatabase()
+        
+        
+        aivLoading.isHidden = true
+        
+    
         
         
     }
@@ -103,8 +113,9 @@ class MyEventsViewController: UIViewController, UITableViewDelegate, UITableView
                 cell.eventDescription.text = self.events[indexPath.row].evDescription
             }
         
-                return (cell) 
-            
+
+                return (cell)
+        
         }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "myEventInfoSegue", sender: events[indexPath.row].eventKey)

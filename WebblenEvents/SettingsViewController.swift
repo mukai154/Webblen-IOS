@@ -11,17 +11,16 @@ import Firebase
 
 class SettingsViewController: UIViewController {
 
-    @IBOutlet weak var currentEmailField: UITextField!
-    @IBOutlet weak var currentPasswordField: UITextField!
-    @IBOutlet weak var changeNameField: UITextField!
-    @IBOutlet weak var newPassField: UITextField!
-    @IBOutlet weak var confirmPassField: UITextField!
-    @IBOutlet weak var updateAccountButton: UIButton!
-    @IBOutlet weak var logoutButton: UIButton!
+
+    @IBOutlet weak var verifyAccountButton: UIButton!
+    @IBOutlet weak var verifyAgeButton: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        verifyAgeButton.isEnabled = false
+        verifyAccountButton.isEnabled = false
         
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")

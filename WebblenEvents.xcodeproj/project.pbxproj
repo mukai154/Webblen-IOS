@@ -15,6 +15,9 @@
 		4617A7471F3D4C6600926160 /* confirmPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4617A7461F3D4C6600926160 /* confirmPostViewController.swift */; };
 		4617A7491F3D4D2900926160 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4617A7481F3D4D2900926160 /* StoreKit.framework */; };
 		461FD2D31F43FBF9001C7279 /* homeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461FD2D21F43FBF9001C7279 /* homeCell.swift */; };
+		4624B9621F67D45D00F4D6E6 /* VerifyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4624B9611F67D45D00F4D6E6 /* VerifyAccountViewController.swift */; };
+		4624B9641F686E2C00F4D6E6 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4624B9631F686E2C00F4D6E6 /* StoreManager.swift */; };
+		4624B9661F68D2AF00F4D6E6 /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4624B9651F68D2AE00F4D6E6 /* SwiftyStoreKit.framework */; };
 		4642E7371E1E6B6300D65DA5 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4642E7361E1E6B6300D65DA5 /* SignInViewController.swift */; };
 		4642E7391E1EED3000D65DA5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4642E7381E1EED3000D65DA5 /* HomeViewController.swift */; };
 		4642E73D1E1F40E400D65DA5 /* NewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4642E73C1E1F40E400D65DA5 /* NewEventViewController.swift */; };
@@ -50,6 +53,9 @@
 		4617A7461F3D4C6600926160 /* confirmPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confirmPostViewController.swift; sourceTree = "<group>"; };
 		4617A7481F3D4D2900926160 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		461FD2D21F43FBF9001C7279 /* homeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = homeCell.swift; sourceTree = "<group>"; };
+		4624B9611F67D45D00F4D6E6 /* VerifyAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyAccountViewController.swift; sourceTree = "<group>"; };
+		4624B9631F686E2C00F4D6E6 /* StoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
+		4624B9651F68D2AE00F4D6E6 /* SwiftyStoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyStoreKit.framework; path = "../../Library/Developer/Xcode/DerivedData/WebblenEvents-aqmxctmtxigagscabsvsxabqegai/Build/Products/Debug-iphoneos/SwiftyStoreKit/SwiftyStoreKit.framework"; sourceTree = "<group>"; };
 		4642E7361E1E6B6300D65DA5 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		4642E7381E1EED3000D65DA5 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		4642E73C1E1F40E400D65DA5 /* NewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4624B9661F68D2AF00F4D6E6 /* SwiftyStoreKit.framework in Frameworks */,
 				0DEA47663D8D060E3DC23629 /* Pods_WebblenEvents.framework in Frameworks */,
 				4617A7491F3D4D2900926160 /* StoreKit.framework in Frameworks */,
 			);
@@ -150,6 +157,8 @@
 				461FD2D21F43FBF9001C7279 /* homeCell.swift */,
 				D40A12A31F658F3E00392FF9 /* WhatsNewViewController.swift */,
 				D40A12A51F659E7300392FF9 /* NotificationSettingsViewController.swift */,
+				4624B9611F67D45D00F4D6E6 /* VerifyAccountViewController.swift */,
+				4624B9631F686E2C00F4D6E6 /* StoreManager.swift */,
 			);
 			path = WebblenEvents;
 			sourceTree = "<group>";
@@ -157,6 +166,7 @@
 		EEABF8226ADF07419F0B7844 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4624B9651F68D2AE00F4D6E6 /* SwiftyStoreKit.framework */,
 				4617A7481F3D4D2900926160 /* StoreKit.framework */,
 				5B69FC37BCC1F75D899C6C06 /* Pods_WebblenEvents.framework */,
 			);
@@ -380,6 +390,7 @@
 				460999101E3A9902000DE53F /* BlockTableViewCell.swift in Sources */,
 				46956C6F1E1DB3F9009A8F93 /* InterestSetupViewController.swift in Sources */,
 				4642E7391E1EED3000D65DA5 /* HomeViewController.swift in Sources */,
+				4624B9621F67D45D00F4D6E6 /* VerifyAccountViewController.swift in Sources */,
 				4642E73D1E1F40E400D65DA5 /* NewEventViewController.swift in Sources */,
 				461FD2D31F43FBF9001C7279 /* homeCell.swift in Sources */,
 				4642E74B1E20E90A00D65DA5 /* Constants.swift in Sources */,
@@ -388,6 +399,7 @@
 				4609990C1E39E38A000DE53F /* BlockedUsersViewController.swift in Sources */,
 				D40A12A61F659E7300392FF9 /* NotificationSettingsViewController.swift in Sources */,
 				46956C731E1E10E5009A8F93 /* SignUpViewController.swift in Sources */,
+				4624B9641F686E2C00F4D6E6 /* StoreManager.swift in Sources */,
 				469E84831F355988002E07AA /* MapsViewController.swift in Sources */,
 				46956C711E1E0537009A8F93 /* SetupViewController.swift in Sources */,
 			);

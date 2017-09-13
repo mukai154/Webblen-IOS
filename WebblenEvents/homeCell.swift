@@ -43,6 +43,12 @@ class homeCell: UITableViewCell {
     }
 
     public func configure(eventTitle:String, eventDate:String, isVerified:String, eventDescription: String, eventPhoto: String?){
+        
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd/yyyy"
+        let currentDate = formatter.string(from: date)
+        
         self.eventTitle.text = eventTitle
         self.eventDate.text = eventDate
         self.eventDescription.text = eventDescription
@@ -50,6 +56,11 @@ class homeCell: UITableViewCell {
         if (isVerified == "true"){
            self.isVerified.isHidden = false
             self.verifiedWidth.constant = 20
+        }
+        
+        if (eventDate == currentDate){
+            self.eventDate.text = "Today"
+            self.eventDate.textColor = UIColor.red
         }
         
         

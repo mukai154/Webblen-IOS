@@ -11,10 +11,10 @@ import Firebase
 import SwiftyStoreKit
 import StoreKit
 
-var sharedSecret = "3fd70aaaf914c7999e7930abd16e0523"
+var sharedSecret = "3fd70aaa6f914c799e7930abd16e0523"
 
 enum RegisteredPurchase : String {
-    case event5 = "5DollarEvent"
+    case event5 = "notifyFive"
     
 }
 
@@ -72,7 +72,7 @@ class confirmPostViewController: UIViewController {
     var dataBaseRef: FIRDatabaseReference!
     var currentUser: AnyObject?
     
-    var Money = Int()
+    var Money : Int!
     
     let bundleID = "com.webblen.events"
     
@@ -83,6 +83,13 @@ class confirmPostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        
+        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        
+        tap.cancelsTouchesInView = true
+        view.addGestureRecognizer(tap)
+        
         //Database Ref
         dataBaseRef = FIRDatabase.database().reference()
         self.currentUser = FIRAuth.auth()?.currentUser
@@ -112,8 +119,25 @@ class confirmPostViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //Causes the view (or one of its embedded text fields) to resign the first responder status.
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    
     @IBAction func didPressConfirm(_ sender: Any) {
-        performSegue(withIdentifier: "eventPurchasedSegue", sender: nil)
+        
+        if (promoCode.text == "GoNDSUBison"){
+            self.dataBaseRef.child("Event").child(self.eventKey).child("paid").setValue("true")
+            
+            print("promo code used")
+            
+            performSegue(withIdentifier: "eventPurchasedSegue", sender: nil)
+        }
+        else {
+        print("attempting to get purchase")
+        purchase(purchase: event5)
+        }
 
     }
     
@@ -141,12 +165,13 @@ class confirmPostViewController: UIViewController {
             
             if case .success(let product) = result {
                 
-                if product.productId == self.bundleID + "." + "5DollarEvent" {
+                if product.productId == self.bundleID + "." + "notifyFive" {
                     
-                    self.Money += 5
-                    print(self.Money)
+                    self.dataBaseRef.child("Event").child(self.eventKey).child("paid").setValue("true")
                     
-                    //performSegue(withIdentifier: "eventPurchasedSegue", sender: nil)
+                    print("success")
+                    
+                    self.performSegue(withIdentifier: "eventPurchasedSegue", sender: nil)
                     
                 }
                 
