@@ -429,7 +429,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="50Y-2m-otW">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" ¯\_(ツ)_/¯ " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RWd-cI-g1z">
                                         <rect key="frame" x="8" y="260" width="359" height="21"/>
@@ -619,7 +619,7 @@
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dT1-Ga-2Jz">
-                                        <rect key="frame" x="8" y="382" width="134" height="30"/>
+                                        <rect key="frame" x="8" y="431" width="134" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="VM1-jj-DE6"/>
                                         </constraints>
@@ -1088,7 +1088,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="B9G-lF-a5b">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">ABOUT WEBBLEN EVENTS:
+                                <string key="text">ABOUT WEBBLEN EVENTS:
 
 Webblen Events is a platform for users to share and receive events with other users around them. Events are categorized by interest and users are only displayed events they may be interested in.
 
@@ -1176,7 +1176,7 @@ Personal data should be relevant to the purposes for which it is to be used, and
 We will protect personal information by reasonable security safeguards against loss or theft, as well as unauthorized access, disclosure, copying, use or modification.
 We will make readily available to customers information about our policies and practices relating to the management of personal information.
 We are committed to conducting our business in accordance with these principles in order to ensure that the confidentiality of personal information is protected and maintained.
-</mutableString>
+</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -1242,7 +1242,7 @@ We are committed to conducting our business in accordance with these principles 
                                         <color key="backgroundColor" red="0.97637528179999999" green="0.9765191674" blue="0.97635573149999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                         <connections>
                                             <action selector="informationEntered:" destination="WNU-Hy-TN8" eventType="editingDidEnd" id="ugp-mo-jBG"/>
                                         </connections>
@@ -3357,7 +3357,7 @@ We appreciate any feedback you might have. Just let us know what's on your mind 
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="86" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="00P-fH-ttv">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyEventsTableViewCell" rowHeight="86" id="aAU-8w-Se5" customClass="MyEventsTableViewCell" customModule="WebblenEvents" customModuleProvider="target">
@@ -4134,14 +4134,14 @@ We appreciate any feedback you might have. Just let us know what's on your mind 
         <image name="smallLogo" width="50" height="47"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xdX-Va-LQa"/>
-        <segue reference="yUq-d1-VKm"/>
-        <segue reference="aLb-VU-Jwi"/>
-        <segue reference="FUO-gM-pvq"/>
-        <segue reference="cAV-TR-Sf9"/>
+        <segue reference="YfR-AC-1IB"/>
         <segue reference="NW1-hn-Hbo"/>
-        <segue reference="mSo-0h-na2"/>
+        <segue reference="8pt-WH-yMZ"/>
         <segue reference="DMs-YS-mFP"/>
+        <segue reference="1zS-lf-rXT"/>
+        <segue reference="yUq-d1-VKm"/>
+        <segue reference="FUO-gM-pvq"/>
+        <segue reference="aLb-VU-Jwi"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.2554709020374385" blue="0.0072951618259343709" alpha="1" colorSpace="calibratedRGB"/>
 </document>

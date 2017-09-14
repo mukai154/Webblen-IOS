@@ -309,7 +309,14 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
                             self.dataBaseRef.child("Event").child(key).child("eventKey").setValue(key)
                             self.dataBaseRef.child("Event").child(key).child("radius").setValue(String(self.notifyDistance))
                             self.dataBaseRef.child("Event").child(key).child("paid").setValue("false")
+                            
+                            if (self.currentUser?.uid == "KFDuKYEoHbUmc1B0nsfbssON6zY2"){
+                            self.dataBaseRef.child("Event").child(key).child("verified").setValue("true")
+                            }
+                            else {
                             self.dataBaseRef.child("Event").child(key).child("verified").setValue("false")
+                            }
+                            
                             self.dataBaseRef.child("Event").child(key).child("pathToImage").setValue(downloadURL)
                             
                             

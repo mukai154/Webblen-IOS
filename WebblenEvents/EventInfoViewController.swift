@@ -98,7 +98,7 @@ class EventInfoViewController: UIViewController {
                 self.eventDate.text = eDate + " | " + eTime
                 self.eUid = eDict["uid"] as! String
                 let eUsername = eDict["username"] as! String
-                if (self.eUid == self.currentUser?.uid || self.currentUser?.uid == "hwTLttjkAN327gLPriXXFhx9Z12" ){
+                if (self.eUid == self.currentUser?.uid || self.currentUser?.uid == "KFDuKYEoHbUmc1B0nsfbssON6zY2" ){
                     if(eCat != "WARNING"){
                     //self.editEventButton.isHidden = false
                     //self.editEventButton.isEnabled = true
@@ -139,7 +139,7 @@ class EventInfoViewController: UIViewController {
             
         }
         
-        if (madeEvent == false && self.eUid != "hwiTLttjkAN327gLPriXXFhx9Z12"){
+        if (madeEvent == false && self.eUid != "KFDuKYEoHbUmc1B0nsfbssON6zY2"){
             
             let alert = UIAlertController(title: "Event Options", message: "Report the Event for Offensive Content or Block Whomever Created It?", preferredStyle: .alert)
             
@@ -216,7 +216,7 @@ class EventInfoViewController: UIViewController {
             
         }
         
-        if(self.eUid == "hwiTLttjkAN327gLPriXXFhx9Z12"){
+        if(self.eUid == "KFDuKYEoHbUmc1B0nsfbssON6zY2"){
             
             let alert = UIAlertController(title: "Event Options", message: "Report the Event for Offensive Content or Block Whomever Created It?", preferredStyle: .alert)
             

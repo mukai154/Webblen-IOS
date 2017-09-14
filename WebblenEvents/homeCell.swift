@@ -21,13 +21,18 @@ class homeCell: UITableViewCell {
     
     @IBOutlet weak var verifiedWidth: NSLayoutConstraint!
 
-    
+    var currentDate : String?
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         self.layoutIfNeeded()
+        
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd/yyyy"
+        currentDate = formatter.string(from: date)
         
         eventDescription.textContainerInset = UIEdgeInsetsMake(5, -1, 0, 0)
         eventDescription.translatesAutoresizingMaskIntoConstraints = true
@@ -44,10 +49,6 @@ class homeCell: UITableViewCell {
 
     public func configure(eventTitle:String, eventDate:String, isVerified:String, eventDescription: String, eventPhoto: String?){
         
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd/yyyy"
-        let currentDate = formatter.string(from: date)
         
         self.eventTitle.text = eventTitle
         self.eventDate.text = eventDate
