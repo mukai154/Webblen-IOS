@@ -44,6 +44,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
     var eventKey = "key"
     var event18 = false
     var event21 = false
+    var post : [String : AnyObject] = [:]
 
     var image : UIImage?
  
@@ -114,24 +115,6 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
     func dismissKeyboard() {
         view.endEditing(true)
     }
-    
-    //Class to convert address from String to Coordinates
-    /* func convertAddressToLatAndLong() -> String {
-        let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(eventAddress) {
-            placemarks, error in
-            let placemark = placemarks?.first
-            let lat = placemark?.location?.coordinate.latitude
-            let lon = placemark?.location?.coordinate.longitude
-            
-            let post:[String : AnyObject] = [
-                "latitude":lat as AnyObject,
-                "longitude":lon as AnyObject
-            ]
-        }
-        return post
-    }
-   */
     
     
     //Functions for Category Picker
@@ -335,7 +318,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
                             }
                             
                             self.dataBaseRef.child("Event").child(key).child("pathToImage").setValue(downloadURL)
-                           //self.dataBaseRef.child("LocationCoordinates").childByAutoId().setValue(self.convertAddressToLatAndLong())
+                            self.dataBaseRef.child("LocationCoordinates").childByAutoId().setValue(self.convertAddressToLatAndLong())
                         }
                     self.uploadPost()
                 }
@@ -378,7 +361,8 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
                 self.dataBaseRef.child("Event").child(key).child("paid").setValue("false")
                 self.dataBaseRef.child("Event").child(key).child("verified").setValue("false")
                 self.dataBaseRef.child("Event").child(key).child("pathToImage").setValue("null")
-                //self.dataBaseRef.child("LocationCoordinates").childByAutoId().setValue(self.convertAddressToLatAndLong())
+                self.dataBaseRef.child("LocationCoordinates").childByAutoId().setValue(self.convertAddressToLatAndLong())
+                
                 
             }
             uploadPost()
@@ -391,6 +375,25 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
         
         activityIndicator.stopAnimating()
         performSegue(withIdentifier: "confirmSegue", sender: eventKey)
+    }
+    
+    //Class to convert address from String to Coordinates
+    func convertAddressToLatAndLong() -> [String : AnyObject] {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(eventAddress) {
+            placemarks, error in
+            let placemark = placemarks?.first
+            let lat = placemark?.location?.coordinate.latitude
+            let lon = placemark?.location?.coordinate.longitude
+            
+            self.post = [
+                "latitude":lat as AnyObject,
+                "longitude":lon as AnyObject
+            ]
+            
+        }
+        return post
+    
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
