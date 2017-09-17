@@ -44,7 +44,8 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
     var eventKey = "key"
     var event18 = false
     var event21 = false
-    var post : [String : AnyObject] = [:]
+    var lat : Double?
+    var lon : Double?
 
     var image : UIImage?
  
@@ -190,6 +191,10 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
     @IBAction func didTapConfirm(_ sender: Any) {
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
+        
+        //Get Location Coordinates
+        convertAddressToLatAndLong()
+        
         //Check for images & Event Key & Link Storage & Prepare Segue
         let key = self.dataBaseRef.child("Event").childByAutoId().key
         eventKey = key
@@ -261,7 +266,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
             //Check detail of event & upload info to firebase
         else if((eventTitleField.text?.characters.count)! > 0 && (eventDescriptionField.text?.characters.count)! > 30 && uploadedImage == true){
             
-
+            
             //Lowers resolution of the image
             let imageData = UIImageJPEGRepresentation(self.imageSelectButton.backgroundImage(for: .normal)!, 0.6)
                 
@@ -318,13 +323,15 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
                             }
                             
                             self.dataBaseRef.child("Event").child(key).child("pathToImage").setValue(downloadURL)
-                            self.dataBaseRef.child("LocationCoordinates").childByAutoId().setValue(self.convertAddressToLatAndLong())
+                            self.dataBaseRef.child("LocationCoordinates").child(key).child("lat").setValue(self.lat)
+                            self.dataBaseRef.child("LocationCoordinates").child(key).child("lon").setValue(self.lon)
                         }
                     self.uploadPost()
                 }
             }
         }
         else if (((self.eventDescriptionField.text?.characters.count)! > 30) && (eventTitleField.text?.characters.count)! > 0 ){
+            
             
             //Name Fixes
             if (self.eventCategory == "Health & Fitness"){
@@ -361,7 +368,10 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
                 self.dataBaseRef.child("Event").child(key).child("paid").setValue("false")
                 self.dataBaseRef.child("Event").child(key).child("verified").setValue("false")
                 self.dataBaseRef.child("Event").child(key).child("pathToImage").setValue("null")
-                self.dataBaseRef.child("LocationCoordinates").childByAutoId().setValue(self.convertAddressToLatAndLong())
+                self.dataBaseRef.child("LocationCoordinates").child(key).child("lat").setValue(self.lat)
+                self.dataBaseRef.child("LocationCoordinates").child(key).child("lon").setValue(self.lon)
+
+                
                 
                 
             }
@@ -378,22 +388,19 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
     }
     
     //Class to convert address from String to Coordinates
-    func convertAddressToLatAndLong() -> [String : AnyObject] {
+    func convertAddressToLatAndLong(){
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(eventAddress) {
+            
             placemarks, error in
             let placemark = placemarks?.first
-            let lat = placemark?.location?.coordinate.latitude
-            let lon = placemark?.location?.coordinate.longitude
-            
-            self.post = [
-                "latitude":lat as AnyObject,
-                "longitude":lon as AnyObject
-            ]
-            
-        }
-        return post
+            self.lat = placemark?.location?.coordinate.latitude
+            self.lon = placemark?.location?.coordinate.longitude
     
+            }
+        
+        print(lat)
+        print(lon)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
