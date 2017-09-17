@@ -125,7 +125,6 @@ class EventInfoViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     @IBAction func didPressReportButton(_ sender: Any) {
         if (madeEvent == true){
