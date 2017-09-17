@@ -20,7 +20,7 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         
         verifyAgeButton.isEnabled = false
-        verifyAccountButton.isEnabled = false
+        //verifyAccountButton.isEnabled = false
         
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
