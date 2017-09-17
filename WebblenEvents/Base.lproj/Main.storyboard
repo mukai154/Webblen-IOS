@@ -2678,7 +2678,7 @@ We are committed to conducting our business in accordance with these principles 
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7pH-3L-UtD">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7pH-3L-UtD">
                                 <rect key="frame" x="16" y="105" width="336.5" height="83"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -2698,7 +2698,7 @@ We are committed to conducting our business in accordance with these principles 
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Yes. It is and always will be free." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AWn-dh-lK8">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Yes. It is and always will be free." textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWn-dh-lK8">
                                 <rect key="frame" x="16" y="222" width="343" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -2755,18 +2755,6 @@ We are committed to conducting our business in accordance with these principles 
                                     <action selector="didTapSubmit:" destination="DoR-tD-HRX" eventType="touchUpInside" id="tLc-Di-ypc"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Usy-9O-HhO">
-                                <rect key="frame" x="137" y="412" width="100" height="100"/>
-                                <connections>
-                                    <action selector="didPressPhoto2:" destination="DoR-tD-HRX" eventType="touchUpInside" id="mhg-hx-qsJ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RBx-sX-s9T">
-                                <rect key="frame" x="259" y="412" width="100" height="100"/>
-                                <connections>
-                                    <action selector="didPressPhoto3:" destination="DoR-tD-HRX" eventType="touchUpInside" id="ObJ-4A-KUd"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Verification" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qI0-aU-4mw">
                                 <rect key="frame" x="16" y="32" width="150" height="21"/>
                                 <constraints>
@@ -2807,6 +2795,18 @@ We are committed to conducting our business in accordance with these principles 
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="didPressPhoto1:" destination="DoR-tD-HRX" eventType="touchUpInside" id="R3S-aF-bKM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Usy-9O-HhO">
+                                <rect key="frame" x="137" y="412" width="100" height="100"/>
+                                <connections>
+                                    <action selector="didPressPhoto2:" destination="DoR-tD-HRX" eventType="touchUpInside" id="mhg-hx-qsJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RBx-sX-s9T">
+                                <rect key="frame" x="259" y="412" width="100" height="100"/>
+                                <connections>
+                                    <action selector="didPressPhoto3:" destination="DoR-tD-HRX" eventType="touchUpInside" id="ObJ-4A-KUd"/>
                                 </connections>
                             </button>
                         </subviews>
