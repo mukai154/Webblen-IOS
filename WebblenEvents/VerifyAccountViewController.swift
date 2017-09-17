@@ -16,9 +16,10 @@ class VerifyAccountViewController: UIViewController, UIImagePickerControllerDele
     @IBOutlet weak var accountName: UITextField!
     @IBOutlet weak var accountEmail: UITextField!
     @IBOutlet weak var accountPhone: UITextField!
-    @IBOutlet weak var photo1: UIImageView!
-    @IBOutlet weak var photo2: UIImageView!
-    @IBOutlet weak var photo3: UIImageView!
+    @IBOutlet weak var image1: UIButton!
+    @IBOutlet weak var image2: UIButton!
+    @IBOutlet weak var image3: UIButton!
+
     
     //Firebase References
     var dataBaseRef = FIRDatabase.database().reference()
@@ -86,28 +87,44 @@ class VerifyAccountViewController: UIViewController, UIImagePickerControllerDele
     //Function after photo has been selected
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
-            
-            
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             
             if (chosePhoto1 == true){
-            uploadedImage = true
-            self.photo1.image = image
-            chosePhoto1 = false
             
+                uploadedImage = true
+            
+                print(chosePhoto1)
+            
+                self.image1.setBackgroundImage(image, for: .normal)
+                
+                chosePhoto1 = false
             }
             
             if (chosePhoto2 == true){
+                
                 uploadedImage = true
-                self.photo2.image = image
+                
+                print(chosePhoto2)
+                
+                self.image2.setBackgroundImage(image, for: .normal)
+                
                 chosePhoto2 = false
             }
             
             if (chosePhoto3 == true){
+                
                 uploadedImage = true
-                self.photo3.image = image
+                
+                print(chosePhoto3)
+                
+                self.image3.setBackgroundImage(image, for: .normal)
+                
                 chosePhoto3 = false
             }
+            
+            
+            
+
         }
         
         self.dismiss(animated: true, completion: nil)
@@ -117,31 +134,56 @@ class VerifyAccountViewController: UIViewController, UIImagePickerControllerDele
     @IBAction func didPressPhoto1(_ sender: Any) {
         
         chosePhoto1 = true
-        selectPhotos()
+        actionForPhotoSource()
+
         
     }
     
     @IBAction func didPressPhoto2(_ sender: Any) {
         
         chosePhoto2 = true
-        selectPhotos()
+        actionForPhotoSource()
     }
     
     @IBAction func didPressPhoto3(_ sender: Any) {
         
         chosePhoto3 = true
-        selectPhotos()
+        actionForPhotoSource()
+        
     }
     
     @IBAction func didPressCancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
-    func selectPhotos(){
-    
-        imagePicker.sourceType = .photoLibrary
+    //Functions for selecting image from library or camera
+    func actionForPhotoSource(){
+        let actionSheet = UIAlertController(title: "Upload Photo", message: "Choose photo source", preferredStyle: .actionSheet)
         
-        self.present(imagePicker, animated: true, completion: nil)
+        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: {(action:UIAlertAction) in
+            
+            if UIImagePickerController.isSourceTypeAvailable(.camera){
+            self.imagePicker.sourceType = .camera
+            self.present(self.imagePicker, animated: true, completion: nil)
+                
+            }
+            else {
+                print("camera not utilized")
+            }
+            
+            }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: {(action:UIAlertAction) in
+            
+            self.imagePicker.sourceType = .photoLibrary
+            self.present(self.imagePicker, animated: true, completion: nil)
+            
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(actionSheet, animated: true, completion: nil)
+        
     }
     
     @IBAction func didTapSubmit(_ sender: Any) {

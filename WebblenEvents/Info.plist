@@ -50,6 +50,8 @@
 	<string>Webblen Events Would Like Access to Your Location</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Webblen Events Would Like Access to Your Photos</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Webblen Events Would Like Access to Your Camera</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
