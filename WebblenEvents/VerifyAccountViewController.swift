@@ -36,6 +36,9 @@ class VerifyAccountViewController: UIViewController, UIImagePickerControllerDele
     var chosePhoto1 = false
     var chosePhoto2 = false
     var chosePhoto3 = false
+    var uploadPhoto1 = false
+    var uploadPhoto2 = false
+    var uploadPhoto3 = false
     
     var imagePicker = UIImagePickerController()
     
@@ -92,6 +95,8 @@ class VerifyAccountViewController: UIViewController, UIImagePickerControllerDele
             if (chosePhoto1 == true){
             
                 uploadedImage = true
+                
+                uploadPhoto1 = true
             
                 print(chosePhoto1)
             
@@ -104,7 +109,7 @@ class VerifyAccountViewController: UIViewController, UIImagePickerControllerDele
                 
                 uploadedImage = true
                 
-                print(chosePhoto2)
+                uploadPhoto2 = true
                 
                 self.image2.setBackgroundImage(image, for: .normal)
                 
@@ -115,7 +120,8 @@ class VerifyAccountViewController: UIViewController, UIImagePickerControllerDele
                 
                 uploadedImage = true
                 
-                print(chosePhoto3)
+                uploadPhoto3 = true
+                
                 
                 self.image3.setBackgroundImage(image, for: .normal)
                 
@@ -134,6 +140,7 @@ class VerifyAccountViewController: UIViewController, UIImagePickerControllerDele
     @IBAction func didPressPhoto1(_ sender: Any) {
         
         chosePhoto1 = true
+        
         actionForPhotoSource()
 
         
@@ -152,9 +159,12 @@ class VerifyAccountViewController: UIViewController, UIImagePickerControllerDele
         
     }
     
+    
+    //Cancel
     @IBAction func didPressCancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
     
     //Functions for selecting image from library or camera
     func actionForPhotoSource(){
@@ -186,7 +196,23 @@ class VerifyAccountViewController: UIViewController, UIImagePickerControllerDele
         
     }
     
+    
+    //Submit Photos
     @IBAction func didTapSubmit(_ sender: Any) {
+        
+        //Check for images & Event Key & Link Storage & Prepare Segue
+        let key = self.dataBaseRef.child("toBeVerified").childByAutoId().key
+        let storage = FIRStorage.storage().reference(forURL: "gs://webblen-events.appspot.com")
+        let imageRef = storage.child("toBeVerified").child(currentUser!.uid as! String).child("\(key).jpg")
+        if (uploadPhoto1 == true){
+        let imageData1 = UIImageJPEGRepresentation(self.image1.backgroundImage(for: .normal)!, 0.6)
+        }
+        if (uploadPhoto2 == true){
+        let imageDate2 = UIImageJPEGRepresentation(self.image2.backgroundImage(for: .normal)!, 0.6)
+        }
+        if (uploadPhoto3 == true){
+        let imageDate3 = UIImageJPEGRepresentation(self.image3.backgroundImage(for: .normal)!, 0.6)
+        }
     }
     
 

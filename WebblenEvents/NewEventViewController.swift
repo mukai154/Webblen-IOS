@@ -398,9 +398,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
             self.lon = placemark?.location?.coordinate.longitude
     
             }
-        
-        print(lat)
-        print(lon)
+
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
