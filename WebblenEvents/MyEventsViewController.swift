@@ -22,14 +22,12 @@ class MyEventsViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     @IBOutlet weak var myEventsTableView: UITableView!
-    @IBOutlet weak var noEventsView: UILabel!
     @IBOutlet weak var aivLoading: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         aivLoading.startAnimating()
-        noEventsView.isHidden = true
 
         dataBaseRef = FIRDatabase.database().reference()
         
@@ -128,8 +126,6 @@ class MyEventsViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
 
-    @IBAction func didPressHeart(_ sender: Any) {
-        performSegue(withIdentifier: "interestSegue2", sender: nil)
-    }
+
 
 }

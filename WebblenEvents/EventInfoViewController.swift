@@ -33,7 +33,9 @@ class EventInfoViewController: UIViewController {
     
     @IBOutlet weak var reportButton: UIBarButtonItem!
 
+    @IBOutlet weak var imageHeightConstrain: NSLayoutConstraint!
     
+    @IBOutlet weak var descriptionHeightConstraint: NSLayoutConstraint!
     var imageName = "AMUSEMENT"
     var eTitle = "Title"
     var date = "January 17, 2017"
@@ -53,6 +55,11 @@ class EventInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let screenSize : CGRect = UIScreen.main.bounds
+        imageHeightConstrain.constant = screenSize.height * 0.20
+        descriptionHeightConstraint.constant = screenSize.height * 0.20
+        
         
         eventUploadedPhoto.layer.cornerRadius = 5
         eventUploadedPhoto.layer.masksToBounds = true
@@ -129,7 +136,7 @@ class EventInfoViewController: UIViewController {
     @IBAction func didPressReportButton(_ sender: Any) {
         if (madeEvent == true){
             
-            let alert = UIAlertController(title: "Event Options", message: "You Made This Event. Edit or Delete it Below.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Event Options", message: "You Made This Event.", preferredStyle: .alert)
             
             let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
             

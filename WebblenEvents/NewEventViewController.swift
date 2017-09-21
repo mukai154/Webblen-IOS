@@ -12,20 +12,22 @@ import FirebaseAuth
 import FirebaseStorage
 import CoreLocation
 
-class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
 
 
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var eventTitleField: UITextField!
     @IBOutlet weak var eventDescriptionField: UITextView!
-    @IBOutlet weak var eventCategoryPicker: UIPickerView!
     @IBOutlet weak var createEventButton: UIButton!
     @IBOutlet weak var dateTimeButton: UIButton!
     @IBOutlet weak var locationButton: UIButton!
     @IBOutlet weak var imageSelectButton: UIButton!
     @IBOutlet weak var modifyNotification: UIButton!
+    @IBOutlet weak var chooseEventCategoryButton: UIButton!
 
+    @IBOutlet weak var eventInfoHeighConstraint: NSLayoutConstraint!
+    
     //Firebase References
     var dataBaseRef = FIRDatabase.database().reference()
     var currentUser: AnyObject?
@@ -48,11 +50,8 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
     var lon : Double?
 
     var image : UIImage?
- 
     
-    var interests = ["Choose Category","Amusement", "Art", "College Life", "Community", "Competition", "Culture", "Education", "Entertainment", "Family", "Food & Drink", "Gaming", "Health & Fitness", "Music", "Networking", "Outdoors", "Party/Dance", "Shopping", "Sports", "Technology", "Theatre", "Wine & Brew"]
-    
-    var eventCategory: String?
+    var eventCategory = "Choose Category"
 
     //var eventStart = "time"
     //var eventEnd = "time"
@@ -64,6 +63,8 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let screenSize : CGRect = UIScreen.main.bounds
+        eventInfoHeighConstraint.constant = screenSize.height * 0.20
         
         modifyNotification.isEnabled = false
         activityIndicator.isHidden = true
@@ -79,9 +80,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
         //image picker
         imagePicker.delegate = self
 
-        //category picker
-        eventCategoryPicker.delegate = self
-        eventCategoryPicker.dataSource = self
+
         
         //Event Title Style
         self.eventTitleField.layer.borderColor = UIColor.lightGray.cgColor
@@ -97,8 +96,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
         //Address Button
 
         
-        //Event Button Style
-        self.createEventButton.layer.cornerRadius = CGFloat(Float(5.0))
+
         
         
         //Database Handler
@@ -118,20 +116,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
     }
     
     
-    //Functions for Category Picker
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return interests.count
-    }
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return interests[row]
-    }
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        eventCategory = interests[row]
-    }
+
     
     
     override func didReceiveMemoryWarning() {
@@ -171,6 +156,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
 
     }
     
+
     
     
     @IBAction func didTapCancelButton(_ sender: Any) {
@@ -303,7 +289,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
                         if (self.eventCategory != "Choose Category"){
                             
                             //Database upload
-                            self.dataBaseRef.child("Event").child(key).child("category").setValue(self.eventCategory?.uppercased())
+                            self.dataBaseRef.child("Event").child(key).child("category").setValue(self.eventCategory.uppercased())
                             self.dataBaseRef.child("Event").child(key).child("date").setValue(self.eventDate)
                             self.dataBaseRef.child("Event").child(key).child("time").setValue(self.eventTime)
                             self.dataBaseRef.child("Event").child(key).child("address").setValue(self.eventAddress)
@@ -355,7 +341,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
             if (self.eventCategory != "Choose Category"){
                 
                 //Database upload
-                self.dataBaseRef.child("Event").child(key).child("category").setValue(self.eventCategory?.uppercased())
+                self.dataBaseRef.child("Event").child(key).child("category").setValue(self.eventCategory.uppercased())
                 self.dataBaseRef.child("Event").child(key).child("date").setValue(self.eventDate)
                 self.dataBaseRef.child("Event").child(key).child("time").setValue(self.eventTime)
                 self.dataBaseRef.child("Event").child(key).child("address").setValue(self.eventAddress)

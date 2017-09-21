@@ -37,7 +37,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var trailingMenuConstraint: NSLayoutConstraint!
     var menuShowing = false
 
-    @IBOutlet weak var noEventsView: UIView!
     @IBOutlet weak var menu: UIView!
     @IBOutlet weak var homeTableView: UITableView!
     @IBOutlet weak var navBack: UIView!
@@ -70,7 +69,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         menu.layer.shadowOpacity = 0.5
         menu.layer.shadowOffset = CGSize(width: 0, height: 3)
         
-        noEventsView.isHidden = true
         homeTableView.isHidden = true
         //Activity Indicator
         activityIndicator.startAnimating()
@@ -618,7 +616,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         if (numberOfEvents == 0){
         
             self.homeTableView.isHidden = true
-            self.noEventsView.isHidden = false
             
         }
     }
