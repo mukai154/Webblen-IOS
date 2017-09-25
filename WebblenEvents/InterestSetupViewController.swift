@@ -565,7 +565,9 @@ class InterestSetupViewController: UIViewController {
             self.shoppingView.layer.borderWidth = 1
         }
     }
-    @IBAction func didPressSports(_ sender: Any) {
+
+    @IBAction func pressedSports(_ sender: Any) {
+        
         if (sports == true){
             sports = false
             self.sportsView.layer.borderColor = UIColor.lightGray.cgColor
@@ -577,6 +579,7 @@ class InterestSetupViewController: UIViewController {
             self.sportsView.layer.borderWidth = 1
             
         }
+        
     }
     @IBAction func didPressTechnology(_ sender: Any) {
         if (technology == true){

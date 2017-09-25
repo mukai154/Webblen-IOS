@@ -127,12 +127,21 @@ class confirmPostViewController: UIViewController {
     
     @IBAction func didPressConfirm(_ sender: Any) {
         
-        if (promoCode.text == "GoNDSUBison"){
+        if (promoCode.text == "Spitfire12"){
             self.dataBaseRef.child("Event").child(self.eventKey).child("paid").setValue("true")
             
-            print("promo code used")
+            print("Admin Code Used")
             
             performSegue(withIdentifier: "eventPurchasedSegue", sender: nil)
+        }
+        else if (promoCode.text == "webblenfargo"){
+            
+            self.dataBaseRef.child("EventSupport").child(self.eventKey).child("paid").setValue("true")
+            
+            promoCode.text = "Support Code Sent"
+
+            purchase(purchase: event5)
+            
         }
         else {
         print("attempting to get purchase")
