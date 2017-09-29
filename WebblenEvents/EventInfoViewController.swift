@@ -11,10 +11,6 @@ import Firebase
 
 class EventInfoViewController: UIViewController {
 
-
-
-
-
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var eventUploadedPhoto: UIImageView!
     @IBOutlet weak var eventImage: UIImageView!
@@ -36,6 +32,7 @@ class EventInfoViewController: UIViewController {
     @IBOutlet weak var imageHeightConstrain: NSLayoutConstraint!
     
     @IBOutlet weak var descriptionHeightConstraint: NSLayoutConstraint!
+    
     var imageName = "AMUSEMENT"
     var eTitle = "Title"
     var date = "January 17, 2017"
@@ -67,8 +64,8 @@ class EventInfoViewController: UIViewController {
         eventDescription.textContainerInset = UIEdgeInsetsMake(10, 0, 0, 0)
         eventDescription.textColor = UIColor.lightGray
         eventAddress.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0)
-        self.editEventButton.layer.cornerRadius = CGFloat(5.0)
-        self.deleteEventButton.layer.cornerRadius = CGFloat(5.0)
+        //self.editEventButton.layer.cornerRadius = CGFloat(5.0)
+        //self.deleteEventButton.layer.cornerRadius = CGFloat(5.0)
 
         
         self.editEventButton.isHidden = true

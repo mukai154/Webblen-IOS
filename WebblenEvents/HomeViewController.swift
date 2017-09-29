@@ -63,7 +63,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        activityIndicator.startAnimating()
         
         
         menu.layer.shadowOpacity = 0.5
@@ -71,7 +71,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         homeTableView.isHidden = true
         //Activity Indicator
-        activityIndicator.startAnimating()
+        
         
         
         //Database Reference
@@ -399,8 +399,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         checkEvents()
 
-        activityIndicator.stopAnimating()
-
         
         
         
@@ -618,6 +616,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.homeTableView.isHidden = true
             
         }
+        activityIndicator.stopAnimating()
     }
     
     func didTapEventPhoto(sender: UITapGestureRecognizer){

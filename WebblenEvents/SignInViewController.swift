@@ -14,6 +14,7 @@ import FBSDKLoginKit
 
 
 
+
 class SignInViewController: UIViewController,  FBSDKLoginButtonDelegate{
 
     
@@ -34,6 +35,18 @@ class SignInViewController: UIViewController,  FBSDKLoginButtonDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
+        
+        //Done for inputs
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
+        toolBar.setItems([flexibleSpace, doneButton], animated: true)
+        email.inputAccessoryView = toolBar
+        password.inputAccessoryView = toolBar
+        
         
         //Login buttons
         loginButton.layer.cornerRadius = 5
@@ -42,8 +55,7 @@ class SignInViewController: UIViewController,  FBSDKLoginButtonDelegate{
         //setupGoogleLogin()
         
     
-        //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+
  
     
     }
@@ -75,10 +87,6 @@ class SignInViewController: UIViewController,  FBSDKLoginButtonDelegate{
         // Dispose of any resources that can be recreated.
     }
     
-    func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        view.endEditing(true)
-    }
     
     
     
@@ -128,27 +136,27 @@ class SignInViewController: UIViewController,  FBSDKLoginButtonDelegate{
                     if(!snapshot.exists())
                     {
                         
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("AMUSEMENT").setValue(false)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("ART").setValue(false)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("COMMUNITY").setValue(false)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("COMPETITION").setValue(false)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("CULTURE").setValue(false)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("EDUCATION").setValue(false)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("ENTERTAINMENT").setValue(false)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("FAMILY").setValue(false)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("FOODDRINK").setValue(false)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("GAMING").setValue(false)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("HEALTHFITNESS").setValue(false)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("MUSIC").setValue(false)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("NETWORKING").setValue(false)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("OUTDOORS").setValue(false)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("SHOPPING").setValue(false)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("SPORTS").setValue(false)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("TECHNOLOGY").setValue(false)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("THEATRE").setValue(false)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("COLLEGELIFE").setValue(false)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("WINEBREW").setValue(false)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("PARTYDANCE").setValue(false)
+                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("AMUSEMENT").setValue(true)
+                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("ART").setValue(true)
+                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("COMMUNITY").setValue(true)
+                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("COMPETITION").setValue(true)
+                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("CULTURE").setValue(true)
+                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("EDUCATION").setValue(true)
+                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("ENTERTAINMENT").setValue(true)
+                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("FAMILY").setValue(true)
+                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("FOODDRINK").setValue(true)
+                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("GAMING").setValue(true)
+                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("HEALTHFITNESS").setValue(true)
+                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("MUSIC").setValue(true)
+                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("NETWORKING").setValue(true)
+                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("OUTDOORS").setValue(true)
+                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("SHOPPING").setValue(true)
+                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("SPORTS").setValue(true)
+                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("TECHNOLOGY").setValue(true)
+                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("THEATRE").setValue(true)
+                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("COLLEGELIFE").setValue(true)
+                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("WINEBREW").setValue(true)
+                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("PARTYDANCE").setValue(true)
                         
                         self.performSegue(withIdentifier: "SetupSegue", sender: nil)
                     }
@@ -172,7 +180,9 @@ class SignInViewController: UIViewController,  FBSDKLoginButtonDelegate{
     
     }
     
-
+    func doneClicked(){
+        view.endEditing(true)
+    }
 
 }
 

@@ -90,6 +90,7 @@ PODS:
   - GTMSessionFetcher/Core (1.1.7)
   - GTMSessionFetcher/Full (1.1.7):
     - GTMSessionFetcher/Core (= 1.1.7)
+  - IQKeyboardManagerSwift (4.0.8)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
@@ -109,6 +110,7 @@ DEPENDENCIES:
   - GooglePlaces
   - GooglePlacesSearchController
   - GoogleSignIn
+  - IQKeyboardManagerSwift
   - SDWebImage
   - SwiftyStoreKit
 
@@ -135,9 +137,10 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 2b2596cbb7186865e98cadf2b1e262d851c2b168
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: a1f8ed39e4fe21c68957daed472c7afbcdf29166
+  IQKeyboardManagerSwift: c04bc9f68473823f825eb44d958fce98d921bead
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SwiftyStoreKit: 956408606f43ec3df3386b56e65615bb19bee85e
 
-PODFILE CHECKSUM: 9705a08c5cada543c3383ae7a8bf3e3216b3b53d
+PODFILE CHECKSUM: 0b526a38ac5dfa36fc6755e96b1edbc25ba396a2
 
 COCOAPODS: 1.2.0

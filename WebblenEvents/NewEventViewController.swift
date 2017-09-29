@@ -11,6 +11,7 @@ import FirebaseDatabase
 import FirebaseAuth
 import FirebaseStorage
 import CoreLocation
+import IQKeyboardManagerSwift
 
 class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
 
@@ -63,19 +64,26 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        IQKeyboardManager.sharedManager().enable = false
+        
+        //Done for inputs
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
+        toolBar.setItems([flexibleSpace, doneButton], animated: true)
+        eventTitleField.inputAccessoryView = toolBar
+        eventDescriptionField.inputAccessoryView = toolBar
+        
         let screenSize : CGRect = UIScreen.main.bounds
         eventInfoHeighConstraint.constant = screenSize.height * 0.20
         
         modifyNotification.isEnabled = false
         activityIndicator.isHidden = true
         
-        //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-        
-        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
-        
-        tap.cancelsTouchesInView = true
-        view.addGestureRecognizer(tap)
+
         
         //image picker
         imagePicker.delegate = self
@@ -109,16 +117,6 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
         })
     }
 
-    
-    //Causes the view (or one of its embedded text fields) to resign the first responder status.
-    func dismissKeyboard() {
-        view.endEditing(true)
-    }
-    
-    
-
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -394,5 +392,8 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
      }
         }
 
+    func doneClicked(){
+        view.endEditing(true)
+    }
 
 }
