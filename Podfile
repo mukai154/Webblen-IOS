@@ -30,4 +30,7 @@ pod 'FBSDKCoreKit'
 pod 'FBSDKShareKit'
 pod 'FBSDKLoginKit'
 
+
+#KeyBoard Manager
+pod 'IQKeyboardManagerSwift'
 end

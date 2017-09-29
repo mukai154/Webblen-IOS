@@ -40,6 +40,7 @@ class MyEventsViewController: UIViewController, UITableViewDelegate, UITableView
         
         aivLoading.isHidden = true
         
+        
     
         
         
