@@ -33,6 +33,7 @@
 		4687A0171DFCB9A80067F773 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4687A0161DFCB9A80067F773 /* Assets.xcassets */; };
 		4687A01A1DFCB9A80067F773 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4687A0181DFCB9A80067F773 /* LaunchScreen.storyboard */; };
 		4687A0221DFCBC560067F773 /* Logo White No Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 4687A0211DFCBC560067F773 /* Logo White No Background.png */; };
+		468BDB8D1F7F197700C5BF47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 468BDB8C1F7F185900C5BF47 /* GoogleService-Info.plist */; };
 		469386DC1E2F2E51000AF3D4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469386DB1E2F2E51000AF3D4 /* SettingsViewController.swift */; };
 		46956C6F1E1DB3F9009A8F93 /* InterestSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46956C6E1E1DB3F9009A8F93 /* InterestSetupViewController.swift */; };
 		46956C711E1E0537009A8F93 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46956C701E1E0536009A8F93 /* SetupViewController.swift */; };
@@ -56,7 +57,6 @@
 		4624B9611F67D45D00F4D6E6 /* VerifyAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyAccountViewController.swift; sourceTree = "<group>"; };
 		4624B9631F686E2C00F4D6E6 /* StoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
 		4624B9651F68D2AE00F4D6E6 /* SwiftyStoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyStoreKit.framework; path = "../../Library/Developer/Xcode/DerivedData/WebblenEvents-aqmxctmtxigagscabsvsxabqegai/Build/Products/Debug-iphoneos/SwiftyStoreKit/SwiftyStoreKit.framework"; sourceTree = "<group>"; };
-		462502B51F7F141D00FEF164 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../.Trash/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4642E7361E1E6B6300D65DA5 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		4642E7381E1EED3000D65DA5 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		4642E73C1E1F40E400D65DA5 /* NewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +74,7 @@
 		4687A0191DFCB9A80067F773 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4687A01B1DFCB9A80067F773 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4687A0211DFCBC560067F773 /* Logo White No Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo White No Background.png"; sourceTree = "<group>"; };
+		468BDB8C1F7F185900C5BF47 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		469386DB1E2F2E51000AF3D4 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		46956C6E1E1DB3F9009A8F93 /* InterestSetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestSetupViewController.swift; sourceTree = "<group>"; };
 		46956C701E1E0536009A8F93 /* SetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
@@ -150,7 +151,7 @@
 				46F113BB1E16044800FB7294 /* defaultEventImage.png */,
 				4687A0181DFCB9A80067F773 /* LaunchScreen.storyboard */,
 				4687A01B1DFCB9A80067F773 /* Info.plist */,
-				462502B51F7F141D00FEF164 /* GoogleService-Info.plist */,
+				468BDB8C1F7F185900C5BF47 /* GoogleService-Info.plist */,
 				4687A0131DFCB9A80067F773 /* WebblenEvents.xcdatamodeld */,
 				469E84821F355988002E07AA /* MapsViewController.swift */,
 				469E84841F385180002E07AA /* DateViewController.swift */,
@@ -274,6 +275,7 @@
 				4687A0171DFCB9A80067F773 /* Assets.xcassets in Resources */,
 				4687A0221DFCBC560067F773 /* Logo White No Background.png in Resources */,
 				4687A0121DFCB9A80067F773 /* Main.storyboard in Resources */,
+				468BDB8D1F7F197700C5BF47 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -81,8 +81,8 @@ class EventInfoViewController: UIViewController {
             
             if let eDict = snapshot.value as? [String: AnyObject]{
                 self.eventImage.image = UIImage(named: (eDict["category"] as? String)!)
-                self.eventTitle.text = eDict["title"] as! String
-                self.eventCreator.text = eDict["username"] as! String
+                self.eventTitle.text = eDict["title"] as? String
+                self.eventCreator.text = eDict["username"] as? String
                 self.eventDescription.text = eDict["evDescription"] as! String
                 let eDate = eDict["date"] as! String
                 let eTime = eDict["time"] as! String
