@@ -41,11 +41,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var homeTableView: UITableView!
     @IBOutlet weak var navBack: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-
+    @IBOutlet weak var todayOption: UIButton!
+    @IBOutlet weak var thisWeekOption: UIButton!
+    @IBOutlet weak var thisMonthOption: UIButton!
+    
     
     var dataBaseRef: FIRDatabaseReference!
     
-    
+    //Event Date Organzation
     var events = [Event]()
     var eventsToday = [Event]()
     var eventsThisWeek = [Event]()
@@ -54,6 +57,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var today = true
     var thisWeek = false
     var thisMonth = false
+    
+    var currentDate = Date()
+    var formatter = DateFormatter()
+    
+    var tableCount = 0
+    
 
 
 
@@ -65,9 +74,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         activityIndicator.startAnimating()
         
+        formatter.dateFormat = "MM/dd/yyyy"
         
+        //Menu Layout
         menu.layer.shadowOpacity = 0.5
         menu.layer.shadowOffset = CGSize(width: 0, height: 3)
+        todayOption.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        thisWeekOption.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         
         homeTableView.isHidden = true
         //Activity Indicator
@@ -396,11 +409,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.homeTableView.rowHeight = UITableViewAutomaticDimension
         self.homeTableView.estimatedRowHeight = 250
         
-        
         checkEvents()
-
-        
-        
         
     }
 
@@ -421,8 +430,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                         if (each == eventCategory ){
                             if let eKey = event["uid"] as? String {
                                 if(event["paid"] as! String == "true"){
+                                    
                         //Event data
-                                    //WHEN ADDING TO CUSTOM ARRAY, PAY ATTENTION TO DATATYPE OF DATE
                         let eventPost = Event()
                         if let category = event["category"] as? String, let date = event["date"] as? String, let evDescription = event["evDescription"] as? String, let time = event["time"] as? String, let title = event["title"] as? String, let uid = event["uid"] as? String, let username = event["username"] as? String, let pathToImage = event["pathToImage"] as? String, let verified = event["verified"] as? String, let eventKey = event["eventKey"] as? String, let paid = event["paid"] as? String, let radius = event["radius"] as? String{
                             eventPost.category = category
@@ -438,10 +447,22 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                             eventPost.pathToImage = pathToImage
                             eventPost.verified = verified
                         
-                            self.events.append(eventPost)
-                            self.numberOfEvents += 1
                             
-                            print(self.events)
+                            //Append Events According to Date
+                            if(self.formatter.date(from: eventPost.date)!.days(from: self.currentDate) < 0){
+                                self.dataBaseRef.child("Event").child(eventPost.eventKey).removeValue()
+                            }
+                            else if (self.formatter.date(from: eventPost.date)!.days(from: self.currentDate) == 0){
+                                eventPost.date = "Today"
+                                self.eventsToday.append(eventPost)
+                            }
+                            else if (self.formatter.date(from: eventPost.date)!.days(from: self.currentDate) > 0 && self.formatter.date(from: eventPost.date)!.days(from: self.currentDate) <= 7){
+                                self.eventsThisWeek.append(eventPost)
+                                print(self.eventsThisWeek)
+                            }
+                            else {
+                                self.eventsThisMonth.append(eventPost)
+                            }
                             
                                     }
                                 }
@@ -463,15 +484,33 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     //Table view organization
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.events.count
+        
+        if (today == true){
+            self.tableCount = self.eventsToday.count
+        }
+        else if (thisWeek == true){
+            self.tableCount = self.eventsThisWeek.count
+        }
+        else if (thisMonth == true){
+            self.tableCount = self.eventsThisMonth.count
+        }
+        else{
+            self.tableCount = 0
+        }
+        
+        return self.tableCount
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        //SEPARATE CELLS ACCORDING TO EVENT DATE
         let cell = tableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! homeCell
         
-        let photo = self.events[indexPath.row].pathToImage!
+        //----TODAY
+        if (today == true){
+        
+        let photo = self.eventsToday[indexPath.row].pathToImage!
         
         let imageTap = UITapGestureRecognizer(target: self, action: #selector(didTapEventPhoto))
         
@@ -479,12 +518,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         cell.eventPhoto.addGestureRecognizer(imageTap)
         
-        if (self.events[indexPath.row].evDescription.characters.count > 100){
+        if (self.eventsToday[indexPath.row].evDescription.characters.count > 100){
             
-            let index = self.events[indexPath.row].evDescription.index(self.events[indexPath.row].evDescription.startIndex, offsetBy: 100)
+            let index = self.eventsToday[indexPath.row].evDescription.index(self.eventsToday[indexPath.row].evDescription.startIndex, offsetBy: 100)
             
             
-            if ((self.events[indexPath.row].pathToImage) != "null"){
+            if ((self.eventsToday[indexPath.row].pathToImage) != "null"){
                 
                 
                 cell.eventPhoto.isHidden = false
@@ -494,13 +533,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let url = NSURL(string:photo)
                 
                 
-                cell.configure(eventTitle: self.events[indexPath.row].title,
-                               eventDate: self.events[indexPath.row].date,
-                               isVerified: self.events[indexPath.row].verified,
-                               eventDescription: self.events[indexPath.row].evDescription.substring(to: index) + "...",
-                               eventPhoto: self.events[indexPath.row].pathToImage)
+                cell.configure(eventTitle: self.eventsToday[indexPath.row].title,
+                               eventDate: self.eventsToday[indexPath.row].date,
+                               isVerified: self.eventsToday[indexPath.row].verified,
+                               eventDescription: self.eventsToday[indexPath.row].evDescription.substring(to: index) + "...",
+                               eventPhoto: self.eventsToday[indexPath.row].pathToImage)
                 cell.eventPhoto.sd_setImage(with: url! as URL)
-                cell.interestCategory.image = UIImage(named: self.events[indexPath.row].category)
+                cell.interestCategory.image = UIImage(named: self.eventsToday[indexPath.row].category)
                 
                 
             }
@@ -508,17 +547,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             else{
                 cell.eventPhoto.isHidden = true
                 cell.imageViewHeightConstraint.constant = 0
-                cell.interestCategory.image = UIImage(named: self.events[indexPath.row].category)
-                cell.eventTitle.text = self.events[indexPath.row].title
-                cell.eventDate.text = self.events[indexPath.row].date
-                cell.eventDescription.text = self.events[indexPath.row].evDescription.substring(to: index) + "..."
+                cell.interestCategory.image = UIImage(named: self.eventsToday[indexPath.row].category)
+                cell.eventTitle.text = self.eventsToday[indexPath.row].title
+                cell.eventDate.text = self.eventsToday[indexPath.row].date
+                cell.eventDescription.text = self.eventsToday[indexPath.row].evDescription.substring(to: index) + "..."
             }
             
         }
             
         else {
             
-            if ((self.events[indexPath.row].pathToImage) != "null"){
+            if ((self.eventsToday[indexPath.row].pathToImage) != "null"){
                 
                 cell.eventPhoto.isHidden = false
                 cell.imageViewHeightConstraint.constant = defaultImageViewHeightConstraint
@@ -528,35 +567,210 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 
                 
                 
-                cell.configure(eventTitle: self.events[indexPath.row].title,
-                               eventDate: self.events[indexPath.row].date,
-                               isVerified: self.events[indexPath.row].verified,
-                               eventDescription: self.events[indexPath.row].evDescription,
-                               eventPhoto: self.events[indexPath.row].pathToImage)
+                cell.configure(eventTitle: self.eventsToday[indexPath.row].title,
+                               eventDate: self.eventsToday[indexPath.row].date,
+                               isVerified: self.eventsToday[indexPath.row].verified,
+                               eventDescription: self.eventsToday[indexPath.row].evDescription,
+                               eventPhoto: self.eventsToday[indexPath.row].pathToImage)
                 cell.eventPhoto.sd_setImage(with: url! as URL)
-                cell.interestCategory.image = UIImage(named: self.events[indexPath.row].category)
+                cell.interestCategory.image = UIImage(named: self.eventsToday[indexPath.row].category)
                 
             }
                 
             else{
                 cell.eventPhoto.isHidden = true
                 cell.imageViewHeightConstraint.constant = 0
-                cell.interestCategory.image = UIImage(named: self.events[indexPath.row].category)
-                cell.eventTitle.text = self.events[indexPath.row].title
-                cell.eventDate.text = self.events[indexPath.row].date
-                cell.eventDescription.text = self.events[indexPath.row].evDescription
+                cell.interestCategory.image = UIImage(named: self.eventsToday[indexPath.row].category)
+                cell.eventTitle.text = self.eventsToday[indexPath.row].title
+                cell.eventDate.text = self.eventsToday[indexPath.row].date
+                cell.eventDescription.text = self.eventsToday[indexPath.row].evDescription
             }
             
+        }
+        }
+            
+        //------THIS WEEK
+        else if (thisWeek == true){
+            let photo = self.eventsThisWeek[indexPath.row].pathToImage!
+            
+            let imageTap = UITapGestureRecognizer(target: self, action: #selector(didTapEventPhoto))
+            
+            cell.eventPhoto.isUserInteractionEnabled = true
+            
+            cell.eventPhoto.addGestureRecognizer(imageTap)
+            
+            if (self.eventsThisWeek[indexPath.row].evDescription.characters.count > 100){
+                
+                let index = self.eventsThisWeek[indexPath.row].evDescription.index(self.eventsThisWeek[indexPath.row].evDescription.startIndex, offsetBy: 100)
+                
+                
+                if ((self.eventsThisWeek[indexPath.row].pathToImage) != "null"){
+                    
+                    
+                    cell.eventPhoto.isHidden = false
+                    cell.imageViewHeightConstraint.constant = defaultImageViewHeightConstraint
+                    
+                    
+                    let url = NSURL(string:photo)
+                    
+                    
+                    cell.configure(eventTitle: self.eventsThisWeek[indexPath.row].title,
+                                   eventDate: self.eventsThisWeek[indexPath.row].date,
+                                   isVerified: self.eventsThisWeek[indexPath.row].verified,
+                                   eventDescription: self.eventsThisWeek[indexPath.row].evDescription.substring(to: index) + "...",
+                                   eventPhoto: self.eventsThisWeek[indexPath.row].pathToImage)
+                    cell.eventPhoto.sd_setImage(with: url! as URL)
+                    cell.interestCategory.image = UIImage(named: self.eventsThisWeek[indexPath.row].category)
+                    
+                    
+                }
+                    
+                else{
+                    cell.eventPhoto.isHidden = true
+                    cell.imageViewHeightConstraint.constant = 0
+                    cell.interestCategory.image = UIImage(named: self.eventsThisWeek[indexPath.row].category)
+                    cell.eventTitle.text = self.eventsThisWeek[indexPath.row].title
+                    cell.eventDate.text = self.eventsThisWeek[indexPath.row].date
+                    cell.eventDescription.text = self.eventsThisWeek[indexPath.row].evDescription.substring(to: index) + "..."
+                }
+                
+            }
+                
+            else {
+                
+                if ((self.eventsThisWeek[indexPath.row].pathToImage) != "null"){
+                    
+                    cell.eventPhoto.isHidden = false
+                    cell.imageViewHeightConstraint.constant = defaultImageViewHeightConstraint
+                    
+                    
+                    let url = NSURL(string:photo)
+                    
+                    
+                    
+                    cell.configure(eventTitle: self.eventsThisWeek[indexPath.row].title,
+                                   eventDate: self.eventsThisWeek[indexPath.row].date,
+                                   isVerified: self.eventsThisWeek[indexPath.row].verified,
+                                   eventDescription: self.eventsThisWeek[indexPath.row].evDescription,
+                                   eventPhoto: self.eventsThisWeek[indexPath.row].pathToImage)
+                    cell.eventPhoto.sd_setImage(with: url! as URL)
+                    cell.interestCategory.image = UIImage(named: self.eventsThisWeek[indexPath.row].category)
+                    
+                }
+                    
+                else{
+                    cell.eventPhoto.isHidden = true
+                    cell.imageViewHeightConstraint.constant = 0
+                    cell.interestCategory.image = UIImage(named: self.eventsThisWeek[indexPath.row].category)
+                    cell.eventTitle.text = self.eventsThisWeek[indexPath.row].title
+                    cell.eventDate.text = self.eventsThisWeek[indexPath.row].date
+                    cell.eventDescription.text = self.eventsThisWeek[indexPath.row].evDescription
+                }
+                
+            }
+        }
+        
+        //------THIS MONTH
+        else {
+            let photo = self.eventsThisMonth[indexPath.row].pathToImage!
+            
+            let imageTap = UITapGestureRecognizer(target: self, action: #selector(didTapEventPhoto))
+            
+            cell.eventPhoto.isUserInteractionEnabled = true
+            
+            cell.eventPhoto.addGestureRecognizer(imageTap)
+            
+            if (self.eventsThisMonth[indexPath.row].evDescription.characters.count > 100){
+                
+                let index = self.eventsThisMonth[indexPath.row].evDescription.index(self.eventsThisMonth[indexPath.row].evDescription.startIndex, offsetBy: 100)
+                
+                
+                if ((self.eventsThisMonth[indexPath.row].pathToImage) != "null"){
+                    
+                    
+                    cell.eventPhoto.isHidden = false
+                    cell.imageViewHeightConstraint.constant = defaultImageViewHeightConstraint
+                    
+                    
+                    let url = NSURL(string:photo)
+                    
+                    
+                    cell.configure(eventTitle: self.eventsThisMonth[indexPath.row].title,
+                                   eventDate: self.eventsThisMonth[indexPath.row].date,
+                                   isVerified: self.eventsThisMonth[indexPath.row].verified,
+                                   eventDescription: self.eventsThisMonth[indexPath.row].evDescription.substring(to: index) + "...",
+                                   eventPhoto: self.eventsThisMonth[indexPath.row].pathToImage)
+                    cell.eventPhoto.sd_setImage(with: url! as URL)
+                    cell.interestCategory.image = UIImage(named: self.eventsThisMonth[indexPath.row].category)
+                    
+                    
+                }
+                    
+                else{
+                    cell.eventPhoto.isHidden = true
+                    cell.imageViewHeightConstraint.constant = 0
+                    cell.interestCategory.image = UIImage(named: self.eventsThisMonth[indexPath.row].category)
+                    cell.eventTitle.text = self.eventsThisMonth[indexPath.row].title
+                    cell.eventDate.text = self.eventsThisMonth[indexPath.row].date
+                    cell.eventDescription.text = self.eventsThisMonth[indexPath.row].evDescription.substring(to: index) + "..."
+                }
+                
+            }
+                
+            else {
+                
+                if ((self.eventsThisMonth[indexPath.row].pathToImage) != "null"){
+                    
+                    cell.eventPhoto.isHidden = false
+                    cell.imageViewHeightConstraint.constant = defaultImageViewHeightConstraint
+                    
+                    
+                    let url = NSURL(string:photo)
+                    
+                    
+                    
+                    cell.configure(eventTitle: self.eventsThisMonth[indexPath.row].title,
+                                   eventDate: self.eventsThisMonth[indexPath.row].date,
+                                   isVerified: self.eventsThisMonth[indexPath.row].verified,
+                                   eventDescription: self.eventsThisMonth[indexPath.row].evDescription,
+                                   eventPhoto: self.eventsThisMonth[indexPath.row].pathToImage)
+                    cell.eventPhoto.sd_setImage(with: url! as URL)
+                    cell.interestCategory.image = UIImage(named: self.eventsThisMonth[indexPath.row].category)
+                    
+                }
+                    
+                else{
+                    cell.eventPhoto.isHidden = true
+                    cell.imageViewHeightConstraint.constant = 0
+                    cell.interestCategory.image = UIImage(named: self.eventsThisMonth[indexPath.row].category)
+                    cell.eventTitle.text = self.eventsThisMonth[indexPath.row].title
+                    cell.eventDate.text = self.eventsThisMonth[indexPath.row].date
+                    cell.eventDescription.text = self.eventsThisMonth[indexPath.row].evDescription
+                }
+                
+            }
         }
         
         return (cell)
     }
     
+    
+    //Table View Cell Path According to Array
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         var selectedCell:UITableViewCell = tableView.cellForRow(at: indexPath)!
         selectedCell.contentView.backgroundColor = UIColor.white
-        performSegue(withIdentifier: "eventInfoSegue", sender: events[indexPath.row].eventKey)
+        if (today == true){
+            performSegue(withIdentifier: "eventInfoSegue", sender: eventsToday[indexPath.row].eventKey)
+
+        }
+        else if (thisWeek == true){
+            performSegue(withIdentifier: "eventInfoSegue", sender: eventsThisWeek[indexPath.row].eventKey)
+
+        }
+        else{
+            performSegue(withIdentifier: "eventInfoSegue", sender: eventsThisMonth[indexPath.row].eventKey)
+        }
         
     }
     
@@ -570,16 +784,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
 
-    
+    func removeMenu(){
+        trailingMenuConstraint.constant = -150
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.layoutIfNeeded()
+        })
+        view.layoutIfNeeded()
+    }
 
     @IBAction func openMenu(_ sender: Any) {
         
         if (menuShowing){
-            trailingMenuConstraint.constant = -150
-            UIView.animate(withDuration: 0.3, animations: {
-                self.view.layoutIfNeeded()
-            })
-            view.layoutIfNeeded()
+            removeMenu()
         }
         else {
             trailingMenuConstraint.constant = 0
@@ -641,7 +857,50 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         sender.view?.removeFromSuperview()
         
     }
-
+    
+    //Menu Button Actions
+    @IBAction func didPressToday(_ sender: Any) {
+        thisWeek = false
+        thisMonth = false
+        today = true
+        
+        todayOption.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        thisWeekOption.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        thisMonthOption.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        
+        removeMenu()
+        
+        UIView.transition(with: homeTableView, duration: 1.0, options: .transitionCrossDissolve, animations: {self.homeTableView.reloadData()}, completion: nil)
+    }
+    
+    @IBAction func didPressThisWeek(_ sender: Any) {
+        thisWeek = true
+        thisMonth = false
+        today = false
+        
+        thisWeekOption.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        todayOption.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        thisMonthOption.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        
+        removeMenu()
+        
+        UIView.transition(with: homeTableView, duration: 1.0, options: .transitionCrossDissolve, animations: {self.homeTableView.reloadData()}, completion: nil)
+        
+    }
+    @IBAction func didPressThisMonth(_ sender: Any) {
+        thisWeek = false
+        thisMonth = true
+        today = false
+        
+        thisMonthOption.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        thisWeekOption.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        todayOption.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        
+        removeMenu()
+        
+        UIView.transition(with: homeTableView, duration: 1.0, options: .transitionCrossDissolve, animations: {self.homeTableView.reloadData()}, completion: nil)
+    }
+    
 
 }
 

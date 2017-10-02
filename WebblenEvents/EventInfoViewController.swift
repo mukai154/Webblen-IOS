@@ -219,7 +219,7 @@ class EventInfoViewController: UIViewController {
             
         }
         
-        if(self.eUid == "KFDuKYEoHbUmc1B0nsfbssON6zY2"){
+        if(self.eUid == "KFDuKYEoHbUmc1B0nsfbssON6zY2" || self.eUid == "5EeE4RHUxWTa0E8BmwK2b0V1kKn2" || self.eUid == "3kMQYwkjlUOmZU651KbrblkMYWp2"){
             
             let alert = UIAlertController(title: "Event Options", message: "Report the Event for Offensive Content or Block Whomever Created It?", preferredStyle: .alert)
             
