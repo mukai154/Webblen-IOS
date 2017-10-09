@@ -44,6 +44,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var todayOption: UIButton!
     @IBOutlet weak var thisWeekOption: UIButton!
     @IBOutlet weak var thisMonthOption: UIButton!
+    @IBOutlet weak var loadingView: UIView!
+    @IBOutlet weak var noEventText: UITextView!
     
     
     var dataBaseRef: FIRDatabaseReference!
@@ -73,7 +75,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.startAnimating()
-        
+        noEventText.isHidden = true
+        homeTableView.isHidden = true
         formatter.dateFormat = "MM/dd/yyyy"
         
         //Menu Layout
@@ -82,7 +85,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         todayOption.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         thisWeekOption.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         
-        homeTableView.isHidden = true
         //Activity Indicator
         
         
@@ -409,8 +411,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.homeTableView.rowHeight = UITableViewAutomaticDimension
         self.homeTableView.estimatedRowHeight = 250
         
-        checkEvents()
-        
     }
 
 
@@ -455,13 +455,15 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                             else if (self.formatter.date(from: eventPost.date)!.days(from: self.currentDate) == 0){
                                 eventPost.date = "Today"
                                 self.eventsToday.append(eventPost)
+                                self.checkEvents()
                             }
                             else if (self.formatter.date(from: eventPost.date)!.days(from: self.currentDate) > 0 && self.formatter.date(from: eventPost.date)!.days(from: self.currentDate) <= 7){
                                 self.eventsThisWeek.append(eventPost)
-                                print(self.eventsThisWeek)
+                                self.checkEvents()
                             }
                             else {
                                 self.eventsThisMonth.append(eventPost)
+                                self.checkEvents()
                             }
                             
                                     }
@@ -760,6 +762,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         var selectedCell:UITableViewCell = tableView.cellForRow(at: indexPath)!
         selectedCell.contentView.backgroundColor = UIColor.white
+
         if (today == true){
             performSegue(withIdentifier: "eventInfoSegue", sender: eventsToday[indexPath.row].eventKey)
 
@@ -773,6 +776,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
     }
+    
+    
     
     //Function called when clicking on an event
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -790,6 +795,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.view.layoutIfNeeded()
         })
         view.layoutIfNeeded()
+        homeTableView.isUserInteractionEnabled = true
     }
 
     @IBAction func openMenu(_ sender: Any) {
@@ -798,6 +804,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             removeMenu()
         }
         else {
+            
+            homeTableView.isUserInteractionEnabled = false
             trailingMenuConstraint.constant = 0
             
             UIView.animate(withDuration: 0.3, animations: {
@@ -827,12 +835,47 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     //Check if events loaded
     func checkEvents(){
         
-        if (numberOfEvents == 0){
-        
-            self.homeTableView.isHidden = true
+        if (today == true){
+    
+            if (eventsToday.isEmpty){
+                homeTableView.isHidden = true
+                loadingView.isHidden = false
+                noEventText.isHidden = false
+            }
+            else {
+                loadingView.isHidden = true
+                homeTableView.isHidden = false
+            }
             
         }
-        activityIndicator.stopAnimating()
+        if (thisMonth == true){
+            if (eventsThisMonth.isEmpty){
+                homeTableView.isHidden = true
+                loadingView.isHidden = false
+                noEventText.isHidden = false
+                noEventText.text = "Sorry. It looks like nothing you'd be interested in is happening this month :("
+            }
+            else {
+                loadingView.isHidden = true
+                homeTableView.isHidden = false
+
+            }
+        }
+        
+        if (thisWeek == true){
+            if (eventsThisWeek.isEmpty){
+                homeTableView.isHidden = true
+                loadingView.isHidden = false
+                noEventText.isHidden = false
+                noEventText.text = "Sorry. It looks like nothing you'd be interested in is happening this week :("
+            }
+            else {
+                loadingView.isHidden = true
+                homeTableView.isHidden = false
+            }
+        }
+        
+        
     }
     
     func didTapEventPhoto(sender: UITapGestureRecognizer){
@@ -869,6 +912,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         thisMonthOption.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         
         removeMenu()
+        checkEvents()
         
         UIView.transition(with: homeTableView, duration: 1.0, options: .transitionCrossDissolve, animations: {self.homeTableView.reloadData()}, completion: nil)
     }
@@ -877,12 +921,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         thisWeek = true
         thisMonth = false
         today = false
+        checkEvents()
         
         thisWeekOption.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         todayOption.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         thisMonthOption.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         
         removeMenu()
+        checkEvents()
         
         UIView.transition(with: homeTableView, duration: 1.0, options: .transitionCrossDissolve, animations: {self.homeTableView.reloadData()}, completion: nil)
         
@@ -897,6 +943,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         todayOption.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         
         removeMenu()
+        checkEvents()
         
         UIView.transition(with: homeTableView, duration: 1.0, options: .transitionCrossDissolve, animations: {self.homeTableView.reloadData()}, completion: nil)
     }

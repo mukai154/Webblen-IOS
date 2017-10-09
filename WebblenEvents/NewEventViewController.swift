@@ -26,7 +26,8 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
     @IBOutlet weak var imageSelectButton: UIButton!
     @IBOutlet weak var modifyNotification: UIButton!
     @IBOutlet weak var chooseEventCategoryButton: UIButton!
-
+    @IBOutlet weak var eventTabLabel: UILabel!
+    
     @IBOutlet weak var eventInfoHeighConstraint: NSLayoutConstraint!
     
     //Firebase References
@@ -45,10 +46,13 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
     var pathToImage = "null"
     var notifyDistance = 10
     var eventKey = "key"
+    var editKey = "key"
     var event18 = false
     var event21 = false
     var lat : Double?
     var lon : Double?
+    var editingEvent = false
+    var eventPaid = false
 
     var image : UIImage?
     
@@ -115,6 +119,29 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
             self.username = snapshot["Name"] as? String
         
         })
+        
+        if (self.editingEvent == true){
+            self.dataBaseRef.child("Event").child(editKey).observeSingleEvent(of: .value, with: {(snapshot) in
+                
+                if let eDict = snapshot.value as? [String: AnyObject]{
+
+                    self.eventTitleField.text = eDict["title"] as? String
+                    self.eventDescriptionField.text = eDict["evDescription"] as! String
+
+                    self.eventDate = eDict["date"] as! String
+                    self.eventTime = eDict["time"] as! String
+                    self.eventCategory = eDict["category"] as! String
+                    self.eventAddress = eDict["address"] as! String
+                    self.dateTimeButton.setTitle(self.eventDate! + " | " + self.eventTime, for: .normal)
+                    self.chooseEventCategoryButton.setTitle(self.eventCategory, for: .normal)
+                    self.eventTabLabel.text = "Edit Event"
+                    self.locationButton.setTitle(self.eventAddress, for: .normal)
+                    self.createEventButton.setTitle("Finish Editing", for: .normal)
+                }
+                
+            })
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -147,11 +174,13 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
     
     //Erase initial text when editing text view
     func textViewDidBeginEditing(_ textView: UITextView) {
+       
+        if (editingEvent == false){
         if (eventDescriptionField.textColor == UIColor.lightGray){
             eventDescriptionField.text = ""
             eventDescriptionField.textColor = UIColor.black
         }
-
+        }
     }
     
 
@@ -248,7 +277,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
         }
             
             //Check detail of event & upload info to firebase
-        else if((eventTitleField.text?.characters.count)! > 0 && (eventDescriptionField.text?.characters.count)! > 30 && uploadedImage == true){
+        else if((eventTitleField.text?.characters.count)! > 0 && (eventDescriptionField.text?.characters.count)! > 30 && uploadedImage == true && (editingEvent == false)){
             
             
             //Lowers resolution of the image
@@ -314,7 +343,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
                 }
             }
         }
-        else if (((self.eventDescriptionField.text?.characters.count)! > 30) && (eventTitleField.text?.characters.count)! > 0 ){
+        else if (((self.eventDescriptionField.text?.characters.count)! > 30) && (eventTitleField.text?.characters.count)! > 0  && (editingEvent == false)){
             
             
             //Name Fixes
@@ -350,17 +379,142 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
                 self.dataBaseRef.child("Event").child(key).child("eventKey").setValue(key)
                 self.dataBaseRef.child("Event").child(key).child("radius").setValue(String(self.notifyDistance))
                 self.dataBaseRef.child("Event").child(key).child("paid").setValue("false")
-                self.dataBaseRef.child("Event").child(key).child("verified").setValue("false")
+                if (self.currentUser?.uid == "KFDuKYEoHbUmc1B0nsfbssON6zY2"){
+                    self.dataBaseRef.child("Event").child(key).child("verified").setValue("true")
+                }
+                else {
+                    self.dataBaseRef.child("Event").child(key).child("verified").setValue("false")
+                }
                 self.dataBaseRef.child("Event").child(key).child("pathToImage").setValue("null")
                 self.dataBaseRef.child("LocationCoordinates").child(key).child("lat").setValue(self.lat)
                 self.dataBaseRef.child("LocationCoordinates").child(key).child("lon").setValue(self.lon)
 
-                
-                
-                
+            
             }
             uploadPost()
+        }
+        else if ((self.eventDescriptionField.text?.characters.count)! > 30) && (eventTitleField.text?.characters.count)! > 0  && (editingEvent == true){
+            
+            //Name Fixes
+            if (self.eventCategory == "Health & Fitness"){
+                self.eventCategory = "HEALTHFITNESS"
+            }
+            if (self.eventCategory == "Party/Dance"){
+                self.eventCategory = "PARTYDANCE"
+            }
+            if (self.eventCategory == "Food & Drink"){
+                self.eventCategory = "FOODDRINK"
+            }
+            
+            if(self.eventCategory == "College Life"){
+                self.eventCategory = "COLLEGELIFE"
+            }
+            
+            if(self.eventCategory == "Wine & Brew"){
+                self.eventCategory = "WINEBREW"
+            }
+            
+            if (self.eventCategory != "Choose Category"){
+                
+                //Database upload
+                self.dataBaseRef.child("Event").child(self.editKey).child("category").setValue(self.eventCategory.uppercased())
+                self.dataBaseRef.child("Event").child(self.editKey).child("date").setValue(self.eventDate)
+                self.dataBaseRef.child("Event").child(self.editKey).child("time").setValue(self.eventTime)
+                self.dataBaseRef.child("Event").child(self.editKey).child("address").setValue(self.eventAddress)
+                self.dataBaseRef.child("Event").child(self.editKey).child("evDescription").setValue(self.eventDescriptionField.text)
+                self.dataBaseRef.child("Event").child(self.editKey).child("title").setValue(self.eventTitleField.text)
+                self.dataBaseRef.child("Event").child(self.editKey).child("uid").setValue(self.currentUser!.uid)
+                self.dataBaseRef.child("Event").child(self.editKey).child("username").setValue(self.username)
+                self.dataBaseRef.child("Event").child(self.editKey).child("radius").setValue(String(self.notifyDistance))
+                if (self.eventPaid == true){
+                    self.dataBaseRef.child("Event").child(self.editKey).child("paid").setValue("true")
+                    
+                }
+                else{
+                    self.dataBaseRef.child("Event").child(self.editKey).child("paid").setValue("false")
+                }
+                if (self.currentUser?.uid == "KFDuKYEoHbUmc1B0nsfbssON6zY2"){
+                    self.dataBaseRef.child("Event").child(self.editKey).child("verified").setValue("true")
+                }
+                else {
+                    self.dataBaseRef.child("Event").child(self.editKey).child("verified").setValue("false")
+                }
+                self.dataBaseRef.child("Event").child(self.editKey).child("pathToImage").setValue("null")
+                self.dataBaseRef.child("LocationCoordinates").child(self.editKey).child("lat").setValue(self.lat)
+                self.dataBaseRef.child("LocationCoordinates").child(self.editKey).child("lon").setValue(self.lon)
+            
+            performSegue(withIdentifier: "doneEditingSegue", sender: nil)
+            
+        }
+        }
+        else if ((self.eventDescriptionField.text?.characters.count)! > 30) && (eventTitleField.text?.characters.count)! > 0  && (editingEvent == true) && (uploadedImage == true){
+            //Lowers resolution of the image
+            let imageData = UIImageJPEGRepresentation(self.imageSelectButton.backgroundImage(for: .normal)!, 0.6)
+            
+            let uploadPhoto = imageRef.put(imageData!, metadata: nil) {(metadata, error) in
+                if error != nil {
+                    print(error!.localizedDescription)
+                }
+                else {
+                    
+                    //Post URL is available, post it with the event
+                    let downloadURL = (metadata!.downloadURL()?.absoluteString)!
+                    
+                    //print(self.pathToImage)
+                    
+                    //Name Fixes
+                    if (self.eventCategory == "Health & Fitness"){
+                        self.eventCategory = "HEALTHFITNESS"
+                    }
+                    if (self.eventCategory == "Party/Dance"){
+                        self.eventCategory = "PARTYDANCE"
+                    }
+                    if (self.eventCategory == "Food & Drink"){
+                        self.eventCategory = "FOODDRINK"
+                    }
+                    
+                    if(self.eventCategory == "College Life"){
+                        self.eventCategory = "COLLEGELIFE"
+                    }
+                    
+                    if(self.eventCategory == "Wine & Brew"){
+                        self.eventCategory = "WINEBREW"
+                    }
+                    
+                    if (self.eventCategory != "Choose Category"){
+                        
+                        //Database upload
+                        self.dataBaseRef.child("Event").child(self.editKey).child("category").setValue(self.eventCategory.uppercased())
+                        self.dataBaseRef.child("Event").child(self.editKey).child("date").setValue(self.eventDate)
+                        self.dataBaseRef.child("Event").child(self.editKey).child("time").setValue(self.eventTime)
+                        self.dataBaseRef.child("Event").child(self.editKey).child("address").setValue(self.eventAddress)
+                        self.dataBaseRef.child("Event").child(self.editKey).child("evDescription").setValue(self.eventDescriptionField.text)
+                        self.dataBaseRef.child("Event").child(self.editKey).child("title").setValue(self.eventTitleField.text)
+                        self.dataBaseRef.child("Event").child(self.editKey).child("uid").setValue(self.currentUser!.uid)
+                        self.dataBaseRef.child("Event").child(self.editKey).child("username").setValue(self.username)
+                        self.dataBaseRef.child("Event").child(self.editKey).child("radius").setValue(String(self.notifyDistance))
+                        if (self.eventPaid == true){
+                            self.dataBaseRef.child("Event").child(self.editKey).child("paid").setValue("true")
 
+                        }
+                        else{
+                            self.dataBaseRef.child("Event").child(self.editKey).child("paid").setValue("false")
+                        }
+                        
+                        if (self.currentUser?.uid == "KFDuKYEoHbUmc1B0nsfbssON6zY2"){
+                            self.dataBaseRef.child("Event").child(self.editKey).child("verified").setValue("true")
+                        }
+                        else {
+                            self.dataBaseRef.child("Event").child(self.editKey).child("verified").setValue("false")
+                        }
+                        
+                        self.dataBaseRef.child("Event").child(self.editKey).child("pathToImage").setValue(downloadURL)
+                        self.dataBaseRef.child("LocationCoordinates").child(self.editKey).child("lat").setValue(self.lat)
+                        self.dataBaseRef.child("LocationCoordinates").child(self.editKey).child("lon").setValue(self.lon)
+                    }
+                    self.performSegue(withIdentifier: "doneEditingSegue", sender: nil)
+                }
+            }
         }
 
     }
@@ -390,10 +544,12 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
      let confirmController = segue.destination as! confirmPostViewController
         confirmController.eventKey = sender as! String
      }
-        }
-
+    }
+        
     func doneClicked(){
         view.endEditing(true)
     }
+    
+
 
 }
