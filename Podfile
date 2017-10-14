@@ -25,7 +25,7 @@ pod 'GoogleSignIn'
 # pod for photo
 pod 'SDWebImage'
 
-#fb social login pods
+#fb social login pods 
 pod 'FBSDKCoreKit'
 pod 'FBSDKShareKit'
 pod 'FBSDKLoginKit'
