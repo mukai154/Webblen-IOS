@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 import SwiftyStoreKit
 import StoreKit
+import CoreLocation
+
 
 var sharedSecret = "3fd70aaa6f914c799e7930abd16e0523"
 
@@ -67,6 +69,8 @@ class confirmPostViewController: UIViewController {
     var eventKey = "key"
     var eventUID = "uid"
     var paid = "false"
+    var lat = 0.0
+    var lon = 0.0
     var eventCost = 0
     
     var dataBaseRef: FIRDatabaseReference!
@@ -111,6 +115,16 @@ class confirmPostViewController: UIViewController {
 
         })
         
+        self.dataBaseRef.child("LocationCoordinates").child(eventKey).observeSingleEvent(of: .value, with: {(snapshot) in
+            
+            if let eDict = snapshot.value as? [String: AnyObject]{
+                self.lat = eDict["lat"] as! Double
+                self.lon = eDict["lon"] as! Double
+                
+            }
+            
+        })
+        
         // Do any additional setup after loading the view.
     }
 
@@ -128,8 +142,11 @@ class confirmPostViewController: UIViewController {
     @IBAction func didPressConfirm(_ sender: Any) {
         
         if (currentUser?.uid == "5EeE4RHUxWTa0E8BmwK2b0V1kKn2" || currentUser?.uid == "KFDuKYEoHbUmc1B0nsfbssON6zY2" || currentUser?.uid == "3kMQYwkjlUOmZU651KbrblkMYWp2"){
-            self.dataBaseRef.child("Event").child(self.eventKey).child("paid").setValue("true")
+            self.dataBaseRef.child("Event").child(self.eventKey).child("paid").setValue("false")
             self.dataBaseRef.child("Event").child(self.eventKey).child("verified").setValue("true")
+            
+            monitorRegionAtLocation(center: CLLocationCoordinate2DMake(self.lat, self.lon), identifier: self.eventKey)
+            
             self.performSegue(withIdentifier: "eventPurchasedSegue", sender: nil)
         }
         else{
@@ -164,6 +181,7 @@ class confirmPostViewController: UIViewController {
                 if product.productId == self.bundleID + "." + "notifyFive" {
                     
                     self.dataBaseRef.child("Event").child(self.eventKey).child("paid").setValue("true")
+                    
                     
                     print("success")
                     
@@ -386,6 +404,22 @@ extension confirmPostViewController {
             return alertWithTitle(title: "Receipt refresh failed", message: "Receipt refresh failed")
         }
     }
+    
+    func monitorRegionAtLocation(center: CLLocationCoordinate2D, identifier: String ) {
+        // Make sure the app is authorized.
+        if CLLocationManager.authorizationStatus() == .authorizedAlways {
+            // Make sure region monitoring is supported.
+            if CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
+                // Register the region.
+                let maxDistance = 1.0
+                let region = CLCircularRegion(center: center,
+                                              radius: maxDistance, identifier: identifier)
+                region.notifyOnEntry = true
+                region.notifyOnExit = false
+            }
+        }
+    }
+    
     
 }
 

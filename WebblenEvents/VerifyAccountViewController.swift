@@ -206,6 +206,18 @@ class VerifyAccountViewController: UIViewController, UIImagePickerControllerDele
         let imageRef = storage.child("toBeVerified").child(currentUser!.uid as! String).child("\(key).jpg")
         if (uploadPhoto1 == true){
         let imageData1 = UIImageJPEGRepresentation(self.image1.backgroundImage(for: .normal)!, 0.6)
+        
+        let uploadPhoto = imageRef.put(imageData1!, metadata: nil) {(metadata, error) in
+            if error != nil {
+                print(error!.localizedDescription)
+                }
+            else {
+                    //Post URL is available, post it with the event
+                    let downloadURL = (metadata!.downloadURL()?.absoluteString)!
+                    self.dataBaseRef.child("toBeVerified").child(key).child("pathToImage").setValue(downloadURL)
+
+            }
+        
         }
         if (uploadPhoto2 == true){
         let imageDate2 = UIImageJPEGRepresentation(self.image2.backgroundImage(for: .normal)!, 0.6)
@@ -216,4 +228,5 @@ class VerifyAccountViewController: UIViewController, UIImagePickerControllerDele
     }
     
 
+}
 }
