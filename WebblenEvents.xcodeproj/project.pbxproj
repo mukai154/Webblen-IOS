@@ -38,6 +38,7 @@
 		46956C6F1E1DB3F9009A8F93 /* InterestSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46956C6E1E1DB3F9009A8F93 /* InterestSetupViewController.swift */; };
 		46956C711E1E0537009A8F93 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46956C701E1E0536009A8F93 /* SetupViewController.swift */; };
 		46956C731E1E10E5009A8F93 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46956C721E1E10E5009A8F93 /* SignUpViewController.swift */; };
+		469CA8021F93DD1400C1DAFA /* LocationNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469CA8011F93DD1400C1DAFA /* LocationNotification.swift */; };
 		469E84831F355988002E07AA /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469E84821F355988002E07AA /* MapsViewController.swift */; };
 		469E84851F385180002E07AA /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469E84841F385180002E07AA /* DateViewController.swift */; };
 		46EC3ACD1F7305BE00E4CC06 /* EventCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EC3ACC1F7305BE00E4CC06 /* EventCategoryViewController.swift */; };
@@ -80,6 +81,7 @@
 		46956C701E1E0536009A8F93 /* SetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
 		46956C721E1E10E5009A8F93 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		46956C741E1E2519009A8F93 /* WebblenEvents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebblenEvents.entitlements; sourceTree = "<group>"; };
+		469CA8011F93DD1400C1DAFA /* LocationNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationNotification.swift; sourceTree = "<group>"; };
 		469E84821F355988002E07AA /* MapsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
 		469E84841F385180002E07AA /* DateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 		46EC3ACC1F7305BE00E4CC06 /* EventCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCategoryViewController.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				46956C741E1E2519009A8F93 /* WebblenEvents.entitlements */,
 				4687A0131DFCB9A80067F773 /* WebblenEvents.xcdatamodeld */,
 				D40A12A31F658F3E00392FF9 /* WhatsNewViewController.swift */,
+				469CA8011F93DD1400C1DAFA /* LocationNotification.swift */,
 			);
 			path = WebblenEvents;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				4687A00D1DFCB9A80067F773 /* AppDelegate.swift in Sources */,
 				460999101E3A9902000DE53F /* BlockTableViewCell.swift in Sources */,
 				46EC3ACD1F7305BE00E4CC06 /* EventCategoryViewController.swift in Sources */,
+				469CA8021F93DD1400C1DAFA /* LocationNotification.swift in Sources */,
 				46956C6F1E1DB3F9009A8F93 /* InterestSetupViewController.swift in Sources */,
 				4642E7391E1EED3000D65DA5 /* HomeViewController.swift in Sources */,
 				4624B9621F67D45D00F4D6E6 /* VerifyAccountViewController.swift in Sources */,

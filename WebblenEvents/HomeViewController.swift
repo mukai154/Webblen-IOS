@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import SDWebImage
+import CoreLocation
 
 
 
@@ -85,6 +86,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         todayOption.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         thisWeekOption.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         
+        //Start monitoring location...
+        LocationNotification.updateLocation(sender: AnyObject)
         //Activity Indicator
         
         
