@@ -44,7 +44,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
     var eCheckDesc: String?
     var uploadedImage = false
     var pathToImage = "null"
-    var notifyDistance = 10
+    var notifyDistance = ""
     var eventKey = "key"
     var editKey = "key"
     var event18 = false

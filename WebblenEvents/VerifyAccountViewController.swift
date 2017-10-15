@@ -204,29 +204,61 @@ class VerifyAccountViewController: UIViewController, UIImagePickerControllerDele
         let key = self.dataBaseRef.child("toBeVerified").childByAutoId().key
         let storage = FIRStorage.storage().reference(forURL: "gs://webblen-events.appspot.com")
         let imageRef = storage.child("toBeVerified").child(currentUser!.uid as! String).child("\(key).jpg")
+        
+        //Alert for missing category
+        if ((self.accountName.text?.isEmpty)! || (self.accountEmail.text?.isEmpty)! || (self.accountPhone.text?.isEmpty)! ){
+            let alert = UIAlertController(title: "Information Missing", message: "Please Fill All Fields", preferredStyle: .alert)
+            let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+            alert.addAction(dismissAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        else {
+        //Different Photo Uploads
         if (uploadPhoto1 == true){
         let imageData1 = UIImageJPEGRepresentation(self.image1.backgroundImage(for: .normal)!, 0.6)
-        
         let uploadPhoto = imageRef.put(imageData1!, metadata: nil) {(metadata, error) in
             if error != nil {
                 print(error!.localizedDescription)
                 }
             else {
                     //Post URL is available, post it with the event
-                    let downloadURL = (metadata!.downloadURL()?.absoluteString)!
-                    self.dataBaseRef.child("toBeVerified").child(key).child("pathToImage").setValue(downloadURL)
+                    let downloadURL = (metadata!.downloadURL()?.absoluteString)
+                self.dataBaseRef.child("toBeVerified").child(self.uid!).child("image1").setValue(downloadURL)
 
             }
-        
         }
+        }
+         
         if (uploadPhoto2 == true){
         let imageDate2 = UIImageJPEGRepresentation(self.image2.backgroundImage(for: .normal)!, 0.6)
+            let uploadPhoto = imageRef.put(imageDate2!, metadata: nil) {(metadata, error) in
+                if error != nil {
+                    print(error!.localizedDescription)
+                }
+                else {
+                    //Post URL is available, post it with the event
+                    let downloadURL = (metadata!.downloadURL()?.absoluteString)
+                    self.dataBaseRef.child("toBeVerified").child(self.uid!).child("image2").setValue(downloadURL)
+            }
         }
+        }
+            
         if (uploadPhoto3 == true){
         let imageDate3 = UIImageJPEGRepresentation(self.image3.backgroundImage(for: .normal)!, 0.6)
+            let uploadPhoto = imageRef.put(imageDate3!, metadata: nil) {(metadata, error) in
+                if error != nil {
+                    print(error!.localizedDescription)
+                }
+                else {
+                    //Post URL is available, post it with the event
+                    let downloadURL = (metadata!.downloadURL()?.absoluteString)
+                    self.dataBaseRef.child("toBeVerified").child(self.uid!).child("image3").setValue(downloadURL)
+                }
+            }
+    }
         }
     }
-    
 
-}
+            
 }

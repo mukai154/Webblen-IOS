@@ -411,7 +411,7 @@ extension confirmPostViewController {
             // Make sure region monitoring is supported.
             if CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
                 // Register the region.
-                let maxDistance = 1.0
+                let maxDistance = 1000.0
                 let region = CLCircularRegion(center: center,
                                               radius: maxDistance, identifier: identifier)
                 region.notifyOnEntry = true

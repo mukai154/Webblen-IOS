@@ -10,15 +10,13 @@ import UIKit
 
 class NotificationSettingsViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
-    var notifyWhen = ["Day Of Event", "Day Before Event", "Every Day" ]
+    var notifyWithin = ["1 mile", "5 miles", "10 miles" ]
     
     
-    var notificationFrequency = "Day of Event"
+    var notificationDistance = "1 mile"
     var event18 = false
     var event21 = false
     var price = "4.99"
-    var miles = 1
-    var charge = 4
     var event18String = ""
     var event21String = ""
     
@@ -62,16 +60,16 @@ class NotificationSettingsViewController: UIViewController, UIPickerViewDataSour
     
     //Notification Occurence Picker View
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return notifyWhen[row]
+        return notifyWithin[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return notifyWhen.count
+        return notifyWithin.count
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        notifyLabel.text = "Notify Users " + notifyWhen[row]
-        notificationFrequency = notifyWhen[row]
+        notifyLabel.text = "Notify Users Within " + notifyWithin[row]
+        notificationDistance = notifyWithin[row]
     }
     
     
@@ -87,14 +85,7 @@ class NotificationSettingsViewController: UIViewController, UIPickerViewDataSour
     @IBOutlet weak var distanceLabel: UILabel!
    
     @IBAction func distanceSlider(_ sender: UISlider) {
-        
-        distanceLabel.text = "Notify Those Within: " + String(Int(sender.value)) + " miles"
-        
-        miles = Int(sender.value)
-        
-        
-        
-        
+        distanceLabel.text = "Notify Those Within: " + String(Int(sender.value))
     }
     
     @IBAction func didPressConfirm(_ sender: Any) {
@@ -121,9 +112,17 @@ class NotificationSettingsViewController: UIViewController, UIPickerViewDataSour
         }
         
         if let presenter = presentingViewController as? NewEventViewController{
-            presenter.modifyNotification.setTitle("Notify " + notificationFrequency + ", " + event18String + event21String + ", $4.99", for: .normal)
             
-            presenter.notifyDistance = miles
+            if (event18 == true){
+            presenter.modifyNotification.setTitle("Notify Within: " + notificationDistance + ", " + event18String + ", $4.99", for: .normal)
+            }
+            else if (event21 == true && event18 == false){
+            presenter.modifyNotification.setTitle("Notify Within: " + notificationDistance + ", " + event21String + ", $4.99", for: .normal)
+            }
+            else {
+            presenter.modifyNotification.setTitle("Notify Within: " + notificationDistance + ", $4.99", for: .normal)
+            }
+            presenter.notifyDistance = notificationDistance
             presenter.event18 = event18
             presenter.event21 = event21
         }
