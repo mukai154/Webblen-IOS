@@ -82,11 +82,8 @@ class NotificationSettingsViewController: UIViewController, UIPickerViewDataSour
     }
 
     @IBOutlet weak var eventPriceLabel: UILabel!
-    @IBOutlet weak var distanceLabel: UILabel!
    
-    @IBAction func distanceSlider(_ sender: UISlider) {
-        distanceLabel.text = "Notify Those Within: " + String(Int(sender.value))
-    }
+
     
     @IBAction func didPressConfirm(_ sender: Any) {
         

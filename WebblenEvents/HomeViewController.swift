@@ -14,7 +14,7 @@ import CoreLocation
 
 
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
     
     
     var currentUser:  AnyObject?
@@ -28,7 +28,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var numberOfEvents = 0
     
     var defaultImageViewHeightConstraint:CGFloat = 225
-    
+    var locationManager = CLLocationManager()
 
     
     
@@ -86,8 +86,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         todayOption.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         thisWeekOption.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         
-        //Start monitoring location...
-        LocationNotification.updateLocation(sender: AnyObject)
+        //Update Location
+        updateLocation()
+        
         //Activity Indicator
         
         
@@ -904,6 +905,20 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
+    func updateLocation(){
+        locationManager.delegate = self
+        
+        if CLLocationManager.authorizationStatus() == .notDetermined {
+            self.locationManager.requestAlwaysAuthorization()
+            self.locationManager.requestWhenInUseAuthorization()
+        }
+        
+        locationManager.distanceFilter = kCLDistanceFilterNone
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
+        print("location updated")
+    }
+    
     //Menu Button Actions
     @IBAction func didPressToday(_ sender: Any) {
         thisWeek = false
@@ -950,6 +965,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         UIView.transition(with: homeTableView, duration: 1.0, options: .transitionCrossDissolve, animations: {self.homeTableView.reloadData()}, completion: nil)
     }
+    
     
 
 }

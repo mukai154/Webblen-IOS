@@ -22,12 +22,10 @@ class MyEventsViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     @IBOutlet weak var myEventsTableView: UITableView!
-    @IBOutlet weak var aivLoading: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        aivLoading.startAnimating()
 
         dataBaseRef = FIRDatabase.database().reference()
         
@@ -38,7 +36,6 @@ class MyEventsViewController: UIViewController, UITableViewDelegate, UITableView
         configureDatabase()
         
         
-        aivLoading.isHidden = true
         
         
     
