@@ -47,6 +47,7 @@
 		D40A12A41F658F3E00392FF9 /* WhatsNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40A12A31F658F3E00392FF9 /* WhatsNewViewController.swift */; };
 		D40A12A61F659E7300392FF9 /* NotificationSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40A12A51F659E7300392FF9 /* NotificationSettingsViewController.swift */; };
 		D41F1F1B1F93E2E9006DE9CE /* LocationTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41F1F1A1F93E2E9006DE9CE /* LocationTracking.swift */; };
+		D41F1F1D1F9A798E006DE9CE /* GeotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41F1F1C1F9A798E006DE9CE /* GeotificationsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +95,7 @@
 		D40A12A31F658F3E00392FF9 /* WhatsNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsNewViewController.swift; sourceTree = "<group>"; };
 		D40A12A51F659E7300392FF9 /* NotificationSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewController.swift; sourceTree = "<group>"; };
 		D41F1F1A1F93E2E9006DE9CE /* LocationTracking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTracking.swift; sourceTree = "<group>"; };
+		D41F1F1C1F9A798E006DE9CE /* GeotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeotificationsViewController.swift; sourceTree = "<group>"; };
 		D5000C66B9E08A7533D04650 /* Pods-WebblenEvents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebblenEvents.release.xcconfig"; path = "Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -168,7 +170,9 @@
 				46956C741E1E2519009A8F93 /* WebblenEvents.entitlements */,
 				4687A0131DFCB9A80067F773 /* WebblenEvents.xcdatamodeld */,
 				D40A12A31F658F3E00392FF9 /* WhatsNewViewController.swift */,
-				D41F1F1A1F93E2E9006DE9CE /* LocationTracking.swift */,
+				469CA8011F93DD1400C1DAFA /* LocationNotification.swift */,
+				469CA8031F93E65600C1DAFA /* LocationTracking.swift */,
+				D41F1F1C1F9A798E006DE9CE /* GeotificationsViewController.swift */,
 			);
 			path = WebblenEvents;
 			sourceTree = "<group>";
@@ -405,6 +409,7 @@
 				4687A0151DFCB9A80067F773 /* WebblenEvents.xcdatamodeld in Sources */,
 				46621B7F1E218750005E5404 /* InitialViewController.swift in Sources */,
 				4609990E1E3A9530000DE53F /* FeedbackViewController.swift in Sources */,
+				D41F1F1D1F9A798E006DE9CE /* GeotificationsViewController.swift in Sources */,
 				4617A7471F3D4C6600926160 /* confirmPostViewController.swift in Sources */,
 				46621B811E21D11B005E5404 /* MyEventsTableViewCell.swift in Sources */,
 				4609990A1E384717000DE53F /* TermsViewController.swift in Sources */,
