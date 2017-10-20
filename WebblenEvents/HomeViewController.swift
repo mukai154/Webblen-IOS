@@ -20,6 +20,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var currentUserData: FIRDatabaseReference!
     var currentBlock: FIRDatabaseReference!
     var modifiedDescription : String?
+    var locationInfo = LocationTracking()
     
     var userInterests = ["none"]
     var userBlocks = ["key"]
@@ -84,6 +85,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         menu.layer.shadowOffset = CGSize(width: 0, height: 3)
         todayOption.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         thisWeekOption.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        
+        //Start updating location
+        locationInfo.updateLocation(sender: AnyObject.self as AnyObject)
+        
         
         //Activity Indicator
         
