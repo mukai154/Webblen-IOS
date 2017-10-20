@@ -84,7 +84,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
         let screenSize : CGRect = UIScreen.main.bounds
         eventInfoHeighConstraint.constant = screenSize.height * 0.20
         
-        modifyNotification.isEnabled = false
+        //modifyNotification.isEnabled = false
         activityIndicator.isHidden = true
         
 
