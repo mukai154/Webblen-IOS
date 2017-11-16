@@ -18,14 +18,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     var currentUser:  AnyObject?
-    var currentUserData: FIRDatabaseReference!
-    var currentBlock: FIRDatabaseReference!
+    var currentUserData: DatabaseReference!
+    var currentBlock: DatabaseReference!
     var modifiedDescription : String?
     var locationInfo = LocationTracking()
     
     var userInterests = ["none"]
     var userBlocks = ["key"]
-    var interestHandle: FIRDatabaseHandle?
+    var interestHandle: DatabaseHandle?
     var numberOfEvents = 0
     
     var defaultImageViewHeightConstraint:CGFloat = 225
@@ -50,7 +50,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var noEventText: UITextView!
     
     
-    var dataBaseRef: FIRDatabaseReference!
+    var dataBaseRef: DatabaseReference!
     
     //Event Date Organzation
     var events = [Event]()
@@ -71,7 +71,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 
 
-    fileprivate var _refHandle: FIRDatabaseHandle!
+    fileprivate var _refHandle: DatabaseHandle!
     
     
     override func viewDidLoad() {
@@ -96,10 +96,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         
         //Database Reference
-        dataBaseRef = FIRDatabase.database().reference()
+        dataBaseRef = Database.database().reference()
 
         //User Reference
-        self.currentUser = FIRAuth.auth()?.currentUser
+        self.currentUser = Auth.auth().currentUser
         currentUserData = dataBaseRef.child("Users").child(self.currentUser!.uid).child("interests")
         currentBlock = dataBaseRef.child("Users").child(self.currentUser!.uid).child("Blocked Users")
         
@@ -412,7 +412,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.configureDatabase()
         })
         
-        self.currentUser = FIRAuth.auth()?.currentUser
+        self.currentUser = Auth.auth().currentUser
         
         self.homeTableView.rowHeight = UITableViewAutomaticDimension
         self.homeTableView.estimatedRowHeight = 250
@@ -422,71 +422,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     
     func configureDatabase(){
-        
-        
-        
-        //Organize event posts data
-        self.dataBaseRef.child("Event").queryOrderedByKey().observeSingleEvent(of: .value, with: {(snap) in
-        
-            //Check if category of the event fulfills the user's interests
-            let eventSnap = snap.value as! [String: AnyObject]
-            for (_,event) in eventSnap {
-                if let eventCategory = event["category"] as? String {
-                    for each in self.userInterests {
-                        if (each == eventCategory ){
-                            if let eKey = event["uid"] as? String {
-                                if(event["paid"] as! String == "true"){
-                                    
-                        //Event data
-                        let eventPost = Event()
-                        if let category = event["category"] as? String, let date = event["date"] as? String, let evDescription = event["evDescription"] as? String, let time = event["time"] as? String, let title = event["title"] as? String, let uid = event["uid"] as? String, let username = event["username"] as? String, let pathToImage = event["pathToImage"] as? String, let verified = event["verified"] as? String, let eventKey = event["eventKey"] as? String, let paid = event["paid"] as? String, let radius = event["radius"] as? String{
-                            eventPost.category = category
-                            eventPost.paid = paid
-                            eventPost.date = date
-                            eventPost.evDescription = evDescription
-                            self.modifiedDescription = evDescription
-                            eventPost.title = title
-                            eventPost.time = time
-                            eventPost.uid = uid
-                            eventPost.username = username
-                            eventPost.eventKey = eventKey
-                            eventPost.pathToImage = pathToImage
-                            eventPost.verified = verified
-                        
-                            
-                            //Append Events According to Date
-                            if(self.formatter.date(from: eventPost.date)!.days(from: self.currentDate) < 0){
-                                self.dataBaseRef.child("Event").child(eventPost.eventKey).removeValue()
-                            }
-                            else if (self.formatter.date(from: eventPost.date)!.days(from: self.currentDate) == 0){
-                                eventPost.date = "Today"
-                                self.eventsToday.append(eventPost)
-                                self.checkEvents()
-                            }
-                            else if (self.formatter.date(from: eventPost.date)!.days(from: self.currentDate) > 0 && self.formatter.date(from: eventPost.date)!.days(from: self.currentDate) <= 7){
-                                self.eventsThisWeek.append(eventPost)
-                                self.checkEvents()
-                            }
-                            else {
-                                self.eventsThisMonth.append(eventPost)
-                                self.checkEvents()
-                            }
-                            
-                                    }
-                                }
-                            
-                                
-                            }
-                    }
-                }
-                    self.homeTableView.reloadData()
-                    self.homeTableView.isHidden = false
-                }
-            }
-            
-        })
-        dataBaseRef.removeAllObservers()
-
     }
     
 
@@ -825,9 +760,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func didPressLogout(_ sender: Any) {
         
-        if (FIRAuth.auth()?.currentUser != nil){
+        if (Auth.auth().currentUser != nil){
             do{
-                try FIRAuth.auth()?.signOut()
+                try Auth.auth().signOut()
                 let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "initialView")
                 present(vc, animated: true, completion: nil)
             } catch let error as NSError{
@@ -972,44 +907,4 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 }
 
-extension Date {
-    /// Returns the amount of years from another date
-    func years(from date: Date) -> Int {
-        return Calendar.current.dateComponents([.year], from: date, to: self).year ?? 0
-    }
-    /// Returns the amount of months from another date
-    func months(from date: Date) -> Int {
-        return Calendar.current.dateComponents([.month], from: date, to: self).month ?? 0
-    }
-    /// Returns the amount of weeks from another date
-    func weeks(from date: Date) -> Int {
-        return Calendar.current.dateComponents([.weekOfMonth], from: date, to: self).weekOfMonth ?? 0
-    }
-    /// Returns the amount of days from another date
-    func days(from date: Date) -> Int {
-        return Calendar.current.dateComponents([.day], from: date, to: self).day ?? 0
-    }
-    /// Returns the amount of hours from another date
-    func hours(from date: Date) -> Int {
-        return Calendar.current.dateComponents([.hour], from: date, to: self).hour ?? 0
-    }
-    /// Returns the amount of minutes from another date
-    func minutes(from date: Date) -> Int {
-        return Calendar.current.dateComponents([.minute], from: date, to: self).minute ?? 0
-    }
-    /// Returns the amount of seconds from another date
-    func seconds(from date: Date) -> Int {
-        return Calendar.current.dateComponents([.second], from: date, to: self).second ?? 0
-    }
-    /// Returns the a custom time interval description from another date
-    func offset(from date: Date) -> String {
-        if years(from: date)   > 0 { return "\(years(from: date))y"   }
-        if months(from: date)  > 0 { return "\(months(from: date))M"  }
-        if weeks(from: date)   > 0 { return "\(weeks(from: date))w"   }
-        if days(from: date)    > 0 { return "\(days(from: date))d"    }
-        if hours(from: date)   > 0 { return "\(hours(from: date))h"   }
-        if minutes(from: date) > 0 { return "\(minutes(from: date))m" }
-        if seconds(from: date) > 0 { return "\(seconds(from: date))s" }
-        return ""
-    }
-}
+

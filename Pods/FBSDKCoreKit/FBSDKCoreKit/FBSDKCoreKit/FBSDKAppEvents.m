@@ -47,7 +47,7 @@ NSString *const FBSDKAppEventNameViewedContent           = @"fb_mobile_content_v
 NSString *const FBSDKAppEventNameSearched                = @"fb_mobile_search";
 NSString *const FBSDKAppEventNameRated                   = @"fb_mobile_rate";
 NSString *const FBSDKAppEventNameCompletedTutorial       = @"fb_mobile_tutorial_completion";
-NSString *const FBSDKAppEventParameterLaunchSource          = @"fb_mobile_launch_source";
+NSString *const FBSDKAppEventParameterLaunchSource       = @"fb_mobile_launch_source";
 
 // Ecommerce related
 NSString *const FBSDKAppEventNameAddedToCart             = @"fb_mobile_add_to_cart";
@@ -67,6 +67,7 @@ NSString *const FBSDKAppEventNameSpentCredits            = @"fb_mobile_spent_cre
 NSString *const FBSDKAppEventParameterNameCurrency               = @"fb_currency";
 NSString *const FBSDKAppEventParameterNameRegistrationMethod     = @"fb_registration_method";
 NSString *const FBSDKAppEventParameterNameContentType            = @"fb_content_type";
+NSString *const FBSDKAppEventParameterNameContent                = @"fb_content";
 NSString *const FBSDKAppEventParameterNameContentID              = @"fb_content_id";
 NSString *const FBSDKAppEventParameterNameSearchString           = @"fb_search_string";
 NSString *const FBSDKAppEventParameterNameSuccess                = @"fb_success";
@@ -177,6 +178,7 @@ NSString *const FBSDKAppEventsDialogShareContentTypeOpenGraph       = @"OpenGrap
 NSString *const FBSDKAppEventsDialogShareContentTypeStatus          = @"Status";
 NSString *const FBSDKAppEventsDialogShareContentTypePhoto           = @"Photo";
 NSString *const FBSDKAppEventsDialogShareContentTypeVideo           = @"Video";
+NSString *const FBSDKAppEventsDialogShareContentTypeCamera          = @"Camera";
 NSString *const FBSDKAppEventsDialogShareContentTypeUnknown         = @"Unknown";
 
 NSString *const FBSDKAppEventsLoggingResultNotification = @"com.facebook.sdk:FBSDKAppEventsLoggingResultNotification";
@@ -185,9 +187,11 @@ NSString *const FBSDKAppEventsOverrideAppIDBundleKey = @"FacebookLoggingOverride
 
 //
 // Push Notifications
+//
 // Activities Endpoint Parameter
 static NSString *const FBSDKActivitesParameterPushDeviceToken = @"device_token";
-// Event Name
+// Event Names
+static NSString *const FBSDKAppEventNamePushTokenObtained = @"fb_mobile_obtain_push_token";
 static NSString *const FBSDKAppEventNamePushOpened = @"fb_mobile_push_opened";
 // Event Parameter
 static NSString *const FBSDKAppEventParameterPushCampaign = @"fb_push_campaign";
@@ -326,7 +330,7 @@ static NSString *g_overrideAppID = nil;
   [[FBSDKAppEvents singleton] instanceLogEvent:eventName
                                     valueToSum:valueToSum
                                     parameters:parameters
-                            isImplicitlyLogged:NO
+                            isImplicitlyLogged:(BOOL)parameters[FBSDKAppEventParameterImplicitlyLogged]
                                    accessToken:accessToken];
 }
 
@@ -423,7 +427,22 @@ static NSString *g_overrideAppID = nil;
 
 + (void)setPushNotificationsDeviceToken:(NSData *)deviceToken
 {
-  [FBSDKAppEvents singleton].pushNotificationsDeviceTokenString = [FBSDKInternalUtility hexadecimalStringFromData:deviceToken];
+  NSString *deviceTokenString = [FBSDKInternalUtility hexadecimalStringFromData:deviceToken];
+  if (deviceTokenString == nil) {
+    [FBSDKAppEvents singleton].pushNotificationsDeviceTokenString = nil;
+    return;
+  }
+
+  if (![deviceTokenString isEqualToString:([FBSDKAppEvents singleton].pushNotificationsDeviceTokenString)]) {
+    [FBSDKAppEvents singleton].pushNotificationsDeviceTokenString = deviceTokenString;
+
+    [FBSDKAppEvents logEvent:FBSDKAppEventNamePushTokenObtained];
+
+    // Unless the behavior is set to only allow explicit flushing, we go ahead and flush the event
+    if ([FBSDKAppEvents flushBehavior] != FBSDKAppEventsFlushBehaviorExplicitOnly) {
+      [[FBSDKAppEvents singleton] flushForReason:FBSDKAppEventsFlushReasonEagerlyFlushingEvent];
+    }
+  }
 }
 
 + (FBSDKAppEventsFlushBehavior)flushBehavior
@@ -507,7 +526,7 @@ static NSString *g_overrideAppID = nil;
     return;
   }
   NSDictionary *params = @{ @"data" : dataJSONString };
-  FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"%@/user_properties", [FBSDKSettings appID]]
+  FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"%@/user_properties", [[self singleton] appID]]
                                                                  parameters:params
                                                                 tokenString:[FBSDKAccessToken currentAccessToken].tokenString
                                                                  HTTPMethod:@"POST"
@@ -668,7 +687,6 @@ static NSString *g_overrideAppID = nil;
   if (isImplicitlyLogged) {
     eventDictionary[FBSDKAppEventParameterImplicitlyLogged] = @"1";
   }
-  [FBSDKInternalUtility dictionary:eventDictionary setObject:_userID forKey:@"_app_user_id"];
 
   NSString *currentViewControllerName;
   if ([NSThread isMainThread]) {
@@ -766,6 +784,7 @@ static NSString *g_overrideAppID = nil;
   [FBSDKAppEventsUtility ensureOnMainThread:NSStringFromSelector(_cmd) className:NSStringFromClass([self class])];
 
   [self fetchServerConfiguration:^(void) {
+    NSString *receipt_data = [appEventsState extractReceiptData];
     NSString *JSONString = [appEventsState JSONStringForEvents:_serverConfiguration.implicitLoggingEnabled];
     NSData *encodedEvents = [JSONString dataUsingEncoding:NSUTF8StringEncoding];
     if (!encodedEvents) {
@@ -777,6 +796,11 @@ static NSString *g_overrideAppID = nil;
                                            activityParametersDictionaryForEvent:@"CUSTOM_APP_EVENTS"
                                            implicitEventsOnly:appEventsState.areAllEventsImplicit
                                            shouldAccessAdvertisingID:_serverConfiguration.advertisingIDEnabled];
+    NSInteger length = [receipt_data length];
+    if (length > 0) {
+      postParameters[@"receipt_data"] = receipt_data;
+    }
+
     postParameters[@"custom_events_file"] = encodedEvents;
     if (appEventsState.numSkipped > 0) {
       postParameters[@"num_skipped_events"] = [NSString stringWithFormat:@"%lu", (unsigned long)appEventsState.numSkipped];

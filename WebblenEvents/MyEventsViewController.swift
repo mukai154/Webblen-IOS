@@ -14,22 +14,24 @@ class MyEventsViewController: UIViewController, UITableViewDelegate, UITableView
 {
 
     var currentUser:  AnyObject?
-    var currentUserData: FIRDatabaseReference!
+    var currentUserData: DatabaseReference!
     
-    var dataBaseRef: FIRDatabaseReference!
+    var dataBaseRef: DatabaseReference!
     var events = [Event]()
     var eventCount = 0
     
     
     @IBOutlet weak var myEventsTableView: UITableView!
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
 
-        dataBaseRef = FIRDatabase.database().reference()
+        dataBaseRef = Database.database().reference()
         
-        self.currentUser = FIRAuth.auth()?.currentUser
+        self.currentUser = Auth.auth().currentUser
         
 
         
@@ -45,34 +47,6 @@ class MyEventsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func configureDatabase(){
         
-        self.dataBaseRef.child("Event").queryOrderedByKey().observe(.value, with: {(snap) in
-            
-            let eventSnap = snap.value as! [String: AnyObject]
-            for (_,event) in eventSnap {
-                if let eventCreator = event["uid"] as? String {
-                        if (self.currentUser?.uid == eventCreator){
-                            let eventPost = Event()
-                            if let category = event["category"] as? String, let date = event["date"] as? String, let evDescription = event["evDescription"] as? String, let time = event["time"] as? String, let title = event["title"] as? String, let uid = event["uid"] as? String, let username = event["username"] as? String, let eventKey = event["eventKey"] as? String{
-                                eventPost.category = category
-                                eventPost.date = date
-                                eventPost.evDescription = evDescription
-                                eventPost.title = title
-                                eventPost.time = time
-                                eventPost.uid = uid
-                                eventPost.username = username
-                                eventPost.eventKey = eventKey
-                                
-                                self.events.append(eventPost)
-                                print(self.events)
-                            }
-                        
-                    }
-                    self.myEventsTableView.reloadData()
-                }
-            }
-            
-        })
-        dataBaseRef.removeAllObservers()
     }
     
     
@@ -124,6 +98,9 @@ class MyEventsViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
 
-
-
+    
+    @IBAction func didPressBack(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
 }

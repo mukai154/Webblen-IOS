@@ -35,7 +35,10 @@ class SettingsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-        
+    @IBAction func didPressBack(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     
 
 }

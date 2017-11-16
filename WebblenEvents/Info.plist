@@ -51,7 +51,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Webblen Events Would Like Access to Your Camera</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Will you allow this app to always know your location?</string>
+	<string>Webblen Events Would Like to Access Your Location to Notify You of Events Going On Around You.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Webblen Events Would Like Access to Your Location</string>
 	<key>NSPhotoLibraryUsageDescription</key>

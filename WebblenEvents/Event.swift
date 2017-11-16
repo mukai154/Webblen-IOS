@@ -10,6 +10,7 @@ import UIKit
 
 class Event: NSObject {
     
+    var address: String!
     var title: String!
     var date: String!
     var evDescription: String!

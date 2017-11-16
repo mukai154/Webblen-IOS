@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		0DEA47663D8D060E3DC23629 /* Pods_WebblenEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B69FC37BCC1F75D899C6C06 /* Pods_WebblenEvents.framework */; };
+		46094A261FB1493D008B277D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46094A251FB1493D008B277D /* MapKit.framework */; };
+		46094A281FB25738008B277D /* EventOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46094A271FB25738008B277D /* EventOverlay.swift */; };
+		46094A2F1FB2CD0A008B277D /* CurrentUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46094A2E1FB2CD0A008B277D /* CurrentUserData.swift */; };
+		46094A311FB8EED5008B277D /* documentStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46094A301FB8EED5008B277D /* documentStructures.swift */; };
+		46094A331FB9497C008B277D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46094A321FB9497C008B277D /* HomeViewController.swift */; };
+		46094A351FB94F3F008B277D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46094A341FB94F3F008B277D /* GoogleService-Info.plist */; };
 		4609990A1E384717000DE53F /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460999091E384717000DE53F /* TermsViewController.swift */; };
 		4609990C1E39E38A000DE53F /* BlockedUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4609990B1E39E38A000DE53F /* BlockedUsersViewController.swift */; };
 		4609990E1E3A9530000DE53F /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4609990D1E3A9530000DE53F /* FeedbackViewController.swift */; };
@@ -19,7 +25,6 @@
 		4624B9641F686E2C00F4D6E6 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4624B9631F686E2C00F4D6E6 /* StoreManager.swift */; };
 		4624B9661F68D2AF00F4D6E6 /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4624B9651F68D2AE00F4D6E6 /* SwiftyStoreKit.framework */; };
 		4642E7371E1E6B6300D65DA5 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4642E7361E1E6B6300D65DA5 /* SignInViewController.swift */; };
-		4642E7391E1EED3000D65DA5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4642E7381E1EED3000D65DA5 /* HomeViewController.swift */; };
 		4642E73D1E1F40E400D65DA5 /* NewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4642E73C1E1F40E400D65DA5 /* NewEventViewController.swift */; };
 		4642E73F1E20604100D65DA5 /* MyEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4642E73E1E20604100D65DA5 /* MyEventsViewController.swift */; };
 		4642E7411E2063B800D65DA5 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4642E7401E2063B800D65DA5 /* Event.swift */; };
@@ -34,6 +39,9 @@
 		4687A01A1DFCB9A80067F773 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4687A0181DFCB9A80067F773 /* LaunchScreen.storyboard */; };
 		4687A0221DFCBC560067F773 /* Logo White No Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 4687A0211DFCBC560067F773 /* Logo White No Background.png */; };
 		468BDB8D1F7F197700C5BF47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 468BDB8C1F7F185900C5BF47 /* GoogleService-Info.plist */; };
+		4691BD901FAFED4C00056024 /* SWMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4691BD8F1FAFED4C00056024 /* SWMenuViewController.swift */; };
+		4691BD921FB0364C00056024 /* Geotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4691BD911FB0364C00056024 /* Geotification.swift */; };
+		4691BD941FB036A200056024 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4691BD931FB036A200056024 /* Utilities.swift */; };
 		469386DC1E2F2E51000AF3D4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469386DB1E2F2E51000AF3D4 /* SettingsViewController.swift */; };
 		46956C6F1E1DB3F9009A8F93 /* InterestSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46956C6E1E1DB3F9009A8F93 /* InterestSetupViewController.swift */; };
 		46956C711E1E0537009A8F93 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46956C701E1E0536009A8F93 /* SetupViewController.swift */; };
@@ -42,15 +50,26 @@
 		469CA8041F93E65600C1DAFA /* LocationTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469CA8031F93E65600C1DAFA /* LocationTracking.swift */; };
 		469E84831F355988002E07AA /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469E84821F355988002E07AA /* MapsViewController.swift */; };
 		469E84851F385180002E07AA /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469E84841F385180002E07AA /* DateViewController.swift */; };
+		46CB51951FA53355009CF2D4 /* SetLocationNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CB51941FA53355009CF2D4 /* SetLocationNotificationViewController.swift */; };
+		46CB51971FA92058009CF2D4 /* UIButtonX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CB51961FA92058009CF2D4 /* UIButtonX.swift */; };
+		46CB51991FA9268D009CF2D4 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CB51981FA9268D009CF2D4 /* FloatingActionButton.swift */; };
+		46CB519B1FA93BBB009CF2D4 /* UIViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CB519A1FA93BBB009CF2D4 /* UIViewX.swift */; };
+		46CB519F1FA98F31009CF2D4 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CB519D1FA98F30009CF2D4 /* SWRevealViewController.m */; };
+		46CB51A11FA99576009CF2D4 /* BackTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CB51A01FA99576009CF2D4 /* BackTableVC.swift */; };
 		46EC3ACD1F7305BE00E4CC06 /* EventCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EC3ACC1F7305BE00E4CC06 /* EventCategoryViewController.swift */; };
 		46F113BC1E16044800FB7294 /* defaultEventImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 46F113BB1E16044800FB7294 /* defaultEventImage.png */; };
 		D40A12A41F658F3E00392FF9 /* WhatsNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40A12A31F658F3E00392FF9 /* WhatsNewViewController.swift */; };
 		D40A12A61F659E7300392FF9 /* NotificationSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40A12A51F659E7300392FF9 /* NotificationSettingsViewController.swift */; };
-		D41F1F1B1F93E2E9006DE9CE /* LocationTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41F1F1A1F93E2E9006DE9CE /* LocationTracking.swift */; };
 		D41F1F1D1F9A798E006DE9CE /* GeotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41F1F1C1F9A798E006DE9CE /* GeotificationsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		46094A251FB1493D008B277D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		46094A271FB25738008B277D /* EventOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventOverlay.swift; sourceTree = "<group>"; };
+		46094A2E1FB2CD0A008B277D /* CurrentUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserData.swift; sourceTree = "<group>"; };
+		46094A301FB8EED5008B277D /* documentStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = documentStructures.swift; sourceTree = "<group>"; };
+		46094A321FB9497C008B277D /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		46094A341FB94F3F008B277D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		460999091E384717000DE53F /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		4609990B1E39E38A000DE53F /* BlockedUsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockedUsersViewController.swift; sourceTree = "<group>"; };
 		4609990D1E3A9530000DE53F /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
@@ -62,7 +81,6 @@
 		4624B9631F686E2C00F4D6E6 /* StoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
 		4624B9651F68D2AE00F4D6E6 /* SwiftyStoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyStoreKit.framework; path = "../../Library/Developer/Xcode/DerivedData/WebblenEvents-aqmxctmtxigagscabsvsxabqegai/Build/Products/Debug-iphoneos/SwiftyStoreKit/SwiftyStoreKit.framework"; sourceTree = "<group>"; };
 		4642E7361E1E6B6300D65DA5 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		4642E7381E1EED3000D65DA5 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		4642E73C1E1F40E400D65DA5 /* NewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventViewController.swift; sourceTree = "<group>"; };
 		4642E73E1E20604100D65DA5 /* MyEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyEventsViewController.swift; sourceTree = "<group>"; };
 		4642E7401E2063B800D65DA5 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -79,6 +97,9 @@
 		4687A01B1DFCB9A80067F773 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4687A0211DFCBC560067F773 /* Logo White No Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo White No Background.png"; sourceTree = "<group>"; };
 		468BDB8C1F7F185900C5BF47 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4691BD8F1FAFED4C00056024 /* SWMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWMenuViewController.swift; sourceTree = "<group>"; };
+		4691BD911FB0364C00056024 /* Geotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geotification.swift; sourceTree = "<group>"; };
+		4691BD931FB036A200056024 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		469386DB1E2F2E51000AF3D4 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		46956C6E1E1DB3F9009A8F93 /* InterestSetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestSetupViewController.swift; sourceTree = "<group>"; };
 		46956C701E1E0536009A8F93 /* SetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
@@ -88,13 +109,20 @@
 		469CA8031F93E65600C1DAFA /* LocationTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTracking.swift; sourceTree = "<group>"; };
 		469E84821F355988002E07AA /* MapsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
 		469E84841F385180002E07AA /* DateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
+		46CB51941FA53355009CF2D4 /* SetLocationNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLocationNotificationViewController.swift; sourceTree = "<group>"; };
+		46CB51961FA92058009CF2D4 /* UIButtonX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonX.swift; sourceTree = "<group>"; };
+		46CB51981FA9268D009CF2D4 /* FloatingActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
+		46CB519A1FA93BBB009CF2D4 /* UIViewX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewX.swift; sourceTree = "<group>"; };
+		46CB519C1FA98F2F009CF2D4 /* WebblenEvents-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WebblenEvents-Bridging-Header.h"; sourceTree = "<group>"; };
+		46CB519D1FA98F30009CF2D4 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		46CB519E1FA98F30009CF2D4 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		46CB51A01FA99576009CF2D4 /* BackTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackTableVC.swift; sourceTree = "<group>"; };
 		46EC3ACC1F7305BE00E4CC06 /* EventCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCategoryViewController.swift; sourceTree = "<group>"; };
 		46F113BB1E16044800FB7294 /* defaultEventImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultEventImage.png; sourceTree = "<group>"; };
 		507F16388FC4FF4BC0B398A4 /* Pods-WebblenEvents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebblenEvents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents.debug.xcconfig"; sourceTree = "<group>"; };
 		5B69FC37BCC1F75D899C6C06 /* Pods_WebblenEvents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WebblenEvents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D40A12A31F658F3E00392FF9 /* WhatsNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsNewViewController.swift; sourceTree = "<group>"; };
 		D40A12A51F659E7300392FF9 /* NotificationSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewController.swift; sourceTree = "<group>"; };
-		D41F1F1A1F93E2E9006DE9CE /* LocationTracking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTracking.swift; sourceTree = "<group>"; };
 		D41F1F1C1F9A798E006DE9CE /* GeotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeotificationsViewController.swift; sourceTree = "<group>"; };
 		D5000C66B9E08A7533D04650 /* Pods-WebblenEvents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebblenEvents.release.xcconfig"; path = "Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,6 +134,7 @@
 			files = (
 				4624B9661F68D2AF00F4D6E6 /* SwiftyStoreKit.framework in Frameworks */,
 				0DEA47663D8D060E3DC23629 /* Pods_WebblenEvents.framework in Frameworks */,
+				46094A261FB1493D008B277D /* MapKit.framework in Frameworks */,
 				4617A7491F3D4D2900926160 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -113,6 +142,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4609D8FB1F9C1B4C00EABE9E /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		4687A0001DFCB9A80067F773 = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +156,7 @@
 				4687A00A1DFCB9A80067F773 /* Products */,
 				F6B7F586223312FE50D712D3 /* Pods */,
 				EEABF8226ADF07419F0B7844 /* Frameworks */,
+				4609D8FB1F9C1B4C00EABE9E /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -136,23 +173,33 @@
 			children = (
 				4687A00C1DFCB9A80067F773 /* AppDelegate.swift */,
 				4687A0161DFCB9A80067F773 /* Assets.xcassets */,
+				46CB51A01FA99576009CF2D4 /* BackTableVC.swift */,
 				4609990B1E39E38A000DE53F /* BlockedUsersViewController.swift */,
 				4609990F1E3A9902000DE53F /* BlockTableViewCell.swift */,
 				4617A7461F3D4C6600926160 /* confirmPostViewController.swift */,
 				4642E74A1E20E90A00D65DA5 /* Constants.swift */,
+				46094A2E1FB2CD0A008B277D /* CurrentUserData.swift */,
 				469E84841F385180002E07AA /* DateViewController.swift */,
 				46F113BB1E16044800FB7294 /* defaultEventImage.png */,
+				46094A301FB8EED5008B277D /* documentStructures.swift */,
 				4642E7401E2063B800D65DA5 /* Event.swift */,
 				46EC3ACC1F7305BE00E4CC06 /* EventCategoryViewController.swift */,
 				46621B821E2E9E4A005E5404 /* EventInfoViewController.swift */,
+				46094A271FB25738008B277D /* EventOverlay.swift */,
 				4609990D1E3A9530000DE53F /* FeedbackViewController.swift */,
+				46CB51981FA9268D009CF2D4 /* FloatingActionButton.swift */,
+				4691BD911FB0364C00056024 /* Geotification.swift */,
+				D41F1F1C1F9A798E006DE9CE /* GeotificationsViewController.swift */,
 				468BDB8C1F7F185900C5BF47 /* GoogleService-Info.plist */,
+				46094A341FB94F3F008B277D /* GoogleService-Info.plist */,
 				461FD2D21F43FBF9001C7279 /* homeCell.swift */,
-				4642E7381E1EED3000D65DA5 /* HomeViewController.swift */,
+				46094A321FB9497C008B277D /* HomeViewController.swift */,
 				4687A01B1DFCB9A80067F773 /* Info.plist */,
 				46621B7E1E218750005E5404 /* InitialViewController.swift */,
 				46956C6E1E1DB3F9009A8F93 /* InterestSetupViewController.swift */,
 				4687A0181DFCB9A80067F773 /* LaunchScreen.storyboard */,
+				469CA8011F93DD1400C1DAFA /* LocationNotification.swift */,
+				469CA8031F93E65600C1DAFA /* LocationTracking.swift */,
 				4687A0211DFCBC560067F773 /* Logo White No Background.png */,
 				4687A0101DFCB9A80067F773 /* Main.storyboard */,
 				469E84821F355988002E07AA /* MapsViewController.swift */,
@@ -160,19 +207,24 @@
 				4642E73E1E20604100D65DA5 /* MyEventsViewController.swift */,
 				4642E73C1E1F40E400D65DA5 /* NewEventViewController.swift */,
 				D40A12A51F659E7300392FF9 /* NotificationSettingsViewController.swift */,
+				46CB51941FA53355009CF2D4 /* SetLocationNotificationViewController.swift */,
 				469386DB1E2F2E51000AF3D4 /* SettingsViewController.swift */,
 				46956C701E1E0536009A8F93 /* SetupViewController.swift */,
 				4642E7361E1E6B6300D65DA5 /* SignInViewController.swift */,
 				46956C721E1E10E5009A8F93 /* SignUpViewController.swift */,
 				4624B9631F686E2C00F4D6E6 /* StoreManager.swift */,
+				4691BD8F1FAFED4C00056024 /* SWMenuViewController.swift */,
+				46CB519E1FA98F30009CF2D4 /* SWRevealViewController.h */,
+				46CB519D1FA98F30009CF2D4 /* SWRevealViewController.m */,
 				460999091E384717000DE53F /* TermsViewController.swift */,
+				46CB51961FA92058009CF2D4 /* UIButtonX.swift */,
+				46CB519A1FA93BBB009CF2D4 /* UIViewX.swift */,
+				4691BD931FB036A200056024 /* Utilities.swift */,
 				4624B9611F67D45D00F4D6E6 /* VerifyAccountViewController.swift */,
+				46CB519C1FA98F2F009CF2D4 /* WebblenEvents-Bridging-Header.h */,
 				46956C741E1E2519009A8F93 /* WebblenEvents.entitlements */,
 				4687A0131DFCB9A80067F773 /* WebblenEvents.xcdatamodeld */,
 				D40A12A31F658F3E00392FF9 /* WhatsNewViewController.swift */,
-				469CA8011F93DD1400C1DAFA /* LocationNotification.swift */,
-				469CA8031F93E65600C1DAFA /* LocationTracking.swift */,
-				D41F1F1C1F9A798E006DE9CE /* GeotificationsViewController.swift */,
 			);
 			path = WebblenEvents;
 			sourceTree = "<group>";
@@ -180,6 +232,7 @@
 		EEABF8226ADF07419F0B7844 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				46094A251FB1493D008B277D /* MapKit.framework */,
 				4624B9651F68D2AE00F4D6E6 /* SwiftyStoreKit.framework */,
 				4617A7481F3D4D2900926160 /* StoreKit.framework */,
 				5B69FC37BCC1F75D899C6C06 /* Pods_WebblenEvents.framework */,
@@ -236,7 +289,7 @@
 					4687A0081DFCB9A80067F773 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = TQ9EG6FK32;
-						LastSwiftMigration = 0830;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplePay = {
@@ -249,6 +302,9 @@
 								enabled = 1;
 							};
 							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
 								enabled = 1;
 							};
 							com.apple.Push = {
@@ -287,6 +343,7 @@
 				4687A0221DFCBC560067F773 /* Logo White No Background.png in Resources */,
 				4687A0121DFCB9A80067F773 /* Main.storyboard in Resources */,
 				468BDB8D1F7F197700C5BF47 /* GoogleService-Info.plist in Resources */,
+				46094A351FB94F3F008B277D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,11 +464,15 @@
 			files = (
 				46621B831E2E9E4A005E5404 /* EventInfoViewController.swift in Sources */,
 				4687A0151DFCB9A80067F773 /* WebblenEvents.xcdatamodeld in Sources */,
+				46CB51971FA92058009CF2D4 /* UIButtonX.swift in Sources */,
+				4691BD901FAFED4C00056024 /* SWMenuViewController.swift in Sources */,
+				46094A2F1FB2CD0A008B277D /* CurrentUserData.swift in Sources */,
 				46621B7F1E218750005E5404 /* InitialViewController.swift in Sources */,
 				4609990E1E3A9530000DE53F /* FeedbackViewController.swift in Sources */,
 				D41F1F1D1F9A798E006DE9CE /* GeotificationsViewController.swift in Sources */,
 				4617A7471F3D4C6600926160 /* confirmPostViewController.swift in Sources */,
 				46621B811E21D11B005E5404 /* MyEventsTableViewCell.swift in Sources */,
+				46CB51A11FA99576009CF2D4 /* BackTableVC.swift in Sources */,
 				4609990A1E384717000DE53F /* TermsViewController.swift in Sources */,
 				D40A12A41F658F3E00392FF9 /* WhatsNewViewController.swift in Sources */,
 				469E84851F385180002E07AA /* DateViewController.swift in Sources */,
@@ -420,22 +481,29 @@
 				4687A00D1DFCB9A80067F773 /* AppDelegate.swift in Sources */,
 				460999101E3A9902000DE53F /* BlockTableViewCell.swift in Sources */,
 				469CA8041F93E65600C1DAFA /* LocationTracking.swift in Sources */,
+				46094A331FB9497C008B277D /* HomeViewController.swift in Sources */,
 				46EC3ACD1F7305BE00E4CC06 /* EventCategoryViewController.swift in Sources */,
 				469CA8021F93DD1400C1DAFA /* LocationNotification.swift in Sources */,
+				46CB51951FA53355009CF2D4 /* SetLocationNotificationViewController.swift in Sources */,
 				46956C6F1E1DB3F9009A8F93 /* InterestSetupViewController.swift in Sources */,
-				4642E7391E1EED3000D65DA5 /* HomeViewController.swift in Sources */,
-				D41F1F1B1F93E2E9006DE9CE /* LocationTracking.swift in Sources */,
+				46094A281FB25738008B277D /* EventOverlay.swift in Sources */,
 				4624B9621F67D45D00F4D6E6 /* VerifyAccountViewController.swift in Sources */,
+				4691BD921FB0364C00056024 /* Geotification.swift in Sources */,
 				4642E73D1E1F40E400D65DA5 /* NewEventViewController.swift in Sources */,
+				46CB519F1FA98F31009CF2D4 /* SWRevealViewController.m in Sources */,
 				461FD2D31F43FBF9001C7279 /* homeCell.swift in Sources */,
 				4642E74B1E20E90A00D65DA5 /* Constants.swift in Sources */,
+				46CB51991FA9268D009CF2D4 /* FloatingActionButton.swift in Sources */,
 				4642E7371E1E6B6300D65DA5 /* SignInViewController.swift in Sources */,
 				469386DC1E2F2E51000AF3D4 /* SettingsViewController.swift in Sources */,
+				46094A311FB8EED5008B277D /* documentStructures.swift in Sources */,
 				4609990C1E39E38A000DE53F /* BlockedUsersViewController.swift in Sources */,
 				D40A12A61F659E7300392FF9 /* NotificationSettingsViewController.swift in Sources */,
 				46956C731E1E10E5009A8F93 /* SignUpViewController.swift in Sources */,
 				4624B9641F686E2C00F4D6E6 /* StoreManager.swift in Sources */,
 				469E84831F355988002E07AA /* MapsViewController.swift in Sources */,
+				46CB519B1FA93BBB009CF2D4 /* UIViewX.swift in Sources */,
+				4691BD941FB036A200056024 /* Utilities.swift in Sources */,
 				46956C711E1E0537009A8F93 /* SetupViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -585,6 +653,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.webblen.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WebblenEvents/WebblenEvents-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -605,6 +674,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.webblen.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WebblenEvents/WebblenEvents-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

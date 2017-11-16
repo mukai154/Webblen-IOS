@@ -14,15 +14,35 @@ import FirebaseMessaging
 import UserNotifications
 import FBSDKCoreKit
 import IQKeyboardManagerSwift
+import CoreLocation
+import SwiftyStoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
 
+    let locationManager = CLLocationManager()
+    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        
+        SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
+            for purchase in purchases {
+                if purchase.transaction.transactionState == .purchased || purchase.transaction.transactionState == .restored {
+                    if purchase.needsFinishTransaction {
+                        // Deliver content from server, then:
+                        SwiftyStoreKit.finishTransaction(purchase.transaction)
+                    }
+                    print("purchased: \(purchase)")
+                }
+            }
+        }
+        
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
         
         IQKeyboardManager.sharedManager().enable = true
         application.statusBarStyle = .default
@@ -45,29 +65,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         application.registerForRemoteNotifications()
         
-        FIRApp.configure()
+        FirebaseApp.configure()
         
         GMSServices.provideAPIKey("AIzaSyDG-kmaqXsZRJwMFDyE--2LAi1Bsnw803U")
         GMSPlacesClient.provideAPIKey("AIzaSyDG-kmaqXsZRJwMFDyE--2LAi1Bsnw803U")
 
-        
-        
         return true
     }
     
-    
+
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
         let handled = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String, annotation: options[UIApplicationOpenURLOptionsKey.annotation] )
-        
 
-        
-        
-        
         // Add any custom logic here.
         return handled;
-        
-
         
     }
     
@@ -131,5 +143,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window.rootViewController?.present(alert, animated: true, completion: nil)
     }
     
+    func handleEvent(forRegion region: CLRegion!) {
+        print("Geofence triggered!")
+    }
+    
 }
+
+extension AppDelegate: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        if region is CLCircularRegion {
+            handleEvent(forRegion: region)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        if region is CLCircularRegion {
+            handleEvent(forRegion: region)
+        }
+    }
+}
+
 

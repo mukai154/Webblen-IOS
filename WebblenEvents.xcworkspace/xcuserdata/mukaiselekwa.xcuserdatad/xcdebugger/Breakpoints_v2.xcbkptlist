@@ -25,29 +25,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WebblenEvents/EventInfoViewController.swift"
-            timestampString = "529781205.353426"
+            filePath = "WebblenEvents/HomeViewController.swift"
+            timestampString = "532237575.357778"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WebblenEvents/EventInfoViewController.swift"
-            timestampString = "529781205.355153"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "826"
+            endingLineNumber = "826"
+            landmarkName = "didTapEventPhoto(sender:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,28 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WebblenEvents/HomeViewController.swift"
-            timestampString = "529788644.274881"
+            timestampString = "532237575.357916"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "891"
-            endingLineNumber = "891"
-            landmarkName = "HomeViewController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WebblenEvents/HomeViewController.swift"
-            timestampString = "529788644.275006"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "893"
-            endingLineNumber = "893"
-            landmarkName = "dismissFullScreenImage(sender:)"
+            startingLineNumber = "828"
+            endingLineNumber = "828"
+            landmarkName = "didTapEventPhoto(sender:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -90,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WebblenEvents/HomeViewController.swift"
-            timestampString = "529788644.275061"
+            timestampString = "532237575.358005"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "894"
-            endingLineNumber = "894"
-            landmarkName = "dismissFullScreenImage(sender:)"
+            startingLineNumber = "829"
+            endingLineNumber = "829"
+            landmarkName = "didTapEventPhoto(sender:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

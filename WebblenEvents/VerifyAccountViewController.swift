@@ -22,7 +22,7 @@ class VerifyAccountViewController: UIViewController, UIImagePickerControllerDele
 
     
     //Firebase References
-    var dataBaseRef = FIRDatabase.database().reference()
+    var dataBaseRef = Database.database().reference()
     var currentUser: AnyObject?
     
     //Variable
@@ -60,7 +60,7 @@ class VerifyAccountViewController: UIViewController, UIImagePickerControllerDele
         imagePicker.delegate = self
         
         //Grab UID
-        self.currentUser = FIRAuth.auth()?.currentUser
+        self.currentUser = Auth.auth().currentUser
         self.uid = currentUser?.uid
 
 
@@ -202,7 +202,7 @@ class VerifyAccountViewController: UIViewController, UIImagePickerControllerDele
         
         //Check for images & Event Key & Link Storage & Prepare Segue
         let key = self.dataBaseRef.child("toBeVerified").childByAutoId().key
-        let storage = FIRStorage.storage().reference(forURL: "gs://webblen-events.appspot.com")
+        let storage = Storage.storage().reference(forURL: "gs://webblen-events.appspot.com")
         let imageRef = storage.child("toBeVerified").child(currentUser!.uid as! String).child("\(key).jpg")
         
         //Alert for missing category
@@ -217,7 +217,7 @@ class VerifyAccountViewController: UIViewController, UIImagePickerControllerDele
         //Different Photo Uploads
         if (uploadPhoto1 == true){
         let imageData1 = UIImageJPEGRepresentation(self.image1.backgroundImage(for: .normal)!, 0.6)
-        let uploadPhoto = imageRef.put(imageData1!, metadata: nil) {(metadata, error) in
+        let uploadPhoto = imageRef.putData(imageData1!, metadata: nil) {(metadata, error) in
             if error != nil {
                 print(error!.localizedDescription)
                 }
@@ -232,7 +232,7 @@ class VerifyAccountViewController: UIViewController, UIImagePickerControllerDele
          
         if (uploadPhoto2 == true){
         let imageDate2 = UIImageJPEGRepresentation(self.image2.backgroundImage(for: .normal)!, 0.6)
-            let uploadPhoto = imageRef.put(imageDate2!, metadata: nil) {(metadata, error) in
+            let uploadPhoto = imageRef.putData(imageDate2!, metadata: nil) {(metadata, error) in
                 if error != nil {
                     print(error!.localizedDescription)
                 }
@@ -246,7 +246,7 @@ class VerifyAccountViewController: UIViewController, UIImagePickerControllerDele
             
         if (uploadPhoto3 == true){
         let imageDate3 = UIImageJPEGRepresentation(self.image3.backgroundImage(for: .normal)!, 0.6)
-            let uploadPhoto = imageRef.put(imageDate3!, metadata: nil) {(metadata, error) in
+            let uploadPhoto = imageRef.putData(imageDate3!, metadata: nil) {(metadata, error) in
                 if error != nil {
                     print(error!.localizedDescription)
                 }

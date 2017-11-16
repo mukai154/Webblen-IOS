@@ -11,13 +11,16 @@ pod 'Firebase/Database'
 pod 'Firebase/Storage'
 pod 'Firebase/Messaging'
 pod 'Firebase/Core'
+pod 'Firebase/Firestore'
+
+
 
 # pod for store kit
 pod 'SwiftyStoreKit'
 
 # google pods
-pod 'GoogleMaps'
-pod 'GooglePlaces'
+pod 'GoogleMaps', '2.2'
+pod 'GooglePlaces', '2.2'
 pod 'GooglePlacesSearchController'
 pod 'GoogleSignIn'
 # Pods for WebblenEvents
@@ -33,4 +36,8 @@ pod 'FBSDKLoginKit'
 
 #KeyBoard Manager
 pod 'IQKeyboardManagerSwift'
+
+#Onboarding UI
+pod 'paper-onboarding'
+
 end

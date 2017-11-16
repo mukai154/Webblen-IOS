@@ -16,7 +16,7 @@ class FeedbackViewController: UIViewController {
     
     
     var feedBack: String?
-    var dataBaseRef = FIRDatabase.database().reference()
+    var dataBaseRef = Database.database().reference()
     
     override func viewDidLoad() {
         super.viewDidLoad()

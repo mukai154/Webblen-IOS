@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'CB0D3E2A8050F142A8091179A5A4593C'
+               BlueprintIdentifier = 'D874483BFA0AD8D5EC6A27755AFF3E43'
                BlueprintName = 'Pods-WebblenEvents'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods-WebblenEvents.framework'>

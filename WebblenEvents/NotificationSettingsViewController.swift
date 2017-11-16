@@ -119,7 +119,7 @@ class NotificationSettingsViewController: UIViewController, UIPickerViewDataSour
             else {
             presenter.modifyNotification.setTitle("Notify Within: " + notificationDistance + ", $4.99", for: .normal)
             }
-            presenter.notifyDistance = notificationDistance
+            //presenter.eventRadius = notificationDistance
             presenter.event18 = event18
             presenter.event21 = event21
         }

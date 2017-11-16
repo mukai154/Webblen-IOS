@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import FirebaseDatabase
-import FirebaseAuth
+import Firebase
 import FBSDKLoginKit
 
 
@@ -22,10 +21,13 @@ class SignUpViewController: UIViewController, FBSDKLoginButtonDelegate{
     @IBOutlet weak var confirmPassword: UITextField!
     @IBOutlet weak var registerButton: UIButton!
     
-    var databaseRef = FIRDatabase.database().reference()
+    var userDocumentRef: DocumentReference!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //FireStore Initializers
 
     
         
@@ -67,7 +69,7 @@ class SignUpViewController: UIViewController, FBSDKLoginButtonDelegate{
         
         registerButton.isEnabled = false
         
-        FIRAuth.auth()?.createUser(withEmail: email.text!, password: password.text!, completion: {(user, error) in
+        Auth.auth().createUser(withEmail: email.text!, password: password.text!, completion: {(user, error) in
             
             if(error != nil){
                 
@@ -77,31 +79,9 @@ class SignUpViewController: UIViewController, FBSDKLoginButtonDelegate{
             else{
                 self.errorMessage.text = "Registration Successful"
                 
-                FIRAuth.auth()?.signIn(withEmail: self.email.text!, password: self.password.text!, completion: {(user, error) in
+                Auth.auth().signIn(withEmail: self.email.text!, password: self.password.text!, completion: {(user, error) in
                     
                     if(error == nil){
-                        
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("AMUSEMENT").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("ART").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("COMMUNITY").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("COMPETITION").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("CULTURE").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("EDUCATION").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("ENTERTAINMENT").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("FAMILY").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("FOODDRINK").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("GAMING").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("HEALTHFITNESS").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("MUSIC").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("NETWORKING").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("OUTDOORS").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("SHOPPING").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("SPORTS").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("TECHNOLOGY").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("THEATRE").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("COLLEGELIFE").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("WINEBREW").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("PARTYDANCE").setValue(true)
                         
                         self.performSegue(withIdentifier: "SetupSegue", sender: nil)
                     }
@@ -133,45 +113,12 @@ class SignUpViewController: UIViewController, FBSDKLoginButtonDelegate{
         let accessToken = FBSDKAccessToken.current()
         guard let accessTokenString = accessToken?.tokenString else {return}
         
-        let credentials = FIRFacebookAuthProvider.credential(withAccessToken: accessTokenString)
+        let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
         
-        FIRAuth.auth()?.signIn(with: credentials, completion: {(user, error) in
+        Auth.auth().signIn(with: credentials, completion: {(user, error) in
             
             if(error == nil){
-                self.databaseRef.child("Users").child((user?.uid)!).child("Name").observeSingleEvent(of: .value, with: {(snapshot:FIRDataSnapshot) in
-                    
-                    if(!snapshot.exists())
-                    {
-                        
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("AMUSEMENT").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("ART").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("COMMUNITY").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("COMPETITION").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("CULTURE").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("EDUCATION").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("ENTERTAINMENT").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("FAMILY").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("FOODDRINK").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("GAMING").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("HEALTHFITNESS").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("MUSIC").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("NETWORKING").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("OUTDOORS").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("SHOPPING").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("SPORTS").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("TECHNOLOGY").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("THEATRE").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("COLLEGELIFE").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("WINEBREW").setValue(true)
-                        self.databaseRef.child("Users").child(user!.uid).child("interests").child("PARTYDANCE").setValue(true)
-                        
-                        self.performSegue(withIdentifier: "SetupSegue", sender: nil)
-                    }
-                    else{
-                        self.performSegue(withIdentifier: "HomeViewSegue", sender: nil)
-                    }
-                    
-                })
+
             }
             else if (result.isCancelled){
                 

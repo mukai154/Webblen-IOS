@@ -14,8 +14,8 @@ class BlockedUsersViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var blockTableView: UITableView!
     
     var currentUser: AnyObject?
-    var dataBaseRef: FIRDatabaseReference!
-    var blockQ: FIRDatabaseReference!
+    var dataBaseRef: DatabaseReference!
+    var blockQ: DatabaseReference!
     var blockUid: String?
     var blockName: String?
     var blockList = [String]()
@@ -26,9 +26,9 @@ class BlockedUsersViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dataBaseRef = FIRDatabase.database().reference()
+        dataBaseRef = Database.database().reference()
         
-        self.currentUser = FIRAuth.auth()?.currentUser
+        self.currentUser = Auth.auth().currentUser
 
         
         blockQ = dataBaseRef.child("Users").child(self.currentUser!.uid).child("Blocked Users")

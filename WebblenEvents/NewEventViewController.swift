@@ -31,7 +31,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
     @IBOutlet weak var eventInfoHeighConstraint: NSLayoutConstraint!
     
     //Firebase References
-    var dataBaseRef = FIRDatabase.database().reference()
+    var dataBaseRef = Database.database().reference()
     var currentUser: AnyObject?
 
     
@@ -112,8 +112,8 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
         
         
         //Database Handler
-        self.currentUser = FIRAuth.auth()?.currentUser
-        self.dataBaseRef.child("Users").child(self.currentUser!.uid).observeSingleEvent(of: .value, with: {(snapshot:FIRDataSnapshot) in
+        self.currentUser = Auth.auth().currentUser
+        self.dataBaseRef.child("Users").child(self.currentUser!.uid).observeSingleEvent(of: .value, with: {(snapshot:DataSnapshot) in
         
             let snapshot = snapshot.value as! [String: AnyObject]
             self.username = snapshot["Name"] as? String
@@ -211,7 +211,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
         //Check for images & Event Key & Link Storage & Prepare Segue
         let key = self.dataBaseRef.child("Event").childByAutoId().key
         eventKey = key
-        let storage = FIRStorage.storage().reference(forURL: "gs://webblen-events.appspot.com")
+        let storage = Storage.storage().reference(forURL: "gs://webblen-events.appspot.com")
         let imageRef = storage.child("Event").child(currentUser!.uid).child("\(key).jpg")
         
         ///Uppercase title & description
@@ -283,7 +283,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
             //Lowers resolution of the image
             let imageData = UIImageJPEGRepresentation(self.imageSelectButton.backgroundImage(for: .normal)!, 0.6)
                 
-            let uploadPhoto = imageRef.put(imageData!, metadata: nil) {(metadata, error) in
+            let uploadPhoto = imageRef.putData(imageData!, metadata: nil) {(metadata, error) in
                 if error != nil {
                     print(error!.localizedDescription)
                 }
@@ -451,7 +451,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
             //Lowers resolution of the image
             let imageData = UIImageJPEGRepresentation(self.imageSelectButton.backgroundImage(for: .normal)!, 0.6)
             
-            let uploadPhoto = imageRef.put(imageData!, metadata: nil) {(metadata, error) in
+            let uploadPhoto = imageRef.putData(imageData!, metadata: nil) {(metadata, error) in
                 if error != nil {
                     print(error!.localizedDescription)
                 }

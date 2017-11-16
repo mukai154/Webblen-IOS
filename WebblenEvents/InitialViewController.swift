@@ -16,12 +16,12 @@ class InitialViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in
+        Auth.auth().addStateDidChangeListener({ (auth, user) in
             if let currentUser = user {
                 print("user is signed in")
                 
                 let mainStoryBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let homeViewController: UIViewController = mainStoryBoard.instantiateViewController(withIdentifier: "TabBarControllerView")
+                let homeViewController: UIViewController = mainStoryBoard.instantiateViewController(withIdentifier: "RevealViewController")
                 
                 self.present(homeViewController, animated: true, completion: nil)
             }

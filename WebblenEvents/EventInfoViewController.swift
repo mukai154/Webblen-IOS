@@ -13,11 +13,15 @@ import MapKit
 
 class EventInfoViewController: UIViewController {
 
+    
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var eventUploadedPhoto: UIImageView!
     @IBOutlet weak var eventImage: UIImageView!
+    
+
     @IBOutlet weak var eventTitle: UILabel!
     @IBOutlet weak var eventCreator: UILabel!
+    @IBOutlet weak var eventViews: UILabel!
     @IBOutlet weak var eventDescription: UITextView!
 
   
@@ -26,18 +30,12 @@ class EventInfoViewController: UIViewController {
     @IBOutlet weak var calendarButton: UIButton!
     @IBOutlet weak var calendarIcon: UIImageView!
     
-    @IBOutlet weak var bottomLineBreak: UIView!
     @IBOutlet weak var centerLineBreak: UIView!
+    @IBOutlet weak var eventOptions: UIBarButtonItem!
     
     
-    @IBOutlet weak var editEventButton: UIButton!
-    @IBOutlet weak var deleteEventButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    @IBOutlet weak var reportButton: UIBarButtonItem!
-
-    @IBOutlet weak var imageHeightConstrain: NSLayoutConstraint!
-    
-    @IBOutlet weak var descriptionHeightConstraint: NSLayoutConstraint!
     
     var imageName = "AMUSEMENT"
     var eDate = "01/01/2018"
@@ -58,7 +56,7 @@ class EventInfoViewController: UIViewController {
     var formatter = DateFormatter()
     
     var currentUser:  AnyObject?
-    var dataBaseRef: FIRDatabaseReference!
+    var dataBaseRef: DatabaseReference!
     var madeEvent = false
 
     var lat : Double?
@@ -68,33 +66,18 @@ class EventInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let screenSize : CGRect = UIScreen.main.bounds
-        imageHeightConstrain.constant = screenSize.height * 0.35
-        descriptionHeightConstraint.constant = screenSize.height * 0.23
-
-        if (screenSize.height <= 3.5){
-            mapButton.isHidden = true
-            calendarButton.isHidden = true
-        }
+        activityIndicator.startAnimating()
+        eventUploadedPhoto.isHidden = true
         
         
-        eventUploadedPhoto.layer.cornerRadius = 5
-        eventUploadedPhoto.layer.masksToBounds = true
         
         eventDescription.textContainerInset = UIEdgeInsetsMake(10, 0, 0, 0)
         eventDescription.textColor = UIColor.lightGray
-        self.editEventButton.layer.cornerRadius = CGFloat(5.0)
-        self.deleteEventButton.layer.cornerRadius = CGFloat(5.0)
+
 
         
-        self.editEventButton.isHidden = true
-        self.editEventButton.isEnabled = false
-        self.deleteEventButton.isHidden = true
-        self.deleteEventButton.isEnabled = false
-
-        
-        dataBaseRef = FIRDatabase.database().reference()
-        self.currentUser = FIRAuth.auth()?.currentUser
+        dataBaseRef = Database.database().reference()
+        self.currentUser = Auth.auth().currentUser
         self.editKey = self.eventKey
         
         self.dataBaseRef.child("Event").child(eventKey).observeSingleEvent(of: .value, with: {(snapshot) in
@@ -115,30 +98,20 @@ class EventInfoViewController: UIViewController {
                 
                 if (self.ePhoto != "null"){
                 let url = NSURL(string: self.ePhoto)
-                self.eventUploadedPhoto.sd_setImage(with: url! as URL)
+                //self.eventUploadedPhoto.sd_setImage(with: url! as URL)
+                self.activityIndicator.stopAnimating()
+                self.eventUploadedPhoto.isHidden = false
                 }
                 else {
                 self.eventUploadedPhoto.isHidden = true
                 self.imageViewHeightConstraint.constant = 0
+                self.activityIndicator.stopAnimating()
                 }
                 self.eUid = eDict["uid"] as! String
                 let eUsername = eDict["username"] as! String
                 if (self.eUid == self.currentUser?.uid || self.currentUser?.uid == "KFDuKYEoHbUmc1B0nsfbssON6zY2" ){
-                    if(self.eCat != "WARNING"){
-                    self.editEventButton.isHidden = false
-                    self.editEventButton.isEnabled = true
-
-                    }
-                    self.calendarButton.isEnabled = false
-                    self.calendarIcon.isHidden = true
-                    self.mapButton.isEnabled = false
-                    self.mapIcon.isHidden = true
-                    self.deleteEventButton.isHidden = false
-                    self.deleteEventButton.isEnabled = true
                     self.madeEvent = true
-                    self.bottomLineBreak.isHidden = true
-                    self.centerLineBreak.isHidden = true
-                }
+                    }
                 if (self.ePayment == "true"){
                     self.eventPaid = true
                 }
@@ -153,16 +126,6 @@ class EventInfoViewController: UIViewController {
         
         eventUploadedPhoto.addGestureRecognizer(imageTap)
         
-        // Do any additional setup after loading the view.
-        var sysInfo = utsname()
-        uname(&sysInfo)
-        let machine = Mirror(reflecting: sysInfo.machine)
-        let identifier = machine.children.reduce("") { identifier, element in
-            guard let value = element.value as? Int8, value != 0 else { return identifier }
-            return identifier + String(UnicodeScalar(UInt8(value)))
-        }
-        
-        self.platformType(platform: identifier as NSString)
         
     }
 
@@ -171,28 +134,32 @@ class EventInfoViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func didPressReportButton(_ sender: Any) {
-        if (madeEvent == true){
+    @IBAction func didPressEventOptions(_ sender: Any) {
+        if (madeEvent == true || self.eUid == "KFDuKYEoHbUmc1B0nsfbssON6zY2" || self.eUid == "5EeE4RHUxWTa0E8BmwK2b0V1kKn2" || self.eUid == "3kMQYwkjlUOmZU651KbrblkMYWp2"){
             
-            let alert = UIAlertController(title: "Event Options", message: "You Made This Event.", preferredStyle: .alert)
+            let alert = UIAlertController(title: nil, message: nil , preferredStyle: .actionSheet)
+            let editEvent = UIAlertAction(title: "Edit Event", style: .default, handler: { action in
+                self.performSegue(withIdentifier: "editEventSegue", sender: self.editKey)
+            })
+            let deleteEvent = UIAlertAction(title: "Delete Event", style: .destructive, handler: { action in
+                self.dataBaseRef.child("Event").child(self.eventKey).removeValue()
+                self.performSegue(withIdentifier: "homeSegue2", sender: nil)
+            })
+            let dismissAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             
-            let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
-            
+            alert.addAction(editEvent)
+            alert.addAction(deleteEvent)
             alert.addAction(dismissAction)
             self.present(alert, animated: true, completion: nil)
             
         }
         
-        if (madeEvent == false && self.eUid != "KFDuKYEoHbUmc1B0nsfbssON6zY2"){
+        else if (madeEvent == false && self.eUid != "KFDuKYEoHbUmc1B0nsfbssON6zY2" || self.eUid != "5EeE4RHUxWTa0E8BmwK2b0V1kKn2" || self.eUid != "3kMQYwkjlUOmZU651KbrblkMYWp2"){
             
-            let alert = UIAlertController(title: "Event Options", message: "Report the Event for Offensive Content or Block Whomever Created It?", preferredStyle: .alert)
-            
-            let dismissAction = UIAlertAction(title: "Back", style: .cancel, handler: nil)
-            
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            let dismissAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             let thankDismiss = UIAlertAction(title: "Dismiss", style: .default, handler: { action in
-                
                 self.performSegue(withIdentifier: "homeSegue2", sender: nil)
-                
             })
             
             let thankAlert = UIAlertController(title: "Report Submitted", message: "Thank You for Submitting Your Report. We'll Address This Issue As Soon As Possible. Block the User to No Longer View Events By Them", preferredStyle: .alert)
@@ -260,77 +227,6 @@ class EventInfoViewController: UIViewController {
             
         }
         
-        if(self.eUid == "KFDuKYEoHbUmc1B0nsfbssON6zY2" || self.eUid == "5EeE4RHUxWTa0E8BmwK2b0V1kKn2" || self.eUid == "3kMQYwkjlUOmZU651KbrblkMYWp2"){
-            
-            let alert = UIAlertController(title: "Event Options", message: "Report the Event for Offensive Content or Block Whomever Created It?", preferredStyle: .alert)
-            
-            let dismissAction = UIAlertAction(title: "Back", style: .cancel, handler: nil)
-            
-            let thankDismiss = UIAlertAction(title: "Dismiss", style: .default, handler: { action in
-                
-                self.performSegue(withIdentifier: "homeSegue2", sender: nil)
-                
-            })
-            
-            let thankAlert = UIAlertController(title: "Report Submitted", message: "Thank You for Submitting Your Report. We Apologize for the Content of This Event. We'll Fix Any Issues With It As Soon As Possible.", preferredStyle: .alert)
-            
-            thankAlert.addAction(thankDismiss)
-            
-            
-            let blockAction = UIAlertAction(title: "Block User", style: .default, handler: { action in
-                
-                
-                let blockAlert = UIAlertController(title: "Sorry, But You Cannot Block Administrative Accounts", message: nil, preferredStyle: .alert)
-                
-                let blockDismiss = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
-                
-                blockAlert.addAction(blockDismiss)
-                self.present(blockAlert, animated: true, completion: nil)
-                
-            })
-            
-            let reportAction = UIAlertAction(title: "Report Event", style: .destructive, handler: { action in
-                
-                let reportAlert = UIAlertController(title: "Report Event", message: "What's Wrong With This Event?", preferredStyle: .alert)
-                
-                let rAction1 = UIAlertAction(title: "Offensive/Inappropriate Language", style: .default, handler: { action in
-                    
-                    self.dataBaseRef.child("Reported Events").child(self.eventKey).setValue("Offensive/Inappropriate Language")
-                    
-                    self.present(thankAlert, animated: true, completion: nil)
-                    
-                })
-                
-                let rAction2 = UIAlertAction(title: "Unsafe Event", style: .default, handler: { action in
-                    
-                    self.dataBaseRef.child("Reported Events").child(self.eventKey).setValue("Unsafe Event")
-                    
-                    self.present(thankAlert, animated: true, completion: nil)
-                    
-                })
-                
-                let rAction3 = UIAlertAction(title: "Other", style: .default, handler: { action in
-                    
-                    self.dataBaseRef.child("Reported Events").child(self.eventKey).setValue("Other")
-                    
-                    self.present(thankAlert, animated: true, completion: nil)
-                    
-                })
-                
-                reportAlert.addAction(rAction1)
-                reportAlert.addAction(rAction2)
-                reportAlert.addAction(rAction3)
-                reportAlert.addAction(dismissAction)
-                self.present(reportAlert, animated: true, completion: nil)
-                
-            })
-            
-            alert.addAction(blockAction)
-            alert.addAction(reportAction)
-            alert.addAction(dismissAction)
-            self.present(alert, animated: true, completion: nil)
-            
-        }
     }
 
     
@@ -340,44 +236,26 @@ class EventInfoViewController: UIViewController {
     }
 
 
-    @IBAction func didPressEdit(_ sender: Any) {
-        performSegue(withIdentifier: "editEventSegue", sender: editKey)
-    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "editEventSegue"){
             let editEvent = segue.destination as! NewEventViewController
-            editEvent.editKey = sender as! String
+            editEvent.eventKey = sender as! String
             editEvent.editingEvent = true
             editEvent.eventPaid = eventPaid
         }
     }
 
-
-    @IBAction func didPressDelete(_ sender: Any) {
-        self.dataBaseRef.child("Event").child(eventKey).removeValue()
-        performSegue(withIdentifier: "homeSegue2", sender: nil)
-    }
-    
-
-    
-    
     func didTapEventPhoto(sender: UITapGestureRecognizer){
-        
         let imageView = sender.view as! UIImageView
         let newImageView = UIImageView(image: imageView.image)
-        
         newImageView.frame = self.view.frame
-        
         newImageView.backgroundColor = UIColor.black
         newImageView.contentMode = .scaleAspectFit
         newImageView.isUserInteractionEnabled = true
-        
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.dismissFullScreenImage))
-        
         newImageView.addGestureRecognizer(tap)
         self.view.addSubview(newImageView)
-        
     }
     
     func dismissFullScreenImage(sender: UITapGestureRecognizer){
@@ -435,132 +313,17 @@ class EventInfoViewController: UIViewController {
     func convertAddressToLatAndLong(){
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(self.eAddress) {
-            
             placemarks, error in
             let placemark = placemarks?.first
             self.lat = placemark?.location?.coordinate.latitude
             self.lon = placemark?.location?.coordinate.longitude
-            
             let coordinate = CLLocationCoordinate2DMake(self.lat!, self.lon!)
             let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary:nil))
             mapItem.name = self.evTitle
             mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
-            
         }
-        
-
-        
     }
     
 
-    func platformType(platform : NSString){
-        if platform.isEqual(to: "iPhone1,1")  {
-        }
-
-        else if platform.isEqual(to: "iPhone5,4"){
-        }
-        else if platform.isEqual(to: "iPhone6,1"){
-        }
-        else if platform.isEqual(to: "iPhone6,2"){
-        }
-        else if platform.isEqual(to: "iPhone7,2"){
-        }
-        else if platform.isEqual(to: "iPhone7,1"){
-        }
-        else if platform.isEqual(to: "iPhone8,1"){
-        }
-        else if platform.isEqual(to: "iPhone8,2"){
-        }
-        else if platform.isEqual(to: "iPhone8,4"){
-        }
-        else if platform.isEqual(to: "iPhone9,1"){
-        }
-        else if platform.isEqual(to: "iPhone9,2"){
-        }
-        else if platform.isEqual(to: "iPhone9,3"){
-        }
-        else if platform.isEqual(to: "iPhone9,4"){
-        }
-
-        else if platform.isEqual(to: "iPad2,7"){
-        }
-        else if platform.isEqual(to: "iPad3,1"){
-            self.mapButton.isHidden = true
-            self.calendarButton.isHidden = true
-        }
-        else if platform.isEqual(to: "iPad3,2"){
-            self.mapButton.isHidden = true
-            self.calendarButton.isHidden = true
-        }
-        else if platform.isEqual(to: "iPad3,3"){
-            self.mapButton.isHidden = true
-            self.calendarButton.isHidden = true
-        }
-        else if platform.isEqual(to: "iPad3,4"){
-            self.mapButton.isHidden = true
-            self.calendarButton.isHidden = true
-        }
-        else if platform.isEqual(to: "iPad3,5"){
-            self.mapButton.isHidden = true
-            self.calendarButton.isHidden = true
-        }
-        else if platform.isEqual(to: "iPad3,6"){
-            self.mapButton.isHidden = true
-            self.calendarButton.isHidden = true
-        }
-        else if platform.isEqual(to: "iPad4,1"){
-            self.mapButton.isHidden = true
-            self.calendarButton.isHidden = true
-        }
-        else if platform.isEqual(to: "iPad4,2"){
-            self.mapButton.isHidden = true
-            self.calendarButton.isHidden = true
-        }
-        else if platform.isEqual(to: "iPad4,3"){
-            self.mapButton.isHidden = true
-            self.calendarButton.isHidden = true
-        }
-        else if platform.isEqual(to: "iPad4,4"){
-            self.mapButton.isHidden = true
-            self.calendarButton.isHidden = true
-        }
-        else if platform.isEqual(to: "iPad4,5"){
-            self.mapButton.isHidden = true
-            self.calendarButton.isHidden = true
-        }
-        else if platform.isEqual(to: "iPad4,6"){
-            self.mapButton.isHidden = true
-            self.calendarButton.isHidden = true
-        }
-        else if platform.isEqual(to: "iPad4,7"){
-            self.mapButton.isHidden = true
-            self.calendarButton.isHidden = true
-        }
-        else if platform.isEqual(to: "iPad4,8"){
-            self.mapButton.isHidden = true
-            self.calendarButton.isHidden = true
-        }
-        else if platform.isEqual(to: "iPad4,9"){
-            self.mapButton.isHidden = true
-            self.calendarButton.isHidden = true
-        }
-        else if platform.isEqual(to: "iPad5,3"){
-            self.mapButton.isHidden = true
-            self.calendarButton.isHidden = true
-        }
-        else if platform.isEqual(to: "iPad5,4"){
-            self.mapButton.isHidden = true
-            self.calendarButton.isHidden = true
-        }
-
-        else if platform.isEqual(to: "i386"){
-            self.mapButton.isHidden = true
-            self.calendarButton.isHidden = true
-        }
-        else if platform.isEqual(to: "x86_64"){
-            self.mapButton.isHidden = true
-            self.calendarButton.isHidden = true
-        }
-    }
-
+  
 }

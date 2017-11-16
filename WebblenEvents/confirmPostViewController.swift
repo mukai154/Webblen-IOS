@@ -73,7 +73,7 @@ class confirmPostViewController: UIViewController {
     var lon = 0.0
     var eventCost = 0
     
-    var dataBaseRef: FIRDatabaseReference!
+    var dataBaseRef: DatabaseReference!
     var currentUser: AnyObject?
     
     var Money : Int!
@@ -95,8 +95,8 @@ class confirmPostViewController: UIViewController {
         view.addGestureRecognizer(tap)
         
         //Database Ref
-        dataBaseRef = FIRDatabase.database().reference()
-        self.currentUser = FIRAuth.auth()?.currentUser
+        dataBaseRef = Database.database().reference()
+        self.currentUser = Auth.auth().currentUser
         
         //Gather and display new event info
         self.dataBaseRef.child("Event").child(eventKey).observeSingleEvent(of: .value, with: {(snapshot) in
@@ -160,68 +160,68 @@ class confirmPostViewController: UIViewController {
     func getInfo(purchase : RegisteredPurchase) {
         
         NetworkActivityIndicatorManager.NetworkOperationStarted()
-        SwiftyStoreKit.retrieveProductsInfo([bundleID + "." + purchase.rawValue], completion: {
-            result in
-            NetworkActivityIndicatorManager.networkOperationFinished()
-            
-            self.showAlert(alert: self.alertForProductRetrievalInfo(result: result))
-        })
+        SwiftyStoreKit.retrieveProductsInfo([bundleID]) { result in
+            if let product = result.retrievedProducts.first {
+                let priceString = product.localizedPrice!
+                print("Product: \(product.localizedDescription), price: \(priceString)")
+            }
+            else if let invalidProductId = result.invalidProductIDs.first {
+                return self.showAlert(withTitle: "Could not retrieve product info", message: "Invalid product identifier: \(invalidProductId)")
+            }
+            else {
+                print("Error: \(result.error)")
+            }
+        }
         
     }
     
     func purchase(purchase : RegisteredPurchase) {
         
         NetworkActivityIndicatorManager.NetworkOperationStarted()
-        SwiftyStoreKit.purchaseProduct(bundleID + "." + purchase.rawValue, completion: {
-            result in
+        SwiftyStoreKit.purchaseProduct(bundleID, quantity: 1, atomically: true) { result in
             NetworkActivityIndicatorManager.networkOperationFinished()
-            
-            if case .success(let product) = result {
-                
-                if product.productId == self.bundleID + "." + "notifyFive" {
-                    
-                    self.dataBaseRef.child("Event").child(self.eventKey).child("paid").setValue("true")
-                    
-                    
-                    print("success")
-                    
-                    self.performSegue(withIdentifier: "eventPurchasedSegue", sender: nil)
-                    
+            switch result {
+            case .success(let purchase):
+                print("Purchase Success: \(purchase.productId)")
+            case .error(let error):
+                switch error.code {
+                case .unknown: print("Unknown error. Please contact support")
+                case .clientInvalid: print("Not allowed to make the payment")
+                case .paymentCancelled: break
+                case .paymentInvalid: print("The purchase identifier was invalid")
+                case .paymentNotAllowed: print("The device is not allowed to make the payment")
+                case .storeProductNotAvailable: print("The product is not available in the current storefront")
+                case .cloudServicePermissionDenied: print("Access to cloud service information is not allowed")
+                case .cloudServiceNetworkConnectionFailed: print("Could not connect to the network")
+                case .cloudServiceRevoked: print("User has revoked permission to use this cloud service")
                 }
-                
-                if product.needsFinishTransaction {
-                    SwiftyStoreKit.finishTransaction(product.transaction)
-                }
-                self.showAlert(alert: self.alertForPurchaseResult(result: result))
-                
-                
             }
-        })
+        }
         
     }
     
     func restorePurchases() {
         
         NetworkActivityIndicatorManager.NetworkOperationStarted()
-        SwiftyStoreKit.restorePurchases(atomically: true,  completion: {
-            result in
+        SwiftyStoreKit.restorePurchases(atomically: true) { results in
+            
             NetworkActivityIndicatorManager.networkOperationFinished()
-            
-            for product in result.restoredProducts {
-                if product.needsFinishTransaction {
-                    SwiftyStoreKit.finishTransaction(product.transaction)
-                }
+            if results.restoreFailedPurchases.count > 0 {
+                print("Restore Failed: \(results.restoreFailedPurchases)")
             }
-            self.showAlert(alert: self.alertForRestorePurchases(result: result))
-            
-            
-        })
+            else if results.restoredPurchases.count > 0 {
+                print("Restore Success: \(results.restoredPurchases)")
+            }
+            else {
+                print("Nothing to Restore")
+            }
+        }
         
     }
     
     func verifyReceipt() {
         NetworkActivityIndicatorManager.NetworkOperationStarted()
-        SwiftyStoreKit.verifyReceipt(password: sharedSecret, completion: {
+        SwiftyStoreKit.verifyReceipt(using: sharedSecret as! ReceiptValidator, completion: {
             result in
             NetworkActivityIndicatorManager.networkOperationFinished()
             
@@ -241,38 +241,37 @@ class confirmPostViewController: UIViewController {
     
     func verifyPurchase(product : RegisteredPurchase) {
         NetworkActivityIndicatorManager.NetworkOperationStarted()
-        SwiftyStoreKit.verifyReceipt(password: sharedSecret, completion: {
-            result in
-            NetworkActivityIndicatorManager.networkOperationFinished()
-
-                    
-                    switch result{
-                    case .success(let receipt):
-                        
-                        let productID = self.bundleID + "." + product.rawValue
-        
-                        let purchaseResult = SwiftyStoreKit.verifyPurchase(productId: productID, inReceipt: receipt)
-                        self.showAlert(alert: self.alertForVerifyPurchase(result: purchaseResult))
-                            
-                        
-                    case .error(let error):
-                        self.showAlert(alert: self.alertForVerifyReceipt(result: result))
-                        if case .noReceiptData = error {
-                            self.refreshReceipt()
-                            
-                        }
-                        
-                    }
-            
-        })
+        let appleValidator = AppleReceiptValidator(service: .production, sharedSecret: sharedSecret)
+        SwiftyStoreKit.verifyReceipt(using: appleValidator) { result in
+            switch result {
+            case .success(let receipt):
+                // Verify the purchase of Consumable or NonConsumable
+                let purchaseResult = SwiftyStoreKit.verifyPurchase(
+                    productId: self.bundleID,
+                    inReceipt: receipt)
+                
+                switch purchaseResult {
+                case .purchased(let receiptItem):
+                    print("Product is purchased: \(receiptItem)")
+                case .notPurchased:
+                    print("The user has never purchased this product")
+                }
+            case .error(let error):
+                print("Receipt verification failed: \(error)")
+            }
+        }
     }
     
     func refreshReceipt() {
-        SwiftyStoreKit.refreshReceipt( completion: {
-            result in
-            
-            self.showAlert(alert: self.alertForRefreshRecepit(result: result))
-        })
+        SwiftyStoreKit.fetchReceipt(forceRefresh: true) { result in
+            switch result {
+            case .success(let receiptData):
+                let encryptedReceipt = receiptData.base64EncodedString(options: [])
+                print("Fetch receipt success:\n\(encryptedReceipt)")
+            case .error(let error):
+                print("Fetch receipt failed: \(error)")
+            }
+        }
     }
     
 //Dismiss
@@ -318,46 +317,8 @@ extension confirmPostViewController {
         }
         
     }
-    func alertForPurchaseResult(result : PurchaseResult) -> UIAlertController {
-        switch result {
-        case .success(let product):
-            print("Purchase Succesful: \(product.productId)")
-            
-            return alertWithTitle(title: "Thank You", message: "Purchase completed")
-        case .error(let error):
-            print("Purchase Failed: \(error)")
-            switch error {
-            case .failed(let error):
-                if (error as NSError).domain == SKErrorDomain {
-                    return alertWithTitle(title: "Purchase Failed", message: "Check your internet connection or try again later.")
-                }
-                else {
-                    return alertWithTitle(title: "Purchase Failed", message: "Unknown Error. Please Contact Support")
-                }
-            case.invalidProductId(let productID):
-                return alertWithTitle(title: "Purchase Failed", message: "\(productID) is not a valid product identifier")
-            case .noProductIdentifier:
-                return alertWithTitle(title: "Purchase Failed", message: "Product not found")
-            case .paymentNotAllowed:
-                return alertWithTitle(title: "Purchase Failed", message: "You are not allowed to make payments")
-                
-            }
-        }
-    }
-    func alertForRestorePurchases(result : RestoreResults) -> UIAlertController {
-        if result.restoreFailedProducts.count > 0 {
-            print("Restore Failed: \(result.restoreFailedProducts)")
-            return alertWithTitle(title: "Restore Failed", message: "Unknown Error. Please Contact Support")
-        }
-        else if result.restoredProducts.count > 0 {
-            return alertWithTitle(title: "Purchases Restored", message: "All purchases have been restored.")
-            
-        }
-        else {
-            return alertWithTitle(title: "Nothing To Restore", message: "No previous purchases were made.")
-        }
-        
-    }
+   
+
     func alertForVerifyReceipt(result: VerifyReceiptResult) -> UIAlertController {
         
         switch result {
@@ -395,15 +356,7 @@ extension confirmPostViewController {
         }
         
     }
-    func alertForRefreshRecepit(result : RefreshReceiptResult) -> UIAlertController {
-        
-        switch result {
-        case .success(let receiptData):
-            return alertWithTitle(title: "Receipt Refreshed", message: "Receipt refreshed successfully")
-        case .error(let error):
-            return alertWithTitle(title: "Receipt refresh failed", message: "Receipt refresh failed")
-        }
-    }
+
     
     func monitorRegionAtLocation(center: CLLocationCoordinate2D, identifier: String ) {
         // Make sure the app is authorized.

@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>BoringSSL.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>13</integer>
+		</dict>
 		<key>FBSDKCoreKit.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -47,12 +52,17 @@
 		<key>IQKeyboardManagerSwift.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>13</integer>
+			<integer>19</integer>
 		</dict>
 		<key>Pods-WebblenEvents.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>9</integer>
+		</dict>
+		<key>Protobuf.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>23</integer>
 		</dict>
 		<key>SDWebImage 2.xcscheme</key>
 		<dict>
@@ -68,6 +78,46 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>11</integer>
+		</dict>
+		<key>gRPC-Core.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>15</integer>
+		</dict>
+		<key>gRPC-ProtoRPC.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>17</integer>
+		</dict>
+		<key>gRPC-RxLibrary.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>18</integer>
+		</dict>
+		<key>gRPC-gRPCCertificates.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>16</integer>
+		</dict>
+		<key>gRPC.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>14</integer>
+		</dict>
+		<key>leveldb-library.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>20</integer>
+		</dict>
+		<key>nanopb.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>21</integer>
+		</dict>
+		<key>paper-onboarding.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>22</integer>
 		</dict>
 	</dict>
 </dict>
