@@ -54,6 +54,11 @@
 			<key>orderHint</key>
 			<integer>19</integer>
 		</dict>
+		<key>NVActivityIndicatorView.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>22</integer>
+		</dict>
 		<key>Pods-WebblenEvents.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -62,7 +67,17 @@
 		<key>Protobuf.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>23</integer>
+			<integer>24</integer>
+		</dict>
+		<key>RSLoadingView-RSLoadingView.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>25</integer>
+		</dict>
+		<key>RSLoadingView.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>24</integer>
 		</dict>
 		<key>SDWebImage 2.xcscheme</key>
 		<dict>
@@ -117,7 +132,7 @@
 		<key>paper-onboarding.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>22</integer>
+			<integer>23</integer>
 		</dict>
 	</dict>
 </dict>

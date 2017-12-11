@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 import EventKit
 import MapKit
+import NVActivityIndicatorView
+import SDWebImage
 
 class EventInfoViewController: UIViewController {
 
@@ -18,12 +20,14 @@ class EventInfoViewController: UIViewController {
     @IBOutlet weak var eventUploadedPhoto: UIImageView!
     @IBOutlet weak var eventImage: UIImageView!
     
-
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     @IBOutlet weak var eventTitle: UILabel!
     @IBOutlet weak var eventCreator: UILabel!
     @IBOutlet weak var eventViews: UILabel!
     @IBOutlet weak var eventDescription: UITextView!
-
+    @IBOutlet weak var contentView: UIView!
+    
   
     @IBOutlet weak var mapIcon: UIImageView!
     @IBOutlet weak var mapButton: UIButton!
@@ -33,9 +37,12 @@ class EventInfoViewController: UIViewController {
     @IBOutlet weak var centerLineBreak: UIView!
     @IBOutlet weak var eventOptions: UIBarButtonItem!
     
+    @IBOutlet weak var eventAddress: UILabel!
+    @IBOutlet weak var eventDate: UILabel!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var imageBottomShadow: UIViewX!
     
     var imageName = "AMUSEMENT"
     var eDate = "01/01/2018"
@@ -51,28 +58,44 @@ class EventInfoViewController: UIViewController {
     var eUid = "String"
     var ePayment = "false"
     var eventPaid = false
-    
+    var eventCategories : [String] = []
     var currentDate = Date()
     var formatter = DateFormatter()
+    var eventAuthor : String?
     
     var currentUser:  AnyObject?
+    var username: String?
     var dataBaseRef: DatabaseReference!
+    var dataBase = Firestore.firestore()
     var madeEvent = false
 
     var lat : Double?
     var lon : Double?
     
+    var loadingView = NVActivityIndicatorView(frame: CGRect(x: (100), y: (100), width: 125, height: 125), type: .orbit, color: UIColor(red: 251/255, green: 140/255, blue: 0/255, alpha: 0.9), padding: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        activityIndicator.startAnimating()
+        scrollView.alpha = 0
         eventUploadedPhoto.isHidden = true
+        
+        //Activity indicator starts
+        let xAxis = self.view.center.x
+        let yAxis = self.view.center.y
+        
+        let frame = CGRect(x: (xAxis-60), y: (yAxis-45), width: 125, height: 125)
+        loadingView = NVActivityIndicatorView(frame: frame, type: .ballRotateChase, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1.0), padding: 0)
+        self.view.addSubview(loadingView)
+        loadingView.startAnimating()
         
         
         
         eventDescription.textContainerInset = UIEdgeInsetsMake(10, 0, 0, 0)
         eventDescription.textColor = UIColor.lightGray
+        let initialDescriptionHeight = eventDescription.contentSize.height
+        let initialContentHeight = contentView.frame.size.height
+
 
 
         
@@ -80,45 +103,75 @@ class EventInfoViewController: UIViewController {
         self.currentUser = Auth.auth().currentUser
         self.editKey = self.eventKey
         
-        self.dataBaseRef.child("Event").child(eventKey).observeSingleEvent(of: .value, with: {(snapshot) in
             
-            if let eDict = snapshot.value as? [String: AnyObject]{
-                self.eventImage.image = UIImage(named: (eDict["category"] as? String)!)
-                self.eventTitle.text = eDict["title"] as? String
-                self.eventCreator.text = eDict["username"] as? String
-                self.eventDescription.text = eDict["evDescription"] as! String
-                self.evDescription = eDict["evDescription"] as! String
-                self.evTitle = eDict["title"] as! String
-                self.eDate = eDict["date"] as! String
-                self.eTime = eDict["time"] as! String
-                self.eCat = eDict["category"] as! String
-                self.eAddress = eDict["address"] as! String
-                self.ePhoto = eDict["pathToImage"] as! String
-                self.ePayment = eDict["paid"] as! String
-                
-                if (self.ePhoto != "null"){
-                let url = NSURL(string: self.ePhoto)
-                //self.eventUploadedPhoto.sd_setImage(with: url! as URL)
-                self.activityIndicator.stopAnimating()
-                self.eventUploadedPhoto.isHidden = false
+            let eventRef = self.dataBase.collection("events").document(self.eventKey)
+            eventRef.getDocument(completion: {(event, error) in
+                if let event = event {
+                    self.eventCategories = event.data()["categories"] as! [String]
+                    self.eventImage.image = UIImage(named: self.eventCategories.first!)
+                    self.eventTitle.text = event.data()["title"] as! String
+                    self.evTitle = event.data()["title"] as! String
+                    self.eventDescription.text = event.data()["description"] as! String
+
+                    self.eventAuthor = event.data()["author"] as! String
+                    let imageURL = event.data()["pathToImage"] as! String
+                    print(imageURL)
+                    if imageURL != "" {
+                        let url = NSURL(string: imageURL)
+                        self.eventUploadedPhoto.sd_setImage(with: url! as URL)
+                        self.eventUploadedPhoto.isHidden = false
+                        self.eventDescription.translatesAutoresizingMaskIntoConstraints = true
+                        self.eventDescription.sizeToFit()
+                        let changedHeight = initialDescriptionHeight - (self.eventDescription.contentSize.height)
+                        let newContentHeight = self.contentView.frame.size.height - changedHeight
+                        self.scrollView.contentSize.height -= newContentHeight
+
+                    }
+                    else {
+                        self.imageViewHeightConstraint.constant = 0
+                        self.imageBottomShadow.isHidden = true
+                        self.scrollView.isScrollEnabled = false
+                    }
+                    self.eventCreator.text = "@" + self.eventAuthor!
+                    self.eventAddress.text = event.data()["address"] as! String
+                    let eDate = event.data()["date"] as! String
+                    let eTime = event.data()["time"] as! String
+                    self.eventDate.text = eDate + " | " + eTime
+                    let views = event.data()["views"] as! Int
+                    let newViewCount = views + 1
+                    self.eventViews.text = String(views) + " Views"
+                    self.scrollView.isHidden = false
+                    eventRef.updateData([
+                        "views": newViewCount
+                    ]) { err in
+                        if let err = err {
+                            print("Error updating document: \(err)")
+                        } else {
+                            print("Document successfully updated")
+                            let checkUsernameRef = self.dataBase.collection("users").document((self.currentUser?.uid)!)
+                            checkUsernameRef.getDocument(completion: {(userDoc, error) in
+                                if let userDoc = userDoc {
+                                    self.username = userDoc.data()["username"] as! String
+                                    if (self.username == self.eventAuthor) || (self.username == "Webblen Administrator") {
+                                      self.madeEvent == true
+                                    }
+                                }
+                                else {
+                                   print("Did not create event")
+                                }
+                            })
+                        }
+                    }
+                    UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
+                        self.scrollView.alpha = 1.0 // Here you will get the animation you want
+                    }, completion: nil)
+                    self.loadingView.stopAnimating()
                 }
                 else {
-                self.eventUploadedPhoto.isHidden = true
-                self.imageViewHeightConstraint.constant = 0
-                self.activityIndicator.stopAnimating()
+                    print("doc does not exist")
                 }
-                self.eUid = eDict["uid"] as! String
-                let eUsername = eDict["username"] as! String
-                if (self.eUid == self.currentUser?.uid || self.currentUser?.uid == "KFDuKYEoHbUmc1B0nsfbssON6zY2" ){
-                    self.madeEvent = true
-                    }
-                if (self.ePayment == "true"){
-                    self.eventPaid = true
-                }
-                
-            }
+            })
         
-        })
         
         let imageTap = UITapGestureRecognizer(target: self, action: #selector(didTapEventPhoto))
         
@@ -135,15 +188,36 @@ class EventInfoViewController: UIViewController {
     }
 
     @IBAction func didPressEventOptions(_ sender: Any) {
-        if (madeEvent == true || self.eUid == "KFDuKYEoHbUmc1B0nsfbssON6zY2" || self.eUid == "5EeE4RHUxWTa0E8BmwK2b0V1kKn2" || self.eUid == "3kMQYwkjlUOmZU651KbrblkMYWp2"){
+        if (madeEvent == true || (self.username == eventAuthor) || (self.username == "Webblen Administrator")){
             
             let alert = UIAlertController(title: nil, message: nil , preferredStyle: .actionSheet)
             let editEvent = UIAlertAction(title: "Edit Event", style: .default, handler: { action in
-                self.performSegue(withIdentifier: "editEventSegue", sender: self.editKey)
+                self.performSegue(withIdentifier: "editEventSegue", sender: self.eventKey)
             })
             let deleteEvent = UIAlertAction(title: "Delete Event", style: .destructive, handler: { action in
-                self.dataBaseRef.child("Event").child(self.eventKey).removeValue()
-                self.performSegue(withIdentifier: "homeSegue2", sender: nil)
+                self.dataBase.collection("events").document(self.eventKey).delete()
+                //Send Data Back
+                if let presenter = self.presentingViewController as? GeotificationsViewController{
+                    presenter.menuOpen = true
+                    presenter.menuView.isHidden = false
+                    UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
+                        presenter.googleMapsView.alpha = 0
+                        presenter.googleMapsView.clear()
+                    }, completion: { _ in
+                        presenter.googleMapsView.isUserInteractionEnabled = false
+                        
+                    })
+                    presenter.todayArray.removeAll()
+                    presenter.tomorrowArray.removeAll()
+                    presenter.thisWeekArray.removeAll()
+                    presenter.thisMonthArray.removeAll()
+                    presenter.loadEventData()
+                }
+                else if let presenter = self.presentingViewController as? MyEventsViewController{
+                    presenter.loadingView.startAnimating()
+                    presenter.configureDatabase()
+                }
+                self.dismiss(animated: true, completion: nil)
             })
             let dismissAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             
@@ -154,12 +228,33 @@ class EventInfoViewController: UIViewController {
             
         }
         
-        else if (madeEvent == false && self.eUid != "KFDuKYEoHbUmc1B0nsfbssON6zY2" || self.eUid != "5EeE4RHUxWTa0E8BmwK2b0V1kKn2" || self.eUid != "3kMQYwkjlUOmZU651KbrblkMYWp2"){
+        else if (madeEvent == false && (self.username == self.eventAuthor) || (self.username == "Webblen Administrator")){
             
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             let dismissAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             let thankDismiss = UIAlertAction(title: "Dismiss", style: .default, handler: { action in
-                self.performSegue(withIdentifier: "homeSegue2", sender: nil)
+                //Send Data Back
+                if let presenter = self.presentingViewController as? GeotificationsViewController{
+                    presenter.menuOpen = true
+                    presenter.menuView.isHidden = false
+                    UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
+                        presenter.googleMapsView.alpha = 0
+                        presenter.googleMapsView.clear()
+                    }, completion: { _ in
+                        presenter.googleMapsView.isUserInteractionEnabled = false
+                        
+                    })
+                    presenter.todayArray.removeAll()
+                    presenter.tomorrowArray.removeAll()
+                    presenter.thisWeekArray.removeAll()
+                    presenter.thisMonthArray.removeAll()
+                    presenter.loadEventData()
+                }
+                else if let presenter = self.presentingViewController as? MyEventsViewController{
+                    presenter.loadingView.startAnimating()
+                    presenter.configureDatabase()
+                }
+                self.dismiss(animated: true, completion: nil)
             })
             
             let thankAlert = UIAlertController(title: "Report Submitted", message: "Thank You for Submitting Your Report. We'll Address This Issue As Soon As Possible. Block the User to No Longer View Events By Them", preferredStyle: .alert)
@@ -168,14 +263,52 @@ class EventInfoViewController: UIViewController {
             
             
             let blockAction = UIAlertAction(title: "Block User", style: .default, handler: { action in
-                
-                self.dataBaseRef.child("Users").child((self.currentUser?.uid)!).child("Blocked Users").child(self.eUid).setValue(true)
+                let userDocRef = self.dataBase.collection("users").document((self.currentUser?.uid)!)
+                userDocRef.getDocument(completion: {(userDoc, error) in
+                    if let userDoc = userDoc {
+                        var blockedUsers = userDoc.data()["blockedUsers"] as! [String]
+                        blockedUsers.append(self.eventAuthor!)
+                        userDocRef.updateData([
+                            "blockedUsers": blockedUsers
+                        ]) { err in
+                            if let err = err {
+                                print("Error updating document: \(err)")
+                            } else {
+                                print("Document successfully updated")
+                            }
+                        }
+                    }
+                    else {
+                      print("Error")
+                    }
+                })
                 
                 let blockAlert = UIAlertController(title: "This User Has Been Blocked", message: nil, preferredStyle: .alert)
                 
                 let blockDismiss = UIAlertAction(title: "Dismiss", style: .default, handler: { action in
                     
-                    self.performSegue(withIdentifier: "homeSegue2", sender: nil)
+                    //Send Data Back
+                    if let presenter = self.presentingViewController as? GeotificationsViewController{
+                        presenter.menuOpen = true
+                        presenter.menuView.isHidden = false
+                        UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
+                            presenter.googleMapsView.alpha = 0
+                            presenter.googleMapsView.clear()
+                        }, completion: { _ in
+                            presenter.googleMapsView.isUserInteractionEnabled = false
+                            
+                        })
+                        presenter.todayArray.removeAll()
+                        presenter.tomorrowArray.removeAll()
+                        presenter.thisWeekArray.removeAll()
+                        presenter.thisMonthArray.removeAll()
+                        presenter.loadEventData()
+                    }
+                    else if let presenter = self.presentingViewController as? MyEventsViewController{
+                        presenter.loadingView.startAnimating()
+                        presenter.configureDatabase()
+                    }
+                    self.dismiss(animated: true, completion: nil)
                     
                 })
                 
@@ -232,7 +365,7 @@ class EventInfoViewController: UIViewController {
     
 
     @IBAction func didTapBack(_ sender: Any) {
-        performSegue(withIdentifier: "homeSegue2", sender: nil)
+        dismiss(animated: true, completion: nil)
     }
 
 

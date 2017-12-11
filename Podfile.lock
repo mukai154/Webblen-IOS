@@ -129,6 +129,9 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - NVActivityIndicatorView (4.0.0):
+    - NVActivityIndicatorView/Presenter (= 4.0.0)
+  - NVActivityIndicatorView/Presenter (4.0.0)
   - paper-onboarding (2.2)
   - Protobuf (3.4.0)
   - SDWebImage (4.2.2):
@@ -152,6 +155,7 @@ DEPENDENCIES:
   - GooglePlacesSearchController
   - GoogleSignIn
   - IQKeyboardManagerSwift
+  - NVActivityIndicatorView
   - paper-onboarding
   - SDWebImage
   - SwiftyStoreKit
@@ -185,11 +189,12 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 02bfbb0dff71c66d0ab77d80d25dfce0c3717735
   leveldb-library: 44ef425bfde64f5b41daef86b38db2d13edbbee1
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  NVActivityIndicatorView: 54c9b93b6f25a4f467512680c0c90c09a1095cf2
   paper-onboarding: 7fcb8f2737edb32bd345d6e890578fff1a073fef
   Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
   SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
   SwiftyStoreKit: c5cb38110cb01b55b9c5f25d7f69d0083650b2a4
 
-PODFILE CHECKSUM: b79938a4b952c0f2172f7a2f8f2716d1bbc6b49f
+PODFILE CHECKSUM: 0a062d8318e12963155d8c88dbe5ae1dc82b9151
 
 COCOAPODS: 1.2.0

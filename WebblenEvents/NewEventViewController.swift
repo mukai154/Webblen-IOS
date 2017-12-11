@@ -7,11 +7,10 @@
 //
 
 import UIKit
-import FirebaseDatabase
-import FirebaseAuth
-import FirebaseStorage
+import Firebase
 import CoreLocation
 import IQKeyboardManagerSwift
+import NVActivityIndicatorView
 
 class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
 
@@ -27,47 +26,60 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
     @IBOutlet weak var modifyNotification: UIButton!
     @IBOutlet weak var chooseEventCategoryButton: UIButton!
     @IBOutlet weak var eventTabLabel: UILabel!
-    
+    @IBOutlet weak var eventPriceHelp: UIButton!
+    @IBOutlet weak var eventPriceLabel: UILabel!
     @IBOutlet weak var eventInfoHeighConstraint: NSLayoutConstraint!
     
     //Firebase References
-    var dataBaseRef = Database.database().reference()
-    var currentUser: AnyObject?
-
+    var dataBase = Firestore.firestore()
+    var currentUser = Auth.auth().currentUser
     
     //Variables
     var username: String?
-    var eventAddress = "address"
-    var eventDate: String?
-    var eventTime = "time"
+    var eventAddress = ""
+    var eventDate = ""
+    var eventTime = ""
     var eCheckTitle: String?
     var eCheckDesc: String?
     var uploadedImage = false
-    var pathToImage = "null"
+    var pathToImage = ""
+    var eventImage: UIImageView?
     var notifyDistance = ""
-    var eventKey = "key"
-    var editKey = "key"
+    var eventKey : String?
+    var editKey : String?
     var event18 = false
     var event21 = false
+    var studentsOnly = false
     var lat : Double?
     var lon : Double?
     var editingEvent = false
     var eventPaid = false
-
+    var eventRadius : Double?
+    var eventVerified = false
+    var notificationOnly = false
     var image : UIImage?
     
-    var eventCategory = "Choose Category"
+    var eventCategory = "Event Categories"
+    var eventCategories : [String] = []
 
-    //var eventStart = "time"
-    //var eventEnd = "time"
+    
+    
+    var helpCircle = UIImage(named: "help-circle")?.withRenderingMode(.alwaysTemplate)
+
     
     var imagePicker = UIImagePickerController()
     
-    
+        var loadingView = NVActivityIndicatorView(frame: CGRect(x: (100), y: (100), width: 125, height: 125), type: .ballRotateChase, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1.0), padding: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let xAxis = self.view.center.x
+        let yAxis = self.view.center.y
+        
+        let frame = CGRect(x: (xAxis-147), y: (yAxis-135), width: 300, height: 300)
+        loadingView = NVActivityIndicatorView(frame: frame, type: .ballRotateChase, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1.0), padding: 0)
+        self.view.addSubview(loadingView)
         
         IQKeyboardManager.sharedManager().enable = false
         
@@ -84,17 +96,13 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
         let screenSize : CGRect = UIScreen.main.bounds
         eventInfoHeighConstraint.constant = screenSize.height * 0.20
         
-        //modifyNotification.isEnabled = false
-        activityIndicator.isHidden = true
-        
-
         
         //image picker
         imagePicker.delegate = self
 
 
-        
         //Event Title Style
+        self.eventTitleField.delegate = self
         self.eventTitleField.layer.borderColor = UIColor.lightGray.cgColor
         self.eventTitleField.layer.borderWidth = 0.5
         self.eventTitleField.layer.cornerRadius = CGFloat(Float(5.0))
@@ -105,42 +113,103 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
         self.eventDescriptionField.text = "Event Info"
         self.eventDescriptionField.textColor = UIColor.lightGray
         
-        //Address Button
-
-        
-
-        
         
         //Database Handler
-        self.currentUser = Auth.auth().currentUser
-        self.dataBaseRef.child("Users").child(self.currentUser!.uid).observeSingleEvent(of: .value, with: {(snapshot:DataSnapshot) in
-        
-            let snapshot = snapshot.value as! [String: AnyObject]
-            self.username = snapshot["Name"] as? String
-        
+        self.dataBase.collection("users").document((currentUser?.uid)!).getDocument(completion: {(snapshot, error) in
+            if !(snapshot?.exists)! {
+                self.performSegue(withIdentifier: "SetupSegue", sender: nil)
+            }
+            else if error != nil{
+                print(error)
+            }
+            else {
+                self.username = snapshot?.data()["username"] as! String
+            }
         })
         
         if (self.editingEvent == true){
-            self.dataBaseRef.child("Event").child(editKey).observeSingleEvent(of: .value, with: {(snapshot) in
-                
-                if let eDict = snapshot.value as? [String: AnyObject]{
-
-                    self.eventTitleField.text = eDict["title"] as? String
-                    self.eventDescriptionField.text = eDict["evDescription"] as! String
-
-                    self.eventDate = eDict["date"] as! String
-                    self.eventTime = eDict["time"] as! String
-                    self.eventCategory = eDict["category"] as! String
-                    self.eventAddress = eDict["address"] as! String
-                    self.dateTimeButton.setTitle(self.eventDate! + " | " + self.eventTime, for: .normal)
-                    self.chooseEventCategoryButton.setTitle(self.eventCategory, for: .normal)
-                    self.eventTabLabel.text = "Edit Event"
-                    self.locationButton.setTitle(self.eventAddress, for: .normal)
-                    self.createEventButton.setTitle("Finish Editing", for: .normal)
+            
+            let eventRef = dataBase.collection("events").document(eventKey!)
+            eventRef.getDocument(completion: {(event, error) in
+                if let event = event {
+                    self.eventTitleField.text = event.data()["title"] as! String
+                    self.eventDescriptionField.text = event.data()["description"] as! String
+                    self.eventDate = event.data()["date"] as! String
+                    self.eventTime = event.data()["time"] as! String
+                    self.dateTimeButton.setTitle(self.eventDate + " | " + self.eventTime, for: .normal)
+                    self.eventCategories = event.data()["categories"] as! [String]
+                    self.chooseEventCategoryButton.setTitle(self.eventCategories.joined(separator: ", "), for: .normal)
+                    self.pathToImage = event.data()["pathToImage"] as! String
+                    if self.pathToImage != "" {
+                        let url = NSURL(string: self.pathToImage)
+                        self.eventImage?.sd_setImage(with: url as! URL)
+                        let backImage = self.eventImage?.image
+                        self.imageSelectButton.setImage(backImage, for: .normal)
+                        
+                    }
+                    self.event18 = event.data()["event18"] as! Bool
+                    self.event21 = event.data()["event21"] as! Bool
+                    self.notificationOnly = event.data()["notificationOnly"] as! Bool
+                    if (self.event18 == true){
+                        self.modifyNotification.setTitle("18+ Event", for: .normal)
+                    }
+                    else if (self.event21 == true){
+                        self.modifyNotification.setTitle("21+ Event", for: .normal)
+                    }
+                    else if (self.notificationOnly == true){
+                        self.modifyNotification.setTitle("Notification Only", for: .normal)
+                    }
+                    else if (self.notificationOnly == true && self.event18 == true){
+                        self.modifyNotification.setTitle("Notification Only, 18+ Event", for: .normal)
+                    }
+                    else if (self.notificationOnly == true && self.event21 == true){
+                        self.modifyNotification.setTitle("Notification Only, 21+ Event", for: .normal)
+                    }
+                    else {
+                        self.modifyNotification.setTitle("Event Filter Settings", for: .normal)
+                    }
+                    self.eventAddress = event.data()["address"] as! String
+                    self.eventRadius = event.data()["radius"] as! Double
+                    self.locationButton.setTitle(self.eventAddress + " | " + String(Int(self.eventRadius!)) + " Meters", for: .normal)
+                    self.lat = event.data()["lat"] as! Double
+                    self.lon = event.data()["lon"] as! Double
+                    if self.eventRadius! < 10000 {
+                        self.eventPriceLabel.text = "Event Total: $34.99"
+                    }
+                    if self.eventRadius! < 8500 {
+                        self.eventPriceLabel.text = "Event Total: $29.99"
+                    }
+                    if self.eventRadius! < 6000 {
+                        self.eventPriceLabel.text = "Event Total: $26.99"
+                    }
+                    if self.eventRadius! < 3100 {
+                        self.eventPriceLabel.text = "Event Total: $24.99"
+                    }
+                    if self.eventRadius! < 2000 {
+                        self.eventPriceLabel.text = "Event Total: $19.99"
+                    }
+                    if self.eventRadius! < 1000 {
+                        self.eventPriceLabel.text = "Event Total: $14.99"
+                    }
+                    if self.eventRadius! < 600 {
+                        self.eventPriceLabel.text = "Event Total: $9.99"
+                    }
+                    if self.eventRadius! < 400 {
+                        self.eventPriceLabel.text = "Event Total: $4.99"
+                    }
+                    if self.eventRadius! < 275 {
+                        self.eventPriceLabel.text = "Event Total: $2.99"
+                    }
                 }
-                
+                else {
+                    print("doc does not exist")
+                }
             })
-        }
+            
+            }
+        
+        eventPriceHelp.setImage(helpCircle, for: .normal)
+        eventPriceHelp.tintColor = UIColor(red: 189/255, green: 189/255, blue: 189/255, alpha: 1.0)
         
     }
 
@@ -163,18 +232,13 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
     
     //Photo Action Button
     @IBAction func selectImageFromPhotos(_ sender: Any) {
-        
         imagePicker.allowsEditing = true
         imagePicker.sourceType = .photoLibrary
-        
         self.present(imagePicker, animated: true, completion: nil)
-        
     }
 
-    
     //Erase initial text when editing text view
     func textViewDidBeginEditing(_ textView: UITextView) {
-       
         if (editingEvent == false){
         if (eventDescriptionField.textColor == UIColor.lightGray){
             eventDescriptionField.text = ""
@@ -183,352 +247,184 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
         }
     }
     
-
-    
     
     @IBAction func didTapCancelButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-
-
-
-
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return false
     }
     
-
-    
-
     @IBAction func didTapConfirm(_ sender: Any) {
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
+
+        loadingView.startAnimating()
         
         //Get Location Coordinates
         convertAddressToLatAndLong()
+        let newEventReference = dataBase.collection("events").document()
+
         
-        //Check for images & Event Key & Link Storage & Prepare Segue
-        let key = self.dataBaseRef.child("Event").childByAutoId().key
-        eventKey = key
-        let storage = Storage.storage().reference(forURL: "gs://webblen-events.appspot.com")
-        let imageRef = storage.child("Event").child(currentUser!.uid).child("\(key).jpg")
-        
-        ///Uppercase title & description
-        eCheckTitle = eventTitleField.text?.uppercased()
-        eCheckDesc = eventDescriptionField.text?.uppercased()
-        eventAddress = locationButton.title(for: .normal)!
-        
-        //Check for profanity
-        if ((eCheckTitle?.contains("ASSHOLE"))! || (eCheckTitle?.contains("BONDAGE"))! || (eCheckTitle?.contains("BITCH"))! || (eCheckTitle?.contains("VAGINA"))! || (eCheckTitle?.contains("PENIS"))! || (eCheckTitle?.contains("BLOWJOB"))! || (eCheckTitle?.contains("EJACULATION"))! || (eCheckTitle?.contains("JERKOFF"))! || (eCheckTitle?.contains("HANDJOB"))! || (eCheckTitle?.contains("SHIT"))! || (eCheckTitle?.contains("INTERCOURSE"))! || (eCheckTitle?.contains("RAPE"))! || (eCheckDesc?.contains("DAMN"))! || (eCheckDesc?.contains("FUCK"))! || (eCheckDesc?.contains("BITCH"))! || (eCheckDesc?.contains("VAGINA"))! || (eCheckDesc?.contains("PENIS"))! || (eCheckTitle?.contains("BLOWJOB"))! || (eCheckDesc?.contains("EJACULATION"))! || (eCheckDesc?.contains("JERKOFF"))! || (eCheckDesc?.contains("HANDJOB"))! || (eCheckDesc?.contains("SHIT"))! || (eCheckDesc?.contains("INTERCOURSE"))! || (eCheckDesc?.contains("GROUPSEX"))! || (eCheckDesc?.contains("ORGY"))! || (eCheckDesc?.contains("NIGGER"))! || (eCheckDesc?.contains("ANUS"))!){
-            
-            activityIndicator.stopAnimating()
-            
-            //Alert for profanity
-            let alert = UIAlertController(title: "Watch Yo Profanity", message: "Please show some class", preferredStyle: .alert)
-            let dismissAction = UIAlertAction(title: "Ok, I'm Sorry", style: .cancel, handler: nil)
-            alert.addAction(dismissAction)
-            self.present(alert, animated: true, completion: nil)
-            
+        //VALIDATION
+        if (self.eventTitleField.text!.count < 5){
+            showAlert(withTitle: "Event Title Error", message: "Please be more descriptive.")
+            loadingView.stopAnimating()
         }
-            //Alert for missing category
-        else if(self.eventCategory == "Choose Category"){
-            
-            activityIndicator.stopAnimating()
-            
-            let alert = UIAlertController(title: "Category Missing", message: "Please choose a category for this event.", preferredStyle: .alert)
-            let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
-            alert.addAction(dismissAction)
-            self.present(alert, animated: true, completion: nil)
+        else if (self.eventDescriptionField.text!.count < 30){
+            showAlert(withTitle: "Event Description Error", message: "Please do a better job of describing the event.")
+            loadingView.stopAnimating()
         }
+        else if (eventDate == "" || eventTime == ""){
+            showAlert(withTitle: "Event Date/Time Error", message: "Please check the date of your event")
+            loadingView.stopAnimating()
+        }
+        else if (eventAddress == "" || !(eventAddress.contains("Fargo, ND"))){
+            showAlert(withTitle: "Event Address Error", message: "Please make an event within Fargo, ND.")
+            loadingView.stopAnimating()
+        }
+        else if (eventCategories.isEmpty){
+            showAlert(withTitle: "Event Categories", message: "Please choose at lease one category for your event.")
+            loadingView.stopAnimating()
+        }
+        else if (uploadedImage == true){
         
-        //Alert for missing category or not descriptive enough category
-        else if ((self.eventDescriptionField.text?.characters.count)! < 30){
+            if isEditing == false {
+            let imageStorage = Storage.storage().reference(forURL: "gs://webblen-events.appspot.com/events")
+            let imageRef = imageStorage.child("events").child((currentUser?.uid)!).child("\(newEventReference.documentID).jpg")
             
-            activityIndicator.stopAnimating()
-            
-            let alert = UIAlertController(title: "Event Description Error", message: "Please be more specific about the details of this event.", preferredStyle: .alert)
-            let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
-            alert.addAction(dismissAction)
-            self.present(alert, animated: true, completion: nil)
-        }
-        
-            //Alert for checking if event is in Fargo
-        else if (!(eventAddress.contains("Fargo")) || eventAddress.contains("address")){
-            
-            activityIndicator.stopAnimating()
-            
-            let alert = UIAlertController(title: "Event Address Error", message: "Please select a location in Fargo, ND", preferredStyle: .alert)
-            let dismissAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-            alert.addAction(dismissAction)
-            self.present(alert, animated: true, completion: nil)
-            
-            }
-            
-            //Check for event time
-        else if (eventTime.contains("time")){
-            
-            activityIndicator.stopAnimating()
-            
-            let alert = UIAlertController(title: "Event Time Error", message: "Please set a time for the event", preferredStyle: .alert)
-            let dismissAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-            alert.addAction(dismissAction)
-            self.present(alert, animated: true, completion: nil)
-        }
-            
-            //Check detail of event & upload info to firebase
-        else if((eventTitleField.text?.characters.count)! > 0 && (eventDescriptionField.text?.characters.count)! > 30 && uploadedImage == true && (editingEvent == false)){
-            
-            
-            //Lowers resolution of the image
-            let imageData = UIImageJPEGRepresentation(self.imageSelectButton.backgroundImage(for: .normal)!, 0.6)
-                
-            let uploadPhoto = imageRef.putData(imageData!, metadata: nil) {(metadata, error) in
+            let imageData = UIImageJPEGRepresentation(self.imageSelectButton.backgroundImage(for: .normal)!, 1.0)
+            let uploadImage = imageRef.putData(imageData!, metadata: nil) {(metadata, error) in
                 if error != nil {
-                    print(error!.localizedDescription)
+                    self.showAlert(withTitle: "Event Upload Error", message: "Error occurred while uploading event")
+                    return
                 }
-                else {
-                        
-                    //Post URL is available, post it with the event
-                    let downloadURL = (metadata!.downloadURL()?.absoluteString)!
-                    
-                    //print(self.pathToImage)
+                imageRef.downloadURL(completion: {(url, error) in
+                    if let url = url {
+                        newEventReference.setData([
+                            "title": self.eventTitleField.text!,
+                            "address": self.eventAddress,
+                            "date": self.eventDate,
+                            "description": self.eventDescriptionField.text,
+                            "categories": self.eventCategories,
+                            "eventKey": newEventReference.documentID,
+                            "lat": self.lat!,
+                            "lon": self.lon!,
+                            "paid": false,
+                            "pathToImage": url.absoluteString,
+                            "radius": self.eventRadius,
+                            "time": self.eventTime,
+                            "author": self.username!,
+                            "verified": self.eventVerified,
+                            "views": 0,
+                            "event18": self.event18,
+                            "event21": self.event21,
+                            "notificationOnly": self.notificationOnly,
+                            "distanceFromUser": 0
+                            ])
+                        self.loadingView.stopAnimating()
+                        self.uploadPost(currentKey: newEventReference.documentID)
+                        }
+                    })
+                }
+            }
+            else {
+                let imageStorage = Storage.storage().reference(forURL: "gs://webblen-events.appspot.com/events")
+                let imageRef = imageStorage.child("events").child((currentUser?.uid)!).child("\(self.eventKey).jpg")
                 
-                        //Name Fixes
-                        if (self.eventCategory == "Health & Fitness"){
-                            self.eventCategory = "HEALTHFITNESS"
+                let imageData = UIImageJPEGRepresentation(self.imageSelectButton.backgroundImage(for: .normal)!, 1.0)
+                let uploadImage = imageRef.putData(imageData!, metadata: nil) {(metadata, error) in
+                    if error != nil {
+                        self.showAlert(withTitle: "Event Upload Error", message: "Error occurred while uploading event")
+                        return
+                    }
+                    imageRef.downloadURL(completion: {(url, error) in
+                        if let url = url {
+                            let updateEvent = self.dataBase.collection("events").document(self.eventKey!)
+                            updateEvent.updateData([
+                                "title": self.eventTitleField.text!,
+                                "address": self.eventAddress,
+                                "date": self.eventDate,
+                                "description": self.eventDescriptionField.text,
+                                "categories": self.eventCategories,
+                                "lat": self.lat!,
+                                "lon": self.lon!,
+                                "pathToImage": url.absoluteString,
+                                "radius": self.eventRadius,
+                                "time": self.eventTime,
+                                "author": self.username!,
+                                "event18": self.event18,
+                                "event21": self.event21,
+                                "notificationOnly": self.notificationOnly,
+                                ])
+                            self.loadingView.stopAnimating()
+                            self.uploadPost(currentKey: self.eventKey!)
                         }
-                        if (self.eventCategory == "Party/Dance"){
-                            self.eventCategory = "PARTYDANCE"
-                        }
-                        if (self.eventCategory == "Food & Drink"){
-                            self.eventCategory = "FOODDRINK"
-                        }
-                        
-                        if(self.eventCategory == "College Life"){
-                            self.eventCategory = "COLLEGELIFE"
-                        }
-                        
-                        if(self.eventCategory == "Wine & Brew"){
-                            self.eventCategory = "WINEBREW"
-                        }
-                        
-                        if (self.eventCategory != "Choose Category"){
-                            
-                            //Database upload
-                            self.dataBaseRef.child("Event").child(key).child("category").setValue(self.eventCategory.uppercased())
-                            self.dataBaseRef.child("Event").child(key).child("date").setValue(self.eventDate)
-                            self.dataBaseRef.child("Event").child(key).child("time").setValue(self.eventTime)
-                            self.dataBaseRef.child("Event").child(key).child("address").setValue(self.eventAddress)
-                            self.dataBaseRef.child("Event").child(key).child("evDescription").setValue(self.eventDescriptionField.text)
-                            self.dataBaseRef.child("Event").child(key).child("title").setValue(self.eventTitleField.text)
-                            self.dataBaseRef.child("Event").child(key).child("uid").setValue(self.currentUser!.uid)
-                            self.dataBaseRef.child("Event").child(key).child("username").setValue(self.username)
-                            self.dataBaseRef.child("Event").child(key).child("eventKey").setValue(key)
-                            self.dataBaseRef.child("Event").child(key).child("radius").setValue(String(self.notifyDistance))
-                            self.dataBaseRef.child("Event").child(key).child("paid").setValue("false")
-                            
-                            if (self.currentUser?.uid == "KFDuKYEoHbUmc1B0nsfbssON6zY2"){
-                            self.dataBaseRef.child("Event").child(key).child("verified").setValue("true")
-                            }
-                            else {
-                            self.dataBaseRef.child("Event").child(key).child("verified").setValue("false")
-                            }
-                            
-                            self.dataBaseRef.child("Event").child(key).child("pathToImage").setValue(downloadURL)
-                            self.dataBaseRef.child("LocationCoordinates").child(key).child("lat").setValue(self.lat)
-                            self.dataBaseRef.child("LocationCoordinates").child(key).child("lon").setValue(self.lon)
-                        }
-                    self.uploadPost()
+                    })
                 }
             }
-        }
-        else if (((self.eventDescriptionField.text?.characters.count)! > 30) && (eventTitleField.text?.characters.count)! > 0  && (editingEvent == false)){
-            
-            
-            //Name Fixes
-            if (self.eventCategory == "Health & Fitness"){
-                self.eventCategory = "HEALTHFITNESS"
-            }
-            if (self.eventCategory == "Party/Dance"){
-                self.eventCategory = "PARTYDANCE"
-            }
-            if (self.eventCategory == "Food & Drink"){
-                self.eventCategory = "FOODDRINK"
-            }
-            
-            if(self.eventCategory == "College Life"){
-                self.eventCategory = "COLLEGELIFE"
-            }
-            
-            if(self.eventCategory == "Wine & Brew"){
-                self.eventCategory = "WINEBREW"
-            }
-            
-            if (self.eventCategory != "Choose Category"){
-                
-                //Database upload
-                self.dataBaseRef.child("Event").child(key).child("category").setValue(self.eventCategory.uppercased())
-                self.dataBaseRef.child("Event").child(key).child("date").setValue(self.eventDate)
-                self.dataBaseRef.child("Event").child(key).child("time").setValue(self.eventTime)
-                self.dataBaseRef.child("Event").child(key).child("address").setValue(self.eventAddress)
-                self.dataBaseRef.child("Event").child(key).child("evDescription").setValue(self.eventDescriptionField.text)
-                self.dataBaseRef.child("Event").child(key).child("title").setValue(self.eventTitleField.text)
-                self.dataBaseRef.child("Event").child(key).child("uid").setValue(self.currentUser!.uid)
-                self.dataBaseRef.child("Event").child(key).child("username").setValue(self.username)
-                self.dataBaseRef.child("Event").child(key).child("eventKey").setValue(key)
-                self.dataBaseRef.child("Event").child(key).child("radius").setValue(String(self.notifyDistance))
-                self.dataBaseRef.child("Event").child(key).child("paid").setValue("false")
-                if (self.currentUser?.uid == "KFDuKYEoHbUmc1B0nsfbssON6zY2"){
-                    self.dataBaseRef.child("Event").child(key).child("verified").setValue("true")
-                }
-                else {
-                    self.dataBaseRef.child("Event").child(key).child("verified").setValue("false")
-                }
-                self.dataBaseRef.child("Event").child(key).child("pathToImage").setValue("null")
-                self.dataBaseRef.child("LocationCoordinates").child(key).child("lat").setValue(self.lat)
-                self.dataBaseRef.child("LocationCoordinates").child(key).child("lon").setValue(self.lon)
-
-            
-            }
-            uploadPost()
-        }
-        else if ((self.eventDescriptionField.text?.characters.count)! > 30) && (eventTitleField.text?.characters.count)! > 0  && (editingEvent == true){
-            
-            //Name Fixes
-            if (self.eventCategory == "Health & Fitness"){
-                self.eventCategory = "HEALTHFITNESS"
-            }
-            if (self.eventCategory == "Party/Dance"){
-                self.eventCategory = "PARTYDANCE"
-            }
-            if (self.eventCategory == "Food & Drink"){
-                self.eventCategory = "FOODDRINK"
-            }
-            
-            if(self.eventCategory == "College Life"){
-                self.eventCategory = "COLLEGELIFE"
-            }
-            
-            if(self.eventCategory == "Wine & Brew"){
-                self.eventCategory = "WINEBREW"
-            }
-            
-            if (self.eventCategory != "Choose Category"){
-                
-                //Database upload
-                self.dataBaseRef.child("Event").child(self.editKey).child("category").setValue(self.eventCategory.uppercased())
-                self.dataBaseRef.child("Event").child(self.editKey).child("date").setValue(self.eventDate)
-                self.dataBaseRef.child("Event").child(self.editKey).child("time").setValue(self.eventTime)
-                self.dataBaseRef.child("Event").child(self.editKey).child("address").setValue(self.eventAddress)
-                self.dataBaseRef.child("Event").child(self.editKey).child("evDescription").setValue(self.eventDescriptionField.text)
-                self.dataBaseRef.child("Event").child(self.editKey).child("title").setValue(self.eventTitleField.text)
-                self.dataBaseRef.child("Event").child(self.editKey).child("uid").setValue(self.currentUser!.uid)
-                self.dataBaseRef.child("Event").child(self.editKey).child("username").setValue(self.username)
-                self.dataBaseRef.child("Event").child(self.editKey).child("radius").setValue(String(self.notifyDistance))
-                if (self.eventPaid == true){
-                    self.dataBaseRef.child("Event").child(self.editKey).child("paid").setValue("true")
-                    
-                }
-                else{
-                    self.dataBaseRef.child("Event").child(self.editKey).child("paid").setValue("false")
-                }
-                if (self.currentUser?.uid == "KFDuKYEoHbUmc1B0nsfbssON6zY2"){
-                    self.dataBaseRef.child("Event").child(self.editKey).child("verified").setValue("true")
-                }
-                else {
-                    self.dataBaseRef.child("Event").child(self.editKey).child("verified").setValue("false")
-                }
-                self.dataBaseRef.child("Event").child(self.editKey).child("pathToImage").setValue("null")
-                self.dataBaseRef.child("LocationCoordinates").child(self.editKey).child("lat").setValue(self.lat)
-                self.dataBaseRef.child("LocationCoordinates").child(self.editKey).child("lon").setValue(self.lon)
-            
-            performSegue(withIdentifier: "doneEditingSegue", sender: nil)
             
         }
-        }
-        else if ((self.eventDescriptionField.text?.characters.count)! > 30) && (eventTitleField.text?.characters.count)! > 0  && (editingEvent == true) && (uploadedImage == true){
-            //Lowers resolution of the image
-            let imageData = UIImageJPEGRepresentation(self.imageSelectButton.backgroundImage(for: .normal)!, 0.6)
-            
-            let uploadPhoto = imageRef.putData(imageData!, metadata: nil) {(metadata, error) in
-                if error != nil {
-                    print(error!.localizedDescription)
-                }
-                else {
-                    
-                    //Post URL is available, post it with the event
-                    let downloadURL = (metadata!.downloadURL()?.absoluteString)!
-                    
-                    //print(self.pathToImage)
-                    
-                    //Name Fixes
-                    if (self.eventCategory == "Health & Fitness"){
-                        self.eventCategory = "HEALTHFITNESS"
-                    }
-                    if (self.eventCategory == "Party/Dance"){
-                        self.eventCategory = "PARTYDANCE"
-                    }
-                    if (self.eventCategory == "Food & Drink"){
-                        self.eventCategory = "FOODDRINK"
-                    }
-                    
-                    if(self.eventCategory == "College Life"){
-                        self.eventCategory = "COLLEGELIFE"
-                    }
-                    
-                    if(self.eventCategory == "Wine & Brew"){
-                        self.eventCategory = "WINEBREW"
-                    }
-                    
-                    if (self.eventCategory != "Choose Category"){
-                        
-                        //Database upload
-                        self.dataBaseRef.child("Event").child(self.editKey).child("category").setValue(self.eventCategory.uppercased())
-                        self.dataBaseRef.child("Event").child(self.editKey).child("date").setValue(self.eventDate)
-                        self.dataBaseRef.child("Event").child(self.editKey).child("time").setValue(self.eventTime)
-                        self.dataBaseRef.child("Event").child(self.editKey).child("address").setValue(self.eventAddress)
-                        self.dataBaseRef.child("Event").child(self.editKey).child("evDescription").setValue(self.eventDescriptionField.text)
-                        self.dataBaseRef.child("Event").child(self.editKey).child("title").setValue(self.eventTitleField.text)
-                        self.dataBaseRef.child("Event").child(self.editKey).child("uid").setValue(self.currentUser!.uid)
-                        self.dataBaseRef.child("Event").child(self.editKey).child("username").setValue(self.username)
-                        self.dataBaseRef.child("Event").child(self.editKey).child("radius").setValue(String(self.notifyDistance))
-                        if (self.eventPaid == true){
-                            self.dataBaseRef.child("Event").child(self.editKey).child("paid").setValue("true")
-
-                        }
-                        else{
-                            self.dataBaseRef.child("Event").child(self.editKey).child("paid").setValue("false")
-                        }
-                        
-                        if (self.currentUser?.uid == "KFDuKYEoHbUmc1B0nsfbssON6zY2"){
-                            self.dataBaseRef.child("Event").child(self.editKey).child("verified").setValue("true")
-                        }
-                        else {
-                            self.dataBaseRef.child("Event").child(self.editKey).child("verified").setValue("false")
-                        }
-                        
-                        self.dataBaseRef.child("Event").child(self.editKey).child("pathToImage").setValue(downloadURL)
-                        self.dataBaseRef.child("LocationCoordinates").child(self.editKey).child("lat").setValue(self.lat)
-                        self.dataBaseRef.child("LocationCoordinates").child(self.editKey).child("lon").setValue(self.lon)
-                    }
-                    self.performSegue(withIdentifier: "doneEditingSegue", sender: nil)
-                }
+        else if (uploadedImage == false){
+            if !(isEditing) {
+            newEventReference.setData([
+                "title": self.eventTitleField.text!,
+                "address": self.eventAddress,
+                "date": self.eventDate,
+                "description": self.eventDescriptionField.text,
+                "categories": self.eventCategories,
+                "eventKey": newEventReference.documentID,
+                "lat": self.lat!,
+                "lon": self.lon!,
+                "paid": false,
+                "pathToImage": "",
+                "radius": self.eventRadius,
+                "time": self.eventTime,
+                "author": self.username!,
+                "verified": self.eventVerified,
+                "views": 0,
+                "event18": self.event18,
+                "event21": self.event21,
+                "notificationOnly": self.notificationOnly,
+                "distanceFromUser": 0
+                ])
+            loadingView.stopAnimating()
+            uploadPost(currentKey: newEventReference.documentID)
+            }
+            else {
+                let updateEvent = self.dataBase.collection("events").document(self.eventKey!)
+                updateEvent.updateData([
+                    "title": self.eventTitleField.text!,
+                    "address": self.eventAddress,
+                    "date": self.eventDate,
+                    "description": self.eventDescriptionField.text,
+                    "categories": self.eventCategories,
+                    "lat": self.lat!,
+                    "lon": self.lon!,
+                    "pathToImage": "",
+                    "radius": self.eventRadius,
+                    "time": self.eventTime,
+                    "author": self.username!,
+                    "event18": self.event18,
+                    "event21": self.event21,
+                    "notificationOnly": self.notificationOnly,
+                    ])
+                self.loadingView.stopAnimating()
+                self.uploadPost(currentKey: self.eventKey!)
             }
         }
-
     }
     
-    func uploadPost(){
+    func uploadPost(currentKey: String){
         
         activityIndicator.stopAnimating()
-        performSegue(withIdentifier: "confirmSegue", sender: eventKey)
+        performSegue(withIdentifier: "confirmSegue", sender: currentKey)
     }
     
     //Class to convert address from String to Coordinates
     func convertAddressToLatAndLong(){
         let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(eventAddress) {
+            geocoder.geocodeAddressString(eventAddress) {
             
             placemarks, error in
             let placemark = placemarks?.first

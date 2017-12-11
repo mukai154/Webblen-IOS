@@ -18,6 +18,8 @@
 		4609990C1E39E38A000DE53F /* BlockedUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4609990B1E39E38A000DE53F /* BlockedUsersViewController.swift */; };
 		4609990E1E3A9530000DE53F /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4609990D1E3A9530000DE53F /* FeedbackViewController.swift */; };
 		460999101E3A9902000DE53F /* BlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4609990F1E3A9902000DE53F /* BlockTableViewCell.swift */; };
+		461085B41FDE206D00E7B2A2 /* WebblenIAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461085B31FDE206D00E7B2A2 /* WebblenIAP.swift */; };
+		461085B61FDE214300E7B2A2 /* WebblenIAPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461085B51FDE214300E7B2A2 /* WebblenIAPService.swift */; };
 		4617A7471F3D4C6600926160 /* confirmPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4617A7461F3D4C6600926160 /* confirmPostViewController.swift */; };
 		4617A7491F3D4D2900926160 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4617A7481F3D4D2900926160 /* StoreKit.framework */; };
 		461FD2D31F43FBF9001C7279 /* homeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461FD2D21F43FBF9001C7279 /* homeCell.swift */; };
@@ -32,6 +34,7 @@
 		46621B7F1E218750005E5404 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46621B7E1E218750005E5404 /* InitialViewController.swift */; };
 		46621B811E21D11B005E5404 /* MyEventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46621B801E21D11B005E5404 /* MyEventsTableViewCell.swift */; };
 		46621B831E2E9E4A005E5404 /* EventInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46621B821E2E9E4A005E5404 /* EventInfoViewController.swift */; };
+		466FF4CF1FD517EF00ED6E37 /* EventPricingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466FF4CE1FD517EF00ED6E37 /* EventPricingViewController.swift */; };
 		4687A00D1DFCB9A80067F773 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4687A00C1DFCB9A80067F773 /* AppDelegate.swift */; };
 		4687A0121DFCB9A80067F773 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4687A0101DFCB9A80067F773 /* Main.storyboard */; };
 		4687A0151DFCB9A80067F773 /* WebblenEvents.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4687A0131DFCB9A80067F773 /* WebblenEvents.xcdatamodeld */; };
@@ -58,6 +61,7 @@
 		46CB51A11FA99576009CF2D4 /* BackTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CB51A01FA99576009CF2D4 /* BackTableVC.swift */; };
 		46EC3ACD1F7305BE00E4CC06 /* EventCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EC3ACC1F7305BE00E4CC06 /* EventCategoryViewController.swift */; };
 		46F113BC1E16044800FB7294 /* defaultEventImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 46F113BB1E16044800FB7294 /* defaultEventImage.png */; };
+		46F4D6E81FC381C100F5289B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46F4D6E71FC3819C00F5289B /* CoreLocation.framework */; };
 		D40A12A41F658F3E00392FF9 /* WhatsNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40A12A31F658F3E00392FF9 /* WhatsNewViewController.swift */; };
 		D40A12A61F659E7300392FF9 /* NotificationSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40A12A51F659E7300392FF9 /* NotificationSettingsViewController.swift */; };
 		D41F1F1D1F9A798E006DE9CE /* GeotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41F1F1C1F9A798E006DE9CE /* GeotificationsViewController.swift */; };
@@ -74,6 +78,8 @@
 		4609990B1E39E38A000DE53F /* BlockedUsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockedUsersViewController.swift; sourceTree = "<group>"; };
 		4609990D1E3A9530000DE53F /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		4609990F1E3A9902000DE53F /* BlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTableViewCell.swift; sourceTree = "<group>"; };
+		461085B31FDE206D00E7B2A2 /* WebblenIAP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebblenIAP.swift; sourceTree = "<group>"; };
+		461085B51FDE214300E7B2A2 /* WebblenIAPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebblenIAPService.swift; sourceTree = "<group>"; };
 		4617A7461F3D4C6600926160 /* confirmPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confirmPostViewController.swift; sourceTree = "<group>"; };
 		4617A7481F3D4D2900926160 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		461FD2D21F43FBF9001C7279 /* homeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = homeCell.swift; sourceTree = "<group>"; };
@@ -88,6 +94,7 @@
 		46621B7E1E218750005E5404 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		46621B801E21D11B005E5404 /* MyEventsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyEventsTableViewCell.swift; sourceTree = "<group>"; };
 		46621B821E2E9E4A005E5404 /* EventInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInfoViewController.swift; sourceTree = "<group>"; };
+		466FF4CE1FD517EF00ED6E37 /* EventPricingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPricingViewController.swift; sourceTree = "<group>"; };
 		4687A0091DFCB9A80067F773 /* WebblenEvents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebblenEvents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4687A00C1DFCB9A80067F773 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4687A0111DFCB9A80067F773 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -119,6 +126,7 @@
 		46CB51A01FA99576009CF2D4 /* BackTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackTableVC.swift; sourceTree = "<group>"; };
 		46EC3ACC1F7305BE00E4CC06 /* EventCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCategoryViewController.swift; sourceTree = "<group>"; };
 		46F113BB1E16044800FB7294 /* defaultEventImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultEventImage.png; sourceTree = "<group>"; };
+		46F4D6E71FC3819C00F5289B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		507F16388FC4FF4BC0B398A4 /* Pods-WebblenEvents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebblenEvents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents.debug.xcconfig"; sourceTree = "<group>"; };
 		5B69FC37BCC1F75D899C6C06 /* Pods_WebblenEvents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WebblenEvents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D40A12A31F658F3E00392FF9 /* WhatsNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsNewViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46F4D6E81FC381C100F5289B /* CoreLocation.framework in Frameworks */,
 				4624B9661F68D2AF00F4D6E6 /* SwiftyStoreKit.framework in Frameworks */,
 				0DEA47663D8D060E3DC23629 /* Pods_WebblenEvents.framework in Frameworks */,
 				46094A261FB1493D008B277D /* MapKit.framework in Frameworks */,
@@ -225,6 +234,9 @@
 				46956C741E1E2519009A8F93 /* WebblenEvents.entitlements */,
 				4687A0131DFCB9A80067F773 /* WebblenEvents.xcdatamodeld */,
 				D40A12A31F658F3E00392FF9 /* WhatsNewViewController.swift */,
+				466FF4CE1FD517EF00ED6E37 /* EventPricingViewController.swift */,
+				461085B31FDE206D00E7B2A2 /* WebblenIAP.swift */,
+				461085B51FDE214300E7B2A2 /* WebblenIAPService.swift */,
 			);
 			path = WebblenEvents;
 			sourceTree = "<group>";
@@ -232,6 +244,7 @@
 		EEABF8226ADF07419F0B7844 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				46F4D6E71FC3819C00F5289B /* CoreLocation.framework */,
 				46094A251FB1493D008B277D /* MapKit.framework */,
 				4624B9651F68D2AE00F4D6E6 /* SwiftyStoreKit.framework */,
 				4617A7481F3D4D2900926160 /* StoreKit.framework */,
@@ -309,6 +322,9 @@
 							};
 							com.apple.Push = {
 								enabled = 1;
+							};
+							com.apple.SafariKeychain = {
+								enabled = 0;
 							};
 						};
 					};
@@ -466,11 +482,13 @@
 				4687A0151DFCB9A80067F773 /* WebblenEvents.xcdatamodeld in Sources */,
 				46CB51971FA92058009CF2D4 /* UIButtonX.swift in Sources */,
 				4691BD901FAFED4C00056024 /* SWMenuViewController.swift in Sources */,
+				466FF4CF1FD517EF00ED6E37 /* EventPricingViewController.swift in Sources */,
 				46094A2F1FB2CD0A008B277D /* CurrentUserData.swift in Sources */,
 				46621B7F1E218750005E5404 /* InitialViewController.swift in Sources */,
 				4609990E1E3A9530000DE53F /* FeedbackViewController.swift in Sources */,
 				D41F1F1D1F9A798E006DE9CE /* GeotificationsViewController.swift in Sources */,
 				4617A7471F3D4C6600926160 /* confirmPostViewController.swift in Sources */,
+				461085B61FDE214300E7B2A2 /* WebblenIAPService.swift in Sources */,
 				46621B811E21D11B005E5404 /* MyEventsTableViewCell.swift in Sources */,
 				46CB51A11FA99576009CF2D4 /* BackTableVC.swift in Sources */,
 				4609990A1E384717000DE53F /* TermsViewController.swift in Sources */,
@@ -498,6 +516,7 @@
 				469386DC1E2F2E51000AF3D4 /* SettingsViewController.swift in Sources */,
 				46094A311FB8EED5008B277D /* documentStructures.swift in Sources */,
 				4609990C1E39E38A000DE53F /* BlockedUsersViewController.swift in Sources */,
+				461085B41FDE206D00E7B2A2 /* WebblenIAP.swift in Sources */,
 				D40A12A61F659E7300392FF9 /* NotificationSettingsViewController.swift in Sources */,
 				46956C731E1E10E5009A8F93 /* SignUpViewController.swift in Sources */,
 				4624B9641F686E2C00F4D6E6 /* StoreManager.swift in Sources */,

@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import Foundation
 
 // MARK: Helper Extensions
 extension UIViewController {
@@ -83,7 +84,7 @@ extension Date {
         if years(from: date)   > 0 { return "\(years(from: date))y"   }
         if months(from: date)  > 0 { return "\(months(from: date))M"  }
         if weeks(from: date)   > 0 { return "\(weeks(from: date))w"   }
-        if days(from: date)    > -2 { return "\(days(from: date))d"    }
+        if days(from: date)    > 0 { return "\(days(from: date))d"    }
         if hours(from: date)   > 0 { return "\(hours(from: date))h"   }
         if minutes(from: date) > 0 { return "\(minutes(from: date))m" }
         if seconds(from: date) > 0 { return "\(seconds(from: date))s" }

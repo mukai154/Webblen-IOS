@@ -8,26 +8,25 @@
 
 import UIKit
 
-class NotificationSettingsViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class NotificationSettingsViewController: UIViewController {
     
-    var notifyWithin = ["1 mile", "5 miles", "10 miles" ]
-    
-    
-    var notificationDistance = "1 mile"
     var event18 = false
     var event21 = false
-    var price = "4.99"
-    var event18String = ""
-    var event21String = ""
+    var notificationOnly = false
     
     @IBOutlet weak var event18Switch: UISwitch!
     
     @IBOutlet weak var event21Switch: UISwitch!
-
+    @IBOutlet weak var notificationOnlySwitch: UISwitch!
+    @IBOutlet weak var notificationInfoButton: UIButton!
+    
+    var helpCircle = UIImage(named: "help-circle")?.withRenderingMode(.alwaysTemplate)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        notificationInfoButton.setImage(helpCircle, for: .normal)
+        notificationInfoButton.tintColor = UIColor(red: 189/255, green: 189/255, blue: 189/255, alpha: 1.0)
         // Do any additional setup after loading the view.
     }
     
@@ -36,88 +35,54 @@ class NotificationSettingsViewController: UIViewController, UIPickerViewDataSour
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
-    
-    
-    @IBOutlet weak var notifyLabel: UILabel!
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
 
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-    //Notification Occurence Picker View
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return notifyWithin[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return notifyWithin.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        notifyLabel.text = "Notify Users Within " + notifyWithin[row]
-        notificationDistance = notifyWithin[row]
-    }
-    
-    
-    
-    //Outlets & Functions
-    @IBOutlet weak var notificationsPicker: UIPickerView!
     
     @IBAction func didTapCancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
 
-    @IBOutlet weak var eventPriceLabel: UILabel!
-   
 
+   
+    @IBAction func didPressQuestion(_ sender: Any) {
+        showAlert(withTitle: "Notification Only Event", message: "Only those within your set notification radius will be able to view your event.")
+    }
+    
     
     @IBAction func didPressConfirm(_ sender: Any) {
         
+        if (notificationOnlySwitch.isOn){
+            notificationOnly = true
+        }
         if (event18Switch.isOn){
             event18 = true
-            event18String = "18+"
-        }
-        else {
-            event18 = false
         }
         
-        if (event21Switch.isOn && event18Switch.isOn){
-            
-            event18 = false
-            event18String = ""
-            
+        if (event21Switch.isOn){
             event21 = true
-            event21String = "21+"
         }
-        else if (event21Switch.isOn){
-            event21 = true
-            event21String = "21+"
+        if (event21Switch.isOn && event18Switch.isOn){
+            event21 = false
         }
         
         if let presenter = presentingViewController as? NewEventViewController{
             
             if (event18 == true){
-            presenter.modifyNotification.setTitle("Notify Within: " + notificationDistance + ", " + event18String + ", $4.99", for: .normal)
+            presenter.modifyNotification.setTitle("18+ Event", for: .normal)
             }
-            else if (event21 == true && event18 == false){
-            presenter.modifyNotification.setTitle("Notify Within: " + notificationDistance + ", " + event21String + ", $4.99", for: .normal)
+            else if (event21 == true){
+                presenter.modifyNotification.setTitle("21+ Event", for: .normal)
+            }
+            else if (notificationOnly == true){
+                presenter.modifyNotification.setTitle("Notification Only", for: .normal)
+            }
+            else if (notificationOnly == true && event18 == true){
+                presenter.modifyNotification.setTitle("Notification Only, 18+ Event", for: .normal)
+            }
+            else if (notificationOnly == true && event21 == true){
+                presenter.modifyNotification.setTitle("Notification Only, 21+ Event", for: .normal)
             }
             else {
-            presenter.modifyNotification.setTitle("Notify Within: " + notificationDistance + ", $4.99", for: .normal)
+               presenter.modifyNotification.setTitle("Event Filter Settings", for: .normal)
             }
             //presenter.eventRadius = notificationDistance
             presenter.event18 = event18

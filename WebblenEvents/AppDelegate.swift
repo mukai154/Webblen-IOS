@@ -16,6 +16,7 @@ import FBSDKCoreKit
 import IQKeyboardManagerSwift
 import CoreLocation
 import SwiftyStoreKit
+import NVActivityIndicatorView
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -27,7 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
         
         SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
             for purchase in purchases {
@@ -41,27 +41,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }
         }
         
-        locationManager.delegate = self
-        locationManager.requestAlwaysAuthorization()
-        
         IQKeyboardManager.sharedManager().enable = true
         application.statusBarStyle = .default
         
         //FB Authentication
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        
-        //Create notification center
-        if #available(iOS 10.0, *){
-            UNUserNotificationCenter.current().delegate = self
-            
-            let authOptions : UNAuthorizationOptions = [.alert, .badge, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: {_, _ in})
-        }
-        else {
-            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-            application.registerUserNotificationSettings(settings)
-        }
         
         application.registerForRemoteNotifications()
         
@@ -118,50 +103,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Saves changes in the application's managed object context before the application terminates.
     }
 
-    @available(iOS 10.0, *)
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notificaiton: UNNotification, withCompletionHandler completionHandler: @escaping (_ options: UNNotificationPresentationOptions) -> Void){
-        
-        //custom code to handle push while app in foreground
-        
-        let dict = notificaiton.request.content.userInfo["aps"] as! NSDictionary
-        let d : [String : Any] = dict["alert"] as! [String : Any]
-        let body : String = d["body"] as! String
-        let title : String = d["title"] as! String
-        self.showAlertAppDelegate(title: title, message: body, buttonTitle: "ok", window: self.window!)
-        
-    }
-
-    @available(iOS 10.0, *)
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        // If..
-        print("Handle push from background or closed\(response.notification.request.content.userInfo)")
-    }
-    
-    func showAlertAppDelegate(title: String,message : String,buttonTitle: String,window: UIWindow){
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: buttonTitle, style: UIAlertActionStyle.default, handler: nil))
-        window.rootViewController?.present(alert, animated: true, completion: nil)
-    }
-    
-    func handleEvent(forRegion region: CLRegion!) {
-        print("Geofence triggered!")
-    }
-    
 }
 
-extension AppDelegate: CLLocationManagerDelegate {
-    
-    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            handleEvent(forRegion: region)
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            handleEvent(forRegion: region)
-        }
-    }
-}
+
 
 

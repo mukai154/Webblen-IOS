@@ -9,6 +9,7 @@
 
 import UIKit
 import Firebase
+import NVActivityIndicatorView
 
 class InterestSetupViewController: UIViewController {
 
@@ -74,11 +75,19 @@ class InterestSetupViewController: UIViewController {
     var dataBaseRef = Database.database().reference()
     var currentUser = Auth.auth().currentUser
     
+    var loadingView = NVActivityIndicatorView(frame: CGRect(x: (100), y: (100), width: 125, height: 125), type: .ballRotateChase, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1.0), padding: 0)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
     //Activity indicator starts
-    activityIndicator.startAnimating()
+        let xAxis = self.view.center.x
+        let yAxis = self.view.center.y
+        
+        let frame = CGRect(x: (xAxis-147), y: (yAxis-135), width: 300, height: 300)
+        loadingView = NVActivityIndicatorView(frame: frame, type: .ballRotateChase, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 0.9), padding: 0)
+        self.view.addSubview(loadingView)
+        loadingView.startAnimating()
     
     //Check for current user
         
@@ -156,7 +165,9 @@ class InterestSetupViewController: UIViewController {
                     if  (interests?.contains("WINEBREW"))!{
                         self.wineBrew = true
                     }
-                    self.renderInterests()
+                    UIView.animate(withDuration: 0.4, delay: 0, options: [], animations: {
+                        self.renderInterests()
+                    }, completion: nil)
                 }
                 else {
                     print("document does not exist")
@@ -165,8 +176,7 @@ class InterestSetupViewController: UIViewController {
    
             
         }
-        activityIndicator.stopAnimating()
-        activityIndicator.isHidden = true
+
         
     }
 
@@ -768,6 +778,7 @@ class InterestSetupViewController: UIViewController {
             self.wineBrewView.layer.borderWidth = 0.1
             self.wineBrewView.layer.cornerRadius = CGFloat(Float(25.0))
         }
+        self.loadingView.stopAnimating()
     }
 
 

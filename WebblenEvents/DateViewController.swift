@@ -18,13 +18,15 @@ class DateViewController: UIViewController {
     @IBOutlet weak var setDateTimeButton: UIButton!
     
     //Variables
-    var chosenDate = "date"
-    var eventStart = "5:45PM"
-    var eventEnd = "end"
+    var chosenDate = ""
+    var eventStart = ""
+    var eventEnd = ""
     var noEnd = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        eventDatePicker.minimumDate = Date()
         
         // Do any additional setup after loading the view.
     }

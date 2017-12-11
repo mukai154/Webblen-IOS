@@ -67,6 +67,10 @@ class SWMenuViewController: UIViewController {
         
         //Database Handler
         currentUser = Auth.auth().currentUser
+        
+        if currentUser == nil {
+            self.performSegue(withIdentifier: "loginSegue", sender: nil)
+        }
         self.dataBase.collection("users").document((currentUser?.uid)!).getDocument(completion: {(snapshot, error) in
             if !(snapshot?.exists)! {
                 self.performSegue(withIdentifier: "SetupSegue", sender: nil)
@@ -75,7 +79,7 @@ class SWMenuViewController: UIViewController {
                 print(error)
             }
             else {
-               print("user exists")
+               self.username.text = snapshot?.data()["username"] as! String
             }
         })
         

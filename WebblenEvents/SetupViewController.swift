@@ -21,6 +21,7 @@ class SetupViewController: UIViewController {
     var userID:String?
     
     var database = Firestore.firestore()
+    var changingName = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +51,8 @@ class SetupViewController: UIViewController {
             "isOver21": false,
             "isVerified": [5, true, "hello"],
             "uid": self.userID!,
-            "username": self.username.text!
+            "username": self.username.text!,
+            "blockedUsers": []
         ]
         
         database.collection("usernames").document(username.text!).getDocument(completion: {(snapshot, error) in
@@ -65,7 +67,12 @@ class SetupViewController: UIViewController {
                 usernameRef.document(self.username.text!).setData([
                     "uid": self.user?.uid
                     ])
+                if self.changingName {
+                    //do something
+                }
+                else {
                 self.performSegue(withIdentifier: "SetupInterestsSegue", sender: nil)
+                }
             }
         })
     }

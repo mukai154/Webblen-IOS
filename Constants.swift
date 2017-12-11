@@ -37,4 +37,5 @@ struct Constants {
         static let technology = "TECHNOLOGY"
         static let theatre = "THEATRE"
     }
+
 }
