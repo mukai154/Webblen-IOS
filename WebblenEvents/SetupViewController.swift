@@ -49,7 +49,7 @@ class SetupViewController: UIViewController {
             "interests": [],
             "isOver18": false,
             "isOver21": false,
-            "isVerified": [5, true, "hello"],
+            "isVerified": false,
             "uid": self.userID!,
             "username": self.username.text!,
             "blockedUsers": []
@@ -61,14 +61,16 @@ class SetupViewController: UIViewController {
                 self.errorMessage.text = "Sorry, this Name is taken :("
             }
             else {
+                if self.username.text!.count > 2{
                 let userDocRef = self.database.collection("users")
                 userDocRef.document(self.userID!).setData(newUser)
                 let usernameRef = self.database.collection("usernames")
                 usernameRef.document(self.username.text!).setData([
                     "uid": self.user?.uid
                     ])
-                if self.changingName {
-                    //do something
+                }
+                else if self.username.text!.count < 2 {
+                    self.showAlert(withTitle: "Username error", message: "Please set a sufficient username")
                 }
                 else {
                 self.performSegue(withIdentifier: "SetupInterestsSegue", sender: nil)

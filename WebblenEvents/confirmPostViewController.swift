@@ -152,7 +152,7 @@ class confirmPostViewController: UIViewController {
         
         loadingView.startAnimating()
         
-        if (self.eventCreator == "Webblen Administrator"){
+        if (self.eventCreator == "Webblen"){
             didPurchaseEvent = true
             dataBase.collection("events").document(eventKey).updateData([
                 "verified": true,

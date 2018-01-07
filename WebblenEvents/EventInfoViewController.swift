@@ -26,7 +26,6 @@ class EventInfoViewController: UIViewController {
     @IBOutlet weak var eventCreator: UILabel!
     @IBOutlet weak var eventViews: UILabel!
     @IBOutlet weak var eventDescription: UITextView!
-    @IBOutlet weak var contentView: UIView!
     
   
     @IBOutlet weak var mapIcon: UIImageView!
@@ -40,7 +39,6 @@ class EventInfoViewController: UIViewController {
     @IBOutlet weak var eventAddress: UILabel!
     @IBOutlet weak var eventDate: UILabel!
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var imageBottomShadow: UIViewX!
     
@@ -94,7 +92,7 @@ class EventInfoViewController: UIViewController {
         eventDescription.textContainerInset = UIEdgeInsetsMake(10, 0, 0, 0)
         eventDescription.textColor = UIColor.lightGray
         let initialDescriptionHeight = eventDescription.contentSize.height
-        let initialContentHeight = contentView.frame.size.height
+        let initialContentHeight = scrollView.frame.size.height
 
 
 
@@ -122,9 +120,6 @@ class EventInfoViewController: UIViewController {
                         self.eventUploadedPhoto.isHidden = false
                         self.eventDescription.translatesAutoresizingMaskIntoConstraints = true
                         self.eventDescription.sizeToFit()
-                        let changedHeight = initialDescriptionHeight - (self.eventDescription.contentSize.height)
-                        let newContentHeight = self.contentView.frame.size.height - changedHeight
-                        self.scrollView.contentSize.height -= newContentHeight
 
                     }
                     else {
@@ -196,28 +191,7 @@ class EventInfoViewController: UIViewController {
             })
             let deleteEvent = UIAlertAction(title: "Delete Event", style: .destructive, handler: { action in
                 self.dataBase.collection("events").document(self.eventKey).delete()
-                //Send Data Back
-                if let presenter = self.presentingViewController as? GeotificationsViewController{
-                    presenter.menuOpen = true
-                    presenter.menuView.isHidden = false
-                    UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
-                        presenter.googleMapsView.alpha = 0
-                        presenter.googleMapsView.clear()
-                    }, completion: { _ in
-                        presenter.googleMapsView.isUserInteractionEnabled = false
-                        
-                    })
-                    presenter.todayArray.removeAll()
-                    presenter.tomorrowArray.removeAll()
-                    presenter.thisWeekArray.removeAll()
-                    presenter.thisMonthArray.removeAll()
-                    presenter.loadEventData()
-                }
-                else if let presenter = self.presentingViewController as? MyEventsViewController{
-                    presenter.loadingView.startAnimating()
-                    presenter.configureDatabase()
-                }
-                self.dismiss(animated: true, completion: nil)
+                self.performSegue(withIdentifier: "homeSegue", sender: nil)
             })
             let dismissAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             
@@ -233,28 +207,7 @@ class EventInfoViewController: UIViewController {
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             let dismissAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             let thankDismiss = UIAlertAction(title: "Dismiss", style: .default, handler: { action in
-                //Send Data Back
-                if let presenter = self.presentingViewController as? GeotificationsViewController{
-                    presenter.menuOpen = true
-                    presenter.menuView.isHidden = false
-                    UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
-                        presenter.googleMapsView.alpha = 0
-                        presenter.googleMapsView.clear()
-                    }, completion: { _ in
-                        presenter.googleMapsView.isUserInteractionEnabled = false
-                        
-                    })
-                    presenter.todayArray.removeAll()
-                    presenter.tomorrowArray.removeAll()
-                    presenter.thisWeekArray.removeAll()
-                    presenter.thisMonthArray.removeAll()
-                    presenter.loadEventData()
-                }
-                else if let presenter = self.presentingViewController as? MyEventsViewController{
-                    presenter.loadingView.startAnimating()
-                    presenter.configureDatabase()
-                }
-                self.dismiss(animated: true, completion: nil)
+                self.performSegue(withIdentifier: "homeSegue", sender: nil)
             })
             
             let thankAlert = UIAlertController(title: "Report Submitted", message: "Thank You for Submitting Your Report. We'll Address This Issue As Soon As Possible. Block the User to No Longer View Events By Them", preferredStyle: .alert)
@@ -286,30 +239,7 @@ class EventInfoViewController: UIViewController {
                 let blockAlert = UIAlertController(title: "This User Has Been Blocked", message: nil, preferredStyle: .alert)
                 
                 let blockDismiss = UIAlertAction(title: "Dismiss", style: .default, handler: { action in
-                    
-                    //Send Data Back
-                    if let presenter = self.presentingViewController as? GeotificationsViewController{
-                        presenter.menuOpen = true
-                        presenter.menuView.isHidden = false
-                        UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
-                            presenter.googleMapsView.alpha = 0
-                            presenter.googleMapsView.clear()
-                        }, completion: { _ in
-                            presenter.googleMapsView.isUserInteractionEnabled = false
-                            
-                        })
-                        presenter.todayArray.removeAll()
-                        presenter.tomorrowArray.removeAll()
-                        presenter.thisWeekArray.removeAll()
-                        presenter.thisMonthArray.removeAll()
-                        presenter.loadEventData()
-                    }
-                    else if let presenter = self.presentingViewController as? MyEventsViewController{
-                        presenter.loadingView.startAnimating()
-                        presenter.configureDatabase()
-                    }
-                    self.dismiss(animated: true, completion: nil)
-                    
+                    self.performSegue(withIdentifier: "homeSegue", sender: nil)
                 })
                 
                 blockAlert.addAction(blockDismiss)

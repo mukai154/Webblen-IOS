@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0DEA47663D8D060E3DC23629 /* Pods_WebblenEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B69FC37BCC1F75D899C6C06 /* Pods_WebblenEvents.framework */; };
-		46094A261FB1493D008B277D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46094A251FB1493D008B277D /* MapKit.framework */; };
 		46094A281FB25738008B277D /* EventOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46094A271FB25738008B277D /* EventOverlay.swift */; };
-		46094A2F1FB2CD0A008B277D /* CurrentUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46094A2E1FB2CD0A008B277D /* CurrentUserData.swift */; };
 		46094A311FB8EED5008B277D /* documentStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46094A301FB8EED5008B277D /* documentStructures.swift */; };
 		46094A331FB9497C008B277D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46094A321FB9497C008B277D /* HomeViewController.swift */; };
 		46094A351FB94F3F008B277D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46094A341FB94F3F008B277D /* GoogleService-Info.plist */; };
@@ -41,9 +39,7 @@
 		4687A0171DFCB9A80067F773 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4687A0161DFCB9A80067F773 /* Assets.xcassets */; };
 		4687A01A1DFCB9A80067F773 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4687A0181DFCB9A80067F773 /* LaunchScreen.storyboard */; };
 		4687A0221DFCBC560067F773 /* Logo White No Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 4687A0211DFCBC560067F773 /* Logo White No Background.png */; };
-		468BDB8D1F7F197700C5BF47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 468BDB8C1F7F185900C5BF47 /* GoogleService-Info.plist */; };
 		4691BD901FAFED4C00056024 /* SWMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4691BD8F1FAFED4C00056024 /* SWMenuViewController.swift */; };
-		4691BD921FB0364C00056024 /* Geotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4691BD911FB0364C00056024 /* Geotification.swift */; };
 		4691BD941FB036A200056024 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4691BD931FB036A200056024 /* Utilities.swift */; };
 		469386DC1E2F2E51000AF3D4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469386DB1E2F2E51000AF3D4 /* SettingsViewController.swift */; };
 		46956C6F1E1DB3F9009A8F93 /* InterestSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46956C6E1E1DB3F9009A8F93 /* InterestSetupViewController.swift */; };
@@ -68,9 +64,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		46094A251FB1493D008B277D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		46094A271FB25738008B277D /* EventOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventOverlay.swift; sourceTree = "<group>"; };
-		46094A2E1FB2CD0A008B277D /* CurrentUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserData.swift; sourceTree = "<group>"; };
 		46094A301FB8EED5008B277D /* documentStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = documentStructures.swift; sourceTree = "<group>"; };
 		46094A321FB9497C008B277D /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		46094A341FB94F3F008B277D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -103,9 +97,7 @@
 		4687A0191DFCB9A80067F773 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4687A01B1DFCB9A80067F773 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4687A0211DFCBC560067F773 /* Logo White No Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo White No Background.png"; sourceTree = "<group>"; };
-		468BDB8C1F7F185900C5BF47 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4691BD8F1FAFED4C00056024 /* SWMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWMenuViewController.swift; sourceTree = "<group>"; };
-		4691BD911FB0364C00056024 /* Geotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geotification.swift; sourceTree = "<group>"; };
 		4691BD931FB036A200056024 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		469386DB1E2F2E51000AF3D4 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		46956C6E1E1DB3F9009A8F93 /* InterestSetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestSetupViewController.swift; sourceTree = "<group>"; };
@@ -143,7 +135,6 @@
 				46F4D6E81FC381C100F5289B /* CoreLocation.framework in Frameworks */,
 				4624B9661F68D2AF00F4D6E6 /* SwiftyStoreKit.framework in Frameworks */,
 				0DEA47663D8D060E3DC23629 /* Pods_WebblenEvents.framework in Frameworks */,
-				46094A261FB1493D008B277D /* MapKit.framework in Frameworks */,
 				4617A7491F3D4D2900926160 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -187,7 +178,6 @@
 				4609990F1E3A9902000DE53F /* BlockTableViewCell.swift */,
 				4617A7461F3D4C6600926160 /* confirmPostViewController.swift */,
 				4642E74A1E20E90A00D65DA5 /* Constants.swift */,
-				46094A2E1FB2CD0A008B277D /* CurrentUserData.swift */,
 				469E84841F385180002E07AA /* DateViewController.swift */,
 				46F113BB1E16044800FB7294 /* defaultEventImage.png */,
 				46094A301FB8EED5008B277D /* documentStructures.swift */,
@@ -197,9 +187,7 @@
 				46094A271FB25738008B277D /* EventOverlay.swift */,
 				4609990D1E3A9530000DE53F /* FeedbackViewController.swift */,
 				46CB51981FA9268D009CF2D4 /* FloatingActionButton.swift */,
-				4691BD911FB0364C00056024 /* Geotification.swift */,
 				D41F1F1C1F9A798E006DE9CE /* GeotificationsViewController.swift */,
-				468BDB8C1F7F185900C5BF47 /* GoogleService-Info.plist */,
 				46094A341FB94F3F008B277D /* GoogleService-Info.plist */,
 				461FD2D21F43FBF9001C7279 /* homeCell.swift */,
 				46094A321FB9497C008B277D /* HomeViewController.swift */,
@@ -245,7 +233,6 @@
 			isa = PBXGroup;
 			children = (
 				46F4D6E71FC3819C00F5289B /* CoreLocation.framework */,
-				46094A251FB1493D008B277D /* MapKit.framework */,
 				4624B9651F68D2AE00F4D6E6 /* SwiftyStoreKit.framework */,
 				4617A7481F3D4D2900926160 /* StoreKit.framework */,
 				5B69FC37BCC1F75D899C6C06 /* Pods_WebblenEvents.framework */,
@@ -318,7 +305,7 @@
 								enabled = 1;
 							};
 							com.apple.Maps.iOS = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.Push = {
 								enabled = 1;
@@ -358,7 +345,6 @@
 				4687A0171DFCB9A80067F773 /* Assets.xcassets in Resources */,
 				4687A0221DFCBC560067F773 /* Logo White No Background.png in Resources */,
 				4687A0121DFCB9A80067F773 /* Main.storyboard in Resources */,
-				468BDB8D1F7F197700C5BF47 /* GoogleService-Info.plist in Resources */,
 				46094A351FB94F3F008B277D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -483,7 +469,6 @@
 				46CB51971FA92058009CF2D4 /* UIButtonX.swift in Sources */,
 				4691BD901FAFED4C00056024 /* SWMenuViewController.swift in Sources */,
 				466FF4CF1FD517EF00ED6E37 /* EventPricingViewController.swift in Sources */,
-				46094A2F1FB2CD0A008B277D /* CurrentUserData.swift in Sources */,
 				46621B7F1E218750005E5404 /* InitialViewController.swift in Sources */,
 				4609990E1E3A9530000DE53F /* FeedbackViewController.swift in Sources */,
 				D41F1F1D1F9A798E006DE9CE /* GeotificationsViewController.swift in Sources */,
@@ -506,7 +491,6 @@
 				46956C6F1E1DB3F9009A8F93 /* InterestSetupViewController.swift in Sources */,
 				46094A281FB25738008B277D /* EventOverlay.swift in Sources */,
 				4624B9621F67D45D00F4D6E6 /* VerifyAccountViewController.swift in Sources */,
-				4691BD921FB0364C00056024 /* Geotification.swift in Sources */,
 				4642E73D1E1F40E400D65DA5 /* NewEventViewController.swift in Sources */,
 				46CB519F1FA98F31009CF2D4 /* SWRevealViewController.m in Sources */,
 				461FD2D31F43FBF9001C7279 /* homeCell.swift in Sources */,

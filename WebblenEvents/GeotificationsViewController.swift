@@ -42,7 +42,6 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
     //Geotification & Menu Variables
     var initialLoad = false
     var coordinates: [CLLocationCoordinate2D] = []
-    var geotifications: [Geotification] = []
     let locationManager = CLLocationManager()
     var menuOpen = false
     var locationInfo = LocationTracking()
@@ -106,7 +105,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         let yAxis = self.view.center.y
         
         let frame = CGRect(x: (xAxis-147), y: (yAxis-135), width: 300, height: 300)
-        loadingView = NVActivityIndicatorView(frame: frame, type: .ballScaleMultiple, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 0.7), padding: 0)
+        loadingView = NVActivityIndicatorView(frame: frame, type: .ballScaleMultiple, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 0.5), padding: 0)
         self.view.addSubview(loadingView)
         loadingView.startAnimating()
         
@@ -152,18 +151,26 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         //***Location Managing
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startUpdatingLocation()
-        locationManager.startMonitoringSignificantLocationChanges()
+
         
 
         initGoogleMaps()
         if (currentUser == nil){
             self.performSegue(withIdentifier: "loginSegue", sender: nil)
         }
-        else {
-        loadEventData()
+        
+        if CLLocationManager.locationServicesEnabled(){
+            switch CLLocationManager.authorizationStatus() {
+            case .notDetermined, .restricted, .denied:
+                showAlert(withTitle: "Not Able to Retrieve Your Location", message: "It looks like this device has location services disabled. Please enable them to be notified about events around you")
+            case .authorizedAlways, .authorizedWhenInUse:
+                locationManager.desiredAccuracy = kCLLocationAccuracyBest
+                locationManager.startUpdatingLocation()
+                locationManager.startMonitoringSignificantLocationChanges()
+                loadEventData()
+            }
         }
+        
         
     }
 
@@ -177,6 +184,10 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         let userRef = database.collection("users").document((currentUser?.uid)!)
         userRef.getDocument(completion: {(document, error) in
             if let document = document {
+                if !(document.exists){
+                    self.performSegue(withIdentifier: "setupSegue", sender: nil)
+                }
+                else {
                 self.userInterests = (document.data()["interests"] as? [String])!
                 self.userBlocks = (document.data()["blockedUsers"] as? [String])!
                 let eventRef = self.database.collection("events").getDocuments(completion: {(snapshot, error) in
@@ -337,12 +348,15 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
                             }
                         }
                     }
+                    
                 })
+                }
             }
             else {
                 print("document does not exist")
             }
         })
+        
         
     }
     
@@ -392,7 +406,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
             }
             else {
             showEventAlert(withTitle: "There's Something You May be Interested in Happening Today!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
-            self.showNotification(title: "Something you may be interested in is happening tommorow!", message: "The Event: " + eventTitleString + " is happening tomorrow. Check it out!")
+            self.showNotification(title: selectedEvent.author + " has an event today!", message: "The Event: " + eventTitleString + " is happening today. Check it out!")
             }
         }
         if let e = self.tomorrowArray.index(where: { $0.eventKey == region.identifier }) {
@@ -405,7 +419,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
             }
             else{
             showEventAlert(withTitle: "An Event You May be Interested in Will Occur Tomorrow Nearby!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
-            self.showNotification(title: "New Event Occuring Tomorrow Nearby!", message: "The Event: " + eventTitleString + " is happening tomorrow. Check it out!")
+            self.showNotification(title: selectedEvent.author + " has an event tommorow!", message: "The Event: " + eventTitleString + " is happening tomorrow. Check it out!")
             }
         }
         if let e = self.thisWeekArray.index(where: { $0.eventKey == region.identifier }) {
@@ -417,7 +431,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
             }
             else{
             showEventAlert(withTitle: "An Event You'd Be Interested in Will Occur in the Next Few Days Nearby!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
-            self.showNotification(title: "New Event Occuring This Week Nearby!", message: "The Event: " + eventTitleString + " is happening this week. Check it out!")
+            self.showNotification(title: selectedEvent.author + " has an event this week", message: eventTitleString + " is happening this week. Check it out!")
             }
         }
         if let e = self.thisMonthArray.index(where: { $0.eventKey == region.identifier }) {
@@ -429,7 +443,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
             }
             else{
             showEventAlert(withTitle: "An Event You'd Be Interested in Will Occur Next Few Weeks Nearby!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
-            self.showNotification(title: "New Event Occuring in the Next Few Weeks Nearby!", message: "The Event: " + eventTitleString + " is happening this week. Check it out!")
+            self.showNotification(title: selectedEvent.author + " has an event later!", message: "The Event: " + eventTitleString + " is happening this month. Check it out!")
             }
         }
         
@@ -583,10 +597,21 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
     
     @IBAction func didPressToday(_ sender: Any) {
         googleMapsView.clear()
-        
+        self.loadingView.startAnimating()
+        var eventLat = 0.0
+        var eventLon = 0.0
+        self.distanceFromEvent = 10000.0
         for e in self.todayArray {
             if e.notificationOnly == false {
             let position = CLLocationCoordinate2D(latitude: e.lat, longitude: e.lon)
+            let eventLocation = CLLocation(latitude: e.lat, longitude: e.lon)
+            let currentCoordinates = CLLocation(latitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!)
+            let calculatedDistance = currentCoordinates.distance(from: eventLocation)
+                if calculatedDistance <= self.distanceFromEvent {
+                    self.distanceFromEvent = calculatedDistance
+                    eventLat = e.lat
+                    eventLon = e.lon
+                }
             let marker = GMSMarker(position: position)
             marker.title = e.eventKey
             marker.icon = GMSMarker.markerImage(with: nil)
@@ -594,13 +619,33 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
             marker.map = self.googleMapsView
             }
         }
+        if self.todayArray.count < 1 {
+            self.showAlert(withTitle: "No events found", message: "Sorry, it looks like there's nothing you'd be interested in happening today.")
+        }
+        else {
+            let camera = GMSCameraPosition.camera(withLatitude: eventLat, longitude: eventLon, zoom: 12.0)
+            self.googleMapsView.camera = camera
+        }
+        self.loadingView.stopAnimating()
     }
     
     @IBAction func didPressTomorrow(_ sender: Any) {
         googleMapsView.clear()
+        self.loadingView.startAnimating()
+        var eventLat = 0.0
+        var eventLon = 0.0
+        self.distanceFromEvent = 10000.0
         for e in self.tomorrowArray {
             if e.notificationOnly == false {
             let position = CLLocationCoordinate2D(latitude: e.lat, longitude: e.lon)
+            let eventLocation = CLLocation(latitude: e.lat, longitude: e.lon)
+            let currentCoordinates = CLLocation(latitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!)
+            let calculatedDistance = currentCoordinates.distance(from: eventLocation)
+                if calculatedDistance <= self.distanceFromEvent {
+                    self.distanceFromEvent = calculatedDistance
+                    eventLat = e.lat
+                    eventLon = e.lon
+                }
             let marker = GMSMarker(position: position)
             marker.title = e.eventKey
             marker.icon = GMSMarker.markerImage(with: nil)
@@ -608,12 +653,32 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
             marker.map = self.googleMapsView
             }
         }
+        if self.tomorrowArray.count < 1 {
+            self.showAlert(withTitle: "No events found", message: "Sorry, it looks like there's nothing you'd be interested in happening tomorrow.")
+        }
+        else {
+            let camera = GMSCameraPosition.camera(withLatitude: eventLat, longitude: eventLon, zoom: 12.0)
+            self.googleMapsView.camera = camera
+        }
+        self.loadingView.stopAnimating()
     }
     @IBAction func didPressWeek(_ sender: Any) {
         googleMapsView.clear()
+        self.loadingView.startAnimating()
+        var eventLat = 0.0
+        var eventLon = 0.0
+        self.distanceFromEvent = 10000.0
         for e in self.thisWeekArray {
             if e.notificationOnly == false {
             let position = CLLocationCoordinate2D(latitude: e.lat, longitude: e.lon)
+            let eventLocation = CLLocation(latitude: e.lat, longitude: e.lon)
+            let currentCoordinates = CLLocation(latitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!)
+            let calculatedDistance = currentCoordinates.distance(from: eventLocation)
+                if calculatedDistance <= self.distanceFromEvent {
+                    self.distanceFromEvent = calculatedDistance
+                    eventLat = e.lat
+                    eventLon = e.lon
+                }
             let marker = GMSMarker(position: position)
             marker.title = e.eventKey
             marker.icon = GMSMarker.markerImage(with: nil)
@@ -621,12 +686,32 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
             marker.map = self.googleMapsView
             }
         }
+        if self.thisWeekArray.count < 1 {
+            self.showAlert(withTitle: "No events found", message: "Sorry, it looks like there's nothing you'd be interested in happening later this week.")
+        }
+        else {
+            let camera = GMSCameraPosition.camera(withLatitude: eventLat, longitude: eventLon, zoom: 12.0)
+            self.googleMapsView.camera = camera
+        }
+        self.loadingView.stopAnimating()
     }
     @IBAction func didPressMonth(_ sender: Any) {
         googleMapsView.clear()
+        self.loadingView.startAnimating()
+        var eventLat = 0.0
+        var eventLon = 0.0
+        self.distanceFromEvent = 10000.0
         for e in self.thisMonthArray {
             if e.notificationOnly == false {
             let position = CLLocationCoordinate2D(latitude: e.lat, longitude: e.lon)
+            let eventLocation = CLLocation(latitude: e.lat, longitude: e.lon)
+            let currentCoordinates = CLLocation(latitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!)
+            let calculatedDistance = currentCoordinates.distance(from: eventLocation)
+                if calculatedDistance <= self.distanceFromEvent {
+                    self.distanceFromEvent = calculatedDistance
+                    eventLat = e.lat
+                    eventLon = e.lon
+                }
             let marker = GMSMarker(position: position)
             marker.title = e.eventKey
             marker.icon = GMSMarker.markerImage(with: nil)
@@ -634,12 +719,33 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
             marker.map = self.googleMapsView
             }
         }
+        if self.thisMonthArray.count < 1 {
+            self.showAlert(withTitle: "No events found", message: "Sorry, it looks like there's nothing you'd be interested in happening this month... How boring, right?")
+        }
+        else {
+            let camera = GMSCameraPosition.camera(withLatitude: eventLat, longitude: eventLon, zoom: 12.0)
+            self.googleMapsView.camera = camera
+        }
+        self.loadingView.stopAnimating()
     }
+    
     @IBAction func didPressLater(_ sender: Any) {
         googleMapsView.clear()
+        self.loadingView.startAnimating()
+        var eventLat = 0.0
+        var eventLon = 0.0
+        self.distanceFromEvent = 10000.0
         for e in self.laterArray {
             if e.notificationOnly == false {
             let position = CLLocationCoordinate2D(latitude: e.lat, longitude: e.lon)
+            let eventLocation = CLLocation(latitude: e.lat, longitude: e.lon)
+            let currentCoordinates = CLLocation(latitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!)
+            let calculatedDistance = currentCoordinates.distance(from: eventLocation)
+            if calculatedDistance <= self.distanceFromEvent {
+                    self.distanceFromEvent = calculatedDistance
+                    eventLat = e.lat
+                    eventLon = e.lon
+                }
             let marker = GMSMarker(position: position)
             marker.title = e.eventKey
             marker.icon = GMSMarker.markerImage(with: nil)
@@ -647,6 +753,14 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
             marker.map = self.googleMapsView
             }
         }
+        if self.laterArray.count < 1 {
+            self.showAlert(withTitle: "No events found", message: "Sorry, it looks like there's nothing you'd be interested in happening later. That's super unfortunate. You must be in the middle of nowhere or something..")
+        }
+        else {
+            let camera = GMSCameraPosition.camera(withLatitude: eventLat, longitude: eventLon, zoom: 12.0)
+            self.googleMapsView.camera = camera
+        }
+        self.loadingView.stopAnimating()
     }
     
     @IBAction func menuTap(_ sender: Any) {

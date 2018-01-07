@@ -7,16 +7,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Webblen</string>
 	<key>CFBundleDocumentTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeName</key>
-			<string>MKDirectionsRequest</string>
-			<key>LSItemContentTypes</key>
-			<array>
-				<string>com.apple.maps.directionsrequest</string>
-			</array>
-		</dict>
-	</array>
+	<array/>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIcons</key>
@@ -32,7 +23,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.5.7</string>
+	<string>2.0.1</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -43,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>7</string>
+	<string>1</string>
 	<key>FacebookAppID</key>
 	<string>1366128250170949</string>
 	<key>FacebookDisplayName</key>
@@ -59,23 +50,18 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>MKDirectionsApplicationSupportedModes</key>
-	<array>
-		<string>MKDirectionsModeCar</string>
-		<string>MKDirectionsModePedestrian</string>
-	</array>
 	<key>NSCalendarsUsageDescription</key>
-	<string>Webblen Events Would Like Access to Your Calendar</string>
+	<string>Webblen Would Like Access to Your Calendar</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Webblen Events Would Like Access to Your Camera</string>
+	<string>Webblen Would Like Access to Your Camera</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Webblen Events Would Like to Always Access Your Location to Notify You of Events Going On Around You.</string>
+	<string>Webblen Would Like to Always Access Your Location to Notify You of Events Going On Around You.</string>
 	<key>NSLocationUsageDescription</key>
-	<string>Webblen Events Would Like Access Your Location</string>
+	<string>Webblen Would Like Access Your Location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Webblen Events Would Like Access to Your Location</string>
+	<string>Webblen Would Like Access to Your Location</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Webblen Events Would Like Access to Your Photos</string>
+	<string>Webblen Would Like Access to Your Photos</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

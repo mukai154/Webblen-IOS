@@ -95,7 +95,6 @@ class InterestSetupViewController: UIViewController {
         if settingUp == true {
             cancelOption.isEnabled = false
         }
-        else{
     //Set up current interests
             
             let userRef = database.collection("users").document((currentUser?.uid)!)
@@ -175,7 +174,7 @@ class InterestSetupViewController: UIViewController {
             })
    
             
-        }
+        
 
         
     }

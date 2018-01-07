@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MapKit
 import Foundation
 
 // MARK: Helper Extensions
@@ -92,10 +91,3 @@ extension Date {
     }
 }
 
-extension MKMapView {
-    func zoomToUserLocation() {
-        guard let coordinate = userLocation.location?.coordinate else { return }
-        let region = MKCoordinateRegionMakeWithDistance(coordinate, 800, 800)
-        setRegion(region, animated: true)
-    }
-}
