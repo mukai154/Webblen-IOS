@@ -86,16 +86,16 @@ class confirmPostViewController: UIViewController {
         let eventRef = dataBase.collection("events").document(eventKey)
         eventRef.getDocument(completion: {(event, error) in
             if let event = event {
-                self.eventChosenCategories = event.data()["categories"] as! [String]
+                self.eventChosenCategories = event.data()!["categories"] as! [String]
                 self.eventCategories.text = "Categories: " + self.eventChosenCategories.joined(separator: ", ")
                 self.ePhoto.image = UIImage(named: self.eventChosenCategories.first!)
-                self.eTitle.text = event.data()["title"] as! String
-                self.eAddress.text = event.data()["address"] as! String
-                self.eventCreator = event.data()["author"] as! String
-                let eDate = event.data()["date"] as! String
-                let eTime = event.data()["time"] as! String
+                self.eTitle.text = event.data()!["title"] as! String
+                self.eAddress.text = event.data()!["address"] as! String
+                self.eventCreator = event.data()!["author"] as! String
+                let eDate = event.data()!["date"] as! String
+                let eTime = event.data()!["time"] as! String
                 self.eDateTime.text = eDate + " | " + eTime
-                self.eventRadius = event.data()["radius"] as! Int
+                self.eventRadius = event.data()!["radius"] as! Int
                 if self.eventRadius < 275 {
                     self.eTotalCost.text = "Event Total: $2.99"
                 }
@@ -124,7 +124,7 @@ class confirmPostViewController: UIViewController {
                      self.eTotalCost.text = "Event Total: $34.99"
                 }
                 self.eNotifyRadius.text = "Notify those within " + String(self.eventRadius) + " meters"
-                self.paid = event.data()["paid"] as! Bool
+                self.paid = event.data()!["paid"] as! Bool
                 self.loadingView.stopAnimating()
             }
             else {

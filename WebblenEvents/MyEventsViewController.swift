@@ -57,7 +57,7 @@ class MyEventsViewController: UIViewController, UITableViewDelegate, UITableView
         let userRef = database.collection("users").document((currentUser?.uid)!)
         userRef.getDocument(completion: {(document, error) in
             if let document = document {
-                let eventCreator = (document.data()["username"] as? String)
+                let eventCreator = (document.data()!["username"] as? String)
                 let eventRef = self.database.collection("events").getDocuments(completion: {(snapshot, error) in
                     if let error = error {
                         print("error in finding events")

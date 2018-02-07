@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0DEA47663D8D060E3DC23629 /* Pods_WebblenEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B69FC37BCC1F75D899C6C06 /* Pods_WebblenEvents.framework */; };
+		44FC665D8B368F151E005B71 /* Pods_WebblenEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842C1D1D615B3E6FB72B9868 /* Pods_WebblenEvents.framework */; };
 		46094A281FB25738008B277D /* EventOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46094A271FB25738008B277D /* EventOverlay.swift */; };
 		46094A311FB8EED5008B277D /* documentStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46094A301FB8EED5008B277D /* documentStructures.swift */; };
 		46094A331FB9497C008B277D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46094A321FB9497C008B277D /* HomeViewController.swift */; };
@@ -64,6 +64,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1401AC484D14CEFB9FFFCFAC /* Pods-WebblenEvents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebblenEvents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents.debug.xcconfig"; sourceTree = "<group>"; };
+		3FC32E7537DF187EB8960E80 /* Pods-WebblenEvents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebblenEvents.release.xcconfig"; path = "Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents.release.xcconfig"; sourceTree = "<group>"; };
 		46094A271FB25738008B277D /* EventOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventOverlay.swift; sourceTree = "<group>"; };
 		46094A301FB8EED5008B277D /* documentStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = documentStructures.swift; sourceTree = "<group>"; };
 		46094A321FB9497C008B277D /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -119,12 +121,10 @@
 		46EC3ACC1F7305BE00E4CC06 /* EventCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCategoryViewController.swift; sourceTree = "<group>"; };
 		46F113BB1E16044800FB7294 /* defaultEventImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultEventImage.png; sourceTree = "<group>"; };
 		46F4D6E71FC3819C00F5289B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		507F16388FC4FF4BC0B398A4 /* Pods-WebblenEvents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebblenEvents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents.debug.xcconfig"; sourceTree = "<group>"; };
-		5B69FC37BCC1F75D899C6C06 /* Pods_WebblenEvents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WebblenEvents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		842C1D1D615B3E6FB72B9868 /* Pods_WebblenEvents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WebblenEvents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D40A12A31F658F3E00392FF9 /* WhatsNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsNewViewController.swift; sourceTree = "<group>"; };
 		D40A12A51F659E7300392FF9 /* NotificationSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewController.swift; sourceTree = "<group>"; };
 		D41F1F1C1F9A798E006DE9CE /* GeotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeotificationsViewController.swift; sourceTree = "<group>"; };
-		D5000C66B9E08A7533D04650 /* Pods-WebblenEvents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebblenEvents.release.xcconfig"; path = "Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,8 +134,8 @@
 			files = (
 				46F4D6E81FC381C100F5289B /* CoreLocation.framework in Frameworks */,
 				4624B9661F68D2AF00F4D6E6 /* SwiftyStoreKit.framework in Frameworks */,
-				0DEA47663D8D060E3DC23629 /* Pods_WebblenEvents.framework in Frameworks */,
 				4617A7491F3D4D2900926160 /* StoreKit.framework in Frameworks */,
+				44FC665D8B368F151E005B71 /* Pods_WebblenEvents.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,7 +235,7 @@
 				46F4D6E71FC3819C00F5289B /* CoreLocation.framework */,
 				4624B9651F68D2AE00F4D6E6 /* SwiftyStoreKit.framework */,
 				4617A7481F3D4D2900926160 /* StoreKit.framework */,
-				5B69FC37BCC1F75D899C6C06 /* Pods_WebblenEvents.framework */,
+				842C1D1D615B3E6FB72B9868 /* Pods_WebblenEvents.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -243,8 +243,8 @@
 		F6B7F586223312FE50D712D3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				507F16388FC4FF4BC0B398A4 /* Pods-WebblenEvents.debug.xcconfig */,
-				D5000C66B9E08A7533D04650 /* Pods-WebblenEvents.release.xcconfig */,
+				1401AC484D14CEFB9FFFCFAC /* Pods-WebblenEvents.debug.xcconfig */,
+				3FC32E7537DF187EB8960E80 /* Pods-WebblenEvents.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -418,9 +418,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Versions/A/Resources/GooglePlaces.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -433,13 +440,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WebblenEvents-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F29251A93B557E7FE7915AEB /* [CP] Embed Pods Frameworks */ = {
@@ -448,9 +458,52 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GooglePlacesSearchController/GooglePlacesSearchController.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/paper-onboarding/paper_onboarding.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GooglePlacesSearchController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/paper_onboarding.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -644,7 +697,7 @@
 		};
 		4687A01F1DFCB9A80067F773 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 507F16388FC4FF4BC0B398A4 /* Pods-WebblenEvents.debug.xcconfig */;
+			baseConfigurationReference = 1401AC484D14CEFB9FFFCFAC /* Pods-WebblenEvents.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -665,7 +718,7 @@
 		};
 		4687A0201DFCB9A80067F773 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D5000C66B9E08A7533D04650 /* Pods-WebblenEvents.release.xcconfig */;
+			baseConfigurationReference = 3FC32E7537DF187EB8960E80 /* Pods-WebblenEvents.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

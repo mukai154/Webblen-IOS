@@ -100,7 +100,7 @@ class InterestSetupViewController: UIViewController {
             let userRef = database.collection("users").document((currentUser?.uid)!)
             userRef.getDocument(completion: {(document, error) in
                 if let document = document {
-                   let interests = document.data()["interests"] as? [String]
+                    let interests = document.data()!["interests"] as? [String]
                     if  (interests?.contains("AMUSEMENT"))!{
                         self.amusement = true
                     }

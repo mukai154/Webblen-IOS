@@ -68,13 +68,12 @@ class SetupViewController: UIViewController {
                 usernameRef.document(self.username.text!).setData([
                     "uid": self.user?.uid
                     ])
+                    self.performSegue(withIdentifier: "SetupInterestsSegue", sender: nil)
                 }
-                else if self.username.text!.count < 2 {
+                else{
                     self.showAlert(withTitle: "Username error", message: "Please set a sufficient username")
                 }
-                else {
-                self.performSegue(withIdentifier: "SetupInterestsSegue", sender: nil)
-                }
+                
             }
         })
     }

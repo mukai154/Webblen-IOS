@@ -79,7 +79,7 @@ class SWMenuViewController: UIViewController {
                 print(error)
             }
             else {
-               self.username.text = snapshot?.data()["username"] as! String
+                self.username.text = snapshot?.data()!["username"] as! String
             }
         })
         

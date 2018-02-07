@@ -105,14 +105,16 @@ class EventInfoViewController: UIViewController {
             let eventRef = self.dataBase.collection("events").document(self.eventKey)
             eventRef.getDocument(completion: {(event, error) in
                 if let event = event {
-                    self.eventCategories = event.data()["categories"] as! [String]
+                    self.eventCategories = event.data()!["categories"] as! [String]
                     self.eventImage.image = UIImage(named: self.eventCategories.first!)
-                    self.eventTitle.text = event.data()["title"] as! String
-                    self.evTitle = event.data()["title"] as! String
-                    self.eventDescription.text = event.data()["description"] as! String
+                    self.eventTitle.text = event.data()!["title"] as! String
+                    self.evTitle = event.data()!["title"] as! String
+                    self.eventDescription.text = event.data()!["description"] as! String
+                    self.lat = event.data()!["lat"] as! Double
+                    self.lon = event.data()!["lon"] as! Double
 
-                    self.eventAuthor = event.data()["author"] as! String
-                    let imageURL = event.data()["pathToImage"] as! String
+                    self.eventAuthor = event.data()!["author"] as! String
+                    let imageURL = event.data()!["pathToImage"] as! String
                     print(imageURL)
                     if imageURL != "" {
                         let url = NSURL(string: imageURL)
@@ -128,11 +130,11 @@ class EventInfoViewController: UIViewController {
                         self.scrollView.isScrollEnabled = false
                     }
                     self.eventCreator.text = "@" + self.eventAuthor!
-                    self.eventAddress.text = event.data()["address"] as! String
-                    let eDate = event.data()["date"] as! String
-                    let eTime = event.data()["time"] as! String
+                    self.eventAddress.text = event.data()!["address"] as! String
+                    let eDate = event.data()!["date"] as! String
+                    let eTime = event.data()!["time"] as! String
                     self.eventDate.text = eDate + " | " + eTime
-                    let views = event.data()["views"] as! Int
+                    let views = event.data()!["views"] as! Int
                     let newViewCount = views + 1
                     self.eventViews.text = String(views) + " Views"
                     self.scrollView.isHidden = false
@@ -146,8 +148,8 @@ class EventInfoViewController: UIViewController {
                             let checkUsernameRef = self.dataBase.collection("users").document((self.currentUser?.uid)!)
                             checkUsernameRef.getDocument(completion: {(userDoc, error) in
                                 if let userDoc = userDoc {
-                                    self.username = userDoc.data()["username"] as! String
-                                    if (self.username == self.eventAuthor) || (self.username == "Webblen Administrator") {
+                                    self.username = userDoc.data()!["username"] as! String
+                                    if (self.username == self.eventAuthor) || (self.username == "Webblen") {
                                       self.madeEvent == true
                                     }
                                 }
@@ -183,7 +185,7 @@ class EventInfoViewController: UIViewController {
     }
 
     @IBAction func didPressEventOptions(_ sender: Any) {
-        if (madeEvent == true || (self.username == eventAuthor) || (self.username == "Webblen Administrator")){
+        if (madeEvent == true || (self.username == eventAuthor) || (self.username == "Webblen")){
             
             let alert = UIAlertController(title: nil, message: nil , preferredStyle: .actionSheet)
             let editEvent = UIAlertAction(title: "Edit Event", style: .default, handler: { action in
@@ -202,7 +204,7 @@ class EventInfoViewController: UIViewController {
             
         }
         
-        else if (madeEvent == false && (self.username == self.eventAuthor) || (self.username == "Webblen Administrator")){
+        else if (madeEvent == false && (self.username == self.eventAuthor) || (self.username == "Webblen")){
             
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             let dismissAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -219,7 +221,7 @@ class EventInfoViewController: UIViewController {
                 let userDocRef = self.dataBase.collection("users").document((self.currentUser?.uid)!)
                 userDocRef.getDocument(completion: {(userDoc, error) in
                     if let userDoc = userDoc {
-                        var blockedUsers = userDoc.data()["blockedUsers"] as! [String]
+                        var blockedUsers = userDoc.data()!["blockedUsers"] as! [String]
                         blockedUsers.append(self.eventAuthor!)
                         userDocRef.updateData([
                             "blockedUsers": blockedUsers
@@ -374,17 +376,13 @@ class EventInfoViewController: UIViewController {
     }
     
     func convertAddressToLatAndLong(){
-        let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(self.eAddress) {
-            placemarks, error in
-            let placemark = placemarks?.first
-            self.lat = placemark?.location?.coordinate.latitude
-            self.lon = placemark?.location?.coordinate.longitude
+        
+        
             let coordinate = CLLocationCoordinate2DMake(self.lat!, self.lon!)
             let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary:nil))
             mapItem.name = self.evTitle
             mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
-        }
+        
     }
     
 

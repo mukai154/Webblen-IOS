@@ -188,8 +188,8 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
                     self.performSegue(withIdentifier: "setupSegue", sender: nil)
                 }
                 else {
-                self.userInterests = (document.data()["interests"] as? [String])!
-                self.userBlocks = (document.data()["blockedUsers"] as? [String])!
+                    self.userInterests = (document.data()!["interests"] as? [String])!
+                    self.userBlocks = (document.data()!["blockedUsers"] as? [String])!
                 let eventRef = self.database.collection("events").getDocuments(completion: {(snapshot, error) in
                     if let error = error {
                         print("error in finding events")
@@ -291,8 +291,10 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
                                             marker.icon = GMSMarker.markerImage(with: nil)
                                             marker.icon = GMSMarker.markerImage(with: UIColor(red: 255/255, green: 87/255, blue: 34/255, alpha: 1.0))
                                             marker.map = self.googleMapsView
+                                           
+                                            let randomRegion = Int.random(min: 250, max: Int(e.radius))
                                             
-                                            let region = CLCircularRegion(center: position, radius: e.radius, identifier: e.eventKey)
+                                            let region = CLCircularRegion(center: position, radius: Double(randomRegion), identifier: e.eventKey)
                                             region.notifyOnEntry = true
                                             region.notifyOnExit = false
                                             self.locationManager.startMonitoring(for: region)
@@ -303,7 +305,8 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
                                     for e in self.tomorrowArray {
                                         if e.distanceFromUser <= 10000 {
                                             let position = CLLocationCoordinate2D(latitude: e.lat, longitude: e.lon)
-                                            let region = CLCircularRegion(center: position, radius: e.radius, identifier: e.eventKey)
+                                            let randomRegion = Int.random(min: 250, max: Int(e.radius))
+                                            let region = CLCircularRegion(center: position, radius: Double(randomRegion), identifier: e.eventKey)
                                             region.notifyOnEntry = true
                                             region.notifyOnExit = false
                                             self.locationManager.startMonitoring(for: region)
@@ -314,7 +317,8 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
                                     for e in self.thisWeekArray {
                                         if e.distanceFromUser <= 10000 {
                                             let position = CLLocationCoordinate2D(latitude: e.lat, longitude: e.lon)
-                                            let region = CLCircularRegion(center: position, radius: e.radius, identifier: e.eventKey)
+                                            let randomRegion = Int.random(min: 250, max: Int(e.radius))
+                                            let region = CLCircularRegion(center: position, radius: Double(randomRegion), identifier: e.eventKey)
                                             region.notifyOnEntry = true
                                             region.notifyOnExit = false
                                             self.locationManager.startMonitoring(for: region)
@@ -325,7 +329,8 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
                                     for e in self.thisMonthArray {
                                         if e.distanceFromUser <= 10000 {
                                             let position = CLLocationCoordinate2D(latitude: e.lat, longitude: e.lon)
-                                            let region = CLCircularRegion(center: position, radius: e.radius, identifier: e.eventKey)
+                                            let randomRegion = Int.random(min: 250, max: Int(e.radius))
+                                            let region = CLCircularRegion(center: position, radius: Double(randomRegion), identifier: e.eventKey)
                                             region.notifyOnEntry = true
                                             region.notifyOnExit = false
                                             self.locationManager.startMonitoring(for: region)
@@ -334,16 +339,12 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
                                 }
                                 
                                 UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
-                                    
                                     self.googleMapsView.alpha = 1.0
-                                    
-                                    
                                 }, completion: { _ in
                                     self.googleMapsView.isUserInteractionEnabled = true
                                     self.refreshButton.isUserInteractionEnabled = true
                                 })
                                 self.checkAndMonitorTwentyClosestRegions()
-                                self.setClosestNotification()
                                 self.loadingView.stopAnimating()
                             }
                         }
@@ -392,10 +393,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         print("inRegion")
-        loadingView.startAnimating()
-        UIView.animate(withDuration: 0.2, delay: 0, options: [], animations: {
-            self.loadingView.alpha = 1.0
-        }, completion: nil)
+        
         
         if let e = self.todayArray.index(where: { $0.eventKey == region.identifier }) {
             let selectedEvent = self.todayArray[e]
@@ -454,27 +452,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         //showAlert(withTitle: "Entered Region", message: "Test String")
         //showNotification(title: "Webblen Event Title", message: "Webblen Description")
     }
-    
-    func setClosestNotification() {
-        let requestContent = UNMutableNotificationContent()
-        requestContent.title = "New Event Found!"        // insert your title
-        requestContent.subtitle = "There's a new event you may be interested in."  // insert your subtitle
-        requestContent.badge = 1 // the number that appears next to your app
-        requestContent.sound = UNNotificationSound.default()
         
-        // Request the notification
-        let request = UNNotificationRequest(identifier: "timedNotification", content: requestContent, trigger: requestTrigger)
-        
-        // Post the notification!
-        UNUserNotificationCenter.current().add(request) { error in
-        if let error = error {
-            print("error")
-            } else {
-                print("notification Posted")
-            }
-        }
-    }
-    
     func checkAndMonitorTwentyClosestRegions(){
         
         stopMonitoringAllRegions()

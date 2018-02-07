@@ -123,7 +123,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
                 print(error)
             }
             else {
-                self.username = snapshot?.data()["username"] as! String
+                self.username = snapshot?.data()!["username"] as! String
             }
         })
         
@@ -132,14 +132,14 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
             let eventRef = dataBase.collection("events").document(eventKey!)
             eventRef.getDocument(completion: {(event, error) in
                 if let event = event {
-                    self.eventTitleField.text = event.data()["title"] as! String
-                    self.eventDescriptionField.text = event.data()["description"] as! String
-                    self.eventDate = event.data()["date"] as! String
-                    self.eventTime = event.data()["time"] as! String
+                    self.eventTitleField.text = event.data()!["title"] as! String
+                    self.eventDescriptionField.text = event.data()!["description"] as! String
+                    self.eventDate = event.data()!["date"] as! String
+                    self.eventTime = event.data()!["time"] as! String
                     self.dateTimeButton.setTitle(self.eventDate + " | " + self.eventTime, for: .normal)
-                    self.eventCategories = event.data()["categories"] as! [String]
+                    self.eventCategories = event.data()!["categories"] as! [String]
                     self.chooseEventCategoryButton.setTitle(self.eventCategories.joined(separator: ", "), for: .normal)
-                    self.pathToImage = event.data()["pathToImage"] as! String
+                    self.pathToImage = event.data()!["pathToImage"] as! String
                     if self.pathToImage != "" {
                         let url = NSURL(string: self.pathToImage)
                         self.eventImage?.sd_setImage(with: url as! URL)
@@ -147,9 +147,9 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
                         self.imageSelectButton.setImage(backImage, for: .normal)
                         
                     }
-                    self.event18 = event.data()["event18"] as! Bool
-                    self.event21 = event.data()["event21"] as! Bool
-                    self.notificationOnly = event.data()["notificationOnly"] as! Bool
+                    self.event18 = event.data()!["event18"] as! Bool
+                    self.event21 = event.data()!["event21"] as! Bool
+                    self.notificationOnly = event.data()!["notificationOnly"] as! Bool
                     if (self.event18 == true){
                         self.modifyNotification.setTitle("18+ Event", for: .normal)
                     }
@@ -168,11 +168,11 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
                     else {
                         self.modifyNotification.setTitle("Event Filter Settings", for: .normal)
                     }
-                    self.eventAddress = event.data()["address"] as! String
-                    self.eventRadius = event.data()["radius"] as! Double
+                    self.eventAddress = event.data()!["address"] as! String
+                    self.eventRadius = event.data()!["radius"] as! Double
                     self.locationButton.setTitle(self.eventAddress + " | " + String(Int(self.eventRadius!)) + " Meters", for: .normal)
-                    self.lat = event.data()["lat"] as! Double
-                    self.lon = event.data()["lon"] as! Double
+                    self.lat = event.data()!["lat"] as! Double
+                    self.lon = event.data()!["lon"] as! Double
                     if self.eventRadius! < 10000 {
                         self.eventPriceLabel.text = "Event Total: $34.99"
                     }
