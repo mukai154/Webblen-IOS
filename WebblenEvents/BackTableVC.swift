@@ -1,9 +1,9 @@
 //
 //  BackTableVC.swift
-//  WebblenEvents
+//  Webblen
 //
 //  Created by Mukai Selekwa on 11/1/17.
-//  Copyright © 2017 Mukai Selekwa. All rights reserved.
+//  Copyright © 2018 Webblen. All rights reserved.
 //
 
 import Foundation

@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  WebblenEvents
+//  Webblen
 //
 //  Created by Mukai Selekwa on 12/10/16.
-//  Copyright © 2016 Mukai Selekwa. All rights reserved.
+//  Copyright © 2018 Webblen. All rights reserved.
 //
 
 import UIKit

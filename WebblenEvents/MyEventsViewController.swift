@@ -11,8 +11,7 @@ import Firebase
 import NVActivityIndicatorView
 
 
-class MyEventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
-{
+class MyEventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var currentUser = Auth.auth().currentUser
     var currentUserData: DatabaseReference!
@@ -20,15 +19,11 @@ class MyEventsViewController: UIViewController, UITableViewDelegate, UITableView
     
     var dataBaseRef: DatabaseReference!
     var database = Firestore.firestore()
-    var events = [Event]()
     var webblenEvents = [webblenEvent]()
-    var aeventCount = 0
-    
-    
+
     @IBOutlet weak var myEventsTableView: UITableView!
     
-       var loadingView = NVActivityIndicatorView(frame: CGRect(x: (100), y: (100), width: 125, height: 125), type: .ballRotateChase, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1.0), padding: 0)
-    
+    var loadingView = NVActivityIndicatorView(frame: CGRect(x: (100), y: (100), width: 125, height: 125), type: .ballRotateChase, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1.0), padding: 0)
     
     
     override func viewDidLoad() {
@@ -118,34 +113,28 @@ class MyEventsViewController: UIViewController, UITableViewDelegate, UITableView
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyEventsTableViewCell", for: indexPath) as! MyEventsTableViewCell
         
-
-        
         if (self.webblenEvents[indexPath.row].description.characters.count > 100){
-            
             let index = self.webblenEvents[indexPath.row].description.index(self.webblenEvents[indexPath.row].description.startIndex, offsetBy: 100)
-            
                 cell.interestCategory.image = UIImage(named: self.webblenEvents[indexPath.row].categories[0])
                 cell.eventTitle.text = self.webblenEvents[indexPath.row].title
                 cell.eventDate.text = self.webblenEvents[indexPath.row].date
                 cell.eventDescription.text = self.webblenEvents[indexPath.row].description.substring(to: index) + "..."
         }
-        
         else {
-    
                 cell.interestCategory.image = UIImage(named: self.webblenEvents[indexPath.row].categories[0])
                 cell.eventTitle.text = self.webblenEvents[indexPath.row].title
                 cell.eventDate.text = self.webblenEvents[indexPath.row].date
                 cell.eventDescription.text = self.webblenEvents[indexPath.row].description
-            }
+        
+        }
+        
         if (self.webblenEvents[indexPath.row].paid == false){
             cell.eventDescription.text = "Event Draft"
-            
         }
         
-
-                return (cell)
-        
-        }
+        return (cell)
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "myEventInfoSegue", sender: webblenEvents[indexPath.row].eventKey)
     }

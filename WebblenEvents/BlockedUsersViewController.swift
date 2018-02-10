@@ -1,9 +1,9 @@
 //
 //  BlockedUsersViewController.swift
-//  WebblenEvents
+//  Webblen
 //
 //  Created by Mukai Selekwa on 1/26/17.
-//  Copyright © 2017 Mukai Selekwa. All rights reserved.
+//  Copyright © 2018 Webblen. All rights reserved.
 //
 
 import UIKit
@@ -42,8 +42,6 @@ class BlockedUsersViewController: UIViewController, UITableViewDelegate, UITable
             }
             self.configureDatabase()
         })
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,8 +62,6 @@ class BlockedUsersViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
-
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.blockNameList.count
     }
@@ -74,12 +70,8 @@ class BlockedUsersViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "blockCell")
-        
-        
-
         cell.textLabel?.text = self.blockNameList[indexPath.row]
 
-        
         return cell
     }
     
@@ -104,11 +96,8 @@ class BlockedUsersViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
-
-    
     @IBAction func didPressCancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-
 
 }

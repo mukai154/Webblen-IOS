@@ -1,9 +1,9 @@
 //
 //  confirmPostViewController.swift
-//  WebblenEvents
+//  Webblen
 //
 //  Created by Mukai Selekwa on 8/10/17.
-//  Copyright © 2017 Mukai Selekwa. All rights reserved.
+//  Copyright © 2018 Webblen. All rights reserved.
 //
 
 import UIKit
@@ -11,8 +11,6 @@ import Firebase
 import CoreLocation
 import NVActivityIndicatorView
 import SwiftyStoreKit
-
-
 
 class confirmPostViewController: UIViewController {
 
@@ -131,10 +129,6 @@ class confirmPostViewController: UIViewController {
                 print("doc does not exist")
             }
         })
-        
-        
-        
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {

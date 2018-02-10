@@ -1,6 +1,6 @@
 //
 //  EventCategoryViewController.swift
-//  WebblenEvents
+//  Webblen
 //
 //  Created by Mukai Selekwa on 9/20/17.
 //  Copyright © 2017 Mukai Selekwa. All rights reserved.

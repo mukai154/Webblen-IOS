@@ -47,14 +47,14 @@ class homeCell: UITableViewCell {
         // Initialization code
     }
 
-    public func configure(eventTitle:String, eventDate:String, isVerified:String, eventDescription: String, eventPhoto: String?){
+    public func configure(eventTitle:String, eventDate:String, isVerified:Bool, eventDescription: String, eventPhoto: String?){
         
         
         self.eventTitle.text = eventTitle
         self.eventDate.text = eventDate
         self.eventDescription.text = eventDescription
         
-        if (isVerified == "true"){
+        if (isVerified == true){
            self.isVerified.isHidden = false
             self.verifiedWidth.constant = 20
         }
