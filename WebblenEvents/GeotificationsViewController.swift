@@ -40,7 +40,6 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
     var coordinates: [CLLocationCoordinate2D] = []
     let locationManager = CLLocationManager()
     var menuOpen = false
-    var locationInfo = LocationTracking()
     var menuMarker = UIImage(named: "map-marker")?.withRenderingMode(.alwaysTemplate)
 
 
