@@ -3,7 +3,7 @@
 //  WebblenEvents
 //
 //  Created by Mukai Selekwa on 10/31/17.
-//  Copyright © 2017 Mukai Selekwa. All rights reserved.
+//  Copyright © 2018 Webblen. All rights reserved.
 //
 
 import UIKit

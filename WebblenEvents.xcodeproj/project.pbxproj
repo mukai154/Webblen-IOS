@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		44FC665D8B368F151E005B71 /* Pods_WebblenEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842C1D1D615B3E6FB72B9868 /* Pods_WebblenEvents.framework */; };
-		46094A281FB25738008B277D /* EventOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46094A271FB25738008B277D /* EventOverlay.swift */; };
-		46094A311FB8EED5008B277D /* documentStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46094A301FB8EED5008B277D /* documentStructures.swift */; };
+		46094A311FB8EED5008B277D /* DataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46094A301FB8EED5008B277D /* DataStructures.swift */; };
 		46094A331FB9497C008B277D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46094A321FB9497C008B277D /* HomeViewController.swift */; };
 		46094A351FB94F3F008B277D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46094A341FB94F3F008B277D /* GoogleService-Info.plist */; };
 		4609990A1E384717000DE53F /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460999091E384717000DE53F /* TermsViewController.swift */; };
@@ -22,13 +21,10 @@
 		4617A7491F3D4D2900926160 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4617A7481F3D4D2900926160 /* StoreKit.framework */; };
 		461FD2D31F43FBF9001C7279 /* homeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461FD2D21F43FBF9001C7279 /* homeCell.swift */; };
 		4624B9621F67D45D00F4D6E6 /* VerifyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4624B9611F67D45D00F4D6E6 /* VerifyAccountViewController.swift */; };
-		4624B9641F686E2C00F4D6E6 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4624B9631F686E2C00F4D6E6 /* StoreManager.swift */; };
 		4624B9661F68D2AF00F4D6E6 /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4624B9651F68D2AE00F4D6E6 /* SwiftyStoreKit.framework */; };
 		4642E7371E1E6B6300D65DA5 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4642E7361E1E6B6300D65DA5 /* SignInViewController.swift */; };
 		4642E73D1E1F40E400D65DA5 /* NewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4642E73C1E1F40E400D65DA5 /* NewEventViewController.swift */; };
 		4642E73F1E20604100D65DA5 /* MyEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4642E73E1E20604100D65DA5 /* MyEventsViewController.swift */; };
-		4642E7411E2063B800D65DA5 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4642E7401E2063B800D65DA5 /* Event.swift */; };
-		4642E74B1E20E90A00D65DA5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4642E74A1E20E90A00D65DA5 /* Constants.swift */; };
 		46621B7F1E218750005E5404 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46621B7E1E218750005E5404 /* InitialViewController.swift */; };
 		46621B811E21D11B005E5404 /* MyEventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46621B801E21D11B005E5404 /* MyEventsTableViewCell.swift */; };
 		46621B831E2E9E4A005E5404 /* EventInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46621B821E2E9E4A005E5404 /* EventInfoViewController.swift */; };
@@ -45,8 +41,6 @@
 		46956C6F1E1DB3F9009A8F93 /* InterestSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46956C6E1E1DB3F9009A8F93 /* InterestSetupViewController.swift */; };
 		46956C711E1E0537009A8F93 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46956C701E1E0536009A8F93 /* SetupViewController.swift */; };
 		46956C731E1E10E5009A8F93 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46956C721E1E10E5009A8F93 /* SignUpViewController.swift */; };
-		469CA8021F93DD1400C1DAFA /* LocationNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469CA8011F93DD1400C1DAFA /* LocationNotification.swift */; };
-		469CA8041F93E65600C1DAFA /* LocationTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469CA8031F93E65600C1DAFA /* LocationTracking.swift */; };
 		469E84831F355988002E07AA /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469E84821F355988002E07AA /* MapsViewController.swift */; };
 		469E84851F385180002E07AA /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469E84841F385180002E07AA /* DateViewController.swift */; };
 		46CB51951FA53355009CF2D4 /* SetLocationNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CB51941FA53355009CF2D4 /* SetLocationNotificationViewController.swift */; };
@@ -66,8 +60,7 @@
 /* Begin PBXFileReference section */
 		1401AC484D14CEFB9FFFCFAC /* Pods-WebblenEvents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebblenEvents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents.debug.xcconfig"; sourceTree = "<group>"; };
 		3FC32E7537DF187EB8960E80 /* Pods-WebblenEvents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebblenEvents.release.xcconfig"; path = "Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents.release.xcconfig"; sourceTree = "<group>"; };
-		46094A271FB25738008B277D /* EventOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventOverlay.swift; sourceTree = "<group>"; };
-		46094A301FB8EED5008B277D /* documentStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = documentStructures.swift; sourceTree = "<group>"; };
+		46094A301FB8EED5008B277D /* DataStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructures.swift; sourceTree = "<group>"; };
 		46094A321FB9497C008B277D /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		46094A341FB94F3F008B277D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		460999091E384717000DE53F /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
@@ -80,13 +73,10 @@
 		4617A7481F3D4D2900926160 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		461FD2D21F43FBF9001C7279 /* homeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = homeCell.swift; sourceTree = "<group>"; };
 		4624B9611F67D45D00F4D6E6 /* VerifyAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyAccountViewController.swift; sourceTree = "<group>"; };
-		4624B9631F686E2C00F4D6E6 /* StoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
 		4624B9651F68D2AE00F4D6E6 /* SwiftyStoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyStoreKit.framework; path = "../../Library/Developer/Xcode/DerivedData/WebblenEvents-aqmxctmtxigagscabsvsxabqegai/Build/Products/Debug-iphoneos/SwiftyStoreKit/SwiftyStoreKit.framework"; sourceTree = "<group>"; };
 		4642E7361E1E6B6300D65DA5 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		4642E73C1E1F40E400D65DA5 /* NewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventViewController.swift; sourceTree = "<group>"; };
 		4642E73E1E20604100D65DA5 /* MyEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyEventsViewController.swift; sourceTree = "<group>"; };
-		4642E7401E2063B800D65DA5 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		4642E74A1E20E90A00D65DA5 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = ../Constants.swift; sourceTree = "<group>"; };
 		46621B7E1E218750005E5404 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		46621B801E21D11B005E5404 /* MyEventsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyEventsTableViewCell.swift; sourceTree = "<group>"; };
 		46621B821E2E9E4A005E5404 /* EventInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInfoViewController.swift; sourceTree = "<group>"; };
@@ -106,8 +96,6 @@
 		46956C701E1E0536009A8F93 /* SetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
 		46956C721E1E10E5009A8F93 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		46956C741E1E2519009A8F93 /* WebblenEvents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebblenEvents.entitlements; sourceTree = "<group>"; };
-		469CA8011F93DD1400C1DAFA /* LocationNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationNotification.swift; sourceTree = "<group>"; };
-		469CA8031F93E65600C1DAFA /* LocationTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTracking.swift; sourceTree = "<group>"; };
 		469E84821F355988002E07AA /* MapsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
 		469E84841F385180002E07AA /* DateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 		46CB51941FA53355009CF2D4 /* SetLocationNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLocationNotificationViewController.swift; sourceTree = "<group>"; };
@@ -177,14 +165,11 @@
 				4609990B1E39E38A000DE53F /* BlockedUsersViewController.swift */,
 				4609990F1E3A9902000DE53F /* BlockTableViewCell.swift */,
 				4617A7461F3D4C6600926160 /* confirmPostViewController.swift */,
-				4642E74A1E20E90A00D65DA5 /* Constants.swift */,
 				469E84841F385180002E07AA /* DateViewController.swift */,
 				46F113BB1E16044800FB7294 /* defaultEventImage.png */,
-				46094A301FB8EED5008B277D /* documentStructures.swift */,
-				4642E7401E2063B800D65DA5 /* Event.swift */,
+				46094A301FB8EED5008B277D /* DataStructures.swift */,
 				46EC3ACC1F7305BE00E4CC06 /* EventCategoryViewController.swift */,
 				46621B821E2E9E4A005E5404 /* EventInfoViewController.swift */,
-				46094A271FB25738008B277D /* EventOverlay.swift */,
 				4609990D1E3A9530000DE53F /* FeedbackViewController.swift */,
 				46CB51981FA9268D009CF2D4 /* FloatingActionButton.swift */,
 				D41F1F1C1F9A798E006DE9CE /* GeotificationsViewController.swift */,
@@ -195,8 +180,6 @@
 				46621B7E1E218750005E5404 /* InitialViewController.swift */,
 				46956C6E1E1DB3F9009A8F93 /* InterestSetupViewController.swift */,
 				4687A0181DFCB9A80067F773 /* LaunchScreen.storyboard */,
-				469CA8011F93DD1400C1DAFA /* LocationNotification.swift */,
-				469CA8031F93E65600C1DAFA /* LocationTracking.swift */,
 				4687A0211DFCBC560067F773 /* Logo White No Background.png */,
 				4687A0101DFCB9A80067F773 /* Main.storyboard */,
 				469E84821F355988002E07AA /* MapsViewController.swift */,
@@ -209,7 +192,6 @@
 				46956C701E1E0536009A8F93 /* SetupViewController.swift */,
 				4642E7361E1E6B6300D65DA5 /* SignInViewController.swift */,
 				46956C721E1E10E5009A8F93 /* SignUpViewController.swift */,
-				4624B9631F686E2C00F4D6E6 /* StoreManager.swift */,
 				4691BD8F1FAFED4C00056024 /* SWMenuViewController.swift */,
 				46CB519E1FA98F30009CF2D4 /* SWRevealViewController.h */,
 				46CB519D1FA98F30009CF2D4 /* SWRevealViewController.m */,
@@ -532,31 +514,25 @@
 				4609990A1E384717000DE53F /* TermsViewController.swift in Sources */,
 				D40A12A41F658F3E00392FF9 /* WhatsNewViewController.swift in Sources */,
 				469E84851F385180002E07AA /* DateViewController.swift in Sources */,
-				4642E7411E2063B800D65DA5 /* Event.swift in Sources */,
 				4642E73F1E20604100D65DA5 /* MyEventsViewController.swift in Sources */,
 				4687A00D1DFCB9A80067F773 /* AppDelegate.swift in Sources */,
 				460999101E3A9902000DE53F /* BlockTableViewCell.swift in Sources */,
-				469CA8041F93E65600C1DAFA /* LocationTracking.swift in Sources */,
 				46094A331FB9497C008B277D /* HomeViewController.swift in Sources */,
 				46EC3ACD1F7305BE00E4CC06 /* EventCategoryViewController.swift in Sources */,
-				469CA8021F93DD1400C1DAFA /* LocationNotification.swift in Sources */,
 				46CB51951FA53355009CF2D4 /* SetLocationNotificationViewController.swift in Sources */,
 				46956C6F1E1DB3F9009A8F93 /* InterestSetupViewController.swift in Sources */,
-				46094A281FB25738008B277D /* EventOverlay.swift in Sources */,
 				4624B9621F67D45D00F4D6E6 /* VerifyAccountViewController.swift in Sources */,
 				4642E73D1E1F40E400D65DA5 /* NewEventViewController.swift in Sources */,
 				46CB519F1FA98F31009CF2D4 /* SWRevealViewController.m in Sources */,
 				461FD2D31F43FBF9001C7279 /* homeCell.swift in Sources */,
-				4642E74B1E20E90A00D65DA5 /* Constants.swift in Sources */,
 				46CB51991FA9268D009CF2D4 /* FloatingActionButton.swift in Sources */,
 				4642E7371E1E6B6300D65DA5 /* SignInViewController.swift in Sources */,
 				469386DC1E2F2E51000AF3D4 /* SettingsViewController.swift in Sources */,
-				46094A311FB8EED5008B277D /* documentStructures.swift in Sources */,
+				46094A311FB8EED5008B277D /* DataStructures.swift in Sources */,
 				4609990C1E39E38A000DE53F /* BlockedUsersViewController.swift in Sources */,
 				461085B41FDE206D00E7B2A2 /* WebblenIAP.swift in Sources */,
 				D40A12A61F659E7300392FF9 /* NotificationSettingsViewController.swift in Sources */,
 				46956C731E1E10E5009A8F93 /* SignUpViewController.swift in Sources */,
-				4624B9641F686E2C00F4D6E6 /* StoreManager.swift in Sources */,
 				469E84831F355988002E07AA /* MapsViewController.swift in Sources */,
 				46CB519B1FA93BBB009CF2D4 /* UIViewX.swift in Sources */,
 				4691BD941FB036A200056024 /* Utilities.swift in Sources */,

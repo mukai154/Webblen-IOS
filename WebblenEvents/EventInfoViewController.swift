@@ -1,9 +1,9 @@
 //
 //  EventInfoViewController.swift
-//  WebblenEvents
+//  Webblen
 //
 //  Created by Mukai Selekwa on 1/17/17.
-//  Copyright © 2017 Mukai Selekwa. All rights reserved.
+//  Copyright © 2018 Mukai Selekwa. All rights reserved.
 //
 
 import UIKit
@@ -75,10 +75,11 @@ class EventInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //***UI Elements
         scrollView.alpha = 0
         eventUploadedPhoto.isHidden = true
         
-        //Activity indicator starts
+        //Activity indicator
         let xAxis = self.view.center.x
         let yAxis = self.view.center.y
         
@@ -87,8 +88,6 @@ class EventInfoViewController: UIViewController {
         self.view.addSubview(loadingView)
         loadingView.startAnimating()
         
-        
-        
         eventDescription.textContainerInset = UIEdgeInsetsMake(10, 0, 0, 0)
         eventDescription.textColor = UIColor.lightGray
         let initialDescriptionHeight = eventDescription.contentSize.height
@@ -96,12 +95,11 @@ class EventInfoViewController: UIViewController {
 
 
 
-        
+        //Retrieve Event From Firebase Firestore
         dataBaseRef = Database.database().reference()
         self.currentUser = Auth.auth().currentUser
         self.editKey = self.eventKey
         
-            
             let eventRef = self.dataBase.collection("events").document(self.eventKey)
             eventRef.getDocument(completion: {(event, error) in
                 if let event = event {
@@ -184,6 +182,7 @@ class EventInfoViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    //Options Available for Event
     @IBAction func didPressEventOptions(_ sender: Any) {
         if (madeEvent == true || (self.username == eventAuthor) || (self.username == "Webblen")){
             
@@ -213,9 +212,7 @@ class EventInfoViewController: UIViewController {
             })
             
             let thankAlert = UIAlertController(title: "Report Submitted", message: "Thank You for Submitting Your Report. We'll Address This Issue As Soon As Possible. Block the User to No Longer View Events By Them", preferredStyle: .alert)
-            
             thankAlert.addAction(thankDismiss)
-            
             
             let blockAction = UIAlertAction(title: "Block User", style: .default, handler: { action in
                 let userDocRef = self.dataBase.collection("users").document((self.currentUser?.uid)!)
@@ -239,7 +236,6 @@ class EventInfoViewController: UIViewController {
                 })
                 
                 let blockAlert = UIAlertController(title: "This User Has Been Blocked", message: nil, preferredStyle: .alert)
-                
                 let blockDismiss = UIAlertAction(title: "Dismiss", style: .default, handler: { action in
                     self.performSegue(withIdentifier: "homeSegue", sender: nil)
                 })
@@ -254,27 +250,18 @@ class EventInfoViewController: UIViewController {
                 let reportAlert = UIAlertController(title: "Report Event", message: "What's Wrong With This Event?", preferredStyle: .alert)
                 
                 let rAction1 = UIAlertAction(title: "Offensive/Inappropriate Language", style: .default, handler: { action in
-                    
                     self.dataBaseRef.child("Reported Events").child(self.eventKey).setValue("Offensive/Inappropriate Language")
-                    
                     self.present(thankAlert, animated: true, completion: nil)
-                    
                 })
                 
                 let rAction2 = UIAlertAction(title: "Unsafe Event", style: .default, handler: { action in
-                    
                     self.dataBaseRef.child("Reported Events").child(self.eventKey).setValue("Unsafe Event")
-                    
                     self.present(thankAlert, animated: true, completion: nil)
-                    
                 })
                 
                 let rAction3 = UIAlertAction(title: "Other", style: .default, handler: { action in
-                    
                     self.dataBaseRef.child("Reported Events").child(self.eventKey).setValue("Other")
-                    
                     self.present(thankAlert, animated: true, completion: nil)
-                    
                 })
                 
                 reportAlert.addAction(rAction1)
@@ -282,16 +269,13 @@ class EventInfoViewController: UIViewController {
                 reportAlert.addAction(rAction3)
                 reportAlert.addAction(dismissAction)
                 self.present(reportAlert, animated: true, completion: nil)
-                
             })
             
             alert.addAction(blockAction)
             alert.addAction(reportAction)
             alert.addAction(dismissAction)
             self.present(alert, animated: true, completion: nil)
-            
         }
-        
     }
 
     
@@ -300,8 +284,7 @@ class EventInfoViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
-
-
+    //Prepare Segue for Editing Event
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "editEventSegue"){
             let editEvent = segue.destination as! NewEventViewController
@@ -327,17 +310,14 @@ class EventInfoViewController: UIViewController {
         sender.view?.removeFromSuperview()
         
     }
+    
+    
     @IBAction func didPressMapButton(_ sender: Any) {
-        
-        convertAddressToLatAndLong()
-        
+        setupMaps()
         self.eventDescription.text = self.evDescription + "\nAddress: " + self.eAddress
-
-        
     }
 
     @IBAction func didPressCalendarButton(_ sender: Any) {
-        
         let eventStore = EKEventStore()
         self.formatter.dateFormat = "dd/MM/yyyy"
         eventStore.requestAccess(to: .event, completion: { (granted, error) in
@@ -375,16 +355,11 @@ class EventInfoViewController: UIViewController {
         self.eventDescription.text = self.evDescription + "\nDate: " + self.eDate + " | " + self.eTime
     }
     
-    func convertAddressToLatAndLong(){
-        
-        
+    func setupMaps(){
             let coordinate = CLLocationCoordinate2DMake(self.lat!, self.lon!)
             let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary:nil))
             mapItem.name = self.evTitle
             mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
-        
     }
-    
-
-  
+      
 }

@@ -1,9 +1,9 @@
 //
 //  GeotificationsViewController.swift
-//  WebblenEvents
+//  Webblen
 //
-//  Created by Aditya Bhasin on 10/20/17.
-//  Copyright © 2017 Mukai Selekwa. All rights reserved.
+//  Created by Mukai Selekwa on 10/20/17.
+//  Copyright © 2018 Webblen. All rights reserved.
 //
 
 import UIKit
@@ -13,10 +13,6 @@ import Firebase
 import CoreLocation
 import UserNotifications
 import NVActivityIndicatorView
-
-struct PreferencesKeys {
-    static let savedItems = "savedItems"
-}
 
 class GeotificationsViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
 
@@ -44,7 +40,6 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
     var coordinates: [CLLocationCoordinate2D] = []
     let locationManager = CLLocationManager()
     var menuOpen = false
-    var locationInfo = LocationTracking()
     var menuMarker = UIImage(named: "map-marker")?.withRenderingMode(.alwaysTemplate)
 
 
@@ -58,9 +53,6 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
     
     //Event Organzation
     var events = [webblenEvent]()
-    var eventsToday = [Event]()
-    var eventsThisWeek = [Event]()
-    var eventsThisMonth = [Event]()
     var modifiedDescription = ""
     var eventCategory = "AMUSEMENT"
     
@@ -71,13 +63,6 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
     var closestEventTitle: String?
     var closestEventIsHidden = false
     var requestTrigger = UNTimeIntervalNotificationTrigger(timeInterval: (60*60*12*2), repeats: true)
-
-    
-    
-    var today = true
-    var tomorrow = false
-    var thisWeek = false
-    var thisMonth = false
     
     var formatter = DateFormatter()
     var dateCalendar = Calendar.current
@@ -101,6 +86,13 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         
         refreshButton.isUserInteractionEnabled = false
         
+        //Date Format
+        formatter.dateFormat = "MM/dd/yyyy"
+        //***UI
+        //Reveal View Controller
+        Open.target = self.revealViewController()
+        Open.action = Selector("revealToggle:")
+        view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         let xAxis = self.view.center.x
         let yAxis = self.view.center.y
         
@@ -112,16 +104,6 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         UIApplication.shared.applicationIconBadgeNumber = 0
 
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in }
-        
-        //Date Format
-        formatter.dateFormat = "MM/dd/yyyy"
-        //***UI
-        //Reveal View Controller
-        Open.target = self.revealViewController()
-        Open.action = Selector("revealToggle:")
-    
-        view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        
         
         //Map Marker Colors
         todayMenuOption.setImage(menuMarker, for: .normal)
@@ -145,8 +127,6 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         refreshButton.setImage(refreshIcon, for: .normal)
         refreshButton.tintColor = UIColor.darkGray
         
-        
-        //***
         
         //***Location Managing
         locationManager.delegate = self
@@ -182,12 +162,14 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
     func loadEventData(){
         self.refreshButton.isUserInteractionEnabled = false
         let userRef = database.collection("users").document((currentUser?.uid)!)
+        //Check if user exists
         userRef.getDocument(completion: {(document, error) in
             if let document = document {
                 if !(document.exists){
                     self.performSegue(withIdentifier: "setupSegue", sender: nil)
                 }
                 else {
+                    //If users exists load interests and blocked users
                     self.userInterests = (document.data()!["interests"] as? [String])!
                     self.userBlocks = (document.data()!["blockedUsers"] as? [String])!
                 let eventRef = self.database.collection("events").getDocuments(completion: {(snapshot, error) in
@@ -195,6 +177,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
                         print("error in finding events")
                     }
                     else{
+                        //Load Events aligning with user's interests
                         let formattedDate = self.formatter.string(from: Date())
                         for event in snapshot!.documents {
                             let eventCategories = (event.data()["categories"] as? [String])!
@@ -225,12 +208,14 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
                                     let currentDate = self.formatter.date(from: formattedDate)
                                     let eventDate = self.formatter.date(from: interestedEvent.date)
                                     
+                                    //Organize Loaded Events By Date
                                     let currentCalendarDate = self.dateCalendar.dateComponents([.month, .day, .year], from: currentDate!)
                                     let eventCalendarDate = self.dateCalendar.dateComponents([.month, .day, .year], from: eventDate!)
                                     let daysBetweenEvents = self.dateCalendar.dateComponents([.day], from: currentDate!, to: eventDate!)
                                     print(daysBetweenEvents.day)
                                     let monthsBetweenEvents = self.dateCalendar.dateComponents([.month], from: currentDate!, to: eventDate!)
                                     
+                                    //Get teh coordinates of the closest evetn
                                     let eventCoordinates = CLLocation(latitude: interestedEvent.lat, longitude: interestedEvent.lon)
                                     let currentCoordinates = CLLocation(latitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!)
                                     self.distanceFromEvent = currentCoordinates.distance(from: eventCoordinates)
@@ -246,9 +231,8 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
                                             self.closestEventIsHidden = false
                                         }
                                     }
-                                    
-                                    
-                                    
+                
+                                            //Append to Event Date Arrays
                                             if (eventDate! < currentDate! && interestedEvent.paid) {
                                                 self.database.collection("events").document(interestedEvent.eventKey).delete()
                                             }
@@ -282,6 +266,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
                                     
                                 }
                                 
+                                //Place Markers and Set Regions for Today's Events
                                 if self.todayArray.count > 0 {
                                     for e in self.todayArray {
                                         if e.distanceFromUser <= 10000 {
@@ -337,7 +322,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
                                         }
                                     }
                                 }
-                                
+                                //Loading Animations and check for closest regions
                                 UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
                                     self.googleMapsView.alpha = 1.0
                                 }, completion: { _ in
@@ -346,19 +331,17 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
                                 })
                                 self.checkAndMonitorTwentyClosestRegions()
                                 self.loadingView.stopAnimating()
+                                }
                             }
                         }
-                    }
                     
-                })
+                    })
                 }
             }
             else {
                 print("document does not exist")
             }
         })
-        
-        
     }
     
     func initGoogleMaps(){
@@ -367,13 +350,27 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         mapView.isMyLocationEnabled = true
         self.googleMapsView.camera = camera
-        
+        //Show current location
         self.googleMapsView.delegate = self
         self.googleMapsView.isMyLocationEnabled = true
         self.googleMapsView.settings.myLocationButton = true
-        
     }
 
+    // Mark: GMSMapview Delegate
+    func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition){
+        self.googleMapsView.isMyLocationEnabled = true
+    }
+    
+    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
+        if (gesture) {
+            mapView.selectedMarker = nil
+        }
+    }
+    
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        performSegue(withIdentifier: "eventInfoSegue", sender: marker.title!)
+        return true
+    }
     
     // Mark: CLLocation Manager Delegate
     
@@ -390,10 +387,8 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         self.locationManager.stopUpdatingLocation()
     }
     
-    
+    //Actions Performed When Entering Region
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        print("inRegion")
-        
         
         if let e = self.todayArray.index(where: { $0.eventKey == region.identifier }) {
             let selectedEvent = self.todayArray[e]
@@ -444,15 +439,11 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
             self.showNotification(title: selectedEvent.author + " has an event later!", message: "The Event: " + eventTitleString + " is happening this month. Check it out!")
             }
         }
-        
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        print("inRegion")
-        //showAlert(withTitle: "Entered Region", message: "Test String")
-        //showNotification(title: "Webblen Event Title", message: "Webblen Description")
     }
-        
+    
     func checkAndMonitorTwentyClosestRegions(){
         
         stopMonitoringAllRegions()
@@ -529,29 +520,12 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
     
-    // Mark: GMSMapview Delegate
-    func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition){
-        self.googleMapsView.isMyLocationEnabled = true
-    }
-    
-    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
-        if (gesture) {
-            mapView.selectedMarker = nil
-        }
-    }
-    
-    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        performSegue(withIdentifier: "eventInfoSegue", sender: marker.title!)
-        return true
-    }
-    
     //Function called when clicking on an event
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "eventInfoSegue"){
             let eventIn = segue.destination as! EventInfoViewController
             eventIn.eventKey = sender as! String
         }
-        
     }
     
     
@@ -742,7 +716,6 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
     }
     
     @IBAction func menuTap(_ sender: Any) {
-        
         if menuOpen == true {
             UIView.transition(with: self.menuView, duration: 0.5, options: UIViewAnimationOptions.transitionFlipFromRight, animations: {
                 self.menuView.isHidden = true
@@ -755,9 +728,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
             }, completion: nil)
             menuOpen = true
         }
-    
     }
-    
     
     
 }
