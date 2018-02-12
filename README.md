@@ -1,4 +1,4 @@
-![Webblen-IOS](https://github.com/mukai154/Webblen-IOS/blob/2.0.2/resources/webblen-cover-img.png)
+![Webblen-IOS](https://github.com/mukai154/Webblen-IOS/blob/master/resources/webblen-cover-img.png)
 
 [![Crates.io](https://img.shields.io/crates/l/rustc-serialize.svg)]()
 [![Platform](https://img.shields.io/badge/platform-IOS-lightgrey.svg)]()
