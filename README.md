@@ -65,3 +65,9 @@ For more information, read the [Webblen Whitepaper](https://webblen.com/wp-conte
 If you have any questions or recommendations, feel free to either create a new issue or connect with us through [Discord](https://discord.gg/5cxGQmt) or [Telegram](https://t.me/joinchat/AAAAAEwPh5GOiHAZQ-QeJg)
 
 Join Us in Creating the World's First Incentivized Attendance Software!
+
+## License
+
+Copyright 2018 Webblen
+
+Licensed under [Apache 2.0 License](https://opensource.org/licenses/Apache-2.0)
