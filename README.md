@@ -45,7 +45,7 @@ To get the app running, you need to follow these simple steps:
 7. Open the terminal, navigate to project folder and run "pod update". 
 
 
-# Set Environment Variables
+## Set Environment Variables
 Be sure to grab an IOS api key from [Google's Developer Console](https://code.google.com/apis/console)
 Place the services key and places keys within AppDelegate.Swift
 ```sh
@@ -57,11 +57,11 @@ If you're interested in Working with Facebook's API, be sure to define the ID wi
 Otherwise, you're now ready to run Webblen on your iPhone or the iOS Simulator.
 
 
-# Whitepaper
+## Whitepaper
 Webblen is striving to create a social economy that leverages the steem blockchain to incentivize community participation
 For more information, read the [Webblen Whitepaper](https://webblen.com/wp-content/uploads/2018/01/Webblen-White-Paper.pdf).
 
-# Communication
+## Communication
 If you have any questions or recommendations, feel free to either create a new issue or connect with us through [Discord](https://discord.gg/5cxGQmt) or [Telegram](https://t.me/joinchat/AAAAAEwPh5GOiHAZQ-QeJg)
 
 Join Us in Creating the World's First Incentivized Attendance Software!
