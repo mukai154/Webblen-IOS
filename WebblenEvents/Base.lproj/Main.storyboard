@@ -4464,7 +4464,7 @@ We appreciate any feedback you might have. Just let us know what's on your mind 
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Points: 0 (coming soon)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drY-T6-Knr">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Value: $0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drY-T6-Knr">
                                         <rect key="frame" x="73" y="73" width="150" height="12"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="150" id="Uh5-me-nSC"/>
@@ -4756,10 +4756,10 @@ We appreciate any feedback you might have. Just let us know what's on your mind 
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="pzF-aw-Ql8"/>
-        <segue reference="a30-B6-r3Z"/>
+        <segue reference="LOX-4m-BlB"/>
         <segue reference="yrk-35-H7M"/>
         <segue reference="mbQ-RB-hQm"/>
-        <segue reference="a6L-Rn-pju"/>
+        <segue reference="NMR-Rn-vBk"/>
         <segue reference="NW1-hn-Hbo"/>
         <segue reference="8pt-WH-yMZ"/>
         <segue reference="aw5-Tr-0Tg"/>

@@ -62,7 +62,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
     var closestEventKey: String?
     var closestEventTitle: String?
     var closestEventIsHidden = false
-    var requestTrigger = UNTimeIntervalNotificationTrigger(timeInterval: (60*60*12*2), repeats: true)
+    
     
     var formatter = DateFormatter()
     var dateCalendar = Calendar.current
