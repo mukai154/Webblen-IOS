@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		281DA213204E5BC100786054 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 281DA212204E5BC000786054 /* GoogleService-Info.plist */; };
 		44FC665D8B368F151E005B71 /* Pods_WebblenEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842C1D1D615B3E6FB72B9868 /* Pods_WebblenEvents.framework */; };
 		46094A311FB8EED5008B277D /* DataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46094A301FB8EED5008B277D /* DataStructures.swift */; };
 		46094A331FB9497C008B277D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46094A321FB9497C008B277D /* HomeViewController.swift */; };
@@ -59,6 +60,8 @@
 
 /* Begin PBXFileReference section */
 		1401AC484D14CEFB9FFFCFAC /* Pods-WebblenEvents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebblenEvents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents.debug.xcconfig"; sourceTree = "<group>"; };
+		281DA212204E5BC000786054 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		281DA214204E5BF000786054 /* WebblenEvents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebblenEvents.entitlements; sourceTree = "<group>"; };
 		3FC32E7537DF187EB8960E80 /* Pods-WebblenEvents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebblenEvents.release.xcconfig"; path = "Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents.release.xcconfig"; sourceTree = "<group>"; };
 		46094A301FB8EED5008B277D /* DataStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructures.swift; sourceTree = "<group>"; };
 		46094A321FB9497C008B277D /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -174,6 +177,7 @@
 				46CB51981FA9268D009CF2D4 /* FloatingActionButton.swift */,
 				D41F1F1C1F9A798E006DE9CE /* GeotificationsViewController.swift */,
 				46094A341FB94F3F008B277D /* GoogleService-Info.plist */,
+				281DA212204E5BC000786054 /* GoogleService-Info.plist */,
 				461FD2D21F43FBF9001C7279 /* homeCell.swift */,
 				46094A321FB9497C008B277D /* HomeViewController.swift */,
 				4687A01B1DFCB9A80067F773 /* Info.plist */,
@@ -198,6 +202,7 @@
 				460999091E384717000DE53F /* TermsViewController.swift */,
 				46CB51961FA92058009CF2D4 /* UIButtonX.swift */,
 				46CB519A1FA93BBB009CF2D4 /* UIViewX.swift */,
+				281DA214204E5BF000786054 /* WebblenEvents.entitlements */,
 				4691BD931FB036A200056024 /* Utilities.swift */,
 				4624B9611F67D45D00F4D6E6 /* VerifyAccountViewController.swift */,
 				46CB519C1FA98F2F009CF2D4 /* WebblenEvents-Bridging-Header.h */,
@@ -270,9 +275,8 @@
 				TargetAttributes = {
 					4687A0081DFCB9A80067F773 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = TQ9EG6FK32;
 						LastSwiftMigration = 0900;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplePay = {
 								enabled = 0;
@@ -328,6 +332,7 @@
 				4687A0221DFCBC560067F773 /* Logo White No Background.png in Resources */,
 				4687A0121DFCB9A80067F773 /* Main.storyboard in Resources */,
 				46094A351FB94F3F008B277D /* GoogleService-Info.plist in Resources */,
+				281DA213204E5BC100786054 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -679,12 +684,14 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = WebblenEvents/WebblenEvents.entitlements;
-				DEVELOPMENT_TEAM = TQ9EG6FK32;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = WebblenEvents/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.webblen.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WebblenEvents/WebblenEvents-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -700,12 +707,14 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = WebblenEvents/WebblenEvents.entitlements;
-				DEVELOPMENT_TEAM = TQ9EG6FK32;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = WebblenEvents/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.webblen.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WebblenEvents/WebblenEvents-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

@@ -2,12 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "map-marker.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "map-marker(1).png",
+      "filename" : "map-marker.png",
       "scale" : "2x"
     },
     {

@@ -14,7 +14,7 @@ import CoreLocation
 import UserNotifications
 import NVActivityIndicatorView
 
-class GeotificationsViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
+class GeotificationsViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate , UITabBarControllerDelegate {
 
     @IBOutlet weak var menuView: UIViewX!
     @IBOutlet weak var floatinActionButton: FloatingActionButton!
@@ -73,14 +73,15 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
     var userInterests = [""]
     var userBlocks = [""]
     var interestHandle: DatabaseHandle?
+    let tabBarCnt = UITabBarController()
     
     var loadingView = NVActivityIndicatorView(frame: CGRect(x: (100), y: (100), width: 125, height: 125), type: .ballRotateChase, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1.0), padding: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
-        
+        tabBarCnt.delegate=self
+        self.createTabbarController()
         googleMapsView.isUserInteractionEnabled = false
         googleMapsView.alpha = 0
         
@@ -108,12 +109,16 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         //Map Marker Colors
         todayMenuOption.setImage(menuMarker, for: .normal)
         todayMenuOption.tintColor = UIColor(red: 255/255, green: 87/255, blue: 34/255, alpha: 1.0)
+        
         tomorrowMenuOption.setImage(menuMarker, for: .normal)
         tomorrowMenuOption.tintColor = UIColor(red: 240/255, green: 98/255, blue: 146/255, alpha: 1.0)
+        
         weekMenuOption.setImage(menuMarker, for: .normal)
         weekMenuOption.tintColor = UIColor(red: 251/255, green: 140/255, blue: 0/255, alpha: 1.0)
+        
         monthMenuOption.setImage(menuMarker, for: .normal)
         monthMenuOption.tintColor = UIColor(red: 102/255, green: 187/255, blue: 106/255, alpha: 1.0)
+        
         laterMenuOption.setImage(menuMarker, for: .normal)
         laterMenuOption.tintColor = UIColor(red: 66/255, green: 165/255, blue: 245/255, alpha: 1.0)
         
@@ -132,7 +137,6 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
 
-        
 
         initGoogleMaps()
         if (currentUser == nil){
@@ -151,9 +155,58 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
             }
         }
         
-        
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    func createTabbarController(){
+        
+        let firstVc = UIViewController()
+        firstVc.title="Today"
+        firstVc.view.tintColor = UIColor(red: 255/255, green: 87/255, blue: 34/255, alpha: 1.0)
+        firstVc.tabBarItem  = UITabBarItem(title:"Today", image:UIImage(named: "map-marker-red")!.withRenderingMode(.alwaysOriginal), tag: 1)
+     
+        let secondVc = UIViewController()
+        secondVc.view.tintColor = UIColor(red: 240/255, green: 98/255, blue: 146/255, alpha: 1.0)
+        secondVc.tabBarItem  = UITabBarItem(title:"Tomorrow", image:UIImage(named: "map-marker-pink")!.withRenderingMode(.alwaysOriginal), tag: 1)
+        
+        let thirdVc = UIViewController()
+        thirdVc.view.tintColor = UIColor(red: 251/255, green: 140/255, blue: 0/255, alpha: 1.0)
+        thirdVc.tabBarItem  = UITabBarItem(title:"This Week", image:UIImage(named: "map-marker-orange")!.withRenderingMode(.alwaysOriginal), tag: 1)
+        
+        let forthVc = UIViewController()
+        forthVc.view.tintColor = UIColor(red: 102/255, green: 187/255, blue: 106/255, alpha: 1.0)
+        forthVc.tabBarItem  = UITabBarItem(title:"This Month", image:UIImage(named: "map-marker-green")!.withRenderingMode(.alwaysOriginal), tag: 1)
+        
+        let fifthVc = UIViewController()
+        fifthVc.view.tintColor = UIColor(red: 66/255, green: 165/255, blue: 245/255, alpha: 1.0)
+        fifthVc.tabBarItem  = UITabBarItem(title:"Later", image:UIImage(named: "map-marker-blue")!.withRenderingMode(.alwaysOriginal), tag: 1)
+        tabBarCnt.viewControllers = [firstVc, secondVc , thirdVc , forthVc , fifthVc]
+        
+        self.view.addSubview(tabBarCnt.view)
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if tabBarController.selectedIndex==0{
+            self.didPressToday()
+        }
+        else if tabBarController.selectedIndex==1{
+            self.didPressTomorrow()
+        }
+        else if tabBarController.selectedIndex==2{
+            self.didPressWeek()
+        }
+        else if tabBarController.selectedIndex==3{
+            self.didPressMonth()
+        }
+        else{
+            self.didPressLater()
+        }
+
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -547,7 +600,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         self.loadEventData()
     }
     
-    @IBAction func didPressToday(_ sender: Any) {
+     func didPressToday() {
         googleMapsView.clear()
         self.loadingView.startAnimating()
         var eventLat = 0.0
@@ -581,7 +634,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         self.loadingView.stopAnimating()
     }
     
-    @IBAction func didPressTomorrow(_ sender: Any) {
+     func didPressTomorrow() {
         googleMapsView.clear()
         self.loadingView.startAnimating()
         var eventLat = 0.0
@@ -614,7 +667,8 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         }
         self.loadingView.stopAnimating()
     }
-    @IBAction func didPressWeek(_ sender: Any) {
+    
+    func didPressWeek() {
         googleMapsView.clear()
         self.loadingView.startAnimating()
         var eventLat = 0.0
@@ -647,7 +701,8 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         }
         self.loadingView.stopAnimating()
     }
-    @IBAction func didPressMonth(_ sender: Any) {
+    
+     func didPressMonth() {
         googleMapsView.clear()
         self.loadingView.startAnimating()
         var eventLat = 0.0
@@ -681,7 +736,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         self.loadingView.stopAnimating()
     }
     
-    @IBAction func didPressLater(_ sender: Any) {
+     func didPressLater() {
         googleMapsView.clear()
         self.loadingView.startAnimating()
         var eventLat = 0.0
