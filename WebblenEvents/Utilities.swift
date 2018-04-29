@@ -19,6 +19,16 @@ extension UIViewController {
     }
 }
 
+extension UIImage {
+    class func scaleImageToSize(img: UIImage, size: CGSize) -> UIImage {
+        UIGraphicsBeginImageContext(size)
+        img.draw(in: CGRect(origin: CGPoint.zero, size: size))
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return scaledImage!
+    }
+}
+
 public extension Int {
     
     /// Returns a random Int point number between 0 and Int.max.
@@ -74,6 +84,20 @@ extension UIColor {
     }
 }
 
+extension NSMutableAttributedString {
+    @discardableResult func bold(_ text:String) -> NSMutableAttributedString {
+        let attrs:[String:AnyObject] = [NSFontAttributeName: UIFont(name: "HelveticaNeue-Medium", size: 8)!]
+        let boldString = NSMutableAttributedString(string: text, attributes:attrs)
+        self.append(boldString)
+        return self
+    }
+    
+    @discardableResult func normal(_ text:String)->NSMutableAttributedString {
+        let normal =  NSAttributedString(string: text)
+        self.append(normal)
+        return self
+    }
+}
 
 extension Date {
     /// Returns the amount of years from another date

@@ -17,6 +17,8 @@ import IQKeyboardManagerSwift
 import CoreLocation
 import SwiftyStoreKit
 import NVActivityIndicatorView
+import Fabric
+import TwitterKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -42,8 +44,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
         IQKeyboardManager.sharedManager().enable = true
-        application.statusBarStyle = .default
+        application.statusBarStyle = .lightContent
         
+        //Twitter Auth
+        TWTRTwitter.sharedInstance().start(withConsumerKey:"9gDtPWHxcnj6CUoyeVQCKGsGl", consumerSecret:"y57kSG4yUowPNVXNEy5EEbUybTR3Dt72VT4FydWhZ1oKMnspQa")
         //FB Authentication
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
@@ -52,8 +56,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         FirebaseApp.configure()
         
-        GMSServices.provideAPIKey("GMS-SERVICES-KEY")
-        GMSPlacesClient.provideAPIKey("GMS-PLACES-KEY")
+        GMSServices.provideAPIKey("AIzaSyDG-kmaqXsZRJwMFDyE--2LAi1Bsnw803U")
+        GMSPlacesClient.provideAPIKey("AIzaSyDG-kmaqXsZRJwMFDyE--2LAi1Bsnw803U")
 
         return true
     }

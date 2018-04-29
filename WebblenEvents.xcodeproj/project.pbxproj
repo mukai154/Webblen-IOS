@@ -16,6 +16,8 @@
 		4609990C1E39E38A000DE53F /* BlockedUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4609990B1E39E38A000DE53F /* BlockedUsersViewController.swift */; };
 		4609990E1E3A9530000DE53F /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4609990D1E3A9530000DE53F /* FeedbackViewController.swift */; };
 		460999101E3A9902000DE53F /* BlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4609990F1E3A9902000DE53F /* BlockTableViewCell.swift */; };
+		460CD4A22075BACF002CF5B7 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460CD4A12075BACF002CF5B7 /* WalletViewController.swift */; };
+		460CD4A9207B7E8D002CF5B7 /* FirebaseMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460CD4A8207B7E8D002CF5B7 /* FirebaseMethods.swift */; };
 		461085B41FDE206D00E7B2A2 /* WebblenIAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461085B31FDE206D00E7B2A2 /* WebblenIAP.swift */; };
 		461085B61FDE214300E7B2A2 /* WebblenIAPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461085B51FDE214300E7B2A2 /* WebblenIAPService.swift */; };
 		4617A7471F3D4C6600926160 /* confirmPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4617A7461F3D4C6600926160 /* confirmPostViewController.swift */; };
@@ -44,10 +46,20 @@
 		46956C731E1E10E5009A8F93 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46956C721E1E10E5009A8F93 /* SignUpViewController.swift */; };
 		469E84831F355988002E07AA /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469E84821F355988002E07AA /* MapsViewController.swift */; };
 		469E84851F385180002E07AA /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469E84841F385180002E07AA /* DateViewController.swift */; };
+		46AE15032082B82900CC7EEC /* UIViewXRadialGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE14F92082B82800CC7EEC /* UIViewXRadialGradient.swift */; };
+		46AE15042082B82900CC7EEC /* UITextFieldX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE14FA2082B82800CC7EEC /* UITextFieldX.swift */; };
+		46AE15052082B82900CC7EEC /* UIButtonX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE14FB2082B82800CC7EEC /* UIButtonX.swift */; };
+		46AE15062082B82900CC7EEC /* UILabelX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE14FC2082B82800CC7EEC /* UILabelX.swift */; };
+		46AE15072082B82900CC7EEC /* UIViewAnchorPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE14FD2082B82800CC7EEC /* UIViewAnchorPoint.swift */; };
+		46AE15082082B82900CC7EEC /* UIViewControllerX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE14FE2082B82800CC7EEC /* UIViewControllerX.swift */; };
+		46AE15092082B82900CC7EEC /* UIImageViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE14FF2082B82800CC7EEC /* UIImageViewX.swift */; };
+		46AE150A2082B82900CC7EEC /* UIViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE15002082B82800CC7EEC /* UIViewX.swift */; };
+		46AE150B2082B82900CC7EEC /* UIVisualEffectViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE15012082B82800CC7EEC /* UIVisualEffectViewX.swift */; };
+		46AE150C2082B82900CC7EEC /* UISliderX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE15022082B82800CC7EEC /* UISliderX.swift */; };
+		46AE150E208F745B00CC7EEC /* EventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE150D208F745B00CC7EEC /* EventsTableViewController.swift */; };
+		46AE1513209386FC00CC7EEC /* style.json in Resources */ = {isa = PBXBuildFile; fileRef = 46AE15112093869800CC7EEC /* style.json */; };
 		46CB51951FA53355009CF2D4 /* SetLocationNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CB51941FA53355009CF2D4 /* SetLocationNotificationViewController.swift */; };
-		46CB51971FA92058009CF2D4 /* UIButtonX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CB51961FA92058009CF2D4 /* UIButtonX.swift */; };
 		46CB51991FA9268D009CF2D4 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CB51981FA9268D009CF2D4 /* FloatingActionButton.swift */; };
-		46CB519B1FA93BBB009CF2D4 /* UIViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CB519A1FA93BBB009CF2D4 /* UIViewX.swift */; };
 		46CB519F1FA98F31009CF2D4 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CB519D1FA98F30009CF2D4 /* SWRevealViewController.m */; };
 		46CB51A11FA99576009CF2D4 /* BackTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CB51A01FA99576009CF2D4 /* BackTableVC.swift */; };
 		46EC3ACD1F7305BE00E4CC06 /* EventCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EC3ACC1F7305BE00E4CC06 /* EventCategoryViewController.swift */; };
@@ -70,6 +82,8 @@
 		4609990B1E39E38A000DE53F /* BlockedUsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockedUsersViewController.swift; sourceTree = "<group>"; };
 		4609990D1E3A9530000DE53F /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		4609990F1E3A9902000DE53F /* BlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTableViewCell.swift; sourceTree = "<group>"; };
+		460CD4A12075BACF002CF5B7 /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
+		460CD4A8207B7E8D002CF5B7 /* FirebaseMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseMethods.swift; sourceTree = "<group>"; };
 		461085B31FDE206D00E7B2A2 /* WebblenIAP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebblenIAP.swift; sourceTree = "<group>"; };
 		461085B51FDE214300E7B2A2 /* WebblenIAPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebblenIAPService.swift; sourceTree = "<group>"; };
 		4617A7461F3D4C6600926160 /* confirmPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confirmPostViewController.swift; sourceTree = "<group>"; };
@@ -101,10 +115,20 @@
 		46956C741E1E2519009A8F93 /* WebblenEvents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebblenEvents.entitlements; sourceTree = "<group>"; };
 		469E84821F355988002E07AA /* MapsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
 		469E84841F385180002E07AA /* DateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
+		46AE14F92082B82800CC7EEC /* UIViewXRadialGradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewXRadialGradient.swift; sourceTree = "<group>"; };
+		46AE14FA2082B82800CC7EEC /* UITextFieldX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldX.swift; sourceTree = "<group>"; };
+		46AE14FB2082B82800CC7EEC /* UIButtonX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonX.swift; sourceTree = "<group>"; };
+		46AE14FC2082B82800CC7EEC /* UILabelX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelX.swift; sourceTree = "<group>"; };
+		46AE14FD2082B82800CC7EEC /* UIViewAnchorPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewAnchorPoint.swift; sourceTree = "<group>"; };
+		46AE14FE2082B82800CC7EEC /* UIViewControllerX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerX.swift; sourceTree = "<group>"; };
+		46AE14FF2082B82800CC7EEC /* UIImageViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewX.swift; sourceTree = "<group>"; };
+		46AE15002082B82800CC7EEC /* UIViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewX.swift; sourceTree = "<group>"; };
+		46AE15012082B82800CC7EEC /* UIVisualEffectViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIVisualEffectViewX.swift; sourceTree = "<group>"; };
+		46AE15022082B82800CC7EEC /* UISliderX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISliderX.swift; sourceTree = "<group>"; };
+		46AE150D208F745B00CC7EEC /* EventsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewController.swift; sourceTree = "<group>"; };
+		46AE15112093869800CC7EEC /* style.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = style.json; sourceTree = "<group>"; };
 		46CB51941FA53355009CF2D4 /* SetLocationNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLocationNotificationViewController.swift; sourceTree = "<group>"; };
-		46CB51961FA92058009CF2D4 /* UIButtonX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonX.swift; sourceTree = "<group>"; };
 		46CB51981FA9268D009CF2D4 /* FloatingActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
-		46CB519A1FA93BBB009CF2D4 /* UIViewX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewX.swift; sourceTree = "<group>"; };
 		46CB519C1FA98F2F009CF2D4 /* WebblenEvents-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WebblenEvents-Bridging-Header.h"; sourceTree = "<group>"; };
 		46CB519D1FA98F30009CF2D4 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		46CB519E1FA98F30009CF2D4 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
@@ -140,6 +164,14 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		460CD4A7207B7E61002CF5B7 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				460CD4A8207B7E8D002CF5B7 /* FirebaseMethods.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
 		4687A0001DFCB9A80067F773 = {
 			isa = PBXGroup;
 			children = (
@@ -162,30 +194,54 @@
 		4687A00B1DFCB9A80067F773 /* WebblenEvents */ = {
 			isa = PBXGroup;
 			children = (
+				46AE14F82082B82800CC7EEC /* DesignableX */,
+				46AE14F72082B78D00CC7EEC /* ViewControllers */,
+				460CD4A7207B7E61002CF5B7 /* Firebase */,
 				4687A00C1DFCB9A80067F773 /* AppDelegate.swift */,
 				4687A0161DFCB9A80067F773 /* Assets.xcassets */,
 				46CB51A01FA99576009CF2D4 /* BackTableVC.swift */,
+				46F113BB1E16044800FB7294 /* defaultEventImage.png */,
+				46094A301FB8EED5008B277D /* DataStructures.swift */,
+				46CB51981FA9268D009CF2D4 /* FloatingActionButton.swift */,
+				46094A341FB94F3F008B277D /* GoogleService-Info.plist */,
+				281DA212204E5BC000786054 /* GoogleService-Info.plist */,
+				461FD2D21F43FBF9001C7279 /* homeCell.swift */,
+				4687A01B1DFCB9A80067F773 /* Info.plist */,
+				4687A0181DFCB9A80067F773 /* LaunchScreen.storyboard */,
+				4687A0211DFCBC560067F773 /* Logo White No Background.png */,
+				4687A0101DFCB9A80067F773 /* Main.storyboard */,
+				4691BD8F1FAFED4C00056024 /* SWMenuViewController.swift */,
+				46CB519E1FA98F30009CF2D4 /* SWRevealViewController.h */,
+				46CB519D1FA98F30009CF2D4 /* SWRevealViewController.m */,
+				281DA214204E5BF000786054 /* WebblenEvents.entitlements */,
+				4691BD931FB036A200056024 /* Utilities.swift */,
+				46CB519C1FA98F2F009CF2D4 /* WebblenEvents-Bridging-Header.h */,
+				46956C741E1E2519009A8F93 /* WebblenEvents.entitlements */,
+				4687A0131DFCB9A80067F773 /* WebblenEvents.xcdatamodeld */,
+				461085B31FDE206D00E7B2A2 /* WebblenIAP.swift */,
+				461085B51FDE214300E7B2A2 /* WebblenIAPService.swift */,
+				46AE15112093869800CC7EEC /* style.json */,
+			);
+			path = WebblenEvents;
+			sourceTree = "<group>";
+		};
+		46AE14F72082B78D00CC7EEC /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4624B9611F67D45D00F4D6E6 /* VerifyAccountViewController.swift */,
 				4609990B1E39E38A000DE53F /* BlockedUsersViewController.swift */,
 				4609990F1E3A9902000DE53F /* BlockTableViewCell.swift */,
 				4617A7461F3D4C6600926160 /* confirmPostViewController.swift */,
 				469E84841F385180002E07AA /* DateViewController.swift */,
-				46F113BB1E16044800FB7294 /* defaultEventImage.png */,
-				46094A301FB8EED5008B277D /* DataStructures.swift */,
 				46EC3ACC1F7305BE00E4CC06 /* EventCategoryViewController.swift */,
 				46621B821E2E9E4A005E5404 /* EventInfoViewController.swift */,
+				466FF4CE1FD517EF00ED6E37 /* EventPricingViewController.swift */,
+				46AE150D208F745B00CC7EEC /* EventsTableViewController.swift */,
 				4609990D1E3A9530000DE53F /* FeedbackViewController.swift */,
-				46CB51981FA9268D009CF2D4 /* FloatingActionButton.swift */,
 				D41F1F1C1F9A798E006DE9CE /* GeotificationsViewController.swift */,
-				46094A341FB94F3F008B277D /* GoogleService-Info.plist */,
-				281DA212204E5BC000786054 /* GoogleService-Info.plist */,
-				461FD2D21F43FBF9001C7279 /* homeCell.swift */,
 				46094A321FB9497C008B277D /* HomeViewController.swift */,
-				4687A01B1DFCB9A80067F773 /* Info.plist */,
 				46621B7E1E218750005E5404 /* InitialViewController.swift */,
 				46956C6E1E1DB3F9009A8F93 /* InterestSetupViewController.swift */,
-				4687A0181DFCB9A80067F773 /* LaunchScreen.storyboard */,
-				4687A0211DFCBC560067F773 /* Logo White No Background.png */,
-				4687A0101DFCB9A80067F773 /* Main.storyboard */,
 				469E84821F355988002E07AA /* MapsViewController.swift */,
 				46621B801E21D11B005E5404 /* MyEventsTableViewCell.swift */,
 				4642E73E1E20604100D65DA5 /* MyEventsViewController.swift */,
@@ -196,24 +252,28 @@
 				46956C701E1E0536009A8F93 /* SetupViewController.swift */,
 				4642E7361E1E6B6300D65DA5 /* SignInViewController.swift */,
 				46956C721E1E10E5009A8F93 /* SignUpViewController.swift */,
-				4691BD8F1FAFED4C00056024 /* SWMenuViewController.swift */,
-				46CB519E1FA98F30009CF2D4 /* SWRevealViewController.h */,
-				46CB519D1FA98F30009CF2D4 /* SWRevealViewController.m */,
 				460999091E384717000DE53F /* TermsViewController.swift */,
-				46CB51961FA92058009CF2D4 /* UIButtonX.swift */,
-				46CB519A1FA93BBB009CF2D4 /* UIViewX.swift */,
-				281DA214204E5BF000786054 /* WebblenEvents.entitlements */,
-				4691BD931FB036A200056024 /* Utilities.swift */,
-				4624B9611F67D45D00F4D6E6 /* VerifyAccountViewController.swift */,
-				46CB519C1FA98F2F009CF2D4 /* WebblenEvents-Bridging-Header.h */,
-				46956C741E1E2519009A8F93 /* WebblenEvents.entitlements */,
-				4687A0131DFCB9A80067F773 /* WebblenEvents.xcdatamodeld */,
+				460CD4A12075BACF002CF5B7 /* WalletViewController.swift */,
 				D40A12A31F658F3E00392FF9 /* WhatsNewViewController.swift */,
-				466FF4CE1FD517EF00ED6E37 /* EventPricingViewController.swift */,
-				461085B31FDE206D00E7B2A2 /* WebblenIAP.swift */,
-				461085B51FDE214300E7B2A2 /* WebblenIAPService.swift */,
 			);
-			path = WebblenEvents;
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		46AE14F82082B82800CC7EEC /* DesignableX */ = {
+			isa = PBXGroup;
+			children = (
+				46AE14F92082B82800CC7EEC /* UIViewXRadialGradient.swift */,
+				46AE14FA2082B82800CC7EEC /* UITextFieldX.swift */,
+				46AE14FB2082B82800CC7EEC /* UIButtonX.swift */,
+				46AE14FC2082B82800CC7EEC /* UILabelX.swift */,
+				46AE14FD2082B82800CC7EEC /* UIViewAnchorPoint.swift */,
+				46AE14FE2082B82800CC7EEC /* UIViewControllerX.swift */,
+				46AE14FF2082B82800CC7EEC /* UIImageViewX.swift */,
+				46AE15002082B82800CC7EEC /* UIViewX.swift */,
+				46AE15012082B82800CC7EEC /* UIVisualEffectViewX.swift */,
+				46AE15022082B82800CC7EEC /* UISliderX.swift */,
+			);
+			path = DesignableX;
 			sourceTree = "<group>";
 		};
 		EEABF8226ADF07419F0B7844 /* Frameworks */ = {
@@ -275,8 +335,9 @@
 				TargetAttributes = {
 					4687A0081DFCB9A80067F773 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = TQ9EG6FK32;
 						LastSwiftMigration = 0900;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplePay = {
 								enabled = 0;
@@ -326,6 +387,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46AE1513209386FC00CC7EEC /* style.json in Resources */,
 				4687A01A1DFCB9A80067F773 /* LaunchScreen.storyboard in Resources */,
 				46F113BC1E16044800FB7294 /* defaultEventImage.png in Resources */,
 				4687A0171DFCB9A80067F773 /* Assets.xcassets in Resources */,
@@ -409,12 +471,16 @@
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Versions/A/Resources/GooglePlaces.bundle",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterKitResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterShareExtensionUIResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -460,13 +526,14 @@
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
+				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-				"${BUILT_PRODUCTS_DIR}/paper-onboarding/paper_onboarding.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -484,13 +551,14 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/paper_onboarding.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -506,7 +574,6 @@
 			files = (
 				46621B831E2E9E4A005E5404 /* EventInfoViewController.swift in Sources */,
 				4687A0151DFCB9A80067F773 /* WebblenEvents.xcdatamodeld in Sources */,
-				46CB51971FA92058009CF2D4 /* UIButtonX.swift in Sources */,
 				4691BD901FAFED4C00056024 /* SWMenuViewController.swift in Sources */,
 				466FF4CF1FD517EF00ED6E37 /* EventPricingViewController.swift in Sources */,
 				46621B7F1E218750005E5404 /* InitialViewController.swift in Sources */,
@@ -515,12 +582,22 @@
 				4617A7471F3D4C6600926160 /* confirmPostViewController.swift in Sources */,
 				461085B61FDE214300E7B2A2 /* WebblenIAPService.swift in Sources */,
 				46621B811E21D11B005E5404 /* MyEventsTableViewCell.swift in Sources */,
+				46AE15062082B82900CC7EEC /* UILabelX.swift in Sources */,
+				46AE15092082B82900CC7EEC /* UIImageViewX.swift in Sources */,
 				46CB51A11FA99576009CF2D4 /* BackTableVC.swift in Sources */,
 				4609990A1E384717000DE53F /* TermsViewController.swift in Sources */,
+				460CD4A9207B7E8D002CF5B7 /* FirebaseMethods.swift in Sources */,
+				46AE15052082B82900CC7EEC /* UIButtonX.swift in Sources */,
 				D40A12A41F658F3E00392FF9 /* WhatsNewViewController.swift in Sources */,
 				469E84851F385180002E07AA /* DateViewController.swift in Sources */,
+				46AE15032082B82900CC7EEC /* UIViewXRadialGradient.swift in Sources */,
 				4642E73F1E20604100D65DA5 /* MyEventsViewController.swift in Sources */,
+				46AE150C2082B82900CC7EEC /* UISliderX.swift in Sources */,
+				46AE15042082B82900CC7EEC /* UITextFieldX.swift in Sources */,
+				46AE150B2082B82900CC7EEC /* UIVisualEffectViewX.swift in Sources */,
 				4687A00D1DFCB9A80067F773 /* AppDelegate.swift in Sources */,
+				460CD4A22075BACF002CF5B7 /* WalletViewController.swift in Sources */,
+				46AE15082082B82900CC7EEC /* UIViewControllerX.swift in Sources */,
 				460999101E3A9902000DE53F /* BlockTableViewCell.swift in Sources */,
 				46094A331FB9497C008B277D /* HomeViewController.swift in Sources */,
 				46EC3ACD1F7305BE00E4CC06 /* EventCategoryViewController.swift in Sources */,
@@ -528,18 +605,20 @@
 				46956C6F1E1DB3F9009A8F93 /* InterestSetupViewController.swift in Sources */,
 				4624B9621F67D45D00F4D6E6 /* VerifyAccountViewController.swift in Sources */,
 				4642E73D1E1F40E400D65DA5 /* NewEventViewController.swift in Sources */,
+				46AE15072082B82900CC7EEC /* UIViewAnchorPoint.swift in Sources */,
 				46CB519F1FA98F31009CF2D4 /* SWRevealViewController.m in Sources */,
 				461FD2D31F43FBF9001C7279 /* homeCell.swift in Sources */,
+				46AE150E208F745B00CC7EEC /* EventsTableViewController.swift in Sources */,
 				46CB51991FA9268D009CF2D4 /* FloatingActionButton.swift in Sources */,
 				4642E7371E1E6B6300D65DA5 /* SignInViewController.swift in Sources */,
 				469386DC1E2F2E51000AF3D4 /* SettingsViewController.swift in Sources */,
 				46094A311FB8EED5008B277D /* DataStructures.swift in Sources */,
 				4609990C1E39E38A000DE53F /* BlockedUsersViewController.swift in Sources */,
 				461085B41FDE206D00E7B2A2 /* WebblenIAP.swift in Sources */,
+				46AE150A2082B82900CC7EEC /* UIViewX.swift in Sources */,
 				D40A12A61F659E7300392FF9 /* NotificationSettingsViewController.swift in Sources */,
 				46956C731E1E10E5009A8F93 /* SignUpViewController.swift in Sources */,
 				469E84831F355988002E07AA /* MapsViewController.swift in Sources */,
-				46CB519B1FA93BBB009CF2D4 /* UIViewX.swift in Sources */,
 				4691BD941FB036A200056024 /* Utilities.swift in Sources */,
 				46956C711E1E0537009A8F93 /* SetupViewController.swift in Sources */,
 			);
@@ -684,13 +763,15 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = WebblenEvents/WebblenEvents.entitlements;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TQ9EG6FK32;
 				INFOPLIST_FILE = WebblenEvents/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.webblen.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WebblenEvents/WebblenEvents-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -707,13 +788,15 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = WebblenEvents/WebblenEvents.entitlements;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TQ9EG6FK32;
 				INFOPLIST_FILE = WebblenEvents/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.webblen.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WebblenEvents/WebblenEvents-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
