@@ -16,19 +16,18 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
 
 
 
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var eventPhoto: UIImageView!
+    @IBOutlet weak var eventPhotoHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var eventTitleField: UITextField!
     @IBOutlet weak var eventDescriptionField: UITextView!
-    @IBOutlet weak var createEventButton: UIButton!
+    @IBOutlet weak var createEventBtn: UIButtonX!
     @IBOutlet weak var dateTimeButton: UIButton!
     @IBOutlet weak var locationButton: UIButton!
     @IBOutlet weak var imageSelectButton: UIButton!
     @IBOutlet weak var modifyNotification: UIButton!
     @IBOutlet weak var chooseEventCategoryButton: UIButton!
-    @IBOutlet weak var eventTabLabel: UILabel!
     @IBOutlet weak var eventPriceHelp: UIButton!
     @IBOutlet weak var eventPriceLabel: UILabel!
-    @IBOutlet weak var eventInfoHeighConstraint: NSLayoutConstraint!
     
     //Firebase References
     var dataBase = Firestore.firestore()
@@ -45,7 +44,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
     var pathToImage = ""
     var eventImage: UIImageView?
     var notifyDistance = ""
-    var eventKey : String?
+    var eventKey = ""
     var editKey : String?
     var event18 = false
     var event21 = false
@@ -69,7 +68,8 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
     
     var imagePicker = UIImagePickerController()
     
-        var loadingView = NVActivityIndicatorView(frame: CGRect(x: (100), y: (100), width: 125, height: 125), type: .ballRotateChase, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1.0), padding: 0)
+    var loadingColor = UIColor(red: 30/300, green: 39/300, blue: 46/300, alpha: 1.0)
+    var loadingView = NVActivityIndicatorView(frame: CGRect(x: (100), y: (100), width: 125, height: 125), type: .ballRotateChase, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1.0), padding: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,8 +77,8 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
         let xAxis = self.view.center.x
         let yAxis = self.view.center.y
         
-        let frame = CGRect(x: (xAxis-147), y: (yAxis-135), width: 300, height: 300)
-        loadingView = NVActivityIndicatorView(frame: frame, type: .ballRotateChase, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1.0), padding: 0)
+        let frame = CGRect(x: (xAxis-25), y: (yAxis-25), width: 50, height: 50)
+        loadingView = NVActivityIndicatorView(frame: frame, type: .circleStrokeSpin, color: loadingColor, padding: 0)
         self.view.addSubview(loadingView)
         
         IQKeyboardManager.sharedManager().enable = false
@@ -94,7 +94,6 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
         eventDescriptionField.inputAccessoryView = toolBar
         
         let screenSize : CGRect = UIScreen.main.bounds
-        eventInfoHeighConstraint.constant = screenSize.height * 0.20
         
         
         //image picker
@@ -103,13 +102,11 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
 
         //Event Title Style
         self.eventTitleField.delegate = self
-        self.eventTitleField.layer.borderColor = UIColor.lightGray.cgColor
-        self.eventTitleField.layer.borderWidth = 0.5
-        self.eventTitleField.layer.cornerRadius = CGFloat(Float(5.0))
+
         
         //Event Description Field Style
         self.eventDescriptionField.delegate = self
-        self.eventDescriptionField.textContainerInset = UIEdgeInsetsMake(10,0,10,0)
+        self.eventDescriptionField.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         self.eventDescriptionField.text = "Event Info"
         self.eventDescriptionField.textColor = UIColor.lightGray
         
@@ -129,7 +126,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
         
         if (self.editingEvent == true){
             
-            let eventRef = dataBase.collection("events").document(eventKey!)
+            let eventRef = dataBase.collection("events").document(eventKey)
             eventRef.getDocument(completion: {(event, error) in
                 if let event = event {
                     self.eventTitleField.text = event.data()!["title"] as! String
@@ -142,10 +139,8 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
                     self.pathToImage = event.data()!["pathToImage"] as! String
                     if self.pathToImage != "" {
                         let url = NSURL(string: self.pathToImage)
-                        self.eventImage?.sd_setImage(with: url as! URL)
-                        let backImage = self.eventImage?.image
-                        self.imageSelectButton.setImage(backImage, for: .normal)
-                        
+                        self.eventPhoto.sd_setImage(with: url as! URL)
+                        self.eventPhotoHeightConstraint.constant = 275
                     }
                     self.event18 = event.data()!["event18"] as! Bool
                     self.event21 = event.data()!["event21"] as! Bool
@@ -223,10 +218,9 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
            uploadedImage = true
-            self.imageSelectButton.setBackgroundImage(image, for: .normal)
-            
+            self.eventPhoto.image = image
+            self.eventPhotoHeightConstraint.constant = 275
         }
-        
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -257,14 +251,17 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
         return false
     }
     
-    @IBAction func didTapConfirm(_ sender: Any) {
-
+    @IBAction func didTapNextBtn(_ sender: Any) {
         loadingView.startAnimating()
         
         //Get Location Coordinates
         convertAddressToLatAndLong()
+        
         let newEventReference = dataBase.collection("events").document()
-
+        if self.eventKey == "" {
+            self.eventKey = newEventReference.documentID
+        }
+        
         
         //VALIDATION
         if (self.eventTitleField.text!.count < 5){
@@ -279,7 +276,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
             showAlert(withTitle: "Event Date/Time Error", message: "Please check the date of your event")
             loadingView.stopAnimating()
         }
-        else if (eventAddress == "" || !(eventAddress.contains("Fargo, ND"))){
+        else if (eventAddress == ""){
             showAlert(withTitle: "Event Address Error", message: "Please make an event within Fargo, ND.")
             loadingView.stopAnimating()
         }
@@ -288,51 +285,13 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
             loadingView.stopAnimating()
         }
         else if (uploadedImage == true){
-        
-            if isEditing == false {
-            let imageStorage = Storage.storage().reference(forURL: "gs://webblen-events.appspot.com/events")
-            let imageRef = imageStorage.child("events").child((currentUser?.uid)!).child("\(newEventReference.documentID).jpg")
             
-            let imageData = UIImageJPEGRepresentation(self.imageSelectButton.backgroundImage(for: .normal)!, 1.0)
-            let uploadImage = imageRef.putData(imageData!, metadata: nil) {(metadata, error) in
-                if error != nil {
-                    self.showAlert(withTitle: "Event Upload Error", message: "Error occurred while uploading event")
-                    return
-                }
-                imageRef.downloadURL(completion: {(url, error) in
-                    if let url = url {
-                        newEventReference.setData([
-                            "title": self.eventTitleField.text!,
-                            "address": self.eventAddress,
-                            "date": self.eventDate,
-                            "description": self.eventDescriptionField.text,
-                            "categories": self.eventCategories,
-                            "eventKey": newEventReference.documentID,
-                            "lat": self.lat!,
-                            "lon": self.lon!,
-                            "paid": false,
-                            "pathToImage": url.absoluteString,
-                            "radius": self.eventRadius,
-                            "time": self.eventTime,
-                            "author": self.username!,
-                            "verified": self.eventVerified,
-                            "views": 0,
-                            "event18": self.event18,
-                            "event21": self.event21,
-                            "notificationOnly": self.notificationOnly,
-                            "distanceFromUser": 0
-                            ])
-                        self.loadingView.stopAnimating()
-                        self.uploadPost(currentKey: newEventReference.documentID)
-                        }
-                    })
-                }
-            }
-            else {
+            if editingEvent == false {
                 let imageStorage = Storage.storage().reference(forURL: "gs://webblen-events.appspot.com/events")
-                let imageRef = imageStorage.child("events").child((currentUser?.uid)!).child("\(self.eventKey).jpg")
+                let imagePath = self.eventKey + ".jpg"
+                let imageRef = imageStorage.child(imagePath)
                 
-                let imageData = UIImageJPEGRepresentation(self.imageSelectButton.backgroundImage(for: .normal)!, 1.0)
+                let imageData = UIImageJPEGRepresentation(self.eventPhoto.image!, 1.0)
                 let uploadImage = imageRef.putData(imageData!, metadata: nil) {(metadata, error) in
                     if error != nil {
                         self.showAlert(withTitle: "Event Upload Error", message: "Error occurred while uploading event")
@@ -340,7 +299,47 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
                     }
                     imageRef.downloadURL(completion: {(url, error) in
                         if let url = url {
-                            let updateEvent = self.dataBase.collection("events").document(self.eventKey!)
+                            newEventReference.setData([
+                                "title": self.eventTitleField.text!,
+                                "address": self.eventAddress,
+                                "date": self.eventDate,
+                                "description": self.eventDescriptionField.text,
+                                "categories": self.eventCategories,
+                                "eventKey": newEventReference.documentID,
+                                "lat": self.lat!,
+                                "lon": self.lon!,
+                                "paid": false,
+                                "pathToImage": url.absoluteString,
+                                "radius": self.eventRadius,
+                                "time": self.eventTime,
+                                "author": self.username!,
+                                "verified": self.eventVerified,
+                                "views": 0,
+                                "event18": self.event18,
+                                "event21": self.event21,
+                                "notificationOnly": self.notificationOnly,
+                                "distanceFromUser": 0
+                                ])
+                            self.loadingView.stopAnimating()
+                            self.uploadPost(currentKey: newEventReference.documentID)
+                        }
+                    })
+                }
+            }
+            else {
+                let imageStorage = Storage.storage().reference(forURL: "gs://webblen-events.appspot.com/events")
+                let imagePath = self.eventKey + ".jpg"
+                let imageRef = imageStorage.child(imagePath)
+                
+                let imageData = UIImageJPEGRepresentation(self.eventPhoto.image!, 1.0)
+                let uploadImage = imageRef.putData(imageData!, metadata: nil) {(metadata, error) in
+                    if error != nil {
+                        self.showAlert(withTitle: "Event Upload Error", message: "Error occurred while uploading event")
+                        return
+                    }
+                    imageRef.downloadURL(completion: {(url, error) in
+                        if let url = url {
+                            let updateEvent = self.dataBase.collection("events").document(self.eventKey)
                             updateEvent.updateData([
                                 "title": self.eventTitleField.text!,
                                 "address": self.eventAddress,
@@ -358,7 +357,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
                                 "notificationOnly": self.notificationOnly,
                                 ])
                             self.loadingView.stopAnimating()
-                            self.uploadPost(currentKey: self.eventKey!)
+                            self.uploadPost(currentKey: self.eventKey)
                         }
                     })
                 }
@@ -366,33 +365,33 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
             
         }
         else if (uploadedImage == false){
-            if !(isEditing) {
-            newEventReference.setData([
-                "title": self.eventTitleField.text!,
-                "address": self.eventAddress,
-                "date": self.eventDate,
-                "description": self.eventDescriptionField.text,
-                "categories": self.eventCategories,
-                "eventKey": newEventReference.documentID,
-                "lat": self.lat!,
-                "lon": self.lon!,
-                "paid": false,
-                "pathToImage": "",
-                "radius": self.eventRadius,
-                "time": self.eventTime,
-                "author": self.username!,
-                "verified": self.eventVerified,
-                "views": 0,
-                "event18": self.event18,
-                "event21": self.event21,
-                "notificationOnly": self.notificationOnly,
-                "distanceFromUser": 0
-                ])
-            loadingView.stopAnimating()
-            uploadPost(currentKey: newEventReference.documentID)
+            if !(editingEvent) {
+                newEventReference.setData([
+                    "title": self.eventTitleField.text!,
+                    "address": self.eventAddress,
+                    "date": self.eventDate,
+                    "description": self.eventDescriptionField.text,
+                    "categories": self.eventCategories,
+                    "eventKey": newEventReference.documentID,
+                    "lat": self.lat!,
+                    "lon": self.lon!,
+                    "paid": false,
+                    "pathToImage": "",
+                    "radius": self.eventRadius,
+                    "time": self.eventTime,
+                    "author": self.username!,
+                    "verified": self.eventVerified,
+                    "views": 0,
+                    "event18": self.event18,
+                    "event21": self.event21,
+                    "notificationOnly": self.notificationOnly,
+                    "distanceFromUser": 0
+                    ])
+                loadingView.stopAnimating()
+                uploadPost(currentKey: newEventReference.documentID)
             }
             else {
-                let updateEvent = self.dataBase.collection("events").document(self.eventKey!)
+                let updateEvent = self.dataBase.collection("events").document(self.eventKey)
                 updateEvent.updateData([
                     "title": self.eventTitleField.text!,
                     "address": self.eventAddress,
@@ -410,14 +409,13 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
                     "notificationOnly": self.notificationOnly,
                     ])
                 self.loadingView.stopAnimating()
-                self.uploadPost(currentKey: self.eventKey!)
+                self.uploadPost(currentKey: self.eventKey)
             }
         }
     }
+
     
     func uploadPost(currentKey: String){
-        
-        activityIndicator.stopAnimating()
         performSegue(withIdentifier: "confirmSegue", sender: currentKey)
     }
     

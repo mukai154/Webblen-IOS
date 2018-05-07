@@ -38,6 +38,7 @@ class confirmPostViewController: UIViewController {
     var eventCost = 0
     var eventChosenCategories : [String] = []
     var didPurchaseEvent = false
+    var freeEvent = false
     
     var products = ["com.webblen.events.notify250",
                     "com.webblen.events.notify375",
@@ -52,8 +53,12 @@ class confirmPostViewController: UIViewController {
     var sharedSecret = "3fd70aaa6f914c799e7930abd16e0523"
     
     var dataBase = Firestore.firestore()
-    var currentUser: AnyObject?
+    var currentUser = Auth.auth().currentUser
     
+    //Extras
+    var activeColor = UIColor(red: 30/300, green: 39/300, blue: 46/300, alpha: 1.0)
+    var loadingColor = UIColor(red: 255/300, green: 192/300, blue: 72/300, alpha: 1.0)
+    var inactiveColor = UIColor(red: 178/300, green: 190/300, blue: 195/300, alpha: 1.0)
     var loadingView = NVActivityIndicatorView(frame: CGRect(x: (100), y: (100), width: 125, height: 125), type: .ballRotateChase, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1.0), padding: 0)
     
     override func viewDidLoad() {
@@ -62,8 +67,8 @@ class confirmPostViewController: UIViewController {
         let xAxis = self.view.center.x
         let yAxis = self.view.center.y
         
-        let frame = CGRect(x: (xAxis-147), y: (yAxis-135), width: 300, height: 300)
-        loadingView = NVActivityIndicatorView(frame: frame, type: .ballRotateChase, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 0.7), padding: 0)
+        var frame = CGRect(x: (xAxis-25), y: (yAxis-25), width: 50, height: 50)
+        loadingView = NVActivityIndicatorView(frame: frame, type: .circleStrokeSpin, color: activeColor, padding: 0)
         self.view.addSubview(loadingView)
         loadingView.startAnimating()
         
@@ -71,16 +76,24 @@ class confirmPostViewController: UIViewController {
             retrieveProducts(product: product)
         }
 
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-        
-        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
-        
-        tap.cancelsTouchesInView = true
-        view.addGestureRecognizer(tap)
-        
         //Database Ref
-        self.currentUser = Auth.auth().currentUser
+        loadData()
         
+        
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    //Causes the view (or one of its embedded text fields) to resign the first responder status.
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    func loadData(){
+        let userRef = dataBase.collection("users").document((currentUser?.uid)!)
         let eventRef = dataBase.collection("events").document(eventKey)
         eventRef.getDocument(completion: {(event, error) in
             if let event = event {
@@ -101,44 +114,51 @@ class confirmPostViewController: UIViewController {
                     self.eTotalCost.text = "Event Total: $4.99"
                 }
                 else if self.eventRadius < 600 {
-                     self.eTotalCost.text = "Event Total: $9.99"
+                    self.eTotalCost.text = "Event Total: $9.99"
                 }
                 else if self.eventRadius < 1000 {
                     self.eTotalCost.text = "Event Total: $14.99"
                 }
                 else if self.eventRadius < 2000 {
-                     self.eTotalCost.text = "Event Total: $19.99"
+                    self.eTotalCost.text = "Event Total: $19.99"
                 }
                 else if self.eventRadius < 3100 {
-                     self.eTotalCost.text = "Event Total: $24.99"
+                    self.eTotalCost.text = "Event Total: $24.99"
                 }
                 else if self.eventRadius < 6000 {
-                     self.eTotalCost.text = "Event Total: $26.99"
+                    self.eTotalCost.text = "Event Total: $26.99"
                 }
                 else if self.eventRadius < 8500 {
-                     self.eTotalCost.text = "Event Total: $29.99"
+                    self.eTotalCost.text = "Event Total: $29.99"
                 }
                 else if self.eventRadius <= 10000 {
-                     self.eTotalCost.text = "Event Total: $34.99"
+                    self.eTotalCost.text = "Event Total: $34.99"
                 }
                 self.eNotifyRadius.text = "Notify those within " + String(self.eventRadius) + " meters"
                 self.paid = event.data()!["paid"] as! Bool
+                
+                userRef.getDocument(completion: {(userData, error) in
+                    if let userData = userData {
+                        print(userData)
+                        let freeData = userData.data()!["freeEvents"] as? Bool
+                        print(freeData)
+                        if freeData != nil {
+                            self.freeEvent = freeData!
+                        }
+                        print(self.freeEvent)
+                    } else {
+                        print("error")
+                        //Error
+                    }
+                })
+                
                 self.loadingView.stopAnimating()
             }
             else {
                 print("doc does not exist")
             }
         })
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    //Causes the view (or one of its embedded text fields) to resign the first responder status.
-    func dismissKeyboard() {
-        view.endEditing(true)
+        
     }
     
     
@@ -146,19 +166,8 @@ class confirmPostViewController: UIViewController {
         
         loadingView.startAnimating()
         
-        if (self.eventCreator == "Webblen"){
-            didPurchaseEvent = true
-            dataBase.collection("events").document(eventKey).updateData([
-                "verified": true,
-                "paid": true
-            ]) { err in
-                if let err = err {
-                    print("Error updating document: \(err)")
-                } else {
-                    self.loadingView.stopAnimating()
-                    self.performSegue(withIdentifier: "homeSegue", sender: nil)
-                }
-            }
+        if (self.eventCreator?.lowercased() == "webblen" || self.freeEvent){
+            eventPurchased()
         }
         else{
             if eventRadius < 275 {
@@ -197,7 +206,6 @@ class confirmPostViewController: UIViewController {
     
     func eventPurchased(){
         dataBase.collection("events").document(eventKey).updateData([
-            "verified": true,
             "paid": true
         ]) { err in
             if let err = err {

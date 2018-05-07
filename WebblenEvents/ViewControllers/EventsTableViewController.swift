@@ -31,6 +31,7 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
     var thisWeekArray = [webblenEvent]()
     var thisMonthArray = [webblenEvent]()
     var laterArray = [webblenEvent]()
+    var userPicsDictionary = [String: String]()
     
     //User Interests & Blocks
     var currentUser = Auth.auth().currentUser
@@ -118,7 +119,21 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
                                             notificationOnly: event.data()["notificationOnly"] as! Bool,
                                             distanceFromUser: 0
                                         )
-                                        
+                                        let author = interestedEvent.author
+                                        if self.userPicsDictionary[author] == nil {
+                                            self.database.collection("usernames").document(author.lowercased()).getDocument { (document, error) in
+                                                if let document = document, document.exists {
+                                                    let author_uid = document.data()!["uid"] as! String
+                                                    self.database.collection("users").document(author_uid).getDocument{ (userDoc, error) in
+                                                        if let userDoc = userDoc, userDoc.exists {
+                                                            self.userPicsDictionary[author] = userDoc.data()!["profile_pic"] as? String
+                                                        }
+                                                    }
+                                                } else {
+                                                    print("Document does not exist")
+                                                }
+                                            }
+                                        }
                                         let currentDate = self.formatter.date(from: formattedDate)
                                         let eventDate = self.formatter.date(from: interestedEvent.date)
                                         
@@ -241,8 +256,10 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
             let eventSmallCat1 = cell.viewWithTag(7) as! UIImageView
             let eventSmallCat2 = cell.viewWithTag(8) as! UIImageView
             let separator = cell.viewWithTag(11) as! UIImageView
-            if self.webblenEvents[indexPath.row].title == self.webblenEvents[0].title {
+            if indexPath.row == 0 {
                 separator.isHidden = true
+            } else {
+                separator.isHidden = false
             }
             //let eventSmallCat3 = cell.viewWithTag(9) as! UIImageView
             
@@ -250,12 +267,21 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
             eventImage.sd_setImage(with: url! as URL, placeholderImage: nil)
             eventImage.layer.cornerRadius = 25
             eventImage.clipsToBounds = true;
-            eventCatImg.image = UIImage(named: self.webblenEvents[indexPath.row].categories.first!)
+            
+            if self.userPicsDictionary[self.webblenEvents[indexPath.row].author] != nil {
+                let userPicUrl = NSURL(string: self.userPicsDictionary[self.webblenEvents[indexPath.row].author]!)
+                eventCatImg.sd_setImage(with: userPicUrl! as URL, placeholderImage: nil)
+                eventCatImg.clipsToBounds = true;
+            } else {
+                eventCatImg.image = UIImage(named: self.webblenEvents[indexPath.row].categories.first!)
+            }
+            
             eventTitle.text = self.webblenEvents[indexPath.row].title
             eventAuthor.text = "@" + author
             let views = String(self.webblenEvents[indexPath.row].views)
             eventViews.text = views
             eventDescription.text = eDesc
+            eventDescription.textContainerInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
             if self.webblenEvents[indexPath.row].categories.count > 1{
                 eventSmallCat1.image = UIImage(named: self.webblenEvents[indexPath.row].categories[1])
             }
@@ -272,17 +298,25 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
             let eventSmallCat1 = cell.viewWithTag(7) as! UIImageView
             let eventSmallCat2 = cell.viewWithTag(8) as! UIImageView
             let separator = cell.viewWithTag(11) as! UIImageView
-            if self.webblenEvents[indexPath.row].title == self.webblenEvents[0].title {
+            if indexPath.row == 0 {
                 separator.isHidden = true
+            } else {
+                separator.isHidden = false
             }
             //let eventSmallCat3 = cell.viewWithTag(9) as! UIImageView
-            
-            eventCatImg.image = UIImage(named: self.webblenEvents[indexPath.row].categories.first!)
+            if self.userPicsDictionary[self.webblenEvents[indexPath.row].author] != nil {
+                let userPicUrl = NSURL(string: self.userPicsDictionary[self.webblenEvents[indexPath.row].author]!)
+                eventCatImg.sd_setImage(with: userPicUrl! as URL, placeholderImage: nil)
+                eventCatImg.clipsToBounds = true;
+            } else {
+                eventCatImg.image = UIImage(named: self.webblenEvents[indexPath.row].categories.first!)
+            }
             eventTitle.text = self.webblenEvents[indexPath.row].title
             eventAuthor.text = "@" + author
             let views = String(self.webblenEvents[indexPath.row].views)
             eventViews.text = views
             eventDescription.text = eDesc
+            eventDescription.textContainerInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
             if self.webblenEvents[indexPath.row].categories.count > 1{
                 eventSmallCat1.image = UIImage(named: self.webblenEvents[indexPath.row].categories[1])
             }
@@ -326,6 +360,7 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
                 self.eventsTableView.reloadData()
                 self.eventsTableView.isHidden = true
+                self.noEventImg.image = UIImage(named: "sad1")
                 self.noEventImg.isHidden = false
                 self.noEventLbl.isHidden = false
                 self.noEventLbl.text = "Shoot! It Doesn't Look Like Anything is Happening Today..."
@@ -355,9 +390,10 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
                 self.eventsTableView.reloadData()
                 self.eventsTableView.isHidden = true
+                self.noEventImg.image = UIImage(named: "sad2")
                 self.noEventImg.isHidden = false
                 self.noEventLbl.isHidden = false
-                self.noEventLbl.text = "Shoot! It Doesn't Look Like Anything is Happening Tomorrow..."
+                self.noEventLbl.text = "Sorry, There isn't Much Going On Tomorrow..."
             }, completion: { _ in self.loadingView.stopAnimating()})
         } else {
             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
@@ -384,9 +420,10 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
                 self.eventsTableView.reloadData()
                 self.eventsTableView.isHidden = true
+                self.noEventImg.image = UIImage(named: "sad3")
                 self.noEventImg.isHidden = false
                 self.noEventLbl.isHidden = false
-                self.noEventLbl.text = "Shoot! It Doesn't Look Like Anything is Happening Later This Week..."
+                self.noEventLbl.text = "How is There Nothing Happening This Week?"
             }, completion: { _ in self.loadingView.stopAnimating()})
         } else {
             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
@@ -412,9 +449,10 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
                 self.eventsTableView.reloadData()
                 self.eventsTableView.isHidden = true
+                self.noEventImg.image = UIImage(named: "sad4")
                 self.noEventImg.isHidden = false
                 self.noEventLbl.isHidden = false
-                self.noEventLbl.text = "Shoot! It Doesn't Look Like Anything is Happening Later This Month..."
+                self.noEventLbl.text = "This Month is Looking Uneventful"
             }, completion: { _ in self.loadingView.stopAnimating()})
         } else {
             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
@@ -440,9 +478,10 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
                 self.eventsTableView.reloadData()
                 self.eventsTableView.isHidden = true
+                self.noEventImg.image = UIImage(named: "sad5")
                 self.noEventImg.isHidden = false
                 self.noEventLbl.isHidden = false
-                self.noEventLbl.text = "Shoot! It Doesn't Look Like Anything is Happening Later..."
+                self.noEventLbl.text = "Wow, This Place is Dead!"
             }, completion: { _ in self.loadingView.stopAnimating()})
         } else {
             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {

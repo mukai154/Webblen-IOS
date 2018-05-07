@@ -31,7 +31,6 @@ class EventInfoViewController: UIViewController {
     @IBOutlet weak var mapButton: UIButton!
     @IBOutlet weak var calendarButton: UIButton!
     
-    @IBOutlet weak var centerLineBreak: UIView!
     
     @IBOutlet weak var eventAddress: UILabel!
     @IBOutlet weak var eventDate: UILabel!
@@ -62,11 +61,16 @@ class EventInfoViewController: UIViewController {
     var username: String?
     var dataBaseRef: DatabaseReference!
     var dataBase = Firestore.firestore()
+    var imageStorage = Storage.storage().reference(forURL: "gs://webblen-events.appspot.com/events")
     var madeEvent = false
+    var userPicsDictionary = [String: String]()
 
     var lat : Double?
     var lon : Double?
     
+    //Extras
+    var activeColor = UIColor(red: 30/300, green: 39/300, blue: 46/300, alpha: 1.0)
+    var inactiveColor = UIColor(red: 178/300, green: 190/300, blue: 195/300, alpha: 1.0)
     var loadingView = NVActivityIndicatorView(frame: CGRect(x: (100), y: (100), width: 125, height: 125), type: .orbit, color: UIColor(red: 251/255, green: 140/255, blue: 0/255, alpha: 0.9), padding: 0)
     
     override func viewDidLoad() {
@@ -80,12 +84,11 @@ class EventInfoViewController: UIViewController {
         let xAxis = self.view.center.x
         let yAxis = self.view.center.y
         
-        let frame = CGRect(x: (xAxis-60), y: (yAxis-45), width: 125, height: 125)
-        loadingView = NVActivityIndicatorView(frame: frame, type: .ballRotateChase, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1.0), padding: 0)
+        let frame = CGRect(x: (xAxis-25), y: (yAxis-25), width: 50, height: 50)
+        loadingView = NVActivityIndicatorView(frame: frame, type: .circleStrokeSpin, color: activeColor, padding: 0)
         self.view.addSubview(loadingView)
         loadingView.startAnimating()
         
-        eventDescription.textContainerInset = UIEdgeInsetsMake(10, 10, 10, 10)
         let initialDescriptionHeight = eventDescription.contentSize.height
         let initialContentHeight = scrollView.frame.size.height
         let initialContentWidth = scrollView.frame.size.width
@@ -101,28 +104,43 @@ class EventInfoViewController: UIViewController {
             eventRef.getDocument(completion: {(event, error) in
                 if let event = event {
                     self.eventCategories = event.data()!["categories"] as! [String]
-                    self.eventImage.image = UIImage(named: self.eventCategories.first!)
-                    self.eventImage.layer.cornerRadius = self.eventImage.frame.size.width / 2;
-                    self.eventImage.clipsToBounds = true;
-                    self.eventImage.layer.borderWidth = 2
-                    self.eventImage.layer.borderColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0).cgColor
                     self.eventTitle.text = event.data()!["title"] as! String
                     self.evTitle = event.data()!["title"] as! String
                     self.evDescription = event.data()!["description"] as! String
                     self.eventDescription.text = event.data()!["description"] as! String
                     self.lat = event.data()!["lat"] as! Double
                     self.lon = event.data()!["lon"] as! Double
-
+                    
+                    //**User Author Pic
                     self.eventAuthor = event.data()!["author"] as! String
+                    if self.userPicsDictionary[self.eventAuthor!] == nil {
+                        self.dataBase.collection("usernames").document((self.eventAuthor?.lowercased())!).getDocument { (document, error) in
+                            if let document = document, document.exists {
+                                let author_uid = document.data()!["uid"] as! String
+                                self.dataBase.collection("users").document(author_uid).getDocument{ (userDoc, error) in
+                                    if let userDoc = userDoc, userDoc.exists {
+                                        self.userPicsDictionary[self.eventAuthor!] = userDoc.data()!["profile_pic"] as? String
+                                        let userPicPath = self.userPicsDictionary[self.eventAuthor!]
+                                        let userPicUrl = NSURL(string: userPicPath!)
+                                        self.eventImage.sd_setImage(with: userPicUrl! as URL, placeholderImage: nil)
+                                    }
+                                }
+                            } else {
+                                self.eventImage.image = UIImage(named: self.eventCategories.first!)
+                            }
+                            
+                            self.eventImage.layer.cornerRadius = self.eventImage.frame.size.width / 2;
+                            self.eventImage.clipsToBounds = true;
+                        }
+                    }
+                    
+                    //**Event Img
                     let imageURL = event.data()!["pathToImage"] as! String
                     print(imageURL)
                     if imageURL != "" {
                         let url = NSURL(string: imageURL)
-                        self.eventUploadedPhoto.sd_setImage(with: url as! URL, placeholderImage: nil,options: SDWebImageOptions(rawValue: 0), completed: { (image, error, cacheType, imageURL) in
-                            guard let image = image else { return }
-                            print("Image arrived!")
-                            self.eventUploadedPhoto.image = UIImage.scaleImageToSize(img: image, size: self.eventUploadedPhoto.frame.size)
-                        })
+                        self.eventUploadedPhoto.sd_setImage(with: url! as URL, placeholderImage: nil)
+                        self.eventUploadedPhoto.clipsToBounds = true;
                         self.eventUploadedPhoto.isHidden = false
                     }
                     else {
@@ -131,6 +149,7 @@ class EventInfoViewController: UIViewController {
                     
                     self.eventDescription.translatesAutoresizingMaskIntoConstraints = true
                     self.eventDescription.sizeToFit()
+                    self.eventDescription.textContainerInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
                     self.eventCreator.text = "@" + self.eventAuthor!
                     self.eventAddress.text = event.data()!["address"] as! String
                     let eDate = event.data()!["date"] as! String
@@ -151,7 +170,7 @@ class EventInfoViewController: UIViewController {
                             checkUsernameRef.getDocument(completion: {(userDoc, error) in
                                 if let userDoc = userDoc {
                                     self.username = userDoc.data()!["username"] as! String
-                                    if (self.username == self.eventAuthor) || (self.username == "Webblen") {
+                                    if (self.username == self.eventAuthor) || (self.username?.lowercased() == "webblen") {
                                       self.madeEvent == true
                                     }
                                 }
@@ -202,13 +221,21 @@ class EventInfoViewController: UIViewController {
     
     //Options Available for Event
     @IBAction func didTapOptionDots(_ sender: Any) {
-        if (madeEvent == true || (self.username == eventAuthor) || (self.username == "Webblen")){
+        if (madeEvent == true || (self.username == eventAuthor) || (self.username?.lowercased() == "webblen")){
             
             let alert = UIAlertController(title: nil, message: nil , preferredStyle: .actionSheet)
             let editEvent = UIAlertAction(title: "Edit Event", style: .default, handler: { action in
                 self.performSegue(withIdentifier: "editEventSegue", sender: self.eventKey)
             })
             let deleteEvent = UIAlertAction(title: "Delete Event", style: .destructive, handler: { action in
+                let imagePath = self.eventKey + ".jpg"
+                self.imageStorage.child(imagePath).delete { error in
+                    if let error = error {
+                        // Uh-oh, an error occurred!
+                    } else {
+                        // File deleted successfully
+                    }
+                }
                 self.dataBase.collection("events").document(self.eventKey).delete()
                 self.performSegue(withIdentifier: "homeSegue", sender: nil)
             })
@@ -221,7 +248,7 @@ class EventInfoViewController: UIViewController {
             
         }
             
-        else if (madeEvent == false && (self.username == self.eventAuthor) || (self.username == "Webblen")){
+        else if (madeEvent == false && (self.username == self.eventAuthor) || (self.username?.lowercased() == "webblen")){
             
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             let dismissAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)

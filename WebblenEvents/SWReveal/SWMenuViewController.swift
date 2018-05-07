@@ -34,6 +34,9 @@ class SWMenuViewController: UIViewController {
         super.viewDidLoad()
 
         //Set Menu Views
+        let listIc = UIImage(named: "ic_list")
+        let listTemplate = listIc?.withRenderingMode(.alwaysTemplate)
+        
         let favIc = UIImage(named: "ic_favorite_white")
         let favTemplate = favIc?.withRenderingMode(.alwaysTemplate)
 
@@ -55,6 +58,9 @@ class SWMenuViewController: UIViewController {
         let logoutIc = UIImage(named: "ic_exit_to_app")
         let logoutTemplate = logoutIc?.withRenderingMode(.alwaysTemplate)
 
+        listEventsIcon.image = listTemplate
+        listEventsIcon.tintColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
+        
         myInterestsIcon.image = favTemplate
         myInterestsIcon.tintColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
         
@@ -88,6 +94,8 @@ class SWMenuViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //** FUNCTIONS
+    
     func loadFirestoreProfileData(){
         if currentUser == nil {
             self.performSegue(withIdentifier: "loginSegue", sender: nil)
@@ -102,12 +110,7 @@ class SWMenuViewController: UIViewController {
                     let imageURL = snapshot?.data()!["profile_pic"] as? String
                     let currentUsername = snapshot?.data()!["username"] as? String
                     if imageURL != nil && currentUsername != nil {
-                        let url = NSURL(string: imageURL!)
-                        self.userProfilePic.sd_setImage(with: url! as URL)
-                        self.userProfilePic.layer.cornerRadius = self.userProfilePic.frame.size.width / 2;
-                        self.userProfilePic.clipsToBounds = true;
-                        self.userProfilePic.layer.borderWidth = 2
-                        self.userProfilePic.layer.borderColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0).cgColor
+                        self.changeProfileImage(imageURL: imageURL!)
                         self.username.text = "@" +  currentUsername!
                     } else {
                         self.performSegue(withIdentifier: "SetupSegue", sender: nil)
@@ -117,6 +120,18 @@ class SWMenuViewController: UIViewController {
         }
     }
     
+    //Change Profile Image
+    public func changeProfileImage(imageURL: String){
+        let url = NSURL(string: imageURL)
+        self.userProfilePic.sd_setImage(with: url! as URL)
+        self.userProfilePic.layer.cornerRadius = self.userProfilePic.frame.size.width / 2;
+        self.userProfilePic.clipsToBounds = true;
+        self.userProfilePic.layer.borderWidth = 2
+        self.userProfilePic.layer.borderColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0).cgColor
+    }
+    
+    
+    //** Btn Actions
     @IBAction func didPressLogout(_ sender: Any) {
         if (Auth.auth().currentUser != nil){
             do{

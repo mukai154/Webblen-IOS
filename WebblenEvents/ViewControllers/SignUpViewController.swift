@@ -46,7 +46,7 @@ class SignUpViewController: UIViewController, FBSDKLoginButtonDelegate{
         
         self.registerButton.layer.cornerRadius = CGFloat(Float(5.0))
         
-        setupFBLogin()
+        //setupFBLogin()
         
     }
 

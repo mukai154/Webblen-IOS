@@ -162,11 +162,12 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
     var coordinates: [CLLocationCoordinate2D] = []
     let locationManager = CLLocationManager()
     var menuMarker = UIImage(named: "map-marker")?.withRenderingMode(.alwaysTemplate)
-    var markerIcon = UIImage(named: "customMapMarker")
-
+    var markerIcon = UIImage(named: "map-marker-orange")
+    
 
     //Database Variables
     var database = Firestore.firestore()
+    var imageStorage = Storage.storage().reference(forURL: "gs://webblen-events.appspot.com/events")
     var todayArray = [webblenEvent]()
     var tomorrowArray = [webblenEvent]()
     var thisWeekArray = [webblenEvent]()
@@ -196,12 +197,12 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
     
     //Extras
     var activeColor = UIColor(red: 30/300, green: 39/300, blue: 46/300, alpha: 1.0)
+    var loadingColor = UIColor(red: 254/255, green: 202/255, blue: 87/255, alpha: 1.0)
     var inactiveColor = UIColor(red: 178/300, green: 190/300, blue: 195/300, alpha: 1.0)
     var loadingView = NVActivityIndicatorView(frame: CGRect(x: (100), y: (100), width: 125, height: 125), type: .lineScale, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1.0), padding: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         googleMapsView.isUserInteractionEnabled = false
         googleMapsView.alpha = 0
         
@@ -216,7 +217,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         let yAxis = self.view.center.y
         
         var frame = CGRect(x: (xAxis-25), y: (yAxis-75), width: 50, height: 50)
-        loadingView = NVActivityIndicatorView(frame: frame, type: .lineScale, color: UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0), padding: 0)
+        loadingView = NVActivityIndicatorView(frame: frame, type: .lineScale, color: loadingColor, padding: 0)
         self.view.addSubview(loadingView)
         loadingView.startAnimating()
         
@@ -342,6 +343,14 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
                 
                                             //Append to Event Date Arrays
                                             if (eventDate! < currentDate! && interestedEvent.paid) {
+                                                let imagePath = interestedEvent.eventKey + ".jpg"
+                                                self.imageStorage.child(imagePath).delete { error in
+                                                    if let error = error {
+                                                        // Uh-oh, an error occurred!
+                                                    } else {
+                                                        // File deleted successfully
+                                                    }
+                                                }
                                                 self.database.collection("events").document(interestedEvent.eventKey).delete()
                                             }
                                             else if (currentDate! == eventDate! && interestedEvent.paid) {
@@ -555,6 +564,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
             self.showNotification(title: selectedEvent.author + " has an event later!", message: "The Event: " + eventTitleString + " is happening this month. Check it out!")
             }
         }
+        locationManager.stopMonitoring(for: region)
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
@@ -630,7 +640,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         let content = UNMutableNotificationContent()
         content.title = title
         content.body = message
-        content.badge = 1
+        content.badge = 0
         content.sound = .default()
         let request = UNNotificationRequest(identifier: "notif", content: content, trigger: nil)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)

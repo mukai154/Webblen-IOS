@@ -57,7 +57,6 @@
 		46AE150B2082B82900CC7EEC /* UIVisualEffectViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE15012082B82800CC7EEC /* UIVisualEffectViewX.swift */; };
 		46AE150C2082B82900CC7EEC /* UISliderX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE15022082B82800CC7EEC /* UISliderX.swift */; };
 		46AE150E208F745B00CC7EEC /* EventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE150D208F745B00CC7EEC /* EventsTableViewController.swift */; };
-		46AE1513209386FC00CC7EEC /* style.json in Resources */ = {isa = PBXBuildFile; fileRef = 46AE15112093869800CC7EEC /* style.json */; };
 		46CB51951FA53355009CF2D4 /* SetLocationNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CB51941FA53355009CF2D4 /* SetLocationNotificationViewController.swift */; };
 		46CB51991FA9268D009CF2D4 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CB51981FA9268D009CF2D4 /* FloatingActionButton.swift */; };
 		46CB519F1FA98F31009CF2D4 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CB519D1FA98F30009CF2D4 /* SWRevealViewController.m */; };
@@ -126,7 +125,6 @@
 		46AE15012082B82800CC7EEC /* UIVisualEffectViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIVisualEffectViewX.swift; sourceTree = "<group>"; };
 		46AE15022082B82800CC7EEC /* UISliderX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISliderX.swift; sourceTree = "<group>"; };
 		46AE150D208F745B00CC7EEC /* EventsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewController.swift; sourceTree = "<group>"; };
-		46AE15112093869800CC7EEC /* style.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = style.json; sourceTree = "<group>"; };
 		46CB51941FA53355009CF2D4 /* SetLocationNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLocationNotificationViewController.swift; sourceTree = "<group>"; };
 		46CB51981FA9268D009CF2D4 /* FloatingActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
 		46CB519C1FA98F2F009CF2D4 /* WebblenEvents-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WebblenEvents-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -172,6 +170,16 @@
 			path = Firebase;
 			sourceTree = "<group>";
 		};
+		46481A5820965B0300AAC28A /* SWReveal */ = {
+			isa = PBXGroup;
+			children = (
+				4691BD8F1FAFED4C00056024 /* SWMenuViewController.swift */,
+				46CB519E1FA98F30009CF2D4 /* SWRevealViewController.h */,
+				46CB519D1FA98F30009CF2D4 /* SWRevealViewController.m */,
+			);
+			path = SWReveal;
+			sourceTree = "<group>";
+		};
 		4687A0001DFCB9A80067F773 = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +202,7 @@
 		4687A00B1DFCB9A80067F773 /* WebblenEvents */ = {
 			isa = PBXGroup;
 			children = (
+				46481A5820965B0300AAC28A /* SWReveal */,
 				46AE14F82082B82800CC7EEC /* DesignableX */,
 				46AE14F72082B78D00CC7EEC /* ViewControllers */,
 				460CD4A7207B7E61002CF5B7 /* Firebase */,
@@ -210,9 +219,6 @@
 				4687A0181DFCB9A80067F773 /* LaunchScreen.storyboard */,
 				4687A0211DFCBC560067F773 /* Logo White No Background.png */,
 				4687A0101DFCB9A80067F773 /* Main.storyboard */,
-				4691BD8F1FAFED4C00056024 /* SWMenuViewController.swift */,
-				46CB519E1FA98F30009CF2D4 /* SWRevealViewController.h */,
-				46CB519D1FA98F30009CF2D4 /* SWRevealViewController.m */,
 				281DA214204E5BF000786054 /* WebblenEvents.entitlements */,
 				4691BD931FB036A200056024 /* Utilities.swift */,
 				46CB519C1FA98F2F009CF2D4 /* WebblenEvents-Bridging-Header.h */,
@@ -220,7 +226,6 @@
 				4687A0131DFCB9A80067F773 /* WebblenEvents.xcdatamodeld */,
 				461085B31FDE206D00E7B2A2 /* WebblenIAP.swift */,
 				461085B51FDE214300E7B2A2 /* WebblenIAPService.swift */,
-				46AE15112093869800CC7EEC /* style.json */,
 			);
 			path = WebblenEvents;
 			sourceTree = "<group>";
@@ -387,7 +392,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46AE1513209386FC00CC7EEC /* style.json in Resources */,
 				4687A01A1DFCB9A80067F773 /* LaunchScreen.storyboard in Resources */,
 				46F113BC1E16044800FB7294 /* defaultEventImage.png in Resources */,
 				4687A0171DFCB9A80067F773 /* Assets.xcassets in Resources */,

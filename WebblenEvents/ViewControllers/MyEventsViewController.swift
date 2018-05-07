@@ -35,8 +35,8 @@ class MyEventsViewController: UIViewController, UITableViewDelegate, UITableView
         let xAxis = self.view.center.x
         let yAxis = self.view.center.y
         
-        let frame = CGRect(x: (xAxis-147), y: (yAxis-135), width: 300, height: 300)
-        loadingView = NVActivityIndicatorView(frame: frame, type: .ballRotateChase, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 0.7), padding: 0)
+        let frame = CGRect(x: (xAxis-25), y: (yAxis-25), width: 50, height: 50)
+        loadingView = NVActivityIndicatorView(frame: frame, type: .circleStrokeSpin, color: UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0), padding: 0)
         self.view.addSubview(loadingView)
         loadingView.startAnimating()
         

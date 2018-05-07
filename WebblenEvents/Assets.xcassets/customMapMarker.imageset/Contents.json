@@ -2,17 +2,15 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "customRed23.png",
+      "filename" : "mapMarkerDark20.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "customRed30.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "customRed60.png",
       "scale" : "3x"
     }
   ],

@@ -10,13 +10,17 @@ import UIKit
 import Firebase
 import SDWebImage
 
-class WalletViewController: UIViewController {
+class WalletViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     //Firebase References
     var dataBase = Firestore.firestore()
     var currentUser = Auth.auth().currentUser
+    var profilePicStorage = Storage.storage().reference(forURL: "gs://webblen-events.appspot.com/profile_pics")
+    var imagePicker = UIImagePickerController()
+    var userImg:UIImage?
     
     //User UI
+    @IBOutlet weak var profilePicBtn: UIButton!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var profileUsernameLabel: UILabel!
     @IBOutlet weak var eventRatioView: UIView!
@@ -28,7 +32,13 @@ class WalletViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //image picker
+        imagePicker.delegate = self
+        
+        //UI
         self.eventRatioView.layer.cornerRadius = 5
+        
+        //Data
         loadFirestoreProfileData()
     }
 
@@ -62,6 +72,7 @@ class WalletViewController: UIViewController {
                         self.profileUsernameLabel.text = "@" +  currentUsername!
                         self.profileUsernameLabel.isHidden = false
                         self.activityIndicator.isHidden = true
+                        self.profilePicBtn.isEnabled = true
                     } else {
                         self.performSegue(withIdentifier: "SetupSegue", sender: nil)
                     }
@@ -71,12 +82,45 @@ class WalletViewController: UIViewController {
     }
     
     //*** BUTTON ACTIONS
+    @IBAction func didPressProfilePic(_ sender: Any) {
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = .photoLibrary
+        self.present(imagePicker, animated: true, completion: nil)
+    }
     @IBAction func didPressBackArrowBtn(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+
+    //*** METHODS
+    //Photo has been selected
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+            profileImageView.image = image
+            profileImageView.clipsToBounds = true
+        }
+        let imageData = UIImageJPEGRepresentation(self.profileImageView.image!, 1.0)
+        let imageRef = self.profilePicStorage.child((self.currentUser?.uid)! + ".jpg")
+        let uploadImage = imageRef.putData(imageData!, metadata: nil) {(metadata, error) in
+            if error != nil {
+                self.showAlert(withTitle: "Photo Update Error", message: "There was in issue updating your profile pic.")
+                return
+            }
+            imageRef.downloadURL(completion: {(url, error) in
+                if let url = url {
+                    let userDocRef = self.dataBase.collection("users")
+                    userDocRef.document((self.currentUser?.uid)!).updateData(["profile_pic":url.absoluteString])
+                    //SWMenuViewController.changeProfileImage(url.absoluteString)
+                }
+            })
+        }
         self.dismiss(animated: true, completion: nil)
     }
 }
 
-//**** TABLE
+//*** EXTENSIONS
+
+//** TABLE
 extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5

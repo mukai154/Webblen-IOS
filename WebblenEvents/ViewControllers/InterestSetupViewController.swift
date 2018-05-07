@@ -95,7 +95,10 @@ class InterestSetupViewController: UIViewController {
     var currentUser = Auth.auth().currentUser
     
     //Extras
-    var btnBackground = UIImage(named: "pastelOrange")
+    var btnBackground = UIImage(named: "orangeBackground")
+    var activeBtnColor = UIColor(red: 254/255, green: 202/255, blue: 87/255, alpha: 1.0)
+    var inactiveBtnColor = UIColor.clear
+    var btnTintColor = UIColor(red: 30/255, green: 39/255, blue: 46/255, alpha: 1.0)
     var loadingView = NVActivityIndicatorView(frame: CGRect(x: (100), y: (100), width: 125, height: 125), type: .ballRotateChase, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1.0), padding: 0)
     
     override func viewDidLoad() {
@@ -107,53 +110,53 @@ class InterestSetupViewController: UIViewController {
     let yAxis = self.view.center.y
     
     let frame = CGRect(x: (xAxis-25), y: (yAxis-25), width: 50, height: 50)
-    loadingView = NVActivityIndicatorView(frame: frame, type: .circleStrokeSpin, color: UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0), padding: 0)
+    loadingView = NVActivityIndicatorView(frame: frame, type: .circleStrokeSpin, color: btnTintColor, padding: 0)
     self.view.addSubview(loadingView)
     loadingView.startAnimating()
         
     //Set Btn Icons
         amusementBtn.setImage(amuseIcon, for: .normal)
-        amusementBtn.tintColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0)
+        amusementBtn.tintColor = btnTintColor
         artBtn.setImage(artIcon, for: .normal)
-        artBtn.tintColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0)
+        artBtn.tintColor = btnTintColor
         collegeBtn.setImage(collegeIcon, for: .normal)
-        collegeBtn.tintColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0)
+        collegeBtn.tintColor = btnTintColor
         communityBtn.setImage(communIcon, for: .normal)
-        communityBtn.tintColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0)
+        communityBtn.tintColor = btnTintColor
         competitionBtn.setImage(compIcon, for: .normal)
-        competitionBtn.tintColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0)
+        competitionBtn.tintColor = btnTintColor
         cultureBtn.setImage(cultIcon, for: .normal)
-        cultureBtn.tintColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0)
+        cultureBtn.tintColor = btnTintColor
         educationBtn.setImage(edIcon, for: .normal)
-        educationBtn.tintColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0)
+        educationBtn.tintColor = btnTintColor
         entertainmentBtn.setImage(entIcon, for: .normal)
-        entertainmentBtn.tintColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0)
+        entertainmentBtn.tintColor = btnTintColor
         familyBtn.setImage(famIcon, for: .normal)
-        familyBtn.tintColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0)
+        familyBtn.tintColor = btnTintColor
         foodDrinkBtn.setImage(foodIcon, for: .normal)
-        foodDrinkBtn.tintColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0)
+        foodDrinkBtn.tintColor = btnTintColor
         gamingBtn.setImage(gameIcon, for: .normal)
-        gamingBtn.tintColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0)
+        gamingBtn.tintColor = btnTintColor
         healthFitnessBtn.setImage(healthIcon, for: .normal)
-        healthFitnessBtn.tintColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0)
+        healthFitnessBtn.tintColor = btnTintColor
         musicBtn.setImage(musicIcon, for: .normal)
-        musicBtn.tintColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0)
+        musicBtn.tintColor = btnTintColor
         networkingBtn.setImage(netIcon, for: .normal)
-        networkingBtn.tintColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0)
+        networkingBtn.tintColor = btnTintColor
         outdoorsBtn.setImage(outIcon, for: .normal)
-        outdoorsBtn.tintColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0)
+        outdoorsBtn.tintColor = btnTintColor
         partyDanceBtn.setImage(partyIcon, for: .normal)
-        partyDanceBtn.tintColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0)
+        partyDanceBtn.tintColor = btnTintColor
         shoppingBtn.setImage(shopIcon, for: .normal)
-        shoppingBtn.tintColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0)
+        shoppingBtn.tintColor = btnTintColor
         sportsBtn.setImage(sportsIcon, for: .normal)
-        sportsBtn.tintColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0)
+        sportsBtn.tintColor = btnTintColor
         techBtn.setImage(techIcon, for: .normal)
-        techBtn.tintColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0)
+        techBtn.tintColor = btnTintColor
         theatreBtn.setImage(theatreIcon, for: .normal)
-        theatreBtn.tintColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0)
+        theatreBtn.tintColor = btnTintColor
         wineBrewBtn.setImage(wineIcon, for: .normal)
-        wineBrewBtn.tintColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0)
+        wineBrewBtn.tintColor = btnTintColor
         
     //If first time...
         if settingUp == true {
@@ -247,14 +250,12 @@ class InterestSetupViewController: UIViewController {
         if (amusement == true){
             amusement = false
             self.userInterests = self.userInterests.filter(){$0 != "AMUSEMENT"}
-            self.amusementBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.amusementBtn.setBackgroundImage(nil, for: .normal)
+            self.amusementBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         else{
             amusement = true
             self.userInterests.append("AMUSEMENT")
-            self.amusementBtn.tintColor = UIColor.white
-            self.amusementBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.amusementBtn.layer.borderColor = activeBtnColor.cgColor
         }
     }
     
@@ -262,14 +263,12 @@ class InterestSetupViewController: UIViewController {
         if (art == true){
             art = false
             self.userInterests = self.userInterests.filter(){$0 != "ART"}
-            self.artBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.artBtn.setBackgroundImage(nil, for: .normal)
+            self.artBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         else{
             art = true
             self.userInterests.append("ART")
-            self.artBtn.tintColor = UIColor.white
-            self.artBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.artBtn.layer.borderColor = activeBtnColor.cgColor
         }
     }
     
@@ -277,14 +276,12 @@ class InterestSetupViewController: UIViewController {
         if (collegeLife == true){
             collegeLife = false
             self.userInterests = self.userInterests.filter(){$0 != "COLLEGELIFE"}
-            self.collegeBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.collegeBtn.setBackgroundImage(nil, for: .normal)
+            self.collegeBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         else{
             collegeLife = true
             self.userInterests.append("COLLEGELIFE")
-            self.collegeBtn.tintColor = UIColor.white
-            self.collegeBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.collegeBtn.layer.borderColor = activeBtnColor.cgColor
         }
     }
     
@@ -292,14 +289,12 @@ class InterestSetupViewController: UIViewController {
         if (community == true){
             community = false
             self.userInterests = self.userInterests.filter(){$0 != "COMMUNITY"}
-            self.communityBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.communityBtn.setBackgroundImage(nil, for: .normal)
+            self.communityBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         else{
             community = true
             self.userInterests.append("COMMUNITY")
-            self.communityBtn.tintColor = UIColor.white
-            self.communityBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.communityBtn.layer.borderColor = activeBtnColor.cgColor
         }
     }
     
@@ -307,14 +302,12 @@ class InterestSetupViewController: UIViewController {
         if (competition == true){
             competition = false
             self.userInterests = self.userInterests.filter(){$0 != "COMPETITION"}
-            self.competitionBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.competitionBtn.setBackgroundImage(nil, for: .normal)
+            self.competitionBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         else{
             competition = true
             self.userInterests.append("COMPETITION")
-            self.competitionBtn.tintColor = UIColor.white
-            self.competitionBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.competitionBtn.layer.borderColor = activeBtnColor.cgColor
         }
     }
     
@@ -322,14 +315,12 @@ class InterestSetupViewController: UIViewController {
         if (culture == true){
             culture = false
             self.userInterests = self.userInterests.filter(){$0 != "CULTURE"}
-            self.cultureBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.cultureBtn.setBackgroundImage(nil, for: .normal)
+            self.cultureBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         else{
             culture = true
             self.userInterests.append("CULTURE")
-            self.cultureBtn.tintColor = UIColor.white
-            self.cultureBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.cultureBtn.layer.borderColor = activeBtnColor.cgColor
         }
     }
     
@@ -337,14 +328,12 @@ class InterestSetupViewController: UIViewController {
         if (education == true){
             education = false
             self.userInterests = self.userInterests.filter(){$0 != "EDUCATION"}
-            self.educationBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.educationBtn.setBackgroundImage(nil, for: .normal)
+            self.educationBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         else{
             education = true
             self.userInterests.append("EDUCATION")
-            self.educationBtn.tintColor = UIColor.white
-            self.educationBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.educationBtn.layer.borderColor = activeBtnColor.cgColor
         }
     }
     
@@ -352,14 +341,12 @@ class InterestSetupViewController: UIViewController {
         if (entertainment == true){
             entertainment = false
             self.userInterests = self.userInterests.filter(){$0 != "ENTERTAINMENT"}
-            self.entertainmentBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.entertainmentBtn.setBackgroundImage(nil, for: .normal)
+            self.entertainmentBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         else{
             entertainment = true
             self.userInterests.append("ENTERTAINMENT")
-            self.entertainmentBtn.tintColor = UIColor.white
-            self.entertainmentBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.entertainmentBtn.layer.borderColor = activeBtnColor.cgColor
         }
         
     }
@@ -368,14 +355,12 @@ class InterestSetupViewController: UIViewController {
         if (family == true){
             family = false
             self.userInterests = self.userInterests.filter(){$0 != "FAMILY"}
-            self.familyBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.familyBtn.setBackgroundImage(nil, for: .normal)
+            self.familyBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         else{
             family = true
             self.userInterests.append("FAMILY")
-            self.familyBtn.tintColor = UIColor.white
-            self.familyBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.familyBtn.layer.borderColor = activeBtnColor.cgColor
         }
     }
     
@@ -383,14 +368,12 @@ class InterestSetupViewController: UIViewController {
         if (foodDrink == true){
             foodDrink = false
             self.userInterests = self.userInterests.filter(){$0 != "FOODDRINK"}
-            self.foodDrinkBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.foodDrinkBtn.setBackgroundImage(nil, for: .normal)
+            self.foodDrinkBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         else{
             foodDrink = true
             self.userInterests.append("FOODDRINK")
-            self.foodDrinkBtn.tintColor = UIColor.white
-            self.foodDrinkBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.foodDrinkBtn.layer.borderColor = activeBtnColor.cgColor
         }
     }
     
@@ -398,14 +381,12 @@ class InterestSetupViewController: UIViewController {
         if (gaming == true){
             gaming = false
             self.userInterests = self.userInterests.filter(){$0 != "GAMING"}
-            self.gamingBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.gamingBtn.setBackgroundImage(nil, for: .normal)
+            self.gamingBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         else{
             gaming = true
             self.userInterests.append("GAMING")
-            self.gamingBtn.tintColor = UIColor.white
-            self.gamingBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.gamingBtn.layer.borderColor = activeBtnColor.cgColor
         }
     }
     
@@ -413,14 +394,12 @@ class InterestSetupViewController: UIViewController {
         if (healthFitness == true){
             healthFitness = false
             self.userInterests = self.userInterests.filter(){$0 != "HEALTHFITNESS"}
-            self.healthFitnessBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.healthFitnessBtn.setBackgroundImage(nil, for: .normal)
+            self.healthFitnessBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         else{
             healthFitness = true
             self.userInterests.append("HEALTHFITNESS")
-            self.healthFitnessBtn.tintColor = UIColor.white
-            self.healthFitnessBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.healthFitnessBtn.layer.borderColor = activeBtnColor.cgColor
         }
     }
     
@@ -428,14 +407,12 @@ class InterestSetupViewController: UIViewController {
         if (music == true){
             music = false
             self.userInterests = self.userInterests.filter(){$0 != "MUSIC"}
-            self.musicBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.musicBtn.setBackgroundImage(nil, for: .normal)
+            self.musicBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         else{
             music = true
             self.userInterests.append("MUSIC")
-            self.musicBtn.tintColor = UIColor.white
-            self.musicBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.musicBtn.layer.borderColor = activeBtnColor.cgColor
         }
     }
     
@@ -444,14 +421,12 @@ class InterestSetupViewController: UIViewController {
         if (networking == true){
             networking = false
             self.userInterests = self.userInterests.filter(){$0 != "NETWORKING"}
-            self.networkingBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.networkingBtn.setBackgroundImage(nil, for: .normal)
+            self.networkingBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         else{
             networking = true
             self.userInterests.append("NETWORKING")
-            self.networkingBtn.tintColor = UIColor.white
-            self.networkingBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.networkingBtn.layer.borderColor = activeBtnColor.cgColor
         }
     }
     
@@ -459,14 +434,12 @@ class InterestSetupViewController: UIViewController {
         if (outdoors == true){
             outdoors = false
             self.userInterests = self.userInterests.filter(){$0 != "OUTDOORS"}
-            self.outdoorsBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.outdoorsBtn.setBackgroundImage(nil, for: .normal)
+            self.outdoorsBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         else{
             outdoors = true
             self.userInterests.append("OUTDOORS")
-            self.outdoorsBtn.tintColor = UIColor.white
-            self.outdoorsBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.outdoorsBtn.layer.borderColor = activeBtnColor.cgColor
         }
     }
     
@@ -474,14 +447,12 @@ class InterestSetupViewController: UIViewController {
         if (partyDance == true){
             partyDance = false
             self.userInterests = self.userInterests.filter(){$0 != "PARTYDANCE"}
-            self.partyDanceBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.partyDanceBtn.setBackgroundImage(nil, for: .normal)
+            self.partyDanceBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         else{
             partyDance = true
             self.userInterests.append("PARTYDANCE")
-            self.partyDanceBtn.tintColor = UIColor.white
-            self.partyDanceBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.partyDanceBtn.layer.borderColor = activeBtnColor.cgColor
         }
     }
 
@@ -489,14 +460,12 @@ class InterestSetupViewController: UIViewController {
         if (shopping == true){
             shopping = false
             self.userInterests = self.userInterests.filter(){$0 != "SHOPPING"}
-            self.shoppingBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.shoppingBtn.setBackgroundImage(nil, for: .normal)
+            self.shoppingBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         else{
             shopping = true
             self.userInterests.append("SHOPPING")
-            self.shoppingBtn.tintColor = UIColor.white
-            self.shoppingBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.shoppingBtn.layer.borderColor = activeBtnColor.cgColor
         }
     }
 
@@ -504,14 +473,12 @@ class InterestSetupViewController: UIViewController {
         if (sports == true){
             sports = false
             self.userInterests = self.userInterests.filter(){$0 != "SPORTS"}
-            self.sportsBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.sportsBtn.setBackgroundImage(nil, for: .normal)
+            self.sportsBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         else{
             sports = true
             self.userInterests.append("SPORTS")
-            self.sportsBtn.tintColor = UIColor.white
-            self.sportsBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.sportsBtn.layer.borderColor = activeBtnColor.cgColor
         }
     }
     
@@ -519,14 +486,12 @@ class InterestSetupViewController: UIViewController {
         if (technology == true){
             technology = false
             self.userInterests = self.userInterests.filter(){$0 != "TECHNOLOGY"}
-            self.techBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.techBtn.setBackgroundImage(nil, for: .normal)
+            self.techBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         else{
             technology = true
             self.userInterests.append("TECHNOLOGY")
-            self.techBtn.tintColor = UIColor.white
-            self.techBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.techBtn.layer.borderColor = activeBtnColor.cgColor
         }
     }
     
@@ -535,14 +500,12 @@ class InterestSetupViewController: UIViewController {
         if (theatre == true){
             theatre = false
             self.userInterests = self.userInterests.filter(){$0 != "THEATRE"}
-            self.theatreBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.theatreBtn.setBackgroundImage(nil, for: .normal)
+            self.theatreBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         else{
             theatre = true
             self.userInterests.append("THEATRE")
-            self.theatreBtn.tintColor = UIColor.white
-            self.theatreBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.theatreBtn.layer.borderColor = activeBtnColor.cgColor
         }
     }
 
@@ -550,14 +513,12 @@ class InterestSetupViewController: UIViewController {
         if (wineBrew == true){
             wineBrew = false
             self.userInterests = self.userInterests.filter(){$0 != "WINEBREW"}
-            self.wineBrewBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.wineBrewBtn.setBackgroundImage(nil, for: .normal)
+            self.wineBrewBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         else{
             wineBrew = true
             self.userInterests.append("WINEBREW")
-            self.wineBrewBtn.tintColor = UIColor.white
-            self.wineBrewBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.wineBrewBtn.layer.borderColor = activeBtnColor.cgColor
         }
     }
 
@@ -582,212 +543,170 @@ class InterestSetupViewController: UIViewController {
     func renderInterests(){
         if (self.amusement == true){
             userInterests.append("AMUSEMENT")
-            self.amusementBtn.tintColor = UIColor.white
-            self.amusementBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.amusementBtn.layer.borderColor = activeBtnColor.cgColor
         }
         else{
-            self.amusementBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.amusementBtn.setBackgroundImage(nil, for: .normal)
+            self.amusementBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         
         if (self.art == true){
             userInterests.append("ART")
-            self.artBtn.tintColor = UIColor.white
-            self.artBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.artBtn.layer.borderColor = activeBtnColor.cgColor
         }
         else{
-            self.artBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.artBtn.setBackgroundImage(nil, for: .normal)
+            self.artBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         
         if (self.community == true){
             userInterests.append("COMMUNITY")
-            self.communityBtn.tintColor = UIColor.white
-            self.communityBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.communityBtn.layer.borderColor = activeBtnColor.cgColor
         }
         else{
-            self.communityBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.communityBtn.setBackgroundImage(nil, for: .normal)
+            self.communityBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         
         if (self.culture == true){
             userInterests.append("CULTURE")
-            self.cultureBtn.tintColor = UIColor.white
-            self.cultureBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.cultureBtn.layer.borderColor = activeBtnColor.cgColor
         }
         else{
-            self.cultureBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.cultureBtn.setBackgroundImage(nil, for: .normal)
+            self.cultureBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         
         if (self.competition == true){
             userInterests.append("COMPETITION")
-            self.competitionBtn.tintColor = UIColor.white
-            self.competitionBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.competitionBtn.layer.borderColor = activeBtnColor.cgColor
         }
         else{
-            self.competitionBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.competitionBtn.setBackgroundImage(nil, for: .normal)
+            self.competitionBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         
         if (self.education == true){
             userInterests.append("EDUCATION")
-            self.educationBtn.tintColor = UIColor.white
-            self.educationBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.educationBtn.layer.borderColor = activeBtnColor.cgColor
         }
         else{
-            self.educationBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.educationBtn.setBackgroundImage(nil, for: .normal)
+            self.educationBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         
         if (self.entertainment == true){
             userInterests.append("ENTERTAINMENT")
-            self.entertainmentBtn.tintColor = UIColor.white
-            self.entertainmentBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.entertainmentBtn.layer.borderColor = activeBtnColor.cgColor
         }
         else{
-            self.entertainmentBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.entertainmentBtn.setBackgroundImage(nil, for: .normal)
+            self.entertainmentBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         
         if (self.family == true){
             userInterests.append("FAMILY")
-            self.familyBtn.tintColor = UIColor.white
-            self.familyBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.familyBtn.layer.borderColor = activeBtnColor.cgColor
         }
         else{
-            self.familyBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.familyBtn.setBackgroundImage(nil, for: .normal)
+            self.familyBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         
         if (self.foodDrink == true){
             userInterests.append("FOODDRINK")
-            self.foodDrinkBtn.tintColor = UIColor.white
-            self.foodDrinkBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.foodDrinkBtn.layer.borderColor = activeBtnColor.cgColor
         }
         else{
-            self.foodDrinkBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.foodDrinkBtn.setBackgroundImage(nil, for: .normal)
+            self.foodDrinkBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         
         if (self.gaming == true){
             userInterests.append("GAMING")
-            self.gamingBtn.tintColor = UIColor.white
-            self.gamingBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.gamingBtn.layer.borderColor = activeBtnColor.cgColor
         }
         else{
-            self.gamingBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.gamingBtn.setBackgroundImage(nil, for: .normal)
+            self.gamingBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         
         if (self.healthFitness == true){
             userInterests.append("HEALTHFITNESS")
-            self.healthFitnessBtn.tintColor = UIColor.white
-            self.healthFitnessBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.healthFitnessBtn.layer.borderColor = activeBtnColor.cgColor
         }
         else{
-            self.healthFitnessBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.healthFitnessBtn.setBackgroundImage(nil, for: .normal)
+            self.healthFitnessBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         
         if (self.music == true){
             userInterests.append("MUSIC")
-            self.musicBtn.tintColor = UIColor.white
-            self.musicBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.musicBtn.layer.borderColor = activeBtnColor.cgColor
         }
         else{
-            self.musicBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.musicBtn.setBackgroundImage(nil, for: .normal)
+            self.musicBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         
         if (self.networking == true){
             userInterests.append("NETWORKING")
-            self.networkingBtn.tintColor = UIColor.white
-            self.networkingBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.networkingBtn.layer.borderColor = activeBtnColor.cgColor
         }
         else{
-            self.networkingBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.networkingBtn.setBackgroundImage(nil, for: .normal)
+            self.networkingBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         
         if (self.outdoors == true){
             userInterests.append("OUTDOORS")
-            self.outdoorsBtn.tintColor = UIColor.white
-            self.outdoorsBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.outdoorsBtn.layer.borderColor = activeBtnColor.cgColor
         }
         else{
-            self.outdoorsBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.outdoorsBtn.setBackgroundImage(nil, for: .normal)
+            self.outdoorsBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         
         if (self.shopping == true){
             userInterests.append("SHOPPING")
-            self.shoppingBtn.tintColor = UIColor.white
-            self.shoppingBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.shoppingBtn.layer.borderColor = activeBtnColor.cgColor
         }
         else{
-            self.shoppingBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.shoppingBtn.setBackgroundImage(nil, for: .normal)
+            self.shoppingBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         
         if (self.sports == true){
             userInterests.append("SPORTS")
-            self.sportsBtn.tintColor = UIColor.white
-            self.sportsBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.sportsBtn.layer.borderColor = activeBtnColor.cgColor
         }
         else{
-            self.sportsBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.sportsBtn.setBackgroundImage(nil, for: .normal)
+            self.sportsBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         
         if (self.technology == true){
             userInterests.append("TECHNOLOGY")
-            self.techBtn.tintColor = UIColor.white
-            self.techBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.techBtn.layer.borderColor = activeBtnColor.cgColor
         }
         else{
-            self.techBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.techBtn.setBackgroundImage(nil, for: .normal)
+            self.techBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         
         if (self.theatre == true){
             userInterests.append("THEATRE")
-            self.theatreBtn.tintColor = UIColor.white
-            self.theatreBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.theatreBtn.layer.borderColor = activeBtnColor.cgColor
         }
         else{
-            self.theatreBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.theatreBtn.setBackgroundImage(nil, for: .normal)
+            self.theatreBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         
         if (self.collegeLife == true){
             userInterests.append("COLLEGELIFE")
-            self.collegeBtn.tintColor = UIColor.white
-            self.collegeBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.collegeBtn.layer.borderColor = activeBtnColor.cgColor
         }
         else{
-            self.collegeBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.collegeBtn.setBackgroundImage(nil, for: .normal)
+            self.collegeBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         
         if (self.partyDance == true){
             userInterests.append("PARTYDANCE")
-            self.partyDanceBtn.tintColor = UIColor.white
-            self.partyDanceBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.partyDanceBtn.layer.borderColor = activeBtnColor.cgColor
         }
         else{
-            self.partyDanceBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.partyDanceBtn.setBackgroundImage(nil, for: .normal)
+            self.partyDanceBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         
         if (self.wineBrew == true){
             userInterests.append("WINEBREW")
-            self.wineBrewBtn.tintColor = UIColor.white
-            self.wineBrewBtn.setBackgroundImage(btnBackground, for: .normal)
+            self.wineBrewBtn.layer.borderColor = activeBtnColor.cgColor
         }
         else{
-            self.wineBrewBtn.tintColor = UIColor(red: 66/300, green: 66/300, blue: 66/300, alpha: 1.0)
-            self.wineBrewBtn.setBackgroundImage(nil, for: .normal)
+            self.wineBrewBtn.layer.borderColor = inactiveBtnColor.cgColor
         }
         UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
             self.interestsScrollView.alpha = 1.0
