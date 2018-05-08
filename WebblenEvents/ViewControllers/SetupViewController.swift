@@ -8,10 +8,12 @@
 
 import UIKit
 import Firebase
+import NVActivityIndicatorView
 
 class SetupViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     //UI Element
+    @IBOutlet var UXVIEW: UIView!
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var profilePicImgBtn: UIButton!
     @IBOutlet weak var nextButton: UIButton!
@@ -29,9 +31,19 @@ class SetupViewController: UIViewController, UIImagePickerControllerDelegate, UI
     var uploadedImage = false
     var userExists = false
     
+    var loadingColor = UIColor.white
+    var loadingView = NVActivityIndicatorView(frame: CGRect(x: (100), y: (100), width: 125, height: 125), type: .ballRotateChase, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1.0), padding: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Activity indicator setup
+        let xAxis = self.view.center.x
+        let yAxis = self.view.center.y
+        let frame = CGRect(x: (xAxis-25), y: (yAxis-25), width: 50, height: 50)
+        loadingView = NVActivityIndicatorView(frame: frame, type: .circleStrokeSpin, color: loadingColor, padding: 0)
+        self.view.addSubview(loadingView)
+        loadingView.stopAnimating()
         
         //*** INITIALIZE
         //Firebase
@@ -119,11 +131,12 @@ class SetupViewController: UIViewController, UIImagePickerControllerDelegate, UI
     }
     
     @IBAction func didPressNext(_ sender: Any) {
-        
+        startLoading()
         if nameIsValid(){
             if uploadedImage {
                 database.collection("usernames").document(formattedName!).getDocument(completion: {(snapshot, error) in
                     if (snapshot?.exists)! {
+                        self.stopLoading()
                         self.errorMessage.text = "Sorry, This Name is Already Taken."
                     }
                     else {
@@ -132,6 +145,7 @@ class SetupViewController: UIViewController, UIImagePickerControllerDelegate, UI
                             let imageRef = self.profilePicStorage.child((self.user?.uid)! + ".jpg")
                             let uploadImage = imageRef.putData(imageData!, metadata: nil) {(metadata, error) in
                                 if error != nil {
+                                    self.stopLoading()
                                     self.errorMessage.text = "Issue uploading, Please Try Again"
                                     return
                                 }
@@ -154,6 +168,7 @@ class SetupViewController: UIViewController, UIImagePickerControllerDelegate, UI
                             let imageRef = self.profilePicStorage.child((self.user?.uid)! + ".jpg")
                             let uploadImage = imageRef.putData(imageData!, metadata: nil) {(metadata, error) in
                                 if error != nil {
+                                    self.stopLoading()
                                     self.errorMessage.text = "Issue uploading, Please Try Again"
                                     return
                                 }
@@ -185,9 +200,24 @@ class SetupViewController: UIViewController, UIImagePickerControllerDelegate, UI
                     }
                 })
             } else {
+                self.stopLoading()
                 self.errorMessage.text = "Please Upload an Image for Your Account"
             }
         }
+    }
+    
+    func startLoading(){
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.UXVIEW.alpha = 0.5
+            self.loadingView.startAnimating()
+        }, completion: nil)
+    }
+    
+    func stopLoading() {
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.UXVIEW.alpha = 1
+            self.loadingView.stopAnimating()
+        }, completion: nil)
     }
     
 }

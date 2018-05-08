@@ -52,6 +52,7 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
     //Extras
     var activeColor = UIColor(red: 30/300, green: 39/300, blue: 46/300, alpha: 1.0)
     var inactiveColor = UIColor(red: 178/300, green: 190/300, blue: 195/300, alpha: 1.0)
+    var loadingColor = UIColor(red: 83/255, green: 92/255, blue: 104/255, alpha: 0.8)
     var loadingView = NVActivityIndicatorView(frame: CGRect(x: (100), y: (100), width: 125, height: 125), type: .ballRotateChase, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1.0), padding: 0)
     
     override func viewDidLoad() {
@@ -61,7 +62,7 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
         let yAxis = self.view.center.y
         
         let frame = CGRect(x: (xAxis-25), y: (yAxis-25), width: 50, height: 50)
-        loadingView = NVActivityIndicatorView(frame: frame, type: .circleStrokeSpin, color: activeColor, padding: 0)
+        loadingView = NVActivityIndicatorView(frame: frame, type: .circleStrokeSpin, color: loadingColor, padding: 0)
         self.view.addSubview(loadingView)
         loadingView.startAnimating()
         //Date Format
@@ -201,17 +202,20 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
                             if self.webblenEvents.count == 0 {
                                 UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
                                     self.eventsTableView.reloadData()
+                                    self.loadingView.stopAnimating()
                                     self.eventsTableView.isHidden = true
                                     self.noEventImg.isHidden = false
                                     self.noEventLbl.isHidden = false
-                                }, completion: { _ in self.loadingView.stopAnimating()})
+                                }, completion: { _ in })
                             } else {
                                 UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
                                     self.eventsTableView.reloadData()
+                                    self.loadingView.stopAnimating()
                                     self.eventsTableView.isHidden = false
+                                    self.eventsTableView.alpha = 1
                                     self.noEventImg.isHidden = true
                                     self.noEventLbl.isHidden = true
-                                }, completion: { _ in self.loadingView.stopAnimating() })
+                                }, completion: { _ in })
                             }
                             
                         }
@@ -247,8 +251,9 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
         if (imageURL != ""){
             cell = eventsTableView.dequeueReusableCell(withIdentifier: "eventImgCell")!
             let eventImage = cell.viewWithTag(1) as! UIImageViewX
-            eventImage.image = nil
-            let eventCatImg = cell.viewWithTag(2) as! UIImageViewX
+            let eventImgIndicator = cell.viewWithTag(21) as! UIActivityIndicatorView
+            let eventUserImg = cell.viewWithTag(2) as! UIImageViewX
+            let userImgIndicator = cell.viewWithTag(20) as! UIActivityIndicatorView
             let eventTitle = cell.viewWithTag(3) as! UILabel
             let eventAuthor = cell.viewWithTag(4) as! UILabel
             let eventViews = cell.viewWithTag(5) as! UILabel
@@ -266,14 +271,20 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
             let url = NSURL(string: imageURL)
             eventImage.sd_setImage(with: url! as URL, placeholderImage: nil)
             eventImage.layer.cornerRadius = 25
-            eventImage.clipsToBounds = true;
+            eventImage.clipsToBounds = true
+            eventImage.isHidden = false
+            eventImgIndicator.isHidden = true
             
             if self.userPicsDictionary[self.webblenEvents[indexPath.row].author] != nil {
                 let userPicUrl = NSURL(string: self.userPicsDictionary[self.webblenEvents[indexPath.row].author]!)
-                eventCatImg.sd_setImage(with: userPicUrl! as URL, placeholderImage: nil)
-                eventCatImg.clipsToBounds = true;
+                eventUserImg.sd_setImage(with: userPicUrl! as URL, placeholderImage: nil)
+                eventUserImg.clipsToBounds = true
+                eventUserImg.isHidden = false
+                userImgIndicator.isHidden = true
             } else {
-                eventCatImg.image = UIImage(named: self.webblenEvents[indexPath.row].categories.first!)
+                eventUserImg.image = UIImage(named: self.webblenEvents[indexPath.row].categories.first!)
+                eventUserImg.isHidden = false
+                userImgIndicator.isHidden = true
             }
             
             eventTitle.text = self.webblenEvents[indexPath.row].title
@@ -290,7 +301,8 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
             }
         } else {
             cell = eventsTableView.dequeueReusableCell(withIdentifier: "eventCell")!
-            let eventCatImg = cell.viewWithTag(2) as! UIImageViewX
+            let eventUserImg = cell.viewWithTag(2) as! UIImageViewX
+            let userImgIndicator = cell.viewWithTag(20) as! UIActivityIndicatorView
             let eventTitle = cell.viewWithTag(3) as! UILabel
             let eventAuthor = cell.viewWithTag(4) as! UILabel
             let eventViews = cell.viewWithTag(5) as! UILabel
@@ -306,10 +318,14 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
             //let eventSmallCat3 = cell.viewWithTag(9) as! UIImageView
             if self.userPicsDictionary[self.webblenEvents[indexPath.row].author] != nil {
                 let userPicUrl = NSURL(string: self.userPicsDictionary[self.webblenEvents[indexPath.row].author]!)
-                eventCatImg.sd_setImage(with: userPicUrl! as URL, placeholderImage: nil)
-                eventCatImg.clipsToBounds = true;
+                eventUserImg.sd_setImage(with: userPicUrl! as URL, placeholderImage: nil)
+                eventUserImg.clipsToBounds = true
+                eventUserImg.isHidden = false
+                userImgIndicator.isHidden = true
             } else {
-                eventCatImg.image = UIImage(named: self.webblenEvents[indexPath.row].categories.first!)
+                eventUserImg.image = UIImage(named: self.webblenEvents[indexPath.row].categories.first!)
+                eventUserImg.isHidden = false
+                userImgIndicator.isHidden = true
             }
             eventTitle.text = self.webblenEvents[indexPath.row].title
             eventAuthor.text = "@" + author
@@ -345,6 +361,7 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     @IBAction func didPressToday(_ sender: Any) {
+        eventsTableView.alpha = 0
         todayBtn.setTitleColor(activeColor, for: .normal)
         tomorrowBtn.setTitleColor(UIColor(red: 178/300, green: 190/300, blue: 195/300, alpha: 1.0), for: .normal)
         thisWeekBtn.setTitleColor(UIColor(red: 178/300, green: 190/300, blue: 195/300, alpha: 1.0), for: .normal)
@@ -369,12 +386,14 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
                 self.eventsTableView.reloadData()
                 self.eventsTableView.isHidden = false
+                self.eventsTableView.alpha = 1
                 self.noEventImg.isHidden = true
                 self.noEventLbl.isHidden = true
             }, completion: { _ in self.loadingView.stopAnimating() })
         }
     }
     @IBAction func didPressTomorrow(_ sender: Any) {
+        eventsTableView.alpha = 0
         todayBtn.setTitleColor(UIColor(red: 178/300, green: 190/300, blue: 195/300, alpha: 1.0), for: .normal)
         tomorrowBtn.setTitleColor(activeColor, for: .normal)
         thisWeekBtn.setTitleColor(UIColor(red: 178/300, green: 190/300, blue: 195/300, alpha: 1.0), for: .normal)
@@ -399,6 +418,7 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
                 self.eventsTableView.reloadData()
                 self.eventsTableView.isHidden = false
+                self.eventsTableView.alpha = 1
                 self.noEventImg.isHidden = true
                 self.noEventLbl.isHidden = true
             }, completion: { _ in self.loadingView.stopAnimating() })
@@ -406,6 +426,7 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     @IBAction func didPressThisWeek(_ sender: Any) {
+        eventsTableView.alpha = 0
         todayBtn.setTitleColor(UIColor(red: 178/300, green: 190/300, blue: 195/300, alpha: 1.0), for: .normal)
         tomorrowBtn.setTitleColor(UIColor(red: 178/300, green: 190/300, blue: 195/300, alpha: 1.0), for: .normal)
         thisWeekBtn.setTitleColor(activeColor, for: .normal)
@@ -429,12 +450,14 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
                 self.eventsTableView.reloadData()
                 self.eventsTableView.isHidden = false
+                self.eventsTableView.alpha = 1
                 self.noEventImg.isHidden = true
                 self.noEventLbl.isHidden = true
             }, completion: { _ in self.loadingView.stopAnimating() })
         }
     }
     @IBAction func didPressThisMonth(_ sender: Any) {
+        eventsTableView.alpha = 0
         todayBtn.setTitleColor(UIColor(red: 178/300, green: 190/300, blue: 195/300, alpha: 1.0), for: .normal)
         tomorrowBtn.setTitleColor(UIColor(red: 178/300, green: 190/300, blue: 195/300, alpha: 1.0), for: .normal)
         thisWeekBtn.setTitleColor(UIColor(red: 178/300, green: 190/300, blue: 195/300, alpha: 1.0), for: .normal)
@@ -458,12 +481,14 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
                 self.eventsTableView.reloadData()
                 self.eventsTableView.isHidden = false
+                self.eventsTableView.alpha = 1
                 self.noEventImg.isHidden = true
                 self.noEventLbl.isHidden = true
             }, completion: { _ in self.loadingView.stopAnimating() })
         }
     }
     @IBAction func didPressLater(_ sender: Any) {
+        eventsTableView.alpha = 0
         todayBtn.setTitleColor(UIColor(red: 178/300, green: 190/300, blue: 195/300, alpha: 1.0), for: .normal)
         tomorrowBtn.setTitleColor(UIColor(red: 178/300, green: 190/300, blue: 195/300, alpha: 1.0), for: .normal)
         thisWeekBtn.setTitleColor(UIColor(red: 178/300, green: 190/300, blue: 195/300, alpha: 1.0), for: .normal)
@@ -487,6 +512,7 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
                 self.eventsTableView.reloadData()
                 self.eventsTableView.isHidden = false
+                self.eventsTableView.alpha = 1
                 self.noEventImg.isHidden = true
                 self.noEventLbl.isHidden = true
             }, completion: { _ in self.loadingView.stopAnimating() })

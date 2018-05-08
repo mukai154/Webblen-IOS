@@ -514,19 +514,19 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
     
     //Actions Performed When Entering Region
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        
+        let randomNumber = Int.random(min: 0, max: 10)
+        if randomNumber <= 4 {
         if let e = self.todayArray.index(where: { $0.eventKey == region.identifier }) {
             let selectedEvent = self.todayArray[e]
             let eventTitleString = selectedEvent.title
             if selectedEvent.notificationOnly == true {
                 showEventAlert(withTitle: "You found a Hidden Event for Today Nearby!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
                 self.showNotification(title: "Hidden Event Found!", message: "You've Come Accross a Secret Event. Check it out!")
+            } else {
+                showEventAlert(withTitle: "There's Something You May be Interested in Happening Today!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
+                self.showNotification(title: selectedEvent.author + " has an event today!", message: "The Event: " + eventTitleString + " is happening today. Check it out!")
+                }
             }
-            else {
-            showEventAlert(withTitle: "There's Something You May be Interested in Happening Today!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
-            self.showNotification(title: selectedEvent.author + " has an event today!", message: "The Event: " + eventTitleString + " is happening today. Check it out!")
-            }
-        }
         if let e = self.tomorrowArray.index(where: { $0.eventKey == region.identifier }) {
             let selectedEvent = self.tomorrowArray[e]
             let eventTitleString = selectedEvent.title
@@ -534,37 +534,35 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
             if selectedEvent.notificationOnly == true {
                 showEventAlert(withTitle: "You found a Hidden Event for Tomorrow!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
                 self.showNotification(title: "Hidden Event Found!", message: "You've Come Accross a Secret Event. Check it out!")
+            } else{
+                showEventAlert(withTitle: "An Event You May be Interested in Will Occur Tomorrow Nearby!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
+                self.showNotification(title: selectedEvent.author + " has an event tommorow!", message: "The Event: " + eventTitleString + " is happening tomorrow. Check it out!")
+                }
             }
-            else{
-            showEventAlert(withTitle: "An Event You May be Interested in Will Occur Tomorrow Nearby!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
-            self.showNotification(title: selectedEvent.author + " has an event tommorow!", message: "The Event: " + eventTitleString + " is happening tomorrow. Check it out!")
-            }
-        }
         if let e = self.thisWeekArray.index(where: { $0.eventKey == region.identifier }) {
             let selectedEvent = self.thisWeekArray[e]
             let eventTitleString = selectedEvent.title
             if selectedEvent.notificationOnly == true {
                 showEventAlert(withTitle: "You found a Hidden Event for This Week Nearby!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
                 self.showNotification(title: "Hidden Event Found!", message: "You've Come Accross a Secret Event. Check it out!")
+            }   else{
+                showEventAlert(withTitle: "An Event You'd Be Interested in Will Occur in the Next Few Days Nearby!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
+                self.showNotification(title: selectedEvent.author + " has an event this week", message: eventTitleString + " is happening this week. Check it out!")
+                }
             }
-            else{
-            showEventAlert(withTitle: "An Event You'd Be Interested in Will Occur in the Next Few Days Nearby!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
-            self.showNotification(title: selectedEvent.author + " has an event this week", message: eventTitleString + " is happening this week. Check it out!")
-            }
-        }
         if let e = self.thisMonthArray.index(where: { $0.eventKey == region.identifier }) {
             let selectedEvent = self.thisMonthArray[e]
             let eventTitleString = selectedEvent.title
             if selectedEvent.notificationOnly == true {
                 showEventAlert(withTitle: "You found a Hidden Event for This Month!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
                 self.showNotification(title: "Hidden Event Found!", message: "You've Come Accross a Secret Event. Check it out!")
+            } else{
+                showEventAlert(withTitle: "An Event You'd Be Interested in Will Occur Next Few Weeks Nearby!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
+                self.showNotification(title: selectedEvent.author + " has an event later!", message: "The Event: " + eventTitleString + " is happening this month. Check it out!")
+                }
             }
-            else{
-            showEventAlert(withTitle: "An Event You'd Be Interested in Will Occur Next Few Weeks Nearby!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
-            self.showNotification(title: selectedEvent.author + " has an event later!", message: "The Event: " + eventTitleString + " is happening this month. Check it out!")
-            }
+            locationManager.stopMonitoring(for: region)
         }
-        locationManager.stopMonitoring(for: region)
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {

@@ -19,6 +19,7 @@ class EventInfoViewController: UIViewController {
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var eventUploadedPhoto: UIImageView!
     @IBOutlet weak var eventImage: UIImageView!
+    @IBOutlet weak var userImgIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -71,6 +72,7 @@ class EventInfoViewController: UIViewController {
     //Extras
     var activeColor = UIColor(red: 30/300, green: 39/300, blue: 46/300, alpha: 1.0)
     var inactiveColor = UIColor(red: 178/300, green: 190/300, blue: 195/300, alpha: 1.0)
+    var loadingColor = UIColor(red: 83/255, green: 92/255, blue: 104/255, alpha: 0.8)
     var loadingView = NVActivityIndicatorView(frame: CGRect(x: (100), y: (100), width: 125, height: 125), type: .orbit, color: UIColor(red: 251/255, green: 140/255, blue: 0/255, alpha: 0.9), padding: 0)
     
     override func viewDidLoad() {
@@ -85,7 +87,7 @@ class EventInfoViewController: UIViewController {
         let yAxis = self.view.center.y
         
         let frame = CGRect(x: (xAxis-25), y: (yAxis-25), width: 50, height: 50)
-        loadingView = NVActivityIndicatorView(frame: frame, type: .circleStrokeSpin, color: activeColor, padding: 0)
+        loadingView = NVActivityIndicatorView(frame: frame, type: .circleStrokeSpin, color: loadingColor, padding: 0)
         self.view.addSubview(loadingView)
         loadingView.startAnimating()
         
@@ -128,9 +130,10 @@ class EventInfoViewController: UIViewController {
                             } else {
                                 self.eventImage.image = UIImage(named: self.eventCategories.first!)
                             }
-                            
-                            self.eventImage.layer.cornerRadius = self.eventImage.frame.size.width / 2;
-                            self.eventImage.clipsToBounds = true;
+                            self.eventImage.layer.cornerRadius = self.eventImage.frame.size.width / 2
+                            self.eventImage.clipsToBounds = true
+                            self.eventImage.isHidden = false
+                            self.userImgIndicator.isHidden = true
                         }
                     }
                     

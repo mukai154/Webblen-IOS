@@ -98,7 +98,7 @@ class InterestSetupViewController: UIViewController {
     var btnBackground = UIImage(named: "orangeBackground")
     var activeBtnColor = UIColor(red: 254/255, green: 202/255, blue: 87/255, alpha: 1.0)
     var inactiveBtnColor = UIColor.clear
-    var btnTintColor = UIColor(red: 30/255, green: 39/255, blue: 46/255, alpha: 1.0)
+    var btnTintColor = UIColor(red: 83/255, green: 92/255, blue: 104/255, alpha: 0.8)
     var loadingView = NVActivityIndicatorView(frame: CGRect(x: (100), y: (100), width: 125, height: 125), type: .ballRotateChase, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1.0), padding: 0)
     
     override func viewDidLoad() {

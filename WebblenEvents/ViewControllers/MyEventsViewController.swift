@@ -22,6 +22,7 @@ class MyEventsViewController: UIViewController, UITableViewDelegate, UITableView
     var webblenEvents = [webblenEvent]()
 
     @IBOutlet weak var myEventsTableView: UITableView!
+    @IBOutlet weak var noEventsView: UIView!
     
     var loadingView = NVActivityIndicatorView(frame: CGRect(x: (100), y: (100), width: 125, height: 125), type: .ballRotateChase, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1.0), padding: 0)
     
@@ -29,6 +30,7 @@ class MyEventsViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        noEventsView.alpha = 0
         myEventsTableView.alpha = 0
         myEventsTableView.isUserInteractionEnabled = false
 
@@ -88,9 +90,16 @@ class MyEventsViewController: UIViewController, UITableViewDelegate, UITableView
                         }
                         self.myEventsTableView.reloadData()
                         UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
-                            self.myEventsTableView.alpha = 1.0
-                        }, completion: { _ in
                             self.loadingView.stopAnimating()
+                            if self.webblenEvents.count > 0 {
+                            self.myEventsTableView.isHidden = false
+                            self.myEventsTableView.alpha = 1.0
+                            } else {
+                                self.myEventsTableView.isHidden = true
+                                self.noEventsView.isHidden = false
+                                self.noEventsView.alpha = 1
+                            }
+                        }, completion: { _ in
                             self.myEventsTableView.isUserInteractionEnabled = true
                         })
                     }

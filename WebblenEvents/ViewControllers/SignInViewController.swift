@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FBSDKLoginKit
 import TwitterKit
-import Fabric
+import NVActivityIndicatorView
 
 
 
@@ -19,6 +19,7 @@ class SignInViewController: UIViewController,  FBSDKLoginButtonDelegate{
 
     
     
+    @IBOutlet var UXVIEW: UIView!
     @IBOutlet weak var errorMessage: UILabel!
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
@@ -31,14 +32,22 @@ class SignInViewController: UIViewController,  FBSDKLoginButtonDelegate{
     @IBOutlet weak var noAccountButton: UIButton!
     
     var database = Firestore.firestore()
+    var twitterSession: TWTRSession?
     
-    
+    var loadingColor = UIColor.white
+    var loadingView = NVActivityIndicatorView(frame: CGRect(x: (100), y: (100), width: 125, height: 125), type: .ballRotateChase, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1.0), padding: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
-
+        //Activity indicator setup
+        let xAxis = self.view.center.x
+        let yAxis = self.view.center.y
+        let frame = CGRect(x: (xAxis-25), y: (yAxis-25), width: 50, height: 50)
+        loadingView = NVActivityIndicatorView(frame: frame, type: .circleStrokeSpin, color: loadingColor, padding: 0)
+        self.view.addSubview(loadingView)
+        loadingView.stopAnimating()
+        
         
         //Done for inputs
         let toolBar = UIToolbar()
@@ -57,10 +66,6 @@ class SignInViewController: UIViewController,  FBSDKLoginButtonDelegate{
         twitterLoginBtn.layer.cornerRadius = 5
         
         //setupGoogleLogin()
-        
-    
-
- 
     
     }
     
@@ -97,13 +102,14 @@ class SignInViewController: UIViewController,  FBSDKLoginButtonDelegate{
 
 
     @IBAction func didPressLogin(_ sender: Any) {
-    
+        startLoading()
         Auth.auth().signIn(withEmail: self.email.text!, password: self.password.text!, completion: {(user, error) in
             
             if(error == nil){
                 self.database.collection("users").document((user?.uid)!).getDocument(completion: {(snapshot, error) in
                     if error != nil {
                         print(error)
+                        self.stopLoading()
                     }
                     else {
                         self.performSegue(withIdentifier: "HomeSegue", sender: nil)
@@ -111,20 +117,24 @@ class SignInViewController: UIViewController,  FBSDKLoginButtonDelegate{
                 })
             }
             else{
+                self.stopLoading()
                 self.errorMessage.text = error?.localizedDescription
             }
         })
     }
 
     @IBAction func didPressFBLogin(_ sender: Any) {
+        startLoading()
         let manager = FBSDKLoginManager()
         manager.logIn(withReadPermissions: ["public_profile"], from: self) {(result, error) in
             if let error = error {
                 self.errorMessage.text = ("Failed to login: \(error.localizedDescription)")
+                self.stopLoading()
                 return
             }
             guard let accessToken = FBSDKAccessToken.current() else {
                 print("Failed to get access token")
+                self.stopLoading()
                 return
             }
             let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
@@ -134,6 +144,7 @@ class SignInViewController: UIViewController,  FBSDKLoginButtonDelegate{
                 if(error == nil){
                     self.database.collection("users").document((user?.uid)!).getDocument(completion: {(snapshot, error) in
                         if error != nil {
+                            self.stopLoading()
                             print(error)
                         }
                         else {
@@ -142,6 +153,7 @@ class SignInViewController: UIViewController,  FBSDKLoginButtonDelegate{
                     })
                 }
                 else{
+                    self.stopLoading()
                     self.errorMessage.text = error?.localizedDescription
                 }
             })
@@ -149,34 +161,41 @@ class SignInViewController: UIViewController,  FBSDKLoginButtonDelegate{
     }
     
     @IBAction func didPressTwitterLogin(_ sender: Any) {
-        signInWithTwitter()
+        startLoading()
+        TWTRTwitter.sharedInstance().logIn { (session, err) in
+            if let err = err {
+                self.showAlert(withTitle: "Twitter Authentication Failed", message: "\(err)")
+                self.stopLoading()
+                return
+            }
+            else {
+                print(session)
+                self.twitterSession = session
+                self.signInWithTwitter()
+            }
+        }
     }
     
     func signInWithTwitter(){
-        func signIn(session: TWTRSession?, error: Error?) {
-            if let error = error {
-                print("Failed to login to Twitter: ", error.localizedDescription)
-                return
-            }            
-            guard let token = session?.authToken else { return }
-            guard let secret = session?.authTokenSecret else { return }
-            let credentials = TwitterAuthProvider.credential(withToken: token, secret: secret)
+        print("Signing in..")
+        let credentials = TwitterAuthProvider.credential(withToken: (twitterSession?.authToken)!, secret: (twitterSession?.authTokenSecret)!)
             Auth.auth().signIn(with: credentials, completion: {(user, error) in
                 if(error == nil){
+                    print((user?.uid)!)
                     self.database.collection("users").document((user?.uid)!).getDocument(completion: {(snapshot, error) in
-                        if error != nil {
-                            print(error)
+                        if error == nil {
+                            self.performSegue(withIdentifier: "HomeSegue", sender: nil)
                         }
                         else {
-                            self.performSegue(withIdentifier: "HomeSegue", sender: nil)
+                            self.stopLoading()
                         }
                     })
                 }
                 else{
+                    self.stopLoading()
                     self.errorMessage.text = error?.localizedDescription
                 }
             })
-        }
     }
     
     func signInWithFB(){
@@ -234,6 +253,20 @@ class SignInViewController: UIViewController,  FBSDKLoginButtonDelegate{
     
     func doneClicked(){
         view.endEditing(true)
+    }
+    
+    func startLoading(){
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.UXVIEW.alpha = 0.5
+            self.loadingView.startAnimating()
+        }, completion: nil)
+    }
+    
+    func stopLoading() {
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.UXVIEW.alpha = 1
+            self.loadingView.stopAnimating()
+        }, completion: nil)
     }
 
 }
