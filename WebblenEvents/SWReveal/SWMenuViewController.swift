@@ -19,11 +19,8 @@ class SWMenuViewController: UIViewController {
     @IBOutlet weak var listEventsIcon: UIImageView!
     @IBOutlet weak var myInterestsIcon: UIImageView!
     @IBOutlet weak var createEventIcon: UIImageView!
-    @IBOutlet weak var myEventsIcon: UIImageView!
-    @IBOutlet weak var walletIcon: UIImageView!
-    @IBOutlet weak var accountSettingsIcon: UIImageView!
     @IBOutlet weak var contactUsIcon: UIImageView!
-    @IBOutlet weak var logoutIcon: UIImageView!
+
     
     //User Views
     @IBOutlet weak var userProfilePic: UIImageView!
@@ -34,7 +31,7 @@ class SWMenuViewController: UIViewController {
         super.viewDidLoad()
 
         //Set Menu Views
-        let listIc = UIImage(named: "ic_list")
+        let listIc = UIImage(named: "ic_dashboard")
         let listTemplate = listIc?.withRenderingMode(.alwaysTemplate)
         
         let favIc = UIImage(named: "ic_favorite_white")
@@ -43,20 +40,9 @@ class SWMenuViewController: UIViewController {
         let newEventIc = UIImage(named: "add_ic")
         let newEventTemplate = newEventIc?.withRenderingMode(.alwaysTemplate)
         
-        let eventIc = UIImage(named: "ic_event")
-        let eventTemplate = eventIc?.withRenderingMode(.alwaysTemplate)
-
-        let walletIc = UIImage(named: "wallet_ic")
-        let walletTemplate = walletIc?.withRenderingMode(.alwaysTemplate)
-        
-        let settingsIc = UIImage(named: "ic_settings")
-        let settingsTemplate = settingsIc?.withRenderingMode(.alwaysTemplate)
-        
         let contactIc = UIImage(named: "help-circle")
         let contactTemplate = contactIc?.withRenderingMode(.alwaysTemplate)
         
-        let logoutIc = UIImage(named: "ic_exit_to_app")
-        let logoutTemplate = logoutIc?.withRenderingMode(.alwaysTemplate)
 
         listEventsIcon.image = listTemplate
         listEventsIcon.tintColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
@@ -66,20 +52,10 @@ class SWMenuViewController: UIViewController {
         
         createEventIcon.image = newEventTemplate
         createEventIcon.tintColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
-        
-        myEventsIcon.image = eventTemplate
-        myEventsIcon.tintColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
-        walletIcon.image = walletTemplate
-        walletIcon.tintColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
-        
-        accountSettingsIcon.image = settingsTemplate
-        accountSettingsIcon.tintColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
-        
+
         contactUsIcon.image = contactTemplate
         contactUsIcon.tintColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
         
-        logoutIcon.image = logoutTemplate
-        logoutIcon.tintColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
         
         
         //Database Handler
@@ -145,17 +121,10 @@ class SWMenuViewController: UIViewController {
     
     
     //** Btn Actions
-    @IBAction func didPressLogout(_ sender: Any) {
-        if (Auth.auth().currentUser != nil){
-            do{
-                try Auth.auth().signOut()
-                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "initialView")
-                present(vc, animated: true, completion: nil)
-            } catch let error as NSError{
-                print(error.localizedDescription)
-            }
-        }
+    @IBAction func didPressDashboard(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
+
     
     @IBAction func didPressContactUs(_ sender: Any) {
         let settingsUrl = NSURL(string:"https://webblen.io") as! URL

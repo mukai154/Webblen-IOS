@@ -14,7 +14,6 @@ import FirebaseAuth
 class InitialViewController: UIViewController {
 
     @IBOutlet weak var loginBtn: UIButton!
-    @IBOutlet weak var signUpBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,13 +22,12 @@ class InitialViewController: UIViewController {
                 print("user is signed in")
                 
                 let mainStoryBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let homeViewController: UIViewController = mainStoryBoard.instantiateViewController(withIdentifier: "RevealViewController")
+                let homeViewController: UIViewController = mainStoryBoard.instantiateViewController(withIdentifier: "DashboardViewController")
                 
                 self.present(homeViewController, animated: true, completion: nil)
             } else {
                 UIView.animate(withDuration: 1.0, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
                     self.loginBtn.alpha = 1.0
-                    self.signUpBtn.alpha = 1.0
                 }, completion: nil)
             }
         })

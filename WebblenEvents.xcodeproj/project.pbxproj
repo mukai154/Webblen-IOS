@@ -20,6 +20,7 @@
 		460CD4A9207B7E8D002CF5B7 /* FirebaseMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460CD4A8207B7E8D002CF5B7 /* FirebaseMethods.swift */; };
 		461085B41FDE206D00E7B2A2 /* WebblenIAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461085B31FDE206D00E7B2A2 /* WebblenIAP.swift */; };
 		461085B61FDE214300E7B2A2 /* WebblenIAPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461085B51FDE214300E7B2A2 /* WebblenIAPService.swift */; };
+		4610C01820AD140F00F8AD88 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4610C01720AD140F00F8AD88 /* DashboardViewController.swift */; };
 		4617A7471F3D4C6600926160 /* confirmPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4617A7461F3D4C6600926160 /* confirmPostViewController.swift */; };
 		4617A7491F3D4D2900926160 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4617A7481F3D4D2900926160 /* StoreKit.framework */; };
 		461FD2D31F43FBF9001C7279 /* homeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461FD2D21F43FBF9001C7279 /* homeCell.swift */; };
@@ -85,6 +86,7 @@
 		460CD4A8207B7E8D002CF5B7 /* FirebaseMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseMethods.swift; sourceTree = "<group>"; };
 		461085B31FDE206D00E7B2A2 /* WebblenIAP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebblenIAP.swift; sourceTree = "<group>"; };
 		461085B51FDE214300E7B2A2 /* WebblenIAPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebblenIAPService.swift; sourceTree = "<group>"; };
+		4610C01720AD140F00F8AD88 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		4617A7461F3D4C6600926160 /* confirmPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confirmPostViewController.swift; sourceTree = "<group>"; };
 		4617A7481F3D4D2900926160 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		461FD2D21F43FBF9001C7279 /* homeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = homeCell.swift; sourceTree = "<group>"; };
@@ -233,10 +235,10 @@
 		46AE14F72082B78D00CC7EEC /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				4624B9611F67D45D00F4D6E6 /* VerifyAccountViewController.swift */,
 				4609990B1E39E38A000DE53F /* BlockedUsersViewController.swift */,
 				4609990F1E3A9902000DE53F /* BlockTableViewCell.swift */,
 				4617A7461F3D4C6600926160 /* confirmPostViewController.swift */,
+				4610C01720AD140F00F8AD88 /* DashboardViewController.swift */,
 				469E84841F385180002E07AA /* DateViewController.swift */,
 				46EC3ACC1F7305BE00E4CC06 /* EventCategoryViewController.swift */,
 				46621B821E2E9E4A005E5404 /* EventInfoViewController.swift */,
@@ -258,6 +260,7 @@
 				4642E7361E1E6B6300D65DA5 /* SignInViewController.swift */,
 				46956C721E1E10E5009A8F93 /* SignUpViewController.swift */,
 				460999091E384717000DE53F /* TermsViewController.swift */,
+				4624B9611F67D45D00F4D6E6 /* VerifyAccountViewController.swift */,
 				460CD4A12075BACF002CF5B7 /* WalletViewController.swift */,
 				D40A12A31F658F3E00392FF9 /* WhatsNewViewController.swift */,
 			);
@@ -593,6 +596,7 @@
 				460CD4A9207B7E8D002CF5B7 /* FirebaseMethods.swift in Sources */,
 				46AE15052082B82900CC7EEC /* UIButtonX.swift in Sources */,
 				D40A12A41F658F3E00392FF9 /* WhatsNewViewController.swift in Sources */,
+				4610C01820AD140F00F8AD88 /* DashboardViewController.swift in Sources */,
 				469E84851F385180002E07AA /* DateViewController.swift in Sources */,
 				46AE15032082B82900CC7EEC /* UIViewXRadialGradient.swift in Sources */,
 				4642E73F1E20604100D65DA5 /* MyEventsViewController.swift in Sources */,

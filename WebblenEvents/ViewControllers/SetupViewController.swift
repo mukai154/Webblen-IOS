@@ -203,6 +203,8 @@ class SetupViewController: UIViewController, UIImagePickerControllerDelegate, UI
                 self.stopLoading()
                 self.errorMessage.text = "Please Upload an Image for Your Account"
             }
+        } else {
+            self.stopLoading()
         }
     }
     
