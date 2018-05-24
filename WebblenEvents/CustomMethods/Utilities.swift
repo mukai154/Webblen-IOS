@@ -84,6 +84,7 @@ extension UIColor {
     }
 }
 
+
 extension NSMutableAttributedString {
     @discardableResult func bold(_ text:String) -> NSMutableAttributedString {
         let attrs:[String:AnyObject] = [NSFontAttributeName: UIFont(name: "HelveticaNeue-Medium", size: 8)!]

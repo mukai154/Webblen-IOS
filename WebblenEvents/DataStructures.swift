@@ -129,4 +129,36 @@ extension webblenUser : DocumentSerializable {
     }
 }
 
+//Group Structure
+struct webblenGroup {
+    var groupName:String
+    var members:[String]
+    var invited:[String]
+    var suggestedEvents:[String]
+    var totalWebPower:Int
+
+    
+    var dictionary:[String:Any]{
+        return[
+            "groupName":groupName,
+            "members":members,
+            "invited":invited,
+            "suggestedEvents":suggestedEvents,
+            "totalWebPower":totalWebPower,
+        ]
+    }
+}
+
+extension webblenGroup : DocumentSerializable {
+    init?(dictionary: [String : Any]) {
+        guard let groupName = dictionary["groupName"] as? String,
+            let members = dictionary["members"] as? [String],
+            let invited = dictionary["members"] as? [String],
+            let suggestedEvents = dictionary["members"] as? [String],
+            let totalWebPower = dictionary["totalWebPower"] as? Int
+            else {return nil}
+        self.init(groupName: groupName, members: members, invited: invited, suggestedEvents: suggestedEvents, totalWebPower: totalWebPower)
+    }
+}
+
 

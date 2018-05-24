@@ -160,9 +160,13 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
     
     //Geotification & Menu Variables
     var coordinates: [CLLocationCoordinate2D] = []
-    let locationManager = CLLocationManager()
+    var locationManager = CLLocationManager()
     var menuMarker = UIImage(named: "map-marker")?.withRenderingMode(.alwaysTemplate)
     var markerIcon = UIImage(named: "map-marker-orange")
+    
+    // ~1 mile of lat and lon in degrees
+    var mileLat = 0.0144927536231884
+    var mileLon = 0.0181818181818182
     
 
     //Database Variables
@@ -216,7 +220,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         let xAxis = self.view.center.x
         let yAxis = self.view.center.y
         
-        var frame = CGRect(x: (xAxis-25), y: (yAxis-75), width: 50, height: 50)
+        let frame = CGRect(x: (xAxis-25), y: (yAxis-75), width: 50, height: 50)
         loadingView = NVActivityIndicatorView(frame: frame, type: .lineScale, color: loadingColor, padding: 0)
         self.view.addSubview(loadingView)
         loadingView.startAnimating()
@@ -268,7 +272,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
     }
     
     
-    func loadEventData(){
+    func loadEventData(userLat: Double, userLon: Double, withinDistance: Double){
         self.refreshBtn.isEnabled = false
         let userRef = database.collection("users").document((currentUser?.uid)!)
         //Check if user exists
@@ -281,65 +285,74 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
                     //If users exists load interests and blocked users
                     self.userInterests = (document.data()!["interests"] as? [String])!
                     self.userBlocks = (document.data()!["blockedUsers"] as? [String])!
-                let eventRef = self.database.collection("events").getDocuments(completion: {(snapshot, error) in
-                    if let error = error {
-                        print("error in finding events")
-                    }
-                    else{
-                        //Load Events aligning with user's interests
-                        let formattedDate = self.formatter.string(from: Date())
-                        for event in snapshot!.documents {
-                            let eventCategories = (event.data()["categories"] as? [String])!
-                            for i in self.userInterests {
-                                if eventCategories.contains(i){
-                                    var interestedEvent = webblenEvent(
-                                        title: event.data()["title"] as! String,
-                                        address: event.data()["address"] as! String,
-                                        categories: eventCategories,
-                                        date: event.data()["date"] as! String,
-                                        description: event.data()["description"] as! String,
-                                        eventKey: event.data()["eventKey"] as! String,
-                                        lat: event.data()["lat"] as! Double,
-                                        lon: event.data()["lon"] as! Double,
-                                        paid: event.data()["paid"] as! Bool,
-                                        pathToImage: event.data()["pathToImage"] as! String,
-                                        radius: event.data()["radius"] as! Double,
-                                        time: event.data()["time"] as! String,
-                                        author: event.data()["author"] as! String,
-                                        verified: event.data()["verified"] as! Bool,
-                                        views: event.data()["views"] as! Int,
-                                        event18: event.data()["event18"] as! Bool,
-                                        event21: event.data()["event21"] as! Bool,
-                                        notificationOnly: event.data()["notificationOnly"] as! Bool,
-                                        distanceFromUser: 0
-                                    )
+                    
+                    //Max & Min Geopoints
+                    let lowerLat = userLat - (self.mileLat * withinDistance)
+                    let lowerLon = userLon - (self.mileLon * withinDistance)
+                    let greaterLat = userLat + (self.mileLat * withinDistance)
+                    let greaterLon = userLat + (self.mileLon * withinDistance)
+                    
+                    // KEY NOTE: Firebase's Firestore only allows comparison querying on a single field, trying to do multiple fields will raise an NSEexception Error -- Client Side Code will filter by Latitude
+                    let lonQuery = self.database.collection("events").whereField("lon", isGreaterThan: lowerLon).whereField("lon", isLessThan: greaterLon)
+
+                    lonQuery.getDocuments(completion: {(snapshot, error) in
+                        if error != nil {
+                            print("error in finding events")
+                        } else {
+                            //Load Events aligning with user's interests
+                            let formattedDate = self.formatter.string(from: Date())
+                            for event in snapshot!.documents {
+                                let eventCategories = (event.data()["categories"] as? [String])!
+                                let eventLat = (event.data()["lat"] as? Double)!
+                                for i in self.userInterests {
+                                    if eventCategories.contains(i) && lowerLat...greaterLat ~= eventLat {
+                                        var interestedEvent = webblenEvent(
+                                            title: event.data()["title"] as! String,
+                                            address: event.data()["address"] as! String,
+                                            categories: eventCategories,
+                                            date: event.data()["date"] as! String,
+                                            description: event.data()["description"] as! String,
+                                            eventKey: event.data()["eventKey"] as! String,
+                                            lat: event.data()["lat"] as! Double,
+                                            lon: event.data()["lon"] as! Double,
+                                            paid: event.data()["paid"] as! Bool,
+                                            pathToImage: event.data()["pathToImage"] as! String,
+                                            radius: event.data()["radius"] as! Double,
+                                            time: event.data()["time"] as! String,
+                                            author: event.data()["author"] as! String,
+                                            verified: event.data()["verified"] as! Bool,
+                                            views: event.data()["views"] as! Int,
+                                            event18: event.data()["event18"] as! Bool,
+                                            event21: event.data()["event21"] as! Bool,
+                                            notificationOnly: event.data()["notificationOnly"] as! Bool,
+                                            distanceFromUser: 0
+                                        )
                                     
-                                    let currentDate = self.formatter.date(from: formattedDate)
-                                    let eventDate = self.formatter.date(from: interestedEvent.date)
+                                        let currentDate = self.formatter.date(from: formattedDate)
+                                        let eventDate = self.formatter.date(from: interestedEvent.date)
                                     
-                                    //Organize Loaded Events By Date
-                                    let currentCalendarDate = self.dateCalendar.dateComponents([.month, .day, .year], from: currentDate!)
-                                    let eventCalendarDate = self.dateCalendar.dateComponents([.month, .day, .year], from: eventDate!)
-                                    let daysBetweenEvents = self.dateCalendar.dateComponents([.day], from: currentDate!, to: eventDate!)
-                                    print(daysBetweenEvents.day)
-                                    let monthsBetweenEvents = self.dateCalendar.dateComponents([.month], from: currentDate!, to: eventDate!)
+                                        //Organize Loaded Events By Date
+                                        let currentCalendarDate = self.dateCalendar.dateComponents([.month, .day, .year], from: currentDate!)
+                                        let eventCalendarDate = self.dateCalendar.dateComponents([.month, .day, .year], from: eventDate!)
+                                        let daysBetweenEvents = self.dateCalendar.dateComponents([.day], from: currentDate!, to: eventDate!)
+                                        //print(daysBetweenEvents.day)
+                                        let monthsBetweenEvents = self.dateCalendar.dateComponents([.month], from: currentDate!, to: eventDate!)
                                     
-                                    //Get teh coordinates of the closest evetn
-                                    let eventCoordinates = CLLocation(latitude: interestedEvent.lat, longitude: interestedEvent.lon)
-                                    let currentCoordinates = CLLocation(latitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!)
-                                    self.distanceFromEvent = currentCoordinates.distance(from: eventCoordinates)
-                                    if interestedEvent.distanceFromUser < self.distanceFromEvent {
-                                        interestedEvent.distanceFromUser = self.distanceFromEvent
-                                        self.currentRegion = interestedEvent.eventKey
-                                        self.closestEventTitle = interestedEvent.title
-                                        self.closestEventKey = interestedEvent.eventKey
-                                        if interestedEvent.notificationOnly == true {
-                                            self.closestEventIsHidden = true
-                                        }
-                                        else {
+                                        //Get teh coordinates of the closest evetn
+                                        let eventCoordinates = CLLocation(latitude: interestedEvent.lat, longitude: interestedEvent.lon)
+                                        let currentCoordinates = CLLocation(latitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!)
+                                        self.distanceFromEvent = currentCoordinates.distance(from: eventCoordinates)
+                                        if interestedEvent.distanceFromUser < self.distanceFromEvent {
+                                            interestedEvent.distanceFromUser = self.distanceFromEvent
+                                            self.currentRegion = interestedEvent.eventKey
+                                            self.closestEventTitle = interestedEvent.title
+                                            self.closestEventKey = interestedEvent.eventKey
+                                            if interestedEvent.notificationOnly == true {
+                                                self.closestEventIsHidden = true
+                                            } else {
                                             self.closestEventIsHidden = false
+                                            }
                                         }
-                                    }
                 
                                             //Append to Event Date Arrays
                                             if (eventDate! < currentDate! && interestedEvent.paid) {
@@ -664,7 +677,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
                 locationManager.desiredAccuracy = kCLLocationAccuracyBest
                 locationManager.startUpdatingLocation()
                 locationManager.startMonitoringSignificantLocationChanges()
-                loadEventData()
+                loadEventData(userLat: (locationManager.location?.coordinate.latitude)!, userLon: (locationManager.location?.coordinate.longitude)!, withinDistance: 35)
             }
         }
     }

@@ -26,8 +26,11 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var accountValLbl: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var notificationView: UIViewX!
+    @IBOutlet weak var notificationCountLbl: UILabel!
     
     var CURRENT_APP_VERSION = "3.3.0"
+    var notificationCount:Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
