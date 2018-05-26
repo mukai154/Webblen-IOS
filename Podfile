@@ -33,13 +33,15 @@ pod 'FBSDKCoreKit'
 pod 'FBSDKShareKit'
 pod 'FBSDKLoginKit'
 
+# twitter pods
+pod 'Fabric'
+pod 'TwitterKit'
+
 
 #KeyBoard Manager
 pod 'IQKeyboardManagerSwift'
 
 #Custom UI
-pod 'paper-onboarding'
-
 pod 'NVActivityIndicatorView'
 
 end

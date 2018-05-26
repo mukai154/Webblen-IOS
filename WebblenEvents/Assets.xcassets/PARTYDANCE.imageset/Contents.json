@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "DJ-48.png",
+      "filename" : "party-dj.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "party-dj(1).png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "party-dj(2).png",
       "scale" : "3x"
     }
   ],
