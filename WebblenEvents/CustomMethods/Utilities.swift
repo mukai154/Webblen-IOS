@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import PCLBlurEffectAlert
 
 // MARK: Helper Extensions
 extension UIViewController {
@@ -16,6 +17,17 @@ extension UIViewController {
         let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
+    }
+    
+    func showBlurAlert(title: String?, message: String?){
+        let alertController = PCLBlurEffectAlertController(title: title, message: message, effect: UIBlurEffect(style: .regular),style: .alert)
+        let backAction = PCLBlurEffectAlertAction(title: "Back", style: .default) { _ in}
+        alertController.configure(cornerRadius: 15.0)
+        alertController.configure(backgroundColor: .white)
+        alertController.configure(buttonBackgroundColor: .white)
+        alertController.configure(buttonTextColor: [.default: .black, .destructive: .black])
+        alertController.addAction(backAction)
+        alertController.show()
     }
 }
 

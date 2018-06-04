@@ -64,12 +64,12 @@ class WalletViewController: UIViewController, UIImagePickerControllerDelegate, U
                     if imageURL != nil && currentUsername != nil {
                         let url = NSURL(string: imageURL!)
                         self.profileImageView.sd_setImage(with: url! as URL)
-                        self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
-                        self.profileImageView.clipsToBounds = true;
+                        self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
+                        self.profileImageView.clipsToBounds = true
                         self.profileImageView.layer.borderWidth = 2
                         self.profileImageView.layer.borderColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0).cgColor
                         self.profileImageView.isHidden = false
-                        self.profileUsernameLabel.text = "@" +  currentUsername!
+                        self.profileUsernameLabel.text = "@" +  currentUsername!.lowercased()
                         self.profileUsernameLabel.isHidden = false
                         self.activityIndicator.isHidden = true
                         self.profilePicBtn.isEnabled = true

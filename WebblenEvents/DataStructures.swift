@@ -129,35 +129,60 @@ extension webblenUser : DocumentSerializable {
     }
 }
 
+//Mini User Data Structure
+struct webblenUserBasicData {
+    var username:String
+    var profile_pic:String
+    var uid:String
+    
+    var dictionary:[String:Any]{
+        return[
+            "username":username,
+            "profile_pic":profile_pic,
+            "uid":uid
+        ]
+    }
+}
+
+extension webblenUserBasicData : DocumentSerializable {
+    init?(dictionary: [String : Any]) {
+        guard let username = dictionary["username"] as? String,
+            let profile_pic = dictionary["profile_pic"] as? String,
+            let uid = dictionary["uid"] as? String
+            else {return nil}
+        self.init(username: username, profile_pic: profile_pic, uid: uid)
+    }
+}
+
 //Group Structure
 struct webblenGroup {
-    var groupName:String
+    var group_name:String
     var members:[String]
     var invited:[String]
-    var suggestedEvents:[String]
-    var totalWebPower:Int
+    var suggested_events:[String]
+    var total_web_power:Double
 
     
     var dictionary:[String:Any]{
         return[
-            "groupName":groupName,
+            "group_name":group_name,
             "members":members,
             "invited":invited,
-            "suggestedEvents":suggestedEvents,
-            "totalWebPower":totalWebPower,
+            "suggested_events":suggested_events,
+            "total_web_power":total_web_power,
         ]
     }
 }
 
 extension webblenGroup : DocumentSerializable {
     init?(dictionary: [String : Any]) {
-        guard let groupName = dictionary["groupName"] as? String,
+        guard let group_name = dictionary["group_name"] as? String,
             let members = dictionary["members"] as? [String],
-            let invited = dictionary["members"] as? [String],
-            let suggestedEvents = dictionary["members"] as? [String],
-            let totalWebPower = dictionary["totalWebPower"] as? Int
+            let invited = dictionary["invited"] as? [String],
+            let suggested_events = dictionary["suggested_events"] as? [String],
+            let total_web_power = dictionary["total_web_power"] as? Double
             else {return nil}
-        self.init(groupName: groupName, members: members, invited: invited, suggestedEvents: suggestedEvents, totalWebPower: totalWebPower)
+        self.init(group_name: group_name, members: members, invited: invited, suggested_events: suggested_events, total_web_power: total_web_power)
     }
 }
 

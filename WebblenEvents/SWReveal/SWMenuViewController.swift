@@ -100,7 +100,7 @@ class SWMenuViewController: UIViewController {
                     let currentUsername = snapshot?.data()!["username"] as? String
                     if imageURL != nil && currentUsername != nil {
                         self.changeProfileImage(imageURL: imageURL!)
-                        self.username.text = "@" +  currentUsername!
+                        self.username.text = "@" +  currentUsername!.lowercased()
                     } else {
                         self.performSegue(withIdentifier: "SetupSegue", sender: nil)
                     }

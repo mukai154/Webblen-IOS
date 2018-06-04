@@ -39,6 +39,7 @@ class confirmPostViewController: UIViewController {
     var eventChosenCategories : [String] = []
     var didPurchaseEvent = false
     var freeEvent = false
+    var allEventsFree = true
     
     var products = ["com.webblen.events.notify250",
                     "com.webblen.events.notify375",
@@ -107,7 +108,10 @@ class confirmPostViewController: UIViewController {
                 let eTime = event.data()!["time"] as! String
                 self.eDateTime.text = eDate + " | " + eTime
                 self.eventRadius = event.data()!["radius"] as! Int
-                if self.eventRadius < 275 {
+                if (self.eventCreator?.lowercased() == "webblen" || self.freeEvent || self.allEventsFree) {
+                    self.eTotalCost.text = "Event Total: FREE"
+                }
+                else if self.eventRadius < 275 {
                     self.eTotalCost.text = "Event Total: $2.99"
                 }
                 else if self.eventRadius < 400 {
@@ -166,7 +170,7 @@ class confirmPostViewController: UIViewController {
         
         loadingView.startAnimating()
         
-        if (self.eventCreator?.lowercased() == "webblen" || self.freeEvent){
+        if (self.eventCreator?.lowercased() == "webblen" || self.freeEvent || self.allEventsFree){
             eventPurchased()
         }
         else{
@@ -207,10 +211,24 @@ class confirmPostViewController: UIViewController {
     func eventPurchased(){
         dataBase.collection("events").document(eventKey).updateData([
             "paid": true
-        ]) { err in
-            if let err = err {
-                print("Error updating document: \(err)")
+        ]) { error in
+            if error != nil {
+                self.showBlurAlert(title: "There was an Issue Uploading Your Event", message: "Please Try Again.")
             } else {
+                let userRef = self.dataBase.collection("users").document((self.currentUser?.uid)!)
+                userRef.getDocument(completion: {(snapshot, error) in
+                    if let snapshot = snapshot {
+                        if snapshot.exists {
+                            let eventsCreated = snapshot.data()!["eventsCreated"] as? Int
+                            if eventsCreated != nil {
+                                let totalEventsCreated = eventsCreated! + 1
+                                userRef.updateData(["eventsCreated" : totalEventsCreated])
+                            } else {
+                                userRef.updateData(["eventsCreated" : 1])
+                            }
+                        }
+                    }
+                })
                 self.loadingView.stopAnimating()
                 self.performSegue(withIdentifier: "homeSegue", sender: nil)
             }

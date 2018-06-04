@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
         IQKeyboardManager.sharedManager().enable = true
-        application.statusBarStyle = .lightContent
+        application.statusBarStyle = .default
         
         //Twitter Auth
         TWTRTwitter.sharedInstance().start(withConsumerKey:"9gDtPWHxcnj6CUoyeVQCKGsGl", consumerSecret:"y57kSG4yUowPNVXNEy5EEbUybTR3Dt72VT4FydWhZ1oKMnspQa")

@@ -44,4 +44,7 @@ pod 'IQKeyboardManagerSwift'
 #Custom UI
 pod 'NVActivityIndicatorView'
 
+#Custom Alert Controller
+pod 'PCLBlurEffectAlert'
+
 end

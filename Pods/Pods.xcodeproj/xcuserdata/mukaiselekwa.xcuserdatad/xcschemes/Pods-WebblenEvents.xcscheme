@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0810"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C1C4E5E4EE073AABDD61391223850665"
+               BlueprintIdentifier = "06E2DD08779606AC8D299EB1502914B6"
                BuildableName = "Pods_WebblenEvents.framework"
                BlueprintName = "Pods-WebblenEvents"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C1C4E5E4EE073AABDD61391223850665"
+            BlueprintIdentifier = "06E2DD08779606AC8D299EB1502914B6"
             BuildableName = "Pods_WebblenEvents.framework"
             BlueprintName = "Pods-WebblenEvents"
             ReferencedContainer = "container:Pods.xcodeproj">
