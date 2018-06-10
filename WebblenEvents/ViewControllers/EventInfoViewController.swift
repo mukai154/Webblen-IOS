@@ -57,6 +57,7 @@ class EventInfoViewController: UIViewController {
     var currentDate = Date()
     var formatter = DateFormatter()
     var eventAuthor : String?
+    var authorPic : String?
     
     var currentUser:  AnyObject?
     var username: String?
@@ -112,30 +113,19 @@ class EventInfoViewController: UIViewController {
                     self.eventDescription.text = event.data()!["description"] as! String
                     self.lat = event.data()!["lat"] as! Double
                     self.lon = event.data()!["lon"] as! Double
-                    
-                    //**User Author Pic
                     self.eventAuthor = event.data()!["author"] as! String
-                    if self.userPicsDictionary[self.eventAuthor!] == nil {
-                        self.dataBase.collection("usernames").document((self.eventAuthor?.lowercased())!).getDocument { (document, error) in
-                            if let document = document, document.exists {
-                                let author_uid = document.data()!["uid"] as! String
-                                self.dataBase.collection("users").document(author_uid).getDocument{ (userDoc, error) in
-                                    if let userDoc = userDoc, userDoc.exists {
-                                        self.userPicsDictionary[self.eventAuthor!] = userDoc.data()!["profile_pic"] as? String
-                                        let userPicPath = self.userPicsDictionary[self.eventAuthor!]
-                                        let userPicUrl = NSURL(string: userPicPath!)
-                                        self.eventImage.sd_setImage(with: userPicUrl! as URL, placeholderImage: nil)
-                                    }
-                                }
-                            } else {
-                                self.eventImage.image = UIImage(named: self.eventCategories.first!)
-                            }
-                            self.eventImage.layer.cornerRadius = self.eventImage.frame.size.width / 2
-                            self.eventImage.clipsToBounds = true
-                            self.eventImage.isHidden = false
-                            self.userImgIndicator.isHidden = true
-                        }
+                    self.authorPic = event.data()!["author_pic"] as! String
+                    if self.authorPic != "" {
+                        let userPicPath = self.authorPic!
+                        let userPicUrl = NSURL(string: userPicPath)
+                        self.eventImage.sd_setImage(with: userPicUrl! as URL, placeholderImage: nil)
+                    } else {
+                        self.eventImage.image = UIImage(named: self.eventCategories.first!)
                     }
+                    self.eventImage.layer.cornerRadius = self.eventImage.frame.size.width / 2
+                    self.eventImage.clipsToBounds = true
+                    self.eventImage.isHidden = false
+                    self.userImgIndicator.isHidden = true
                     
                     //**Event Img
                     let imageURL = event.data()!["pathToImage"] as! String
@@ -210,14 +200,6 @@ class EventInfoViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .lightContent
-    }
-    override var preferredStatusBarStyle : UIStatusBarStyle {
-        return .lightContent
-    }
-
     @IBAction func didTabBackBtn(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }

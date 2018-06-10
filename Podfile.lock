@@ -122,6 +122,7 @@ PODS:
   - GTMSessionFetcher/Core (1.1.15)
   - GTMSessionFetcher/Full (1.1.15):
     - GTMSessionFetcher/Core (= 1.1.15)
+  - Hero (1.1.0)
   - IQKeyboardManagerSwift (5.0.8)
   - leveldb-library (1.20)
   - nanopb (0.3.8):
@@ -158,6 +159,7 @@ DEPENDENCIES:
   - GooglePlaces (= 2.2)
   - GooglePlacesSearchController
   - GoogleSignIn
+  - Hero
   - IQKeyboardManagerSwift
   - NVActivityIndicatorView
   - PCLBlurEffectAlert
@@ -192,6 +194,7 @@ SPEC CHECKSUMS:
   gRPC-RxLibrary: a41a4652d220f230ba1c0491a94ce2ee04c6180a
   GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
   GTMSessionFetcher: 5fa5b80fd20e439ef5f545fb2cb3ca6c6714caa2
+  Hero: ce59e81c79390613d97b43da7179e2c5e1017e04
   IQKeyboardManagerSwift: 2e7dc7f98c111458c1ea2b373f893e8cf95e2b97
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
@@ -203,6 +206,6 @@ SPEC CHECKSUMS:
   TwitterCore: 644d59e75abccb26cf0a9050d2c4dea0e5412241
   TwitterKit: a2e60ddcedbf54091eac6f27685ca7a87681e1d7
 
-PODFILE CHECKSUM: 28c51591dd62d429b92951ca8bdf9d29b16a3344
+PODFILE CHECKSUM: be85c91dee03152f6e5098ddc0a5aa288f7dad70
 
 COCOAPODS: 1.4.0

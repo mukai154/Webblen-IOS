@@ -47,4 +47,7 @@ pod 'NVActivityIndicatorView'
 #Custom Alert Controller
 pod 'PCLBlurEffectAlert'
 
+#Transition Animations
+pod 'Hero'
+
 end

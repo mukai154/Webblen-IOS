@@ -14,132 +14,10 @@ import CoreLocation
 import UserNotifications
 import NVActivityIndicatorView
 
-let darkMap = "[" +
-"{" +
-"    \"stylers\": [" +
-"    {" +
-"        \"saturation\": -30" +
-"    }," +
-"    {" +
-"        \"weight\": 2.5" +
-"    }" +
-"    ]" +
-"}," +
-"{" +
-"    \"featureType\": \"administrative\"," +
-"    \"elementType\": \"geometry\"," +
-"    \"stylers\": [" +
-"    {" +
-"        \"visibility\": \"off\"" +
-"    }" +
-"    ]" +
-"}," +
-"{" +
-"    \"featureType\": \"poi\"," +
-"    \"stylers\": [" +
-"    {" +
-"        \"visibility\": \"off\"" +
-"    }" +
-"    ]" +
-"}," +
-"{" +
-"    \"featureType\": \"poi.attraction\"," +
-"    \"stylers\": [" +
-"    {" +
-"        \"visibility\": \"on\"" +
-"    }" +
-"    ]" +
-"}," +
-"{" +
-"    \"featureType\": \"poi.business\"," +
-"    \"stylers\": [" +
-"    {" +
-"        \"visibility\": \"on\"" +
-"    }" +
-"    ]" +
-"}," +
-"{" +
-"    \"featureType\": \"poi.school\"," +
-"    \"stylers\": [" +
-"    {" +
-"        \"visibility\": \"on\"" +
-"    }" +
-"    ]" +
-"}," +
-"{" +
-"    \"featureType\": \"poi.sports_complex\"," +
-"    \"stylers\": [" +
-"    {" +
-"        \"visibility\": \"on\"" +
-"    }" +
-"    ]" +
-"}," +
-"{" +
-"    \"featureType\": \"road\"," +
-"    \"elementType\": \"labels.icon\"," +
-"    \"stylers\": [" +
-"    {" +
-"        \"visibility\": \"off\"" +
-"    }" +
-"    ]" +
-"}," +
-"{" +
-"    \"featureType\": \"road.arterial\"," +
-"    \"elementType\": \"labels\"," +
-"    \"stylers\": [" +
-"    {" +
-"        \"visibility\": \"off\"" +
-"    }" +
-"    ]" +
-"}," +
-"{" +
-"    \"featureType\": \"road.highway\"," +
-"    \"stylers\": [" +
-"    {" +
-"        \"visibility\": \"simplified\"" +
-"    }" +
-"    ]" +
-"}," +
-"{" +
-"    \"featureType\": \"road.highway\"," +
-"    \"elementType\": \"geometry\"," +
-"    \"stylers\": [" +
-"    {" +
-"        \"color\": \"#d5d5d5\"" +
-"    }" +
-"    ]" +
-"}," +
-"{" +
-"    \"featureType\": \"road.highway\"," +
-"    \"elementType\": \"labels\"," +
-"    \"stylers\": [" +
-"    {" +
-"        \"visibility\": \"off\"" +
-"    }" +
-"    ]" +
-"}," +
-"{" +
-"    \"featureType\": \"road.local\"," +
-"    \"stylers\": [" +
-"    {" +
-"        \"visibility\": \"off\"" +
-"    }" +
-"    ]" +
-"}," +
-"{" +
-"    \"featureType\": \"transit\"," +
-"    \"stylers\": [" +
-"    {" +
-"        \"visibility\": \"off\"" +
-"    }" +
-"    ]" +
-"}" +
-"]"
+let darkMap = CustomMap.getSimpleMapDesign()
 
 class GeotificationsViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate , UITabBarControllerDelegate {
 
-    
-    
     @IBOutlet weak var googleMapsView: GMSMapView!
     @IBOutlet weak var refreshBtn: UIBarButtonItem!
     @IBOutlet weak var todayMenuOption: UIButton!
@@ -220,8 +98,8 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         let xAxis = self.view.center.x
         let yAxis = self.view.center.y
         
-        let frame = CGRect(x: (xAxis-25), y: (yAxis-75), width: 50, height: 50)
-        loadingView = NVActivityIndicatorView(frame: frame, type: .lineScale, color: loadingColor, padding: 0)
+        let frame = CGRect(x: (xAxis-25), y: (yAxis-25), width: 50, height: 50)
+        loadingView = NVActivityIndicatorView(frame: frame, type: .ballClipRotatePulse, color: loadingColor, padding: 0)
         self.view.addSubview(loadingView)
         loadingView.startAnimating()
         
@@ -251,20 +129,14 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         laterMenuOption.tintColor = UIColor(red: 117/255, green: 117/255, blue: 117/255, alpha: 1.0)
         laterMenuLbl.textColor = UIColor(red: 117/255, green: 117/255, blue: 117/255, alpha: 1.0)
         
-        
-        
         //***Location Managing
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
-
-
         initGoogleMaps()
         if (currentUser == nil){
             self.performSegue(withIdentifier: "loginSegue", sender: nil)
         }
-        
         locationAccessCheck()
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -325,7 +197,8 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
                                             event18: event.data()["event18"] as! Bool,
                                             event21: event.data()["event21"] as! Bool,
                                             notificationOnly: event.data()["notificationOnly"] as! Bool,
-                                            distanceFromUser: 0
+                                            distanceFromUser: 0,
+                                            author_pic: event.data()["author_pic"] as! String
                                         )
                                     
                                         let currentDate = self.formatter.date(from: formattedDate)
@@ -618,7 +491,6 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         }
         else {
             //If there are less than 20, monitor all
-            print("monitor all regions")
             for region in monitoredRegions {
             locationManager.startMonitoring(for: region)
             }

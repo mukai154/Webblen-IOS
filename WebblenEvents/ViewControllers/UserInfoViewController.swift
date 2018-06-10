@@ -12,6 +12,7 @@ import Firebase
 class UserInfoViewController: UIViewController {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var imageShadowView: UIViewX!
     @IBOutlet weak var userImg: UIImageViewX!
     @IBOutlet weak var usernameLbl: UILabel!
     @IBOutlet weak var eventCountsView: UIViewX!
@@ -27,6 +28,11 @@ class UserInfoViewController: UIViewController {
         super.viewDidLoad()
         
         loadData()
+        
+        //Gesture
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        swipeDown.direction = .down
+        self.view.addGestureRecognizer(swipeDown)
         // Do any additional setup after loading the view.
     }
 
@@ -52,9 +58,6 @@ class UserInfoViewController: UIViewController {
                         let url = NSURL(string: profile_pic!)
                         self.userImg.sd_setImage(with: url! as URL)
                         self.userImg.clipsToBounds = true
-                        self.userImg.layer.borderWidth = 2
-                        self.userImg.layer.borderColor = UIColor.white.cgColor
-
                     }
                     if eventsCreated != nil {
                         self.eventsCreatedLbl.text = String(eventsCreated!)
@@ -69,6 +72,7 @@ class UserInfoViewController: UIViewController {
                     }
                     
                     self.userImg.isHidden = false
+                    self.imageShadowView.isHidden = false
                     self.usernameLbl.isHidden = false
                     self.eventCountsView.isHidden = false
                     self.activityIndicator.isHidden = true
@@ -77,9 +81,25 @@ class UserInfoViewController: UIViewController {
         })
     }
     
+    func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
+        if gesture.direction == UISwipeGestureRecognizerDirection.right {
+            print("Swipe Right")
+        }
+        else if gesture.direction == UISwipeGestureRecognizerDirection.left {
+            print("Swipe Left")
+        }
+        else if gesture.direction == UISwipeGestureRecognizerDirection.up {
+            print("Swipe Up")
+        }
+        else if gesture.direction == UISwipeGestureRecognizerDirection.down {
+            dismiss(animated: true, completion: nil)
+        }
+    }
     
     @IBAction func didPressDismiss(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+
     
 }

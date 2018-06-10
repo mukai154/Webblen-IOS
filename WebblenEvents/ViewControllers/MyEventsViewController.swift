@@ -82,7 +82,8 @@ class MyEventsViewController: UIViewController, UITableViewDelegate, UITableView
                                     event18: event.data()["event18"] as! Bool,
                                     event21: event.data()["event21"] as! Bool,
                                     notificationOnly: event.data()["notificationOnly"] as! Bool,
-                                    distanceFromUser: 0
+                                    distanceFromUser: 0,
+                                    author_pic: event.data()["author_pic"] as! String
                                 )
                                 self.webblenEvents.append(createdEvent)
                                 print(self.webblenEvents)

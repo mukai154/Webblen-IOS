@@ -11,6 +11,7 @@ import Firebase
 import CoreLocation
 import IQKeyboardManagerSwift
 import NVActivityIndicatorView
+import PCLBlurEffectAlert
 
 class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
 
@@ -295,35 +296,73 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
                 let uploadImage = imageRef.putData(imageData!, metadata: nil) {(metadata, error) in
                     if error != nil {
                         self.showAlert(withTitle: "Event Upload Error", message: "Error occurred while uploading event")
-                        return
+                    } else {
+                        self.dataBase.collection("users").document((self.currentUser?.uid)!).getDocument(completion: {(snapshot, error) in
+                            if error != nil {
+                                self.showBlurAlert(title: "Event Creation Error", message: "There Was an Issue Uploading Your Event. Please Try Again.")
+                            } else {
+                                let author_pic = snapshot?.data()!["profile_pic"] as? String
+                                if author_pic != nil {
+                                    imageRef.downloadURL(completion: {(url, error) in
+                                        if let url = url {
+                                            newEventReference.setData([
+                                                "title": self.eventTitleField.text!,
+                                                "address": self.eventAddress,
+                                                "date": self.eventDate,
+                                                "description": self.eventDescriptionField.text,
+                                                "categories": self.eventCategories,
+                                                "eventKey": newEventReference.documentID,
+                                                "lat": self.lat!,
+                                                "lon": self.lon!,
+                                                "paid": false,
+                                                "pathToImage": url.absoluteString,
+                                                "radius": self.eventRadius,
+                                                "time": self.eventTime,
+                                                "author": self.username!,
+                                                "verified": self.eventVerified,
+                                                "views": 0,
+                                                "event18": self.event18,
+                                                "event21": self.event21,
+                                                "notificationOnly": self.notificationOnly,
+                                                "distanceFromUser": 0,
+                                                "author_pic": author_pic!
+                                                ])
+                                        }
+                                    })
+                                } else {
+                                    imageRef.downloadURL(completion: {(url, error) in
+                                        if let url = url {
+                                            newEventReference.setData([
+                                                "title": self.eventTitleField.text!,
+                                                "address": self.eventAddress,
+                                                "date": self.eventDate,
+                                                "description": self.eventDescriptionField.text,
+                                                "categories": self.eventCategories,
+                                                "eventKey": newEventReference.documentID,
+                                                "lat": self.lat!,
+                                                "lon": self.lon!,
+                                                "paid": false,
+                                                "pathToImage": url.absoluteString,
+                                                "radius": self.eventRadius,
+                                                "time": self.eventTime,
+                                                "author": self.username!,
+                                                "verified": self.eventVerified,
+                                                "views": 0,
+                                                "event18": self.event18,
+                                                "event21": self.event21,
+                                                "notificationOnly": self.notificationOnly,
+                                                "distanceFromUser": 0,
+                                                "author_pic": author_pic!
+                                                ])
+                                        }
+                                    })
+                                }
+                                self.loadingView.stopAnimating()
+                                self.uploadPost(currentKey: newEventReference.documentID)
+                            }
+                        })
                     }
-                    imageRef.downloadURL(completion: {(url, error) in
-                        if let url = url {
-                            newEventReference.setData([
-                                "title": self.eventTitleField.text!,
-                                "address": self.eventAddress,
-                                "date": self.eventDate,
-                                "description": self.eventDescriptionField.text,
-                                "categories": self.eventCategories,
-                                "eventKey": newEventReference.documentID,
-                                "lat": self.lat!,
-                                "lon": self.lon!,
-                                "paid": false,
-                                "pathToImage": url.absoluteString,
-                                "radius": self.eventRadius,
-                                "time": self.eventTime,
-                                "author": self.username!,
-                                "verified": self.eventVerified,
-                                "views": 0,
-                                "event18": self.event18,
-                                "event21": self.event21,
-                                "notificationOnly": self.notificationOnly,
-                                "distanceFromUser": 0
-                                ])
-                            self.loadingView.stopAnimating()
-                            self.uploadPost(currentKey: newEventReference.documentID)
-                        }
-                    })
+                    
                 }
             }
             else {
@@ -366,29 +405,63 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
         }
         else if (uploadedImage == false){
             if !(editingEvent) {
-                newEventReference.setData([
-                    "title": self.eventTitleField.text!,
-                    "address": self.eventAddress,
-                    "date": self.eventDate,
-                    "description": self.eventDescriptionField.text,
-                    "categories": self.eventCategories,
-                    "eventKey": newEventReference.documentID,
-                    "lat": self.lat!,
-                    "lon": self.lon!,
-                    "paid": false,
-                    "pathToImage": "",
-                    "radius": self.eventRadius,
-                    "time": self.eventTime,
-                    "author": self.username!,
-                    "verified": self.eventVerified,
-                    "views": 0,
-                    "event18": self.event18,
-                    "event21": self.event21,
-                    "notificationOnly": self.notificationOnly,
-                    "distanceFromUser": 0
-                    ])
-                loadingView.stopAnimating()
-                uploadPost(currentKey: newEventReference.documentID)
+                dataBase.collection("users").document((currentUser?.uid)!).getDocument(completion: {(snapshot, error) in
+                    if error != nil {
+                        
+                    } else {
+                        let author_pic = snapshot?.data()!["profile_pic"] as? String
+                        
+                        if author_pic != nil {
+                            newEventReference.setData([
+                                "title": self.eventTitleField.text!,
+                                "address": self.eventAddress,
+                                "date": self.eventDate,
+                                "description": self.eventDescriptionField.text,
+                                "categories": self.eventCategories,
+                                "eventKey": newEventReference.documentID,
+                                "lat": self.lat!,
+                                "lon": self.lon!,
+                                "paid": false,
+                                "pathToImage": "",
+                                "radius": self.eventRadius,
+                                "time": self.eventTime,
+                                "author": self.username!,
+                                "verified": self.eventVerified,
+                                "views": 0,
+                                "event18": self.event18,
+                                "event21": self.event21,
+                                "notificationOnly": self.notificationOnly,
+                                "distanceFromUser": 0,
+                                "author_pic": author_pic!
+                                ])
+                        } else {
+                            newEventReference.setData([
+                                "title": self.eventTitleField.text!,
+                                "address": self.eventAddress,
+                                "date": self.eventDate,
+                                "description": self.eventDescriptionField.text,
+                                "categories": self.eventCategories,
+                                "eventKey": newEventReference.documentID,
+                                "lat": self.lat!,
+                                "lon": self.lon!,
+                                "paid": false,
+                                "pathToImage": "",
+                                "radius": self.eventRadius,
+                                "time": self.eventTime,
+                                "author": self.username!,
+                                "verified": self.eventVerified,
+                                "views": 0,
+                                "event18": self.event18,
+                                "event21": self.event21,
+                                "notificationOnly": self.notificationOnly,
+                                "distanceFromUser": 0,
+                                "author_pic": ""
+                                ])
+                        }
+                        self.loadingView.stopAnimating()
+                        self.uploadPost(currentKey: newEventReference.documentID)
+                    }
+                })
             }
             else {
                 let updateEvent = self.dataBase.collection("events").document(self.eventKey)

@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import PCLBlurEffectAlert
+import Hero
 
 class DashboardViewController: UIViewController {
 
@@ -40,24 +41,29 @@ class DashboardViewController: UIViewController {
     var scaleY:CGFloat?
     
     //App
-    var CURRENT_APP_VERSION = "3.3.0"
+    var CURRENT_APP_VERSION = "3.4.0"
     var notificationCount:Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        setHeroIDS()
         loadFirestoreProfileData()
 
         
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .default
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    //HERO TRANSITIONS
+    func setHeroIDS(){
+        userProfilePic.hero.id = "profile_pic"
+        usernameLbl.hero.id = "username"
+        accountValLbl.hero.id = "account_value"
     }
     
     //** FIREBASE

@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "06E2DD08779606AC8D299EB1502914B6"
+               BlueprintIdentifier = "ECD4B19D28E3C5B7DD57D967F2DD8053"
                BuildableName = "Pods_WebblenEvents.framework"
                BlueprintName = "Pods-WebblenEvents"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "06E2DD08779606AC8D299EB1502914B6"
+            BlueprintIdentifier = "ECD4B19D28E3C5B7DD57D967F2DD8053"
             BuildableName = "Pods_WebblenEvents.framework"
             BlueprintName = "Pods-WebblenEvents"
             ReferencedContainer = "container:Pods.xcodeproj">

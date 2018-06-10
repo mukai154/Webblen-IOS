@@ -118,23 +118,31 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
                                             event18: event.data()["event18"] as! Bool,
                                             event21: event.data()["event21"] as! Bool,
                                             notificationOnly: event.data()["notificationOnly"] as! Bool,
-                                            distanceFromUser: 0
+                                            distanceFromUser: 0,
+                                            author_pic: event.data()["author_pic"] as! String
                                         )
-                                        let author = interestedEvent.author
-                                        if self.userPicsDictionary[author] == nil {
-                                            self.database.collection("usernames").document(author.lowercased()).getDocument { (document, error) in
-                                                if let document = document, document.exists {
-                                                    let author_uid = document.data()!["uid"] as! String
-                                                    self.database.collection("users").document(author_uid).getDocument{ (userDoc, error) in
-                                                        if let userDoc = userDoc, userDoc.exists {
-                                                            self.userPicsDictionary[author] = userDoc.data()!["profile_pic"] as? String
-                                                        }
-                                                    }
-                                                } else {
-                                                    print("Document does not exist")
-                                                }
-                                            }
-                                        }
+//                                        let author = interestedEvent.author
+//                                        if self.userPicsDictionary[author] == nil {
+//                                            self.database.collection("usernames").document(author.lowercased()).getDocument { (document, error) in
+//                                                if let document = document, document.exists {
+//                                                    let author_uid = document.data()!["uid"] as! String
+//                                                    self.database.collection("users").document(author_uid).getDocument{ (userDoc, error) in
+//                                                        if let userDoc = userDoc, userDoc.exists {
+//                                                            let auth_pic = userDoc.data()!["profile_pic"]
+//                                                            self.userPicsDictionary[author] = userDoc.data()!["profile_pic"] as? String
+//                                                           
+//                                                            if auth_pic != nil {
+//                                                                self.database.collection("events").document(interestedEvent.eventKey).updateData(["author_pic": auth_pic!])
+//                                                            } else {
+//                                                                self.database.collection("events").document(interestedEvent.eventKey).updateData(["author_pic": ""])
+//                                                            }
+//                                                        }
+//                                                    }
+//                                                } else {
+//                                                    print("Document does not exist")
+//                                                }
+//                                            }
+//                                        }
                                         let currentDate = self.formatter.date(from: formattedDate)
                                         let eventDate = self.formatter.date(from: interestedEvent.date)
                                         
@@ -275,8 +283,8 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
             eventImage.isHidden = false
             eventImgIndicator.isHidden = true
             
-            if self.userPicsDictionary[self.webblenEvents[indexPath.row].author] != nil {
-                let userPicUrl = NSURL(string: self.userPicsDictionary[self.webblenEvents[indexPath.row].author]!)
+            if self.webblenEvents[indexPath.row].author_pic != "" {
+                let userPicUrl = NSURL(string: self.webblenEvents[indexPath.row].author_pic)
                 eventUserImg.sd_setImage(with: userPicUrl! as URL, placeholderImage: nil)
                 eventUserImg.clipsToBounds = true
                 eventUserImg.isHidden = false
@@ -316,8 +324,8 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
                 separator.isHidden = false
             }
             //let eventSmallCat3 = cell.viewWithTag(9) as! UIImageView
-            if self.userPicsDictionary[self.webblenEvents[indexPath.row].author] != nil {
-                let userPicUrl = NSURL(string: self.userPicsDictionary[self.webblenEvents[indexPath.row].author]!)
+            if self.webblenEvents[indexPath.row].author_pic != "" {
+                let userPicUrl = NSURL(string: self.webblenEvents[indexPath.row].author_pic)
                 eventUserImg.sd_setImage(with: userPicUrl! as URL, placeholderImage: nil)
                 eventUserImg.clipsToBounds = true
                 eventUserImg.isHidden = false
@@ -367,12 +375,9 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
         thisWeekBtn.setTitleColor(UIColor(red: 178/300, green: 190/300, blue: 195/300, alpha: 1.0), for: .normal)
         thisMonthBtn.setTitleColor(UIColor(red: 178/300, green: 190/300, blue: 195/300, alpha: 1.0), for: .normal)
         laterBtn.setTitleColor(UIColor(red: 178/300, green: 190/300, blue: 195/300, alpha: 1.0), for: .normal)
-
         
         webblenEvents = todayArray
-        print(webblenEvents)
-        eventsTableView.reloadData()
-        eventsTableView.contentOffset = CGPoint(x: 0, y: 0 - eventsTableView.contentInset.top)
+
         if self.webblenEvents.count == 0 {
             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
                 self.eventsTableView.reloadData()
@@ -385,6 +390,8 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
         } else {
             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
                 self.eventsTableView.reloadData()
+                let topIndex = IndexPath(row: 0, section: 0)
+                self.eventsTableView.scrollToRow(at: topIndex, at: .top, animated: true)
                 self.eventsTableView.isHidden = false
                 self.eventsTableView.alpha = 1
                 self.noEventImg.isHidden = true
@@ -400,11 +407,8 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
         thisMonthBtn.setTitleColor(UIColor(red: 178/300, green: 190/300, blue: 195/300, alpha: 1.0), for: .normal)
         laterBtn.setTitleColor(UIColor(red: 178/300, green: 190/300, blue: 195/300, alpha: 1.0), for: .normal)
 
-        
         webblenEvents = tomorrowArray
-        //print(webblenEvents)
-        eventsTableView.reloadData()
-        eventsTableView.contentOffset = CGPoint(x: 0, y: 0 - eventsTableView.contentInset.top)
+
         if self.webblenEvents.count == 0 {
             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
                 self.eventsTableView.reloadData()
@@ -417,6 +421,8 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
         } else {
             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
                 self.eventsTableView.reloadData()
+                let topIndex = IndexPath(row: 0, section: 0)
+                self.eventsTableView.scrollToRow(at: topIndex, at: .top, animated: true)
                 self.eventsTableView.isHidden = false
                 self.eventsTableView.alpha = 1
                 self.noEventImg.isHidden = true
@@ -434,9 +440,7 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
         laterBtn.setTitleColor(UIColor(red: 178/300, green: 190/300, blue: 195/300, alpha: 1.0), for: .normal)
         
         webblenEvents = thisWeekArray
-        //print(webblenEvents)
-        eventsTableView.reloadData()
-        eventsTableView.contentOffset = CGPoint(x: 0, y: 0 - eventsTableView.contentInset.top)
+        
         if self.webblenEvents.count == 0 {
             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
                 self.eventsTableView.reloadData()
@@ -449,6 +453,8 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
         } else {
             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
                 self.eventsTableView.reloadData()
+                let topIndex = IndexPath(row: 0, section: 0)
+                self.eventsTableView.scrollToRow(at: topIndex, at: .top, animated: true)
                 self.eventsTableView.isHidden = false
                 self.eventsTableView.alpha = 1
                 self.noEventImg.isHidden = true
@@ -465,9 +471,7 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
         laterBtn.setTitleColor(UIColor(red: 178/300, green: 190/300, blue: 195/300, alpha: 1.0), for: .normal)
         
         webblenEvents = thisMonthArray
-        //print(webblenEvents)
-        eventsTableView.reloadData()
-        eventsTableView.contentOffset = CGPoint(x: 0, y: 0 - eventsTableView.contentInset.top)
+
         if self.webblenEvents.count == 0 {
             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
                 self.eventsTableView.reloadData()
@@ -480,6 +484,8 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
         } else {
             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
                 self.eventsTableView.reloadData()
+                let topIndex = IndexPath(row: 0, section: 0)
+                self.eventsTableView.scrollToRow(at: topIndex, at: .top, animated: true)
                 self.eventsTableView.isHidden = false
                 self.eventsTableView.alpha = 1
                 self.noEventImg.isHidden = true
@@ -496,9 +502,7 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
         laterBtn.setTitleColor(activeColor, for: .normal)
         
         webblenEvents = laterArray
-        //print(webblenEvents)
-        eventsTableView.reloadData()
-        eventsTableView.contentOffset = CGPoint(x: 0, y: 0 - eventsTableView.contentInset.top)
+
         if self.webblenEvents.count == 0 {
             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
                 self.eventsTableView.reloadData()
@@ -511,6 +515,8 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
         } else {
             UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
                 self.eventsTableView.reloadData()
+                let topIndex = IndexPath(row: 0, section: 0)
+                self.eventsTableView.scrollToRow(at: topIndex, at: .top, animated: true)
                 self.eventsTableView.isHidden = false
                 self.eventsTableView.alpha = 1
                 self.noEventImg.isHidden = true

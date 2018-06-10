@@ -40,6 +40,8 @@ struct webblenEvent {
     var event21:Bool
     var notificationOnly:Bool
     var distanceFromUser:Double
+    var author_pic:String
+    
     
     var dictionary:[String:Any]{
         return [
@@ -61,7 +63,8 @@ struct webblenEvent {
             "time":time,
             "title":title,
             "verified":verified,
-            "views":views
+            "views":views,
+            "author_pic": author_pic
         ]
     }
 }
@@ -80,15 +83,16 @@ extension webblenEvent : DocumentSerializable {
         let lat = dictionary["lat"] as? Double,
         let lon = dictionary["lon"] as? Double,
         let notificationOnly = dictionary["notificationOnly"] as? Bool,
-        let paid = dictionary["author"] as? Bool,
-        let pathToImage = dictionary["author"] as? String,
-        let radius = dictionary["author"] as? Double,
-        let time = dictionary["author"] as? String,
-        let title = dictionary["author"] as? String,
-        let verified = dictionary["author"] as? Bool,
-        let views = dictionary["author"] as? Int
+        let paid = dictionary["paid"] as? Bool,
+        let pathToImage = dictionary["pathToImage"] as? String,
+        let radius = dictionary["radius"] as? Double,
+        let time = dictionary["time"] as? String,
+        let title = dictionary["title"] as? String,
+        let verified = dictionary["verified"] as? Bool,
+        let views = dictionary["views"] as? Int,
+        let author_pic = dictionary["author_pic"] as? String
             else {return nil}
-        self.init(title: title, address: address, categories: categories, date: date, description: description, eventKey: eventKey, lat: lat, lon: lon, paid: paid, pathToImage: pathToImage, radius: radius, time: time, author: author, verified: verified, views: views, event18: event18, event21: event21, notificationOnly: notificationOnly, distanceFromUser: distanceFromUser)
+        self.init(title: title, address: address, categories: categories, date: date, description: description, eventKey: eventKey, lat: lat, lon: lon, paid: paid, pathToImage: pathToImage, radius: radius, time: time, author: author, verified: verified, views: views, event18: event18, event21: event21, notificationOnly: notificationOnly, distanceFromUser: distanceFromUser, author_pic: author_pic)
     }
 }
 

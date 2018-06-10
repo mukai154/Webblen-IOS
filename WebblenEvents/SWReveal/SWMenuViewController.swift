@@ -45,16 +45,16 @@ class SWMenuViewController: UIViewController {
         
 
         listEventsIcon.image = listTemplate
-        listEventsIcon.tintColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
+        listEventsIcon.tintColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0)
         
         myInterestsIcon.image = favTemplate
-        myInterestsIcon.tintColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
+        myInterestsIcon.tintColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0)
         
         createEventIcon.image = newEventTemplate
-        createEventIcon.tintColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
+        createEventIcon.tintColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0)
 
         contactUsIcon.image = contactTemplate
-        contactUsIcon.tintColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
+        contactUsIcon.tintColor = UIColor(red: 66/255, green: 66/255, blue: 66/255, alpha: 1.0)
         
         
         
@@ -113,10 +113,8 @@ class SWMenuViewController: UIViewController {
     public func changeProfileImage(imageURL: String){
         let url = NSURL(string: imageURL)
         self.userProfilePic.sd_setImage(with: url! as URL)
-        self.userProfilePic.layer.cornerRadius = self.userProfilePic.frame.size.width / 2;
-        self.userProfilePic.clipsToBounds = true;
-        self.userProfilePic.layer.borderWidth = 2
-        self.userProfilePic.layer.borderColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0).cgColor
+        self.userProfilePic.layer.cornerRadius = self.userProfilePic.frame.size.width / 2
+        self.userProfilePic.clipsToBounds = true
     }
     
     

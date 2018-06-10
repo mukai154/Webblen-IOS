@@ -35,8 +35,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         super.viewDidLoad()
         
         //** SEARCH BAR
-        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
-        textFieldInsideSearchBar?.textColor = .white
+//        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+//        textFieldInsideSearchBar?.textColor = .white
         searchBar.showsCancelButton = true
         searchBar.delegate = self
         
@@ -114,21 +114,23 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         let usernameLbl = cell?.viewWithTag(1) as! UILabel
         usernameLbl.text = usernameResult
         let userPic = cell?.viewWithTag(2) as! UIImageViewX
-        let activityIndicator = cell?.viewWithTag(3) as! UIActivityIndicatorView
+        let imageActivityIndicator = cell?.viewWithTag(3) as! UIActivityIndicatorView
         let inviteUserBtn = cell?.viewWithTag(4) as! UIButtonX
         let viewUserBtn = cell?.viewWithTag(5) as! UIButtonX
         if usernamePicPath != "" {
             let url = NSURL(string: usernamePicPath)
             userPic.sd_setImage(with: url! as URL)
+            imageActivityIndicator.isHidden = true
         } else {
             userPic.image = UIImage(named: "defaultUserPic")
+            imageActivityIndicator.isHidden = true
         }
         userPic.clipsToBounds = true
         userPic.isHidden = false
         
 //        inviteUserBtn.addTarget(self, action: "inviteBtnClicked:", for: .touchUpInside)
 //        viewUserBtn.addTarget(self, action: "viewUserBtnClicked:", for: .touchUpInside)
-        activityIndicator.isHidden = true
+        
         
         cell?.selectionStyle = UITableViewCellSelectionStyle.none
         return cell!

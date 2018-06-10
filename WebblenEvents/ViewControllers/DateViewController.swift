@@ -76,7 +76,6 @@ class DateViewController: UIViewController {
             
         }
         dismiss(animated: true, completion: nil)
-        
     }
     
     @IBAction func didPressNoEndSwitch(_ sender: Any) {

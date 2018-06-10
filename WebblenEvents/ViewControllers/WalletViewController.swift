@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import SDWebImage
+import Hero
 
 class WalletViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -21,9 +22,10 @@ class WalletViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     //User UI
     @IBOutlet weak var profilePicBtn: UIButton!
+    @IBOutlet weak var profileImageShadowView: UIViewX!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var profileUsernameLabel: UILabel!
-    @IBOutlet weak var eventRatioView: UIView!
+    @IBOutlet weak var eventRatioView: UIViewX!
     @IBOutlet weak var walletInfoTable: UITableView!
     @IBOutlet weak var backArrowBtn: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -35,9 +37,6 @@ class WalletViewController: UIViewController, UIImagePickerControllerDelegate, U
         //image picker
         imagePicker.delegate = self
         
-        //UI
-        self.eventRatioView.layer.cornerRadius = 5
-        
         //Data
         loadFirestoreProfileData()
     }
@@ -45,6 +44,12 @@ class WalletViewController: UIViewController, UIImagePickerControllerDelegate, U
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    //HERO TRANSITIONS
+    func setHeroIDS(){
+        profileImageView.hero.id = "profile_pic"
+        profileUsernameLabel.hero.id = "username"
     }
     
     //** FIREBASE
@@ -172,7 +177,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource {
             lblDetail.text = "The value is based on an average value of WBLN in US dollars. "
             lblSelection1.text = "$0.00"
         }
-        
+        cell?.selectionStyle = UITableViewCellSelectionStyle.none
         return cell!
     }
     
