@@ -93,7 +93,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         //***UI
         //Reveal View Controller
         Open.target = self.revealViewController()
-        Open.action = Selector("revealToggle:")
+        Open.action = #selector(SWRevealViewController.revealToggle(_:))
         view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         let xAxis = self.view.center.x
         let yAxis = self.view.center.y

@@ -318,7 +318,7 @@ class EventInfoViewController: UIViewController {
         }
     }
 
-    func didTapEventPhoto(sender: UITapGestureRecognizer){
+    @objc func didTapEventPhoto(sender: UITapGestureRecognizer){
         let imageView = sender.view as! UIImageView
         let newImageView = UIImageView(image: imageView.image)
         newImageView.frame = self.view.frame
@@ -330,7 +330,7 @@ class EventInfoViewController: UIViewController {
         self.view.addSubview(newImageView)
     }
     
-    func dismissFullScreenImage(sender: UITapGestureRecognizer){
+    @objc func dismissFullScreenImage(sender: UITapGestureRecognizer){
         sender.view?.removeFromSuperview()
         
     }

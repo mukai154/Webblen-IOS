@@ -81,7 +81,7 @@ class UserInfoViewController: UIViewController {
         })
     }
     
-    func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
+    @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
         if gesture.direction == UISwipeGestureRecognizerDirection.right {
             print("Swipe Right")
         }

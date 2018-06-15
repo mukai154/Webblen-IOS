@@ -251,7 +251,7 @@ class SignInViewController: UIViewController,  FBSDKLoginButtonDelegate{
     
     }
     
-    func doneClicked(){
+    @objc func doneClicked(){
         view.endEditing(true)
     }
     

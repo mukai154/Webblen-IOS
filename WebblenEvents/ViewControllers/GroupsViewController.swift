@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import PCLBlurEffectAlert
+import NVActivityIndicatorView
 
 class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -20,10 +21,22 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var currentUser = Auth.auth().currentUser
     var currentUserGroupKeys:[String]?
     
+    //UI
+    var btnTintColor = UIColor(red: 83/255, green: 92/255, blue: 104/255, alpha: 0.8)
+    var loadingView = NVActivityIndicatorView(frame: CGRect(x: (100), y: (100), width: 125, height: 125), type: .ballRotateChase, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1.0), padding: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Activity indicator starts
+        let xAxis = self.view.center.x
+        let yAxis = self.view.center.y
         
+        let frame = CGRect(x: (xAxis-25), y: (yAxis-25), width: 50, height: 50)
+        loadingView = NVActivityIndicatorView(frame: frame, type: .circleStrokeSpin, color: btnTintColor, padding: 0)
+        self.view.addSubview(loadingView)
+        loadingView.startAnimating()
+        
+        //Firebase
         loadGroups()
     }
     
@@ -54,11 +67,13 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 self.showBlurAlert(title: "Server Error", message: "There was an error connecting to our server")
                             } else {
                                 let groupData = snapshot?.data()!
-                                let userGroup = webblenGroup(group_name: groupData!["group_name"] as! String,
+                                let userGroup = webblenGroup(groupName: groupData!["groupName"] as! String,
                                                              members: groupData!["members"] as! [String],
                                                              invited: groupData!["invited"] as! [String],
-                                                             suggested_events: groupData!["suggested_events"] as! [String],
-                                                             total_web_power: groupData!["total_web_power"] as! Double)
+                                                             suggestedEvents: groupData!["suggestedEvents"] as! [String],
+                                                             totalWebPower: groupData!["totalWebPower"] as! Double,
+                                                             chatID: groupData!["chatID"] as! String)
+                                
                                 self.webblenGroups.append(userGroup)
                                 self.groupsTable.reloadData()
                             }
@@ -81,8 +96,9 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = groupsTable.dequeueReusableCell(withIdentifier: "groupCell")
-        let groupName = self.webblenGroups[indexPath.row].group_name
-        let members = self.webblenGroups[indexPath.row].members
+        let group = self.webblenGroups[indexPath.row]
+        let groupName = group.groupName
+        let members = group.members
         
         
         let groupNameLbl = cell?.viewWithTag(1) as! UILabel
@@ -127,6 +143,13 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 userPic5.isHidden = false
                             }
                             
+                            if let lastGroup = self.webblenGroups.last {
+                                if lastGroup.groupName == groupName {
+                                    self.loadingView.stopAnimating()
+                                    self.groupsTable.isHidden = false
+                                }
+                            }
+                            
                             additionalCount += 1
                             
                         }
@@ -141,7 +164,6 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             additionalUsers.text = "+" + String(additionalCount)
             additionalUsers.isHidden = false
         }
-        
         activityIndicator.isHidden = true
         
         cell?.selectionStyle = UITableViewCellSelectionStyle.none
@@ -150,9 +172,19 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        performSegue(withIdentifier: "groupChatSegue", sender: self.webblenGroups[indexPath.row].chatID)
     }
     
+    func selectUser(uid: String){
+        performSegue(withIdentifier: "groupChatSegue", sender: uid)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "groupChatSegue"){
+            let messagesViewController = segue.destination as! MessagesViewController
+            messagesViewController.chatID = sender as! String
+        }
+    }
     
     @IBAction func didPressBack(_ sender: Any) {
         dismiss(animated: true, completion: nil)

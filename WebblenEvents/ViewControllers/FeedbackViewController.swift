@@ -24,7 +24,7 @@ class FeedbackViewController: UIViewController {
         self.submitButton.layer.cornerRadius = CGFloat(5.0)
 
         //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(FeedbackViewController.dismissKeyboard))
         
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         //tap.cancelsTouchesInView = false
@@ -45,7 +45,7 @@ class FeedbackViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }

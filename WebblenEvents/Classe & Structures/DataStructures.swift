@@ -160,33 +160,73 @@ extension webblenUserBasicData : DocumentSerializable {
 
 //Group Structure
 struct webblenGroup {
-    var group_name:String
+    var groupName:String
     var members:[String]
     var invited:[String]
-    var suggested_events:[String]
-    var total_web_power:Double
+    var suggestedEvents:[String]
+    var totalWebPower:Double
+    var chatID:String
 
     
     var dictionary:[String:Any]{
         return[
-            "group_name":group_name,
+            "groupName":groupName,
             "members":members,
             "invited":invited,
-            "suggested_events":suggested_events,
-            "total_web_power":total_web_power,
+            "suggestedEvents":suggestedEvents,
+            "totalWebPower":totalWebPower,
+            "chatID":chatID
         ]
     }
 }
 
 extension webblenGroup : DocumentSerializable {
     init?(dictionary: [String : Any]) {
-        guard let group_name = dictionary["group_name"] as? String,
+        guard let groupName = dictionary["groupName"] as? String,
             let members = dictionary["members"] as? [String],
             let invited = dictionary["invited"] as? [String],
-            let suggested_events = dictionary["suggested_events"] as? [String],
-            let total_web_power = dictionary["total_web_power"] as? Double
+            let suggestedEvents = dictionary["suggestedEvents"] as? [String],
+            let totalWebPower = dictionary["totalWebPower"] as? Double,
+            let chatID = dictionary["chatID"] as? String
             else {return nil}
-        self.init(group_name: group_name, members: members, invited: invited, suggested_events: suggested_events, total_web_power: total_web_power)
+        self.init(groupName: groupName, members: members, invited: invited, suggestedEvents: suggestedEvents, totalWebPower: totalWebPower, chatID: chatID)
+    }
+}
+
+//Message Structure
+struct chatMessage {
+    var messageText:String
+    var messagePicUrl:String
+    var senderUID:String
+    var senderPicUrl:String
+    var messageKey:String
+    var messageChatID:String
+    var timeSent:String
+    
+    var dictionary:[String:Any]{
+        return[
+            "messageText":messageText,
+            "messagePicUrl":messagePicUrl,
+            "senderUID":senderUID,
+            "senderPicUrl":senderPicUrl,
+            "messageKey":messageKey,
+            "messageChatID":messageChatID,
+            "timeSent":timeSent
+        ]
+    }
+}
+
+extension chatMessage : DocumentSerializable {
+    init?(dictionary: [String : Any]) {
+        guard let messageText = dictionary["messageText"] as? String,
+            let messagePicUrl = dictionary["messagePicUrl"] as? String,
+            let senderUID = dictionary["senderUID"] as? String,
+            let senderPicUrl = dictionary["senderPicUrl"] as? String,
+            let messageKey = dictionary["messageKey"] as? String,
+            let messageChatID = dictionary["messageChatID"] as? String,
+            let timeSent = dictionary["timeSent"] as? String
+            else {return nil}
+        self.init(messageText: messageText, messagePicUrl: messagePicUrl, senderUID: senderUID, senderPicUrl: senderPicUrl, messageKey: messageKey, messageChatID: messageChatID, timeSent: timeSent)
     }
 }
 

@@ -31,17 +31,7 @@ class BlockedUsersViewController: UIViewController, UITableViewDelegate, UITable
         self.currentUser = Auth.auth().currentUser
 
         
-        blockQ = dataBaseRef.child("Users").child(self.currentUser!.uid).child("Blocked Users")
         
-        self.blockQ.queryOrderedByValue().queryEqual(toValue: true).observe( .value, with: { (snap) in
-            if let snapDict = snap.value as? [String:AnyObject]{
-                for each in snapDict{
-                    self.blockList.append(each.key)
-                    print(self.blockList)
-                }
-            }
-            self.configureDatabase()
-        })
     }
 
     override func didReceiveMemoryWarning() {

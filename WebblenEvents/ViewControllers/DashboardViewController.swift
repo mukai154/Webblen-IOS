@@ -41,16 +41,13 @@ class DashboardViewController: UIViewController {
     var scaleY:CGFloat?
     
     //App
-    var CURRENT_APP_VERSION = "3.4.0"
+    var CURRENT_APP_VERSION = "3.4.1"
     var notificationCount:Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setHeroIDS()
         loadFirestoreProfileData()
-
-        
     }
     
     
@@ -126,7 +123,7 @@ class DashboardViewController: UIViewController {
     func showUpdateAlert(){
         let alertController = UIAlertController(title: "Update Required", message: "A New Version of Webblen is Available in the App Store. Please Update From Your Current Version", preferredStyle: .actionSheet)
         let updateButton = UIAlertAction(title: "Update", style: .default, handler: { (action) -> Void in
-            let appURL = NSURL(string:"https://itunes.apple.com/us/app/webblen/id1196159158?ls=1&mt=8") as! URL
+            let appURL = NSURL(string:"https://itunes.apple.com/us/app/webblen/id1196159158?ls=1&mt=8")! as URL
             UIApplication.shared.open(appURL, options: [:], completionHandler: nil)
         })
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in })
@@ -149,7 +146,7 @@ class DashboardViewController: UIViewController {
         }
         let transform = CGAffineTransform(scaleX: scaleX!, y: scaleY!)
         
-        if let output = filter?.outputImage?.applying(transform){
+        if let output = filter?.outputImage?.transformed(by: transform){
             uidQRCodeImg = UIImage(ciImage: output)
             self.userQRCode.image = uidQRCodeImg
         }
@@ -165,7 +162,7 @@ class DashboardViewController: UIViewController {
         }
         let transform = CGAffineTransform(scaleX: scaleX!, y: scaleY!)
         
-        if let output = filter?.outputImage?.applying(transform){
+        if let output = filter?.outputImage?.transformed(by: transform){
             uidQRCodeImgLarge = UIImage(ciImage: output)
         }
     }

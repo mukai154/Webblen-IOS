@@ -513,7 +513,7 @@ class NewEventViewController: UIViewController, UITextViewDelegate, UITextFieldD
      }
     }
         
-    func doneClicked(){
+    @objc func doneClicked(){
         view.endEditing(true)
     }
     

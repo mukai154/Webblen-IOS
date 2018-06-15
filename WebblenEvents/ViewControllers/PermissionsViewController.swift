@@ -105,7 +105,7 @@ class PermissionsViewController: UIViewController {
         }
         let transform = CGAffineTransform(scaleX: scaleX!, y: scaleY!)
 
-        if let output = filter?.outputImage?.applying(transform){
+        if let output = filter?.outputImage?.transformed(by: transform){
             uidQRCodeImg = UIImage(ciImage: output)
             userIDQRCode.image = uidQRCodeImg
         }
@@ -122,7 +122,7 @@ class PermissionsViewController: UIViewController {
         }
         let transform = CGAffineTransform(scaleX: scaleX!, y: scaleY!)
         
-        if let output = filter?.outputImage?.applying(transform){
+        if let output = filter?.outputImage?.transformed(by: transform){
             uidQRCodeImgLarge = UIImage(ciImage: output)
         }
     }
@@ -140,7 +140,7 @@ class PermissionsViewController: UIViewController {
         }
         let transform = CGAffineTransform(scaleX: scaleX!, y: scaleY!)
         
-        if let output = filter?.outputImage?.applying(transform){
+        if let output = filter?.outputImage?.transformed(by: transform){
             privateKeyQRCodeImg = UIImage(ciImage: output)
             privateKeyQRCode.image = privateKeyQRCodeImg
         }
@@ -156,7 +156,7 @@ class PermissionsViewController: UIViewController {
         }
         let transform = CGAffineTransform(scaleX: scaleX!, y: scaleY!)
         
-        if let output = filter?.outputImage?.applying(transform){
+        if let output = filter?.outputImage?.transformed(by: transform){
             privateKeyQRCodeImgLarge = UIImage(ciImage: output)
         }
     }

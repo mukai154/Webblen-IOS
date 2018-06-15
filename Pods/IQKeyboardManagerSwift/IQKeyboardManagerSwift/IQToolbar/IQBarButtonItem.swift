@@ -85,7 +85,7 @@ open class IQBarButtonItem: UIBarButtonItem {
                     textAttributes = attributes
                 }
                 
-                textAttributes[NSForegroundColorAttributeName] = tintColor
+                textAttributes[NSAttributedStringKey.foregroundColor] = tintColor
                 
                 setTitleTextAttributes(textAttributes, for: .normal)
 

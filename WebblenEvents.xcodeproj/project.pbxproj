@@ -20,7 +20,6 @@
 		4610C01820AD140F00F8AD88 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4610C01720AD140F00F8AD88 /* DashboardViewController.swift */; };
 		4617A7471F3D4C6600926160 /* confirmPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4617A7461F3D4C6600926160 /* confirmPostViewController.swift */; };
 		4617A7491F3D4D2900926160 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4617A7481F3D4D2900926160 /* StoreKit.framework */; };
-		4617E51D20B384B5006B45B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4617E51C20B384B5006B45B2 /* GoogleService-Info.plist */; };
 		4617E52020B38C04006B45B2 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4617E51F20B38C04006B45B2 /* NotificationsViewController.swift */; };
 		4617E52220B64471006B45B2 /* PermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4617E52120B64471006B45B2 /* PermissionsViewController.swift */; };
 		4617E52520B689CB006B45B2 /* StringMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4617E52420B689CB006B45B2 /* StringMethods.swift */; };
@@ -370,13 +369,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Mukai Selekwa";
 				TargetAttributes = {
 					4687A0081DFCB9A80067F773 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = TQ9EG6FK32;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplePay = {
@@ -433,7 +432,6 @@
 				4687A0221DFCBC560067F773 /* Logo White No Background.png in Resources */,
 				4687A0121DFCB9A80067F773 /* Main.storyboard in Resources */,
 				46094A351FB94F3F008B277D /* GoogleService-Info.plist in Resources */,
-				4617E51D20B384B5006B45B2 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -647,6 +645,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -654,6 +653,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -705,6 +705,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -712,6 +713,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -763,7 +765,8 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WebblenEvents/WebblenEvents-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -787,7 +790,8 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WebblenEvents/WebblenEvents-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

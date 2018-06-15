@@ -26,7 +26,7 @@ class VerifyAccountViewController: UIViewController, UIImagePickerControllerDele
     var currentUser: AnyObject?
     
     //Variable
-    var uid : String?
+    @objc var uid : String?
     var username : String?
     var email : String?
     var phoneNumber : String?
@@ -49,7 +49,7 @@ class VerifyAccountViewController: UIViewController, UIImagePickerControllerDele
         super.viewDidLoad()
         
         //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(VerifyAccountViewController.dismissKeyboard))
         
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         
@@ -73,7 +73,7 @@ class VerifyAccountViewController: UIViewController, UIImagePickerControllerDele
     }
     
     //Causes the view (or one of its embedded text fields) to resign the first responder status.
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     
