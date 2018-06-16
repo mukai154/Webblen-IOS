@@ -22,12 +22,18 @@ class MessagesViewController: UIViewController, UITableViewDelegate, UITableView
     
     //UI
     @IBOutlet weak var messagesTableView: UITableView!
-    @IBOutlet weak var newMessageField: UITextFieldX!
+    @IBOutlet weak var newMessageTextView: UITextView!
     @IBOutlet weak var sendMessageBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        if chatID != nil {
+           
+            NotificationCenter.default.addObserver(self, selector: #selector(MessagesViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(MessagesViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+            loadMessagesFromChat(chatID: chatID)
+        }
     }
 
     func loadMessagesFromChat(chatID: String){
@@ -42,6 +48,7 @@ class MessagesViewController: UIViewController, UITableViewDelegate, UITableView
                 self.chatMessages.removeAll()
                 
                 for messsage in messages! {
+//                    print(messsage.data())
                     let messageData = chatMessage(messageText: messsage.data()["messageText"] as! String,
                                                   messagePicUrl: messsage.data()["messagePicUrl"] as! String,
                                                   senderUID: messsage.data()["senderUID"] as! String,
@@ -50,6 +57,7 @@ class MessagesViewController: UIViewController, UITableViewDelegate, UITableView
                                                   messageChatID: messsage.data()["messageChatID"] as! String,
                                                   timeSent: messsage.data()["timeSent"] as! String)
                     self.chatMessages.append(messageData)
+                    self.messagesTableView.reloadData()
                 }
                
             }
@@ -65,7 +73,7 @@ class MessagesViewController: UIViewController, UITableViewDelegate, UITableView
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell:UITableViewCell!
-        if chatMessages[indexPath.row].senderUID == currentUser?.uid {
+        if chatMessages[indexPath.row].senderUID != currentUser?.uid {
             cell = messagesTableView.dequeueReusableCell(withIdentifier: "groupMemberTextBubble")!
             let senderPic = cell.viewWithTag(1) as! UIImageView
             let messageText = cell.viewWithTag(3) as! UILabel
@@ -88,6 +96,26 @@ class MessagesViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    }
+    
+    
+    //Tableview Height Adjusted When Keyboard Shown
+    @objc func keyboardWillShow(_ notification:Notification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            messagesTableView.contentInset = UIEdgeInsetsMake(0, 0, keyboardSize.height, 0)
+        }
+    }
+    @objc func keyboardWillHide(_ notification:Notification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            messagesTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        }
+    }
+    
+    func adjustUITextViewHeight(arg : UITextView)
+    {
+        arg.translatesAutoresizingMaskIntoConstraints = true
+        arg.sizeToFit()
+        arg.isScrollEnabled = false
     }
     
     @IBAction func didPressOptions(_ sender: Any) {

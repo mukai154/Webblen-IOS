@@ -172,15 +172,12 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "groupChatSegue", sender: self.webblenGroups[indexPath.row].chatID)
+        performSegue(withIdentifier: "chatSegue", sender: self.webblenGroups[indexPath.row].chatID)
     }
     
-    func selectUser(uid: String){
-        performSegue(withIdentifier: "groupChatSegue", sender: uid)
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "groupChatSegue"){
+        if(segue.identifier == "chatSegue"){
             let messagesViewController = segue.destination as! MessagesViewController
             messagesViewController.chatID = sender as! String
         }
