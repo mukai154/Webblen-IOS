@@ -175,19 +175,29 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         performSegue(withIdentifier: "chatSegue", sender: self.webblenGroups[indexPath.row].chatID)
     }
     
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "chatSegue"){
-            let messagesViewController = segue.destination as! MessagesViewController
-            messagesViewController.chatID = sender as! String
-        }
-    }
-    
+    //Button Actions
     @IBAction func didPressBack(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func didPressNew(_ sender: Any) {
+        if currentUserGroupKeys?.count == 15 {
+            self.showBlurAlert(title: "Max Groups Reached", message: "Sorry, you cannot be part of more than 15 groups")
+        } else {
+            performSegue(withIdentifier: "newGroupSegue", sender: true)
+        }
+    }
+    
+    //**Overrides
+    //prepare segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "chatSegue"){
+            let messagesViewController = segue.destination as! MessagesViewController
+            messagesViewController.chatID = sender as! String
+        } else if (segue.identifier == "newGroupSegue"){
+            let groupOptionsViewController = segue.destination as! GroupOptionsViewController
+            groupOptionsViewController.isNewGroup = sender as! Bool
+        }
     }
     
 }

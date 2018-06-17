@@ -118,8 +118,8 @@ open class IQTitleBarButtonItem: IQBarButtonItem {
                 layoutDefaultLowPriority = UILayoutPriority(rawValue: layoutPriorityLowValue)
                 layoutDefaultHighPriority = UILayoutPriority(rawValue: layoutPriorityHighValue)
             #else
-                layoutDefaultLowPriority = UILayoutPriority.defaultLow-1
-                layoutDefaultHighPriority = UILayoutPriority.defaultHigh-1
+                layoutDefaultLowPriority = UILayoutPriorityDefaultLow-1
+                layoutDefaultHighPriority = UILayoutPriorityDefaultHigh-1
             #endif
             
             _titleView?.translatesAutoresizingMaskIntoConstraints = false

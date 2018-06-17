@@ -36,6 +36,7 @@
 		46621B811E21D11B005E5404 /* MyEventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46621B801E21D11B005E5404 /* MyEventsTableViewCell.swift */; };
 		46621B831E2E9E4A005E5404 /* EventInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46621B821E2E9E4A005E5404 /* EventInfoViewController.swift */; };
 		466FF4CF1FD517EF00ED6E37 /* EventPricingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466FF4CE1FD517EF00ED6E37 /* EventPricingViewController.swift */; };
+		46744D7320D601DF00DA3B36 /* GroupOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46744D7220D601DF00DA3B36 /* GroupOptionsViewController.swift */; };
 		4687A00D1DFCB9A80067F773 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4687A00C1DFCB9A80067F773 /* AppDelegate.swift */; };
 		4687A0121DFCB9A80067F773 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4687A0101DFCB9A80067F773 /* Main.storyboard */; };
 		4687A0151DFCB9A80067F773 /* WebblenEvents.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4687A0131DFCB9A80067F773 /* WebblenEvents.xcdatamodeld */; };
@@ -67,15 +68,16 @@
 		46F045CA20CD83120069B9E9 /* MapDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F045C920CD83120069B9E9 /* MapDesign.swift */; };
 		46F113BC1E16044800FB7294 /* defaultEventImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 46F113BB1E16044800FB7294 /* defaultEventImage.png */; };
 		46F4D6E81FC381C100F5289B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46F4D6E71FC3819C00F5289B /* CoreLocation.framework */; };
-		85A15174C96CD7470CE01DEE /* Pods_WebblenEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1386311FA88A43DB7AC02D2 /* Pods_WebblenEvents.framework */; };
+		896B6EC0189EB8136A913A75 /* Pods_WebblenEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F16637E6297C12AFB8A3F5 /* Pods_WebblenEvents.framework */; };
 		D40A12A41F658F3E00392FF9 /* WhatsNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40A12A31F658F3E00392FF9 /* WhatsNewViewController.swift */; };
 		D40A12A61F659E7300392FF9 /* NotificationSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40A12A51F659E7300392FF9 /* NotificationSettingsViewController.swift */; };
 		D41F1F1D1F9A798E006DE9CE /* GeotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41F1F1C1F9A798E006DE9CE /* GeotificationsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0B4DC3C0F8FE83C8E041DDB4 /* Pods-WebblenEvents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebblenEvents.release.xcconfig"; path = "Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents.release.xcconfig"; sourceTree = "<group>"; };
+		10F16637E6297C12AFB8A3F5 /* Pods_WebblenEvents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WebblenEvents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		281DA214204E5BF000786054 /* WebblenEvents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebblenEvents.entitlements; sourceTree = "<group>"; };
+		45DB16B53A9398AE185EED97 /* Pods-WebblenEvents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebblenEvents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents.debug.xcconfig"; sourceTree = "<group>"; };
 		46094A301FB8EED5008B277D /* DataStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructures.swift; sourceTree = "<group>"; };
 		46094A341FB94F3F008B277D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		460999091E384717000DE53F /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 		46621B801E21D11B005E5404 /* MyEventsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyEventsTableViewCell.swift; sourceTree = "<group>"; };
 		46621B821E2E9E4A005E5404 /* EventInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInfoViewController.swift; sourceTree = "<group>"; };
 		466FF4CE1FD517EF00ED6E37 /* EventPricingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPricingViewController.swift; sourceTree = "<group>"; };
+		46744D7220D601DF00DA3B36 /* GroupOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupOptionsViewController.swift; sourceTree = "<group>"; };
 		4687A0091DFCB9A80067F773 /* WebblenEvents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebblenEvents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4687A00C1DFCB9A80067F773 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4687A0111DFCB9A80067F773 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -142,11 +145,10 @@
 		46F045C920CD83120069B9E9 /* MapDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDesign.swift; sourceTree = "<group>"; };
 		46F113BB1E16044800FB7294 /* defaultEventImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultEventImage.png; sourceTree = "<group>"; };
 		46F4D6E71FC3819C00F5289B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		5A4CCA3D76E44BE50CEB7F0A /* Pods-WebblenEvents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebblenEvents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents.debug.xcconfig"; sourceTree = "<group>"; };
-		A1386311FA88A43DB7AC02D2 /* Pods_WebblenEvents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WebblenEvents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D40A12A31F658F3E00392FF9 /* WhatsNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsNewViewController.swift; sourceTree = "<group>"; };
 		D40A12A51F659E7300392FF9 /* NotificationSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewController.swift; sourceTree = "<group>"; };
 		D41F1F1C1F9A798E006DE9CE /* GeotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeotificationsViewController.swift; sourceTree = "<group>"; };
+		FA3ADCA2E332BB183E5C2F78 /* Pods-WebblenEvents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebblenEvents.release.xcconfig"; path = "Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,22 +159,13 @@
 				46F4D6E81FC381C100F5289B /* CoreLocation.framework in Frameworks */,
 				4624B9661F68D2AF00F4D6E6 /* SwiftyStoreKit.framework in Frameworks */,
 				4617A7491F3D4D2900926160 /* StoreKit.framework in Frameworks */,
-				85A15174C96CD7470CE01DEE /* Pods_WebblenEvents.framework in Frameworks */,
+				896B6EC0189EB8136A913A75 /* Pods_WebblenEvents.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		235DD6AC79E7BAAE49D5E5D4 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				5A4CCA3D76E44BE50CEB7F0A /* Pods-WebblenEvents.debug.xcconfig */,
-				0B4DC3C0F8FE83C8E041DDB4 /* Pods-WebblenEvents.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		4609D8FB1F9C1B4C00EABE9E /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,7 +216,7 @@
 				4687A00A1DFCB9A80067F773 /* Products */,
 				EEABF8226ADF07419F0B7844 /* Frameworks */,
 				4609D8FB1F9C1B4C00EABE9E /* Recovered References */,
-				235DD6AC79E7BAAE49D5E5D4 /* Pods */,
+				5A82843C0F43F5157D4E3074 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -298,6 +291,7 @@
 				46374BD920BB681F00D1E758 /* GroupsViewController.swift */,
 				46374BDB20BC8CC600D1E758 /* SearchViewController.swift */,
 				46374BDD20C1FF3D00D1E758 /* UserInfoViewController.swift */,
+				46744D7220D601DF00DA3B36 /* GroupOptionsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -328,13 +322,22 @@
 			path = "Classe & Structures";
 			sourceTree = "<group>";
 		};
+		5A82843C0F43F5157D4E3074 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				45DB16B53A9398AE185EED97 /* Pods-WebblenEvents.debug.xcconfig */,
+				FA3ADCA2E332BB183E5C2F78 /* Pods-WebblenEvents.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		EEABF8226ADF07419F0B7844 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				46F4D6E71FC3819C00F5289B /* CoreLocation.framework */,
 				4624B9651F68D2AE00F4D6E6 /* SwiftyStoreKit.framework */,
 				4617A7481F3D4D2900926160 /* StoreKit.framework */,
-				A1386311FA88A43DB7AC02D2 /* Pods_WebblenEvents.framework */,
+				10F16637E6297C12AFB8A3F5 /* Pods_WebblenEvents.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -346,12 +349,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4687A01E1DFCB9A80067F773 /* Build configuration list for PBXNativeTarget "WebblenEvents" */;
 			buildPhases = (
-				F4555E0BCBEF4C4C5A1824FB /* [CP] Check Pods Manifest.lock */,
+				7C93EE54012DDE1AD9587121 /* [CP] Check Pods Manifest.lock */,
 				4687A0051DFCB9A80067F773 /* Sources */,
 				4687A0061DFCB9A80067F773 /* Frameworks */,
 				4687A0071DFCB9A80067F773 /* Resources */,
-				531E736194A90C4037E2643D /* [CP] Embed Pods Frameworks */,
-				F3F171FFB4BFE350ABDA7C8F /* [CP] Copy Pods Resources */,
+				6E45D62B10D8537E93F986DA /* [CP] Embed Pods Frameworks */,
+				2594111C047ADD9EB1999E94 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -438,7 +441,33 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		531E736194A90C4037E2643D /* [CP] Embed Pods Frameworks */ = {
+		2594111C047ADD9EB1999E94 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Versions/A/Resources/GooglePlaces.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterKitResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterShareExtensionUIResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6E45D62B10D8537E93F986DA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -459,6 +488,8 @@
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/PCLBlurEffectAlert/PCLBlurEffectAlert.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/RSKGrowingTextView/RSKGrowingTextView.framework",
+				"${BUILT_PRODUCTS_DIR}/RSKPlaceholderTextView/RSKPlaceholderTextView.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
 				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
@@ -486,6 +517,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PCLBlurEffectAlert.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RSKGrowingTextView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RSKPlaceholderTextView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
@@ -502,33 +535,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F3F171FFB4BFE350ABDA7C8F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents-resources.sh",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle",
-				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Versions/A/Resources/GooglePlaces.bundle",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
-				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterKitResources.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterShareExtensionUIResources.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F4555E0BCBEF4C4C5A1824FB /* [CP] Check Pods Manifest.lock */ = {
+		7C93EE54012DDE1AD9587121 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -574,6 +581,7 @@
 				D40A12A41F658F3E00392FF9 /* WhatsNewViewController.swift in Sources */,
 				4610C01820AD140F00F8AD88 /* DashboardViewController.swift in Sources */,
 				469E84851F385180002E07AA /* DateViewController.swift in Sources */,
+				46744D7320D601DF00DA3B36 /* GroupOptionsViewController.swift in Sources */,
 				46AE15032082B82900CC7EEC /* UIViewXRadialGradient.swift in Sources */,
 				4642E73F1E20604100D65DA5 /* MyEventsViewController.swift in Sources */,
 				46AE150C2082B82900CC7EEC /* UISliderX.swift in Sources */,
@@ -747,7 +755,7 @@
 		};
 		4687A01F1DFCB9A80067F773 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5A4CCA3D76E44BE50CEB7F0A /* Pods-WebblenEvents.debug.xcconfig */;
+			baseConfigurationReference = 45DB16B53A9398AE185EED97 /* Pods-WebblenEvents.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -773,7 +781,7 @@
 		};
 		4687A0201DFCB9A80067F773 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0B4DC3C0F8FE83C8E041DDB4 /* Pods-WebblenEvents.release.xcconfig */;
+			baseConfigurationReference = FA3ADCA2E332BB183E5C2F78 /* Pods-WebblenEvents.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

@@ -26,7 +26,8 @@ class MessagesViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var sendMessageBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        newMessageTextView.delegate = self
+        newMessageTextView.isScrollEnabled = false
         if chatID != nil {
            
             NotificationCenter.default.addObserver(self, selector: #selector(MessagesViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -111,12 +112,6 @@ class MessagesViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    func adjustUITextViewHeight(arg : UITextView)
-    {
-        arg.translatesAutoresizingMaskIntoConstraints = true
-        arg.sizeToFit()
-        arg.isScrollEnabled = false
-    }
     
     @IBAction func didPressOptions(_ sender: Any) {
     }
@@ -124,6 +119,17 @@ class MessagesViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func didPressBack(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    
+}
 
+extension MessagesViewController : UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        let size = CGSize(width: view.frame.width, height: .infinity)
+        let estimatedSize = textView.sizeThatFits(size)
+        
+        textView.constraints.forEach { (constraint) in
+            if constraint.firstAttribute == .height {
+                constraint.constant == estimatedSize.height
+            }
+        }
+    }
 }

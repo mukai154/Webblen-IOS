@@ -50,4 +50,7 @@ pod 'PCLBlurEffectAlert'
 #Transition Animations
 pod 'Hero'
 
+#Chat Textview Box 
+pod 'RSKGrowingTextView'
+
 end

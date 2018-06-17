@@ -115,12 +115,13 @@ class EventInfoViewController: UIViewController {
                     self.lon = event.data()!["lon"] as! Double
                     self.eventAuthor = event.data()!["author"] as! String
                     self.authorPic = event.data()!["author_pic"] as! String
-                    if self.authorPic != "" {
+                    if self.authorPic != "" && self.eventAuthor?.lowercased() != "webblen"{
                         let userPicPath = self.authorPic!
                         let userPicUrl = NSURL(string: userPicPath)
                         self.eventImage.sd_setImage(with: userPicUrl! as URL, placeholderImage: nil)
                     } else {
-                        self.eventImage.image = UIImage(named: self.eventCategories.first!)
+                        let placeholderImg = self.eventCategories.first! + "placeholder"
+                        self.eventImage.image = UIImage(named: placeholderImg)
                     }
                     self.eventImage.layer.cornerRadius = self.eventImage.frame.size.width / 2
                     self.eventImage.clipsToBounds = true
@@ -139,11 +140,29 @@ class EventInfoViewController: UIViewController {
                     else {
                         self.imageViewHeightConstraint.constant = 0
                     }
-                    
+                    //Interest Text
+                    var interestText = self.eventCategories.first!
+                    interestText = interestText.lowercased()
+                    if interestText == "collegelife"{
+                        interestText = "college life"
+                    } else if interestText == "partydance" {
+                        interestText = "partying & dancing"
+                    } else if interestText == "fooddrink" {
+                        interestText = "food & drinks"
+                    } else if interestText == "healthfitness" {
+                        interestText = "health & fitness"
+                    } else if interestText == "winebrew" {
+                        interestText = "wine & brew"
+                    }
                     self.eventDescription.translatesAutoresizingMaskIntoConstraints = true
                     self.eventDescription.sizeToFit()
                     self.eventDescription.textContainerInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
-                    self.eventCreator.text = "@" + self.eventAuthor!
+                    if self.eventAuthor?.lowercased() == "webblen"{
+                        self.eventCreator.text = "*because of your interest in " + interestText
+                    } else {
+                        self.eventCreator.text = "@" + self.eventAuthor!
+                    }
+                    
                     self.eventAddress.text = event.data()!["address"] as! String
                     let eDate = event.data()!["date"] as! String
                     let eTime = event.data()!["time"] as! String

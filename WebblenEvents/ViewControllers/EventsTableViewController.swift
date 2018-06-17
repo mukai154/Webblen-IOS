@@ -251,6 +251,19 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
         let imageURL = self.webblenEvents[indexPath.row].pathToImage
         let author = self.webblenEvents[indexPath.row].author
         var eDesc = self.webblenEvents[indexPath.row].description
+        var interestText = self.webblenEvents[indexPath.row].categories.first!
+        interestText = interestText.lowercased()
+        if interestText == "collegelife"{
+            interestText = "college life"
+        } else if interestText == "partydance" {
+            interestText = "partying & dancing"
+        } else if interestText == "fooddrink" {
+            interestText = "food & drinks"
+        } else if interestText == "healthfitness" {
+            interestText = "health & fitness"
+        } else if interestText == "winebrew" {
+            interestText = "wine & brew"
+        }
         
         if eDesc.count > 250{
             eDesc = eDesc.prefix(250) + "..."
@@ -283,20 +296,23 @@ class EventsTableViewController: UIViewController, UITableViewDelegate, UITableV
             eventImage.isHidden = false
             eventImgIndicator.isHidden = true
             
-            if self.webblenEvents[indexPath.row].author_pic != "" {
+            if self.webblenEvents[indexPath.row].author_pic != "" && author.lowercased() != "webblen" {
                 let userPicUrl = NSURL(string: self.webblenEvents[indexPath.row].author_pic)
                 eventUserImg.sd_setImage(with: userPicUrl! as URL, placeholderImage: nil)
-                eventUserImg.clipsToBounds = true
-                eventUserImg.isHidden = false
-                userImgIndicator.isHidden = true
             } else {
-                eventUserImg.image = UIImage(named: self.webblenEvents[indexPath.row].categories.first!)
-                eventUserImg.isHidden = false
-                userImgIndicator.isHidden = true
+                let placeholderImg = self.webblenEvents[indexPath.row].categories.first! + "placeholder"
+                eventUserImg.image = UIImage(named: placeholderImg)
             }
+            eventUserImg.clipsToBounds = true
+            eventUserImg.isHidden = false
+            userImgIndicator.isHidden = true
             
             eventTitle.text = self.webblenEvents[indexPath.row].title
-            eventAuthor.text = "@" + author
+            if author.lowercased() == "webblen"{
+                eventAuthor.text = "*because of your interest in " + interestText
+            } else {
+                eventAuthor.text = "@" + author
+            }
             let views = String(self.webblenEvents[indexPath.row].views)
             eventViews.text = views
             eventDescription.text = eDesc
