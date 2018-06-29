@@ -110,8 +110,6 @@ class SetupViewController: UIViewController, UIImagePickerControllerDelegate, UI
             uploadedImage = true
             userProfilePic.image = image
             userProfilePic.clipsToBounds = true
-            userProfilePic.layer.borderWidth = 4
-            userProfilePic.layer.borderColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0).cgColor
         }
         self.dismiss(animated: true, completion: nil)
     }

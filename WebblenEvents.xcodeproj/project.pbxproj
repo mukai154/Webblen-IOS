@@ -37,6 +37,13 @@
 		46621B831E2E9E4A005E5404 /* EventInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46621B821E2E9E4A005E5404 /* EventInfoViewController.swift */; };
 		466FF4CF1FD517EF00ED6E37 /* EventPricingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466FF4CE1FD517EF00ED6E37 /* EventPricingViewController.swift */; };
 		46744D7320D601DF00DA3B36 /* GroupOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46744D7220D601DF00DA3B36 /* GroupOptionsViewController.swift */; };
+		46744D8420E588DB00DA3B36 /* NewEventInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46744D8320E588DB00DA3B36 /* NewEventInfoViewController.swift */; };
+		46744D8620E5890E00DA3B36 /* NewEventShortDescViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46744D8520E5890E00DA3B36 /* NewEventShortDescViewController.swift */; };
+		46744D8820E5895A00DA3B36 /* NewEventAddImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46744D8720E5895A00DA3B36 /* NewEventAddImageViewController.swift */; };
+		46744D8A20E589FB00DA3B36 /* NewEventDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46744D8920E589FB00DA3B36 /* NewEventDescriptionViewController.swift */; };
+		46744D8C20E58D3800DA3B36 /* NewEventPagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46744D8B20E58D3800DA3B36 /* NewEventPagingViewController.swift */; };
+		46744D8E20E5A47B00DA3B36 /* EventPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46744D8D20E5A47B00DA3B36 /* EventPost.swift */; };
+		46744D9020E5B7D400DA3B36 /* AttendanceRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46744D8F20E5B7D400DA3B36 /* AttendanceRecord.swift */; };
 		4687A00D1DFCB9A80067F773 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4687A00C1DFCB9A80067F773 /* AppDelegate.swift */; };
 		4687A0121DFCB9A80067F773 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4687A0101DFCB9A80067F773 /* Main.storyboard */; };
 		4687A0151DFCB9A80067F773 /* WebblenEvents.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4687A0131DFCB9A80067F773 /* WebblenEvents.xcdatamodeld */; };
@@ -109,6 +116,13 @@
 		46621B821E2E9E4A005E5404 /* EventInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInfoViewController.swift; sourceTree = "<group>"; };
 		466FF4CE1FD517EF00ED6E37 /* EventPricingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPricingViewController.swift; sourceTree = "<group>"; };
 		46744D7220D601DF00DA3B36 /* GroupOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupOptionsViewController.swift; sourceTree = "<group>"; };
+		46744D8320E588DB00DA3B36 /* NewEventInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventInfoViewController.swift; sourceTree = "<group>"; };
+		46744D8520E5890E00DA3B36 /* NewEventShortDescViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventShortDescViewController.swift; sourceTree = "<group>"; };
+		46744D8720E5895A00DA3B36 /* NewEventAddImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventAddImageViewController.swift; sourceTree = "<group>"; };
+		46744D8920E589FB00DA3B36 /* NewEventDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventDescriptionViewController.swift; sourceTree = "<group>"; };
+		46744D8B20E58D3800DA3B36 /* NewEventPagingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventPagingViewController.swift; sourceTree = "<group>"; };
+		46744D8D20E5A47B00DA3B36 /* EventPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPost.swift; sourceTree = "<group>"; };
+		46744D8F20E5B7D400DA3B36 /* AttendanceRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceRecord.swift; sourceTree = "<group>"; };
 		4687A0091DFCB9A80067F773 /* WebblenEvents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebblenEvents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4687A00C1DFCB9A80067F773 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4687A0111DFCB9A80067F773 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -209,6 +223,18 @@
 			path = SWReveal;
 			sourceTree = "<group>";
 		};
+		46744D8220E5886900DA3B36 /* New Event */ = {
+			isa = PBXGroup;
+			children = (
+				46744D8B20E58D3800DA3B36 /* NewEventPagingViewController.swift */,
+				46744D8320E588DB00DA3B36 /* NewEventInfoViewController.swift */,
+				46744D8520E5890E00DA3B36 /* NewEventShortDescViewController.swift */,
+				46744D8720E5895A00DA3B36 /* NewEventAddImageViewController.swift */,
+				46744D8920E589FB00DA3B36 /* NewEventDescriptionViewController.swift */,
+			);
+			path = "New Event";
+			sourceTree = "<group>";
+		};
 		4687A0001DFCB9A80067F773 = {
 			isa = PBXGroup;
 			children = (
@@ -258,6 +284,7 @@
 		46AE14F72082B78D00CC7EEC /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				46744D8220E5886900DA3B36 /* New Event */,
 				4609990B1E39E38A000DE53F /* BlockedUsersViewController.swift */,
 				4609990F1E3A9902000DE53F /* BlockTableViewCell.swift */,
 				4617A7461F3D4C6600926160 /* confirmPostViewController.swift */,
@@ -318,6 +345,8 @@
 			children = (
 				46094A301FB8EED5008B277D /* DataStructures.swift */,
 				46F045C920CD83120069B9E9 /* MapDesign.swift */,
+				46744D8D20E5A47B00DA3B36 /* EventPost.swift */,
+				46744D8F20E5B7D400DA3B36 /* AttendanceRecord.swift */,
 			);
 			path = "Classe & Structures";
 			sourceTree = "<group>";
@@ -565,12 +594,14 @@
 				4691BD901FAFED4C00056024 /* SWMenuViewController.swift in Sources */,
 				466FF4CF1FD517EF00ED6E37 /* EventPricingViewController.swift in Sources */,
 				46621B7F1E218750005E5404 /* InitialViewController.swift in Sources */,
+				46744D9020E5B7D400DA3B36 /* AttendanceRecord.swift in Sources */,
 				4617E52220B64471006B45B2 /* PermissionsViewController.swift in Sources */,
 				4609990E1E3A9530000DE53F /* FeedbackViewController.swift in Sources */,
 				D41F1F1D1F9A798E006DE9CE /* GeotificationsViewController.swift in Sources */,
 				4617A7471F3D4C6600926160 /* confirmPostViewController.swift in Sources */,
 				461085B61FDE214300E7B2A2 /* WebblenIAPService.swift in Sources */,
 				46374BDE20C1FF3D00D1E758 /* UserInfoViewController.swift in Sources */,
+				46744D8420E588DB00DA3B36 /* NewEventInfoViewController.swift in Sources */,
 				46621B811E21D11B005E5404 /* MyEventsTableViewCell.swift in Sources */,
 				46AE15062082B82900CC7EEC /* UILabelX.swift in Sources */,
 				46AE15092082B82900CC7EEC /* UIImageViewX.swift in Sources */,
@@ -583,15 +614,19 @@
 				469E84851F385180002E07AA /* DateViewController.swift in Sources */,
 				46744D7320D601DF00DA3B36 /* GroupOptionsViewController.swift in Sources */,
 				46AE15032082B82900CC7EEC /* UIViewXRadialGradient.swift in Sources */,
+				46744D8E20E5A47B00DA3B36 /* EventPost.swift in Sources */,
 				4642E73F1E20604100D65DA5 /* MyEventsViewController.swift in Sources */,
 				46AE150C2082B82900CC7EEC /* UISliderX.swift in Sources */,
 				46AE15042082B82900CC7EEC /* UITextFieldX.swift in Sources */,
 				46AE150B2082B82900CC7EEC /* UIVisualEffectViewX.swift in Sources */,
+				46744D8820E5895A00DA3B36 /* NewEventAddImageViewController.swift in Sources */,
+				46744D8620E5890E00DA3B36 /* NewEventShortDescViewController.swift in Sources */,
 				4687A00D1DFCB9A80067F773 /* AppDelegate.swift in Sources */,
 				460CD4A22075BACF002CF5B7 /* WalletViewController.swift in Sources */,
 				46AE15082082B82900CC7EEC /* UIViewControllerX.swift in Sources */,
 				460999101E3A9902000DE53F /* BlockTableViewCell.swift in Sources */,
 				46EC3ACD1F7305BE00E4CC06 /* EventCategoryViewController.swift in Sources */,
+				46744D8A20E589FB00DA3B36 /* NewEventDescriptionViewController.swift in Sources */,
 				46CB51951FA53355009CF2D4 /* SetLocationNotificationViewController.swift in Sources */,
 				46956C6F1E1DB3F9009A8F93 /* InterestSetupViewController.swift in Sources */,
 				4624B9621F67D45D00F4D6E6 /* VerifyAccountViewController.swift in Sources */,
@@ -602,6 +637,7 @@
 				46AE150E208F745B00CC7EEC /* EventsTableViewController.swift in Sources */,
 				4642E7371E1E6B6300D65DA5 /* SignInViewController.swift in Sources */,
 				469386DC1E2F2E51000AF3D4 /* SettingsViewController.swift in Sources */,
+				46744D8C20E58D3800DA3B36 /* NewEventPagingViewController.swift in Sources */,
 				46094A311FB8EED5008B277D /* DataStructures.swift in Sources */,
 				46F045CA20CD83120069B9E9 /* MapDesign.swift in Sources */,
 				46374BD820BB5DD200D1E758 /* MessagesViewController.swift in Sources */,

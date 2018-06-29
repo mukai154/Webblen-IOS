@@ -41,7 +41,7 @@ class DashboardViewController: UIViewController {
     var scaleY:CGFloat?
     
     //App
-    var CURRENT_APP_VERSION = "3.4.1"
+    var CURRENT_APP_VERSION = "3.4.2"
     var notificationCount:Int?
     
     override func viewDidLoad() {

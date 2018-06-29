@@ -11,7 +11,7 @@ import Firebase
 import FBSDKLoginKit
 import NVActivityIndicatorView
 
-class SignUpViewController: UIViewController, FBSDKLoginButtonDelegate{
+class SignUpViewController: UIViewController{
 
 
     
@@ -21,6 +21,7 @@ class SignUpViewController: UIViewController, FBSDKLoginButtonDelegate{
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var confirmPassword: UITextField!
     @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var errorMessageContainer: UIViewX!
     
     var userDocumentRef: DocumentReference!
     var loadingColor = UIColor.white
@@ -52,22 +53,9 @@ class SignUpViewController: UIViewController, FBSDKLoginButtonDelegate{
         password.inputAccessoryView = toolBar
         confirmPassword.inputAccessoryView = toolBar
         
-
-        
-        self.registerButton.layer.cornerRadius = CGFloat(Float(5.0))
-        
-        //setupFBLogin()
         
     }
 
-    //FB Sign in button
-    fileprivate func setupFBLogin(){
-        
-        let FBloginButton = FBSDKLoginButton()
-        FBloginButton.delegate = self
-        view.addSubview(FBloginButton)
-        FBloginButton.frame = CGRect(x: 16, y: 525, width: view.frame.width - 32, height: 40)
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -78,69 +66,53 @@ class SignUpViewController: UIViewController, FBSDKLoginButtonDelegate{
     @IBAction func didPressRegister(_ sender: Any) {
         
         startLoading()
-        
-        registerButton.isEnabled = false
-        
-        Auth.auth().createUser(withEmail: email.text!, password: password.text!, completion: {(user, error) in
-            
-            if(error != nil){
-                self.errorMessage.text = error?.localizedDescription
-                self.registerButton.isEnabled = true
-                self.stopLoading()
-            }
-            else{
-                self.errorMessage.text = "Registration Successful"
-                Auth.auth().signIn(withEmail: self.email.text!, password: self.password.text!, completion: {(user, error) in
-                    if(error == nil){
-                        self.performSegue(withIdentifier: "SetupSegue", sender: nil)
-                    }
+        let passwordError = validatePassword()
+        if passwordError.isEmpty {
+            Auth.auth().createUser(withEmail: email.text!, password: password.text!, completion: {(user, error) in
+                
+                if(error != nil){
+                    self.errorMessageContainer.isHidden = false
+                    self.errorMessage.text = error?.localizedDescription
+                    self.stopLoading()
+                }
+                else{
+                    Auth.auth().signIn(withEmail: self.email.text!, password: self.password.text!, completion: {(user, error) in
+                        if(error == nil){
+                            self.performSegue(withIdentifier: "SetupSegue", sender: nil)
+                        }
+                        
+                    })
                     
-                })
-                
-            }
-        })
-
-    }
-
-
-    @IBAction func informationEntered(_ sender: UITextField) {
-        
-        if((email.text?.characters.count)! > 0 && (password.text?.characters.count)! > 0 && (password.text)! == (confirmPassword.text)!){
-            registerButton.isEnabled = true
+                }
+            })
+        } else {
+            self.errorMessageContainer.isHidden = false
+            self.errorMessage.text = passwordError
+            self.stopLoading()
         }
-        else{
-            registerButton.isEnabled = false
-        }
-    }
-    
-    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        
-        let accessToken = FBSDKAccessToken.current()
-        guard let accessTokenString = accessToken?.tokenString else {return}
-        
-        let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
-        
-        Auth.auth().signIn(with: credentials, completion: {(user, error) in
-            
-            if(error == nil){
 
-            }
-            else if (result.isCancelled){
-                
-            }
-            else{
-                self.errorMessage.text = error?.localizedDescription
-            }
-            
-        })
-    }
-    
-    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-        
+
     }
     
     @objc func doneClicked(){
         view.endEditing(true)
+    }
+    
+    func validatePassword() -> String {
+        var error = ""
+        let pass1 = self.password.text
+        let pass2 = self.confirmPassword.text
+        
+        if pass1 != pass2 {
+            error = "Passwords Do Not Match"
+        } else if (pass1?.isEmpty)! {
+            
+        } else if (pass2?.isEmpty)! {
+            
+        } else if (pass1?.count)! < 8 {
+            error = "Password Must Be at least 8 Characters Long"
+        }
+        return error
     }
 
     func startLoading(){

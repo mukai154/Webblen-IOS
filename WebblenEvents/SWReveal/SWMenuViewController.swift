@@ -120,7 +120,8 @@ class SWMenuViewController: UIViewController {
     
     //** Btn Actions
     @IBAction func didPressDashboard(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+//        self.dismiss(animated: true, completion: nil)
+        self.performSegue(withIdentifier: "dashboardSegue", sender: nil)
     }
 
     

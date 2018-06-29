@@ -98,7 +98,8 @@ class confirmPostViewController: UIViewController {
         let eventRef = dataBase.collection("events").document(eventKey)
         eventRef.getDocument(completion: {(event, error) in
             if let event = event {
-                self.eventChosenCategories = event.data()!["categories"] as! [String]
+                print(event.data()!["categories"])
+                let eventCategoriesArr = event.data()!["categories"] as! [String]
                 self.eventCategories.text = "Categories: " + self.eventChosenCategories.joined(separator: ", ")
                 self.ePhoto.image = UIImage(named: self.eventChosenCategories.first!)
                 self.eTitle.text = event.data()!["title"] as! String

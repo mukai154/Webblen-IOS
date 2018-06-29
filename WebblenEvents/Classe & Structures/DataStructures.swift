@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Firebase
 import CoreLocation
 
 protocol DocumentSerializable {
@@ -66,33 +65,6 @@ struct webblenEvent {
             "views":views,
             "author_pic": author_pic
         ]
-    }
-}
-
-extension webblenEvent : DocumentSerializable {
-    init?(dictionary: [String:Any]) {
-        guard let address = dictionary["address"] as? String,
-        let author = dictionary["author"] as? String,
-        let categories = dictionary["author"] as? [String],
-        let date = dictionary["author"] as? String,
-        let description = dictionary["description"] as? String,
-        let distanceFromUser = dictionary["distanceFromUser"] as? Double,
-        let eventKey = dictionary["author"] as? String,
-        let event18 = dictionary["event18"] as? Bool,
-        let event21 = dictionary["event21"] as? Bool,
-        let lat = dictionary["lat"] as? Double,
-        let lon = dictionary["lon"] as? Double,
-        let notificationOnly = dictionary["notificationOnly"] as? Bool,
-        let paid = dictionary["paid"] as? Bool,
-        let pathToImage = dictionary["pathToImage"] as? String,
-        let radius = dictionary["radius"] as? Double,
-        let time = dictionary["time"] as? String,
-        let title = dictionary["title"] as? String,
-        let verified = dictionary["verified"] as? Bool,
-        let views = dictionary["views"] as? Int,
-        let author_pic = dictionary["author_pic"] as? String
-            else {return nil}
-        self.init(title: title, address: address, categories: categories, date: date, description: description, eventKey: eventKey, lat: lat, lon: lon, paid: paid, pathToImage: pathToImage, radius: radius, time: time, author: author, verified: verified, views: views, event18: event18, event21: event21, notificationOnly: notificationOnly, distanceFromUser: distanceFromUser, author_pic: author_pic)
     }
 }
 

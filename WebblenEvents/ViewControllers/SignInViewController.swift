@@ -21,9 +21,9 @@ class SignInViewController: UIViewController,  FBSDKLoginButtonDelegate{
     
     @IBOutlet var UXVIEW: UIView!
     @IBOutlet weak var errorMessage: UILabel!
+    @IBOutlet weak var errorContainer: UIViewX!
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
-    
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var fbLoginBtn: UIButton!
     @IBOutlet weak var twitterLoginBtn: UIButton!
@@ -119,6 +119,7 @@ class SignInViewController: UIViewController,  FBSDKLoginButtonDelegate{
             else{
                 self.stopLoading()
                 self.errorMessage.text = error?.localizedDescription
+                self.errorContainer.isHidden = false
             }
         })
     }
@@ -164,7 +165,7 @@ class SignInViewController: UIViewController,  FBSDKLoginButtonDelegate{
         startLoading()
         TWTRTwitter.sharedInstance().logIn { (session, err) in
             if let err = err {
-                self.showAlert(withTitle: "Twitter Authentication Failed", message: "\(err)")
+                self.showAlert(withTitle: "Twitter Authentication Failed", message: "There Was an Error While Signing In With Twitter")
                 self.stopLoading()
                 return
             }
