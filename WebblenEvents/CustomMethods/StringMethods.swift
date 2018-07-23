@@ -26,4 +26,15 @@ class StringMethods {
         
         return randomString
     }
+    
+    //Verify URL
+    class func verifyUrl(urlString: String?) -> Bool {
+        var isValid = true
+        if let url = URL(string: urlString!) {
+            isValid = true
+        } else {
+            isValid = false
+        }
+        return isValid
+    }
 }

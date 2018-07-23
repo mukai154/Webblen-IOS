@@ -10,20 +10,22 @@ import Foundation
 
 //Event Structure v3
 struct EventPost {
+    var eventKey:String
     var title:String
-    var shortDescription:String
-    var longDescription:String
+    var caption:String
+    var description:String
     var pathToImage:String
+    var uploadedImage:Any
     var address:String
     var lat:Double
     var lon:Double
-    var radius:Int
-    var distanceFromUser:Int
+    var radius:Double
+    var distanceFromUser:Double
     var tags:[String]
-    var startDate:Date
-    var endDate:Date
-    var startTime:Date
-    var endTime:Date
+    var startDate:String
+    var endDate:String
+    var startTime:String
+    var endTime:String
     var published:Bool
     var hasMessageBoard:Bool
     var messageBoardPassword:String
@@ -38,13 +40,18 @@ struct EventPost {
     var attendanceRecordID:String
     var spotsAvailable:Int
     var reservePrice:Double
+    var website:String
+    var fbSite:String
+    var twitterSite:String
     
     var dictionary:[String:Any]{
         return [
+            "eventKey":eventKey,
             "title":title,
-            "shortDescription":shortDescription,
-            "longDescription":longDescription,
+            "caption":caption,
+            "description":description,
             "pathToImage":pathToImage,
+            "uploadedImage":uploadedImage,
             "address":address,
             "lat":lat,
             "lon":lon,
@@ -68,27 +75,32 @@ struct EventPost {
             "explicit":explicit,
             "attendanceRecordID":attendanceRecordID,
             "spotsAvailable":spotsAvailable,
-            "reservePrice":reservePrice
+            "reservePrice":reservePrice,
+            "website":website,
+            "fbSite":fbSite,
+            "twitterSite":twitterSite
         ]
     }
 }
 
 extension EventPost : DocumentSerializable {
     init?(dictionary: [String:Any]) {
-        guard let title = dictionary["title"] as? String,
-            let shortDescription = dictionary["shortDescription"] as? String,
-            let longDescription = dictionary["longDescription"] as? String,
+        guard let eventKey = dictionary["eventKey"] as? String,
+            let title = dictionary["title"] as? String,
+            let caption = dictionary["shortDescription"] as? String,
+            let description = dictionary["description"] as? String,
             let pathToImage = dictionary["pathToImage"] as? String,
+            let uploadedImage = dictionary["uploadedImage"] as? Any,
             let address = dictionary["address"] as? String,
             let lat = dictionary["lat"] as? Double,
             let lon = dictionary["lon"] as? Double,
-            let radius = dictionary["radius"] as? Int,
-            let distanceFromUser = dictionary["distanceFromUser"] as? Int,
+            let radius = dictionary["radius"] as? Double,
+            let distanceFromUser = dictionary["distanceFromUser"] as? Double,
             let tags = dictionary["tags"] as? [String],
-            let startDate = dictionary["startDate"] as? Date,
-            let endDate = dictionary["endDate"] as? Date,
-            let startTime = dictionary["startTime"] as? Date,
-            let endTime = dictionary["endTime"] as? Date,
+            let startDate = dictionary["startDate"] as? String,
+            let endDate = dictionary["endDate"] as? String,
+            let startTime = dictionary["startTime"] as? String,
+            let endTime = dictionary["endTime"] as? String,
             let published = dictionary["published"] as? Bool,
             let hasMessageBoard = dictionary["hasMessageBoard"] as? Bool,
             let messageBoardPassword = dictionary["messageBoardPassword"] as? String,
@@ -102,12 +114,14 @@ extension EventPost : DocumentSerializable {
             let explicit = dictionary["explicit"] as? Bool,
             let attendanceRecordID = dictionary["attendanceRecordID"] as? String,
             let spotsAvailable = dictionary["spotsAvailable"] as? Int,
-            let reservePrice = dictionary["reservePrice"] as? Double
-        
+            let reservePrice = dictionary["reservePrice"] as? Double,
+            let website = dictionary["website"] as? String,
+            let fbSite = dictionary["fbSite"] as? String,
+            let twitterSite = dictionary["twitterSite"] as? String
             
             else {return nil}
         
-        self.init(title: title, shortDescription: shortDescription, longDescription: longDescription, pathToImage: pathToImage, address: address, lat: lat, lon: lon, radius: radius, distanceFromUser: distanceFromUser, tags: tags, startDate: startDate, endDate: endDate, startTime: startTime, endTime: endTime, published: published, hasMessageBoard: hasMessageBoard, messageBoardPassword: messageBoardPassword, author: author, authorImagePath: authorImagePath, verified: verified, promoted: promoted, views: views, event18: event18, event21: event21, explicit: explicit, attendanceRecordID: attendanceRecordID, spotsAvailable: spotsAvailable, reservePrice: reservePrice)
+        self.init(eventKey: eventKey, title: title, caption: caption, description: description, pathToImage: pathToImage, uploadedImage: uploadedImage, address: address, lat: lat, lon: lon, radius: radius, distanceFromUser: distanceFromUser, tags: tags, startDate: startDate, endDate: endDate, startTime: startTime, endTime: endTime, published: published, hasMessageBoard: hasMessageBoard, messageBoardPassword: messageBoardPassword, author: author, authorImagePath: authorImagePath, verified: verified, promoted: promoted, views: views, event18: event18, event21: event21, explicit: explicit, attendanceRecordID: attendanceRecordID, spotsAvailable: spotsAvailable, reservePrice: reservePrice, website: website, fbSite: fbSite, twitterSite: twitterSite)
     }
 }
 
@@ -115,7 +129,7 @@ extension EventPost : DocumentSerializable {
 //Event Coordinates v3
 struct EventGeo {
     var title:String
-    var shortDescription:String
+    var caption:String
     var pathToImage:String
     var address:String
     var lat:Double
@@ -126,7 +140,7 @@ struct EventGeo {
     var dictionary:[String:Any]{
         return [
             "title":title,
-            "shortDescription":shortDescription,
+            "caption":caption,
             "pathToImage":pathToImage,
             "address":address,
             "lat":lat,
@@ -140,7 +154,7 @@ struct EventGeo {
 extension EventGeo : DocumentSerializable {
     init?(dictionary: [String:Any]) {
         guard let title = dictionary["title"] as? String,
-            let shortDescription = dictionary["shortDescription"] as? String,
+            let caption = dictionary["caption"] as? String,
             let pathToImage = dictionary["pathToImage"] as? String,
             let address = dictionary["address"] as? String,
             let lat = dictionary["lat"] as? Double,
@@ -149,6 +163,6 @@ extension EventGeo : DocumentSerializable {
             let distanceFromUser = dictionary["distanceFromUser"] as? Int
             
             else {return nil}
-        self.init(title: title, shortDescription: shortDescription, pathToImage: pathToImage, address: address, lat: lat, lon: lon, radius: radius, distanceFromUser: distanceFromUser)
+        self.init(title: title, caption: caption, pathToImage: pathToImage, address: address, lat: lat, lon: lon, radius: radius, distanceFromUser: distanceFromUser)
     }
 }

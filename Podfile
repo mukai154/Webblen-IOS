@@ -13,8 +13,6 @@ pod 'Firebase/Messaging'
 pod 'Firebase/Core'
 pod 'Firebase/Firestore'
 
-
-
 # pod for store kit
 pod 'SwiftyStoreKit'
 
@@ -25,8 +23,9 @@ pod 'GooglePlacesSearchController'
 pod 'GoogleSignIn'
 # Pods for WebblenEvents
 
-# pod for photo
+# pod for photos
 pod 'SDWebImage'
+pod 'UIImageCropper'
 
 #fb social login pods 
 pod 'FBSDKCoreKit'
@@ -36,7 +35,6 @@ pod 'FBSDKLoginKit'
 # twitter pods
 pod 'Fabric'
 pod 'TwitterKit'
-
 
 #KeyBoard Manager
 pod 'IQKeyboardManagerSwift'
@@ -52,5 +50,9 @@ pod 'Hero'
 
 #Chat Textview Box 
 pod 'RSKGrowingTextView'
+
+#Calendar & Date
+pod 'JTAppleCalendar'
+pod 'SwiftDate', '~> 5.0'
 
 end

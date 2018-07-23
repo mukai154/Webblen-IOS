@@ -11,7 +11,11 @@ import FirebaseAuth
 
 class InitialViewController: UIViewController {
 
-    @IBOutlet weak var logoImg: UIImageView!
+
+    @IBOutlet weak var welcomeHeadText: UILabel!
+    @IBOutlet weak var welcomeSubtext: UILabel!
+    
+    
     @IBOutlet weak var loginBtn: UIButton!
     
     override func viewDidLoad() {
@@ -25,10 +29,13 @@ class InitialViewController: UIViewController {
                 let homeViewController: UIViewController = mainStoryBoard.instantiateViewController(withIdentifier: "DashboardViewController")
                 self.present(homeViewController, animated: true, completion: nil)
             } else {
-                UIView.animate(withDuration: 1.0, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
-                    self.logoImg.alpha = 1.0
+                UIView.animate(withDuration: 2.0, delay: 1.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                    self.welcomeHeadText.alpha = 1.0
                 }, completion: nil)
-                UIView.animate(withDuration: 1.0, delay: 1.2, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                UIView.animate(withDuration: 2.0, delay: 3.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                    self.welcomeSubtext.alpha = 1.0
+                }, completion: nil)
+                UIView.animate(withDuration: 1.0, delay: 5.5, options: UIViewAnimationOptions.curveEaseIn, animations: {
                     self.loginBtn.alpha = 1.0
                 }, completion: nil)
             }

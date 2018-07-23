@@ -184,16 +184,17 @@ class DashboardViewController: UIViewController {
         alertController.show()
     }
     
-    @IBAction func didPressLogout(_ sender: Any) {
-        if (Auth.auth().currentUser != nil){
-            do{
-                try Auth.auth().signOut()
-                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "initialView")
-                present(vc, animated: true, completion: nil)
-            } catch let error as NSError{
-                print(error.localizedDescription)
-            }
+    @IBAction func didPressMyEvents(_ sender: Any) {
+        performSegue(withIdentifier: "myEventsSegue", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "myEventsSegue"){
+            let eventIn = segue.destination as! EventListViewController
+            eventIn.myEvents = true
         }
     }
+    
+    
     
 }

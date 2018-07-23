@@ -15,6 +15,7 @@ import UserNotifications
 import FBSDKCoreKit
 import IQKeyboardManagerSwift
 import CoreLocation
+import SwiftDate
 import SwiftyStoreKit
 import NVActivityIndicatorView
 import Fabric

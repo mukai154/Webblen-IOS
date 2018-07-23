@@ -124,6 +124,7 @@ PODS:
     - GTMSessionFetcher/Core (= 1.1.15)
   - Hero (1.1.0)
   - IQKeyboardManagerSwift (5.0.8)
+  - JTAppleCalendar (7.1.5)
   - leveldb-library (1.20)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
@@ -141,10 +142,12 @@ PODS:
   - SDWebImage (4.3.3):
     - SDWebImage/Core (= 4.3.3)
   - SDWebImage/Core (4.3.3)
+  - SwiftDate (4.5.1)
   - SwiftyStoreKit (0.13.1)
   - TwitterCore (3.1.0)
   - TwitterKit (3.3.0):
     - TwitterCore (>= 3.1.0)
+  - UIImageCropper (1.3.1)
 
 DEPENDENCIES:
   - Fabric
@@ -164,12 +167,15 @@ DEPENDENCIES:
   - GoogleSignIn
   - Hero
   - IQKeyboardManagerSwift
+  - JTAppleCalendar
   - NVActivityIndicatorView
   - PCLBlurEffectAlert
   - RSKGrowingTextView
   - SDWebImage
+  - SwiftDate
   - SwiftyStoreKit
   - TwitterKit
+  - UIImageCropper
 
 SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
@@ -200,6 +206,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 5fa5b80fd20e439ef5f545fb2cb3ca6c6714caa2
   Hero: ce59e81c79390613d97b43da7179e2c5e1017e04
   IQKeyboardManagerSwift: 2e7dc7f98c111458c1ea2b373f893e8cf95e2b97
+  JTAppleCalendar: 2d4f974f9f3c8b4964d51ca1f6e004883c031fbe
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   NVActivityIndicatorView: 60109b9bf46efc2e71ab81453196ccdfdfeea870
@@ -208,10 +215,12 @@ SPEC CHECKSUMS:
   RSKGrowingTextView: 6bcc9d4565ce4a66de4b7c42875439bde99dab21
   RSKPlaceholderTextView: 0ce73a19998e236323b3f1f16bf4a4e4a76c2c28
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
+  SwiftDate: 7b56d42a221f582047287deb256b23fc5ed49a60
   SwiftyStoreKit: c36bb7841dd51a485ce5c38abf9e96fba988741f
   TwitterCore: 644d59e75abccb26cf0a9050d2c4dea0e5412241
   TwitterKit: a2e60ddcedbf54091eac6f27685ca7a87681e1d7
+  UIImageCropper: 31af87ee6bc6d541155ea42ff7bb41eaa7f56c9a
 
-PODFILE CHECKSUM: 362f997932ea0c36eb978aff5455fec6b743323c
+PODFILE CHECKSUM: edada42924c8e582d1e85c480b200b222cf28a9f
 
 COCOAPODS: 1.4.0

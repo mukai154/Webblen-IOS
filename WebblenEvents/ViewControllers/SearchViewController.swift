@@ -93,7 +93,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         }
     }
     
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    @IBAction func didPressCancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     

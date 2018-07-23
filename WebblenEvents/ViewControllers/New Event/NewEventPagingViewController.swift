@@ -10,26 +10,34 @@ import UIKit
 
 class NewEventPagingViewController: UIPageViewController, UIPageViewControllerDataSource {
 
+    //New Event
+    var newEvent = EventPost.init(eventKey: "", title: "", caption: "", description: "", pathToImage: "", uploadedImage: "", address: "", lat: 0, lon: 0, radius: 0, distanceFromUser: 0.0, tags: [""], startDate: "", endDate: "", startTime: "", endTime: "", published: false, hasMessageBoard: false, messageBoardPassword: "", author: "", authorImagePath: "", verified: false, promoted: false, views: 0, event18: false, event21: false, explicit: false, attendanceRecordID: "", spotsAvailable: 0, reservePrice: 0, website: "", fbSite: "", twitterSite: "")
+    var newEventImage: UIImage?
+    
     //Navigation
     @IBOutlet weak var canceBtn: UIBarButtonItem!
-    @IBOutlet weak var nextBtn: UIBarButtonItem!
     
     //ViewList
     lazy var newEventVCList:[UIViewController] = {
         let storyboard = UIStoryboard(name:"Main", bundle: nil)
         let titleVC = storyboard.instantiateViewController(withIdentifier: "titleVC")
         let shortDescVC = storyboard.instantiateViewController(withIdentifier: "shortDescVC")
+        let tagsVC = storyboard.instantiateViewController(withIdentifier: "tagsVC")
+        let dateVC = storyboard.instantiateViewController(withIdentifier: "dateVC")
+        let timeVC = storyboard.instantiateViewController(withIdentifier: "timeVC")
+        let externalSitesVC = storyboard.instantiateViewController(withIdentifier: "externalSitesVC")
+        let addressVC = storyboard.instantiateViewController(withIdentifier: "addressVC")
+        let confirmVC = storyboard.instantiateViewController(withIdentifier: "confirmVC")
         
-        return [titleVC, shortDescVC]
+        return [titleVC, shortDescVC, tagsVC, dateVC, timeVC, externalSitesVC, addressVC, confirmVC]
     }()
     
     var currentPageIndex:Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //Datasource
-        self.dataSource = self
+        //UI
+        view.backgroundColor = .white
         
         //First Page
         if let firstVC = newEventVCList.first {
@@ -76,9 +84,6 @@ class NewEventPagingViewController: UIPageViewController, UIPageViewControllerDa
     
     @IBAction func didPressCancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-    }
-    @IBAction func didPressNext(_ sender: Any) {
-        displayPageForIndex(index: self.currentPageIndex + 1, animated: true)
     }
     
 }

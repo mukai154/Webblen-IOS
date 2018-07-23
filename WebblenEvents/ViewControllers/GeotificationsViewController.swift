@@ -50,14 +50,14 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
     //Database Variables
     var database = Firestore.firestore()
     var imageStorage = Storage.storage().reference(forURL: "gs://webblen-events.appspot.com/events")
-    var todayArray = [webblenEvent]()
-    var tomorrowArray = [webblenEvent]()
-    var thisWeekArray = [webblenEvent]()
-    var thisMonthArray = [webblenEvent]()
-    var laterArray = [webblenEvent]()
+    var todayArray = [EventPost]()
+    var tomorrowArray = [EventPost]()
+    var thisWeekArray = [EventPost]()
+    var thisMonthArray = [EventPost]()
+    var laterArray = [EventPost]()
     
     //Event Organzation
-    var events = [webblenEvent]()
+    var events = [EventPost]()
     var modifiedDescription = ""
     var eventCategory = "AMUSEMENT"
     
@@ -74,8 +74,9 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
     
     //User Interests & Blocks
     var currentUser = Auth.auth().currentUser
-    var userInterests = [""]
-    var userBlocks = [""]
+    var testTags = ["fitness", "gaming", "business", "food"]
+    var userTags = [String]()
+    var userBlocks = [String]()
     
     //Extras
     var activeColor = UIColor(red: 30/300, green: 39/300, blue: 46/300, alpha: 1.0)
@@ -155,7 +156,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
                 }
                 else {
                     //If users exists load interests and blocked users
-                    self.userInterests = (document.data()!["interests"] as? [String])!
+                    self.userTags = document.data()!["tags"] as? [String] ?? self.testTags
                     self.userBlocks = (document.data()!["blockedUsers"] as? [String])!
                     
                     //Max & Min Geopoints
@@ -165,7 +166,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
                     let greaterLon = userLat + (self.mileLon * withinDistance)
                     
                     // KEY NOTE: Firebase's Firestore only allows comparison querying on a single field, trying to do multiple fields will raise an NSEexception Error -- Client Side Code will filter by Latitude
-                    let lonQuery = self.database.collection("events").whereField("lon", isGreaterThan: lowerLon).whereField("lon", isLessThan: greaterLon)
+                    let lonQuery = self.database.collection("eventposts").whereField("lon", isGreaterThan: lowerLon).whereField("lon", isLessThan: greaterLon)
 
                     lonQuery.getDocuments(completion: {(snapshot, error) in
                         if error != nil {
@@ -174,42 +175,72 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
                             //Load Events aligning with user's interests
                             let formattedDate = self.formatter.string(from: Date())
                             for event in snapshot!.documents {
-                                let eventCategories = (event.data()["categories"] as? [String])!
+                                let eventCategories = (event.data()["tags"] as? [String])!
                                 let eventLat = (event.data()["lat"] as? Double)!
-                                for i in self.userInterests {
+                                for i in self.userTags {
                                     if eventCategories.contains(i) && lowerLat...greaterLat ~= eventLat {
-                                        var interestedEvent = webblenEvent(
-                                            title: event.data()["title"] as! String,
-                                            address: event.data()["address"] as! String,
-                                            categories: eventCategories,
-                                            date: event.data()["date"] as! String,
-                                            description: event.data()["description"] as! String,
-                                            eventKey: event.data()["eventKey"] as! String,
-                                            lat: event.data()["lat"] as! Double,
-                                            lon: event.data()["lon"] as! Double,
-                                            paid: event.data()["paid"] as! Bool,
-                                            pathToImage: event.data()["pathToImage"] as! String,
-                                            radius: event.data()["radius"] as! Double,
-                                            time: event.data()["time"] as! String,
-                                            author: event.data()["author"] as! String,
-                                            verified: event.data()["verified"] as! Bool,
-                                            views: event.data()["views"] as! Int,
-                                            event18: event.data()["event18"] as! Bool,
-                                            event21: event.data()["event21"] as! Bool,
-                                            notificationOnly: event.data()["notificationOnly"] as! Bool,
-                                            distanceFromUser: 0,
-                                            author_pic: event.data()["author_pic"] as! String
-                                        )
-                                    
-                                        let currentDate = self.formatter.date(from: formattedDate)
-                                        let eventDate = self.formatter.date(from: interestedEvent.date)
-                                    
-                                        //Organize Loaded Events By Date
-                                        let currentCalendarDate = self.dateCalendar.dateComponents([.month, .day, .year], from: currentDate!)
-                                        let eventCalendarDate = self.dateCalendar.dateComponents([.month, .day, .year], from: eventDate!)
-                                        let daysBetweenEvents = self.dateCalendar.dateComponents([.day], from: currentDate!, to: eventDate!)
-                                        //print(daysBetweenEvents.day)
-                                        let monthsBetweenEvents = self.dateCalendar.dateComponents([.month], from: currentDate!, to: eventDate!)
+                                        var interestedEvent = EventPost(
+                                            eventKey: event.documentID,
+                                            title: event.data()["title"] as? String ?? "",
+                                            caption: event.data()["caption"] as? String ?? "",
+                                            description: event.data()["description"] as? String ?? "",
+                                            pathToImage: event.data()["pathToImage"] as? String ?? "",
+                                            uploadedImage: "",
+                                            address: event.data()["address"] as? String ?? "",
+                                            lat: event.data()["lat"] as? Double ?? 0.00,
+                                            lon: event.data()["lon"] as? Double ?? 0.00,
+                                            radius: event.data()["radius"] as? Double ?? 0.00,
+                                            distanceFromUser: 0.0,
+                                            tags: event.data()["tags"] as? [String] ?? [],
+                                            startDate: event.data()["startDate"] as? String ?? formattedDate,
+                                            endDate: event.data()["endDate"] as? String ?? formattedDate,
+                                            startTime: event.data()["startTime"] as? String ?? "",
+                                            endTime: event.data()["endTime"] as? String ?? "",
+                                            published: event.data()["published"] as? Bool ?? true,
+                                            hasMessageBoard: event.data()["published"] as? Bool ?? false,
+                                            messageBoardPassword: event.data()["messageBoardPassword"] as? String ?? "",
+                                            author: event.data()["author"] as? String ?? "",
+                                            authorImagePath: event.data()["authorImagePath"] as? String ?? "",
+                                            verified: event.data()["verified"] as? Bool ?? true,
+                                            promoted: event.data()["promoted"] as? Bool ?? false,
+                                            views: event.data()["views"] as? Int ?? 0,
+                                            event18: event.data()["event18"] as? Bool ?? true,
+                                            event21: event.data()["event21"] as? Bool ?? true,
+                                            explicit: event.data()["explicit"] as? Bool ?? false,
+                                            attendanceRecordID: event.data()["attendanceRecordID"] as? String ?? "",
+                                            spotsAvailable: event.data()["spotsAvailable"] as? Int ?? 0,
+                                            reservePrice: event.data()["radius"] as? Double ?? 0.00,
+                                            website: event.data()["website"] as? String ?? "",
+                                            fbSite: event.data()["fbSite"] as? String ?? "",
+                                            twitterSite: event.data()["twitterSite"] as? String ?? "")
+                                        let eventDate = Date(fromString: interestedEvent.startDate, format: .webblenFormat)
+                                        
+                                        if eventDate!.compare(.isInThePast) {
+                                            let imagePath = interestedEvent.eventKey + ".jpg"
+                                            self.imageStorage.child(imagePath).delete { error in
+                                                if let error = error {}
+                                            }
+                                            self.database.collection("eventposts").document(interestedEvent.eventKey).delete()
+                                        } else if eventDate!.compare(.isToday) {
+                                            //print("eventToday")
+                                            self.todayArray.append(interestedEvent)
+                                            self.events.append(interestedEvent)
+                                        } else if eventDate!.compare(.isTomorrow) {
+                                            //print("eventTomorrow")
+                                            self.tomorrowArray.append(interestedEvent)
+                                        } else if eventDate!.compare(.isThisWeek) {
+                                            //print("eventThisWeek")
+                                            self.thisWeekArray.append(interestedEvent)
+                                        } else if eventDate!.compare(.isNextWeek) {
+                                            // print("eventNextWeek")
+                                            //self.nextWeekArray.append(interestedEvent)
+                                        } else if eventDate!.compare(.isThisMonth) || eventDate!.compare(.isNextWeek){
+                                            //print("eventThisMonth")
+                                            self.thisMonthArray.append(interestedEvent)
+                                        } else {
+                                            // print("eventLater")
+                                            self.laterArray.append(interestedEvent)
+                                        }
                                     
                                         //Get teh coordinates of the closest evetn
                                         let eventCoordinates = CLLocation(latitude: interestedEvent.lat, longitude: interestedEvent.lon)
@@ -220,53 +251,8 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
                                             self.currentRegion = interestedEvent.eventKey
                                             self.closestEventTitle = interestedEvent.title
                                             self.closestEventKey = interestedEvent.eventKey
-                                            if interestedEvent.notificationOnly == true {
-                                                self.closestEventIsHidden = true
-                                            } else {
-                                            self.closestEventIsHidden = false
-                                            }
                                         }
-                
-                                            //Append to Event Date Arrays
-                                            if (eventDate! < currentDate! && interestedEvent.paid) {
-                                                let imagePath = interestedEvent.eventKey + ".jpg"
-                                                self.imageStorage.child(imagePath).delete { error in
-                                                    if let error = error {
-                                                        // Uh-oh, an error occurred!
-                                                    } else {
-                                                        // File deleted successfully
-                                                    }
-                                                }
-                                                self.database.collection("events").document(interestedEvent.eventKey).delete()
-                                            }
-                                            else if (currentDate! == eventDate! && interestedEvent.paid) {
-                                                if (self.userBlocks.contains(interestedEvent.author)) == false{
-                                                self.todayArray.append(interestedEvent)
-                                                }
-                                            }
-                                            else if (daysBetweenEvents.day! == 1 && interestedEvent.paid) {
-                                                if (self.userBlocks.contains(interestedEvent.author)) == false{
-                                                self.tomorrowArray.append(interestedEvent)
-                                                }
-                                            }
-                                            else if (daysBetweenEvents.day! > 1 && daysBetweenEvents.day! < 8 && interestedEvent.paid) {
-                                                if (self.userBlocks.contains(interestedEvent.author)) == false{
-
-                                                self.thisWeekArray.append(interestedEvent)
-                                                }
-                                            }
-                                            else if (daysBetweenEvents.day! >= 8 && daysBetweenEvents.day! <= 31 && interestedEvent.paid) {
-                                                if (self.userBlocks.contains(interestedEvent.author)) == false{
-                                                self.thisMonthArray.append(interestedEvent)
-                                                }
-                                            }
-                                            else {
-                                                if ((self.userBlocks.contains(interestedEvent.author)) == false) && interestedEvent.paid{
-                                                self.laterArray.append(interestedEvent)
-                                                }
-                                            }
-                                        
-                                    
+        
                                 }
                                 
                                 //Place Markers and Set Regions for Today's Events
@@ -379,7 +365,20 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        performSegue(withIdentifier: "eventInfoSegue", sender: marker.title!)
+        var event:EventPost?
+        if self.todayArray.contains(where: { $0.eventKey == marker.title! }) {
+            event = self.todayArray.first(where: { $0.eventKey == marker.title! })
+        } else if self.tomorrowArray.contains(where: { $0.eventKey == marker.title! }) {
+            event = self.tomorrowArray.first(where: { $0.eventKey == marker.title! })
+        } else if self.thisWeekArray.contains(where: { $0.eventKey == marker.title! }) {
+            event = self.thisWeekArray.first(where: { $0.eventKey == marker.title! })
+        } else if self.thisMonthArray.contains(where: { $0.eventKey == marker.title! }){
+            event = self.thisMonthArray.first(where: { $0.eventKey == marker.title! })
+        } else if self.laterArray.contains(where: { $0.eventKey == marker.title! }) {
+            event = self.laterArray.first(where: { $0.eventKey == marker.title! })
+        }
+        
+        performSegue(withIdentifier: "eventDetailsSegue", sender: event)
         return true
     }
     
@@ -405,47 +404,29 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         if let e = self.todayArray.index(where: { $0.eventKey == region.identifier }) {
             let selectedEvent = self.todayArray[e]
             let eventTitleString = selectedEvent.title
-            if selectedEvent.notificationOnly == true {
-                showEventAlert(withTitle: "You found a Hidden Event for Today Nearby!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
-                self.showNotification(title: "Hidden Event Found!", message: "You've Come Accross a Secret Event. Check it out!")
-            } else {
-                showEventAlert(withTitle: "There's Something You May be Interested in Happening Today!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
-                self.showNotification(title: selectedEvent.author + " has an event today!", message: "The Event: " + eventTitleString + " is happening today. Check it out!")
-                }
+            showEventAlert(withTitle: "There's Something You May be Interested in Happening Today!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
+            self.showNotification(title: selectedEvent.author + " has an event today!", message: "The Event: " + eventTitleString + " is happening today. Check it out!")
             }
         if let e = self.tomorrowArray.index(where: { $0.eventKey == region.identifier }) {
             let selectedEvent = self.tomorrowArray[e]
             let eventTitleString = selectedEvent.title
             currentRegion = region.identifier
-            if selectedEvent.notificationOnly == true {
-                showEventAlert(withTitle: "You found a Hidden Event for Tomorrow!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
-                self.showNotification(title: "Hidden Event Found!", message: "You've Come Accross a Secret Event. Check it out!")
-            } else{
-                showEventAlert(withTitle: "An Event You May be Interested in Will Occur Tomorrow Nearby!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
-                self.showNotification(title: selectedEvent.author + " has an event tommorow!", message: "The Event: " + eventTitleString + " is happening tomorrow. Check it out!")
-                }
+
+            showEventAlert(withTitle: "An Event You May be Interested in Will Occur Tomorrow Nearby!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
+            self.showNotification(title: selectedEvent.author + " has an event tommorow!", message: "The Event: " + eventTitleString + " is happening tomorrow. Check it out!")
+            
             }
         if let e = self.thisWeekArray.index(where: { $0.eventKey == region.identifier }) {
             let selectedEvent = self.thisWeekArray[e]
             let eventTitleString = selectedEvent.title
-            if selectedEvent.notificationOnly == true {
-                showEventAlert(withTitle: "You found a Hidden Event for This Week Nearby!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
-                self.showNotification(title: "Hidden Event Found!", message: "You've Come Accross a Secret Event. Check it out!")
-            }   else{
-                showEventAlert(withTitle: "An Event You'd Be Interested in Will Occur in the Next Few Days Nearby!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
-                self.showNotification(title: selectedEvent.author + " has an event this week", message: eventTitleString + " is happening this week. Check it out!")
-                }
+            showEventAlert(withTitle: "An Event You'd Be Interested in Will Occur in the Next Few Days Nearby!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
+            self.showNotification(title: selectedEvent.author + " has an event this week", message: eventTitleString + " is happening this week. Check it out!")
             }
         if let e = self.thisMonthArray.index(where: { $0.eventKey == region.identifier }) {
             let selectedEvent = self.thisMonthArray[e]
             let eventTitleString = selectedEvent.title
-            if selectedEvent.notificationOnly == true {
-                showEventAlert(withTitle: "You found a Hidden Event for This Month!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
-                self.showNotification(title: "Hidden Event Found!", message: "You've Come Accross a Secret Event. Check it out!")
-            } else{
-                showEventAlert(withTitle: "An Event You'd Be Interested in Will Occur Next Few Weeks Nearby!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
+            showEventAlert(withTitle: "An Event You'd Be Interested in Will Occur Next Few Weeks Nearby!", message: "Would you like to see more information about the event: \"" + eventTitleString + "\"?", region: region.identifier)
                 self.showNotification(title: selectedEvent.author + " has an event later!", message: "The Event: " + eventTitleString + " is happening this month. Check it out!")
-                }
             }
             locationManager.stopMonitoring(for: region)
         }
@@ -531,9 +512,9 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
     
     //Function called when clicking on an event
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "eventInfoSegue"){
-            let eventIn = segue.destination as! EventInfoViewController
-            eventIn.eventKey = sender as! String
+        if (segue.identifier == "eventDetailsSegue"){
+            let eventIn = segue.destination as! EventDetailsViewController
+            eventIn.event = sender as! EventPost
         }
     }
     
@@ -596,7 +577,6 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         var eventLon = 0.0
         self.distanceFromEvent = 10000.0
         for e in self.todayArray {
-            if e.notificationOnly == false {
                 let position = CLLocationCoordinate2D(latitude: e.lat, longitude: e.lon)
                 let eventLocation = CLLocation(latitude: e.lat, longitude: e.lon)
                 let currentCoordinates = CLLocation(latitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!)
@@ -611,7 +591,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
                 marker.icon = nil
                 marker.icon = self.markerIcon
                 marker.map = self.googleMapsView
-            }
+            
         }
         if self.todayArray.count < 1 {
             self.showAlert(withTitle: "No events found", message: "Sorry, it looks like there's nothing you'd be interested in happening today.")
@@ -648,7 +628,6 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         var eventLon = 0.0
         self.distanceFromEvent = 10000.0
         for e in self.tomorrowArray {
-            if e.notificationOnly == false {
                 let position = CLLocationCoordinate2D(latitude: e.lat, longitude: e.lon)
                 let eventLocation = CLLocation(latitude: e.lat, longitude: e.lon)
                 let currentCoordinates = CLLocation(latitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!)
@@ -663,7 +642,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
                 marker.icon = nil
                 marker.icon = self.markerIcon
                 marker.map = self.googleMapsView
-            }
+            
         }
         if self.tomorrowArray.count < 1 {
             self.showAlert(withTitle: "No events found", message: "Sorry, it looks like there's nothing you'd be interested in happening tomorrow.")
@@ -700,7 +679,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         var eventLon = 0.0
         self.distanceFromEvent = 10000.0
         for e in self.thisWeekArray {
-            if e.notificationOnly == false {
+
                 let position = CLLocationCoordinate2D(latitude: e.lat, longitude: e.lon)
                 let eventLocation = CLLocation(latitude: e.lat, longitude: e.lon)
                 if self.locationManager.location != nil {
@@ -717,7 +696,7 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
                 marker.icon = nil
                 marker.icon = self.markerIcon
                 marker.map = self.googleMapsView
-            }
+            
         }
         if self.thisWeekArray.count < 1 {
             self.showAlert(withTitle: "No events found", message: "Sorry, it looks like there's nothing you'd be interested in happening later this week.")
@@ -754,22 +733,20 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         var eventLon = 0.0
         self.distanceFromEvent = 10000.0
         for e in self.thisMonthArray {
-            if e.notificationOnly == false {
-                let position = CLLocationCoordinate2D(latitude: e.lat, longitude: e.lon)
-                let eventLocation = CLLocation(latitude: e.lat, longitude: e.lon)
-                let currentCoordinates = CLLocation(latitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!)
-                let calculatedDistance = currentCoordinates.distance(from: eventLocation)
-                if calculatedDistance <= self.distanceFromEvent {
-                    self.distanceFromEvent = calculatedDistance
-                    eventLat = e.lat
-                    eventLon = e.lon
-                }
-                let marker = GMSMarker(position: position)
-                marker.title = e.eventKey
-                marker.icon = nil
-                marker.icon = self.markerIcon
-                marker.map = self.googleMapsView
+            let position = CLLocationCoordinate2D(latitude: e.lat, longitude: e.lon)
+            let eventLocation = CLLocation(latitude: e.lat, longitude: e.lon)
+            let currentCoordinates = CLLocation(latitude: (self.locationManager.location?.coordinate.latitude)!, longitude:(self.locationManager.location?.coordinate.longitude)!)
+            let calculatedDistance = currentCoordinates.distance(from: eventLocation)
+            if calculatedDistance <= self.distanceFromEvent {
+                self.distanceFromEvent = calculatedDistance
+                eventLat = e.lat
+                eventLon = e.lon
             }
+            let marker = GMSMarker(position: position)
+            marker.title = e.eventKey
+            marker.icon = nil
+            marker.icon = self.markerIcon
+            marker.map = self.googleMapsView
         }
         if self.thisMonthArray.count < 1 {
             self.showAlert(withTitle: "No events found", message: "Sorry, it looks like there's nothing you'd be interested in happening this month... How boring, right?")
@@ -806,22 +783,20 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         var eventLon = 0.0
         self.distanceFromEvent = 10000.0
         for e in self.laterArray {
-            if e.notificationOnly == false {
-                let position = CLLocationCoordinate2D(latitude: e.lat, longitude: e.lon)
-                let eventLocation = CLLocation(latitude: e.lat, longitude: e.lon)
-                let currentCoordinates = CLLocation(latitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!)
-                let calculatedDistance = currentCoordinates.distance(from: eventLocation)
-                if calculatedDistance <= self.distanceFromEvent {
-                    self.distanceFromEvent = calculatedDistance
-                    eventLat = e.lat
-                    eventLon = e.lon
-                }
-                let marker = GMSMarker(position: position)
-                marker.title = e.eventKey
-                marker.icon = nil
-                marker.icon = self.markerIcon
-                marker.map = self.googleMapsView
+            let position = CLLocationCoordinate2D(latitude: e.lat, longitude: e.lon)
+            let eventLocation = CLLocation(latitude: e.lat, longitude: e.lon)
+            let currentCoordinates = CLLocation(latitude: (self.locationManager.location?.coordinate.latitude)!, longitude: (self.locationManager.location?.coordinate.longitude)!)
+            let calculatedDistance = currentCoordinates.distance(from: eventLocation)
+            if calculatedDistance <= self.distanceFromEvent {
+                self.distanceFromEvent = calculatedDistance
+                eventLat = e.lat
+                eventLon = e.lon
             }
+            let marker = GMSMarker(position: position)
+            marker.title = e.eventKey
+            marker.icon = nil
+            marker.icon = self.markerIcon
+            marker.map = self.googleMapsView
         }
         if self.laterArray.count < 1 {
             self.showAlert(withTitle: "No events found", message: "Sorry, it looks like there's nothing you'd be interested in happening later. That's super unfortunate. You must be in the middle of nowhere or something..")

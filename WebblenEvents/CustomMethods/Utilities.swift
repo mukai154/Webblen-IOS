@@ -31,6 +31,21 @@ extension UIViewController {
     }
 }
 
+//Array Comparisons
+extension Array where Element: Comparable {
+    func containsSameElements(as other: [Element]) -> Bool {
+        return self.count == other.count && self.sorted() == other.sorted()
+    }
+}
+extension Sequence where Iterator.Element : Hashable {
+    func intersects<S : Sequence>(with sequence: S) -> Bool
+        where S.Iterator.Element == Iterator.Element {
+        let sequenceSet = Set(sequence)
+        return self.contains(where: sequenceSet.contains)
+    }
+}
+
+//Image Sizing
 extension UIImage {
     class func scaleImageToSize(img: UIImage, size: CGSize) -> UIImage {
         UIGraphicsBeginImageContext(size)
@@ -41,8 +56,29 @@ extension UIImage {
     }
 }
 
+//Paging
+extension UIPageViewController {
+    var isSwipeEnabled: Bool {
+        get {
+            var isEnabled: Bool = true
+            for view in view.subviews {
+                if let subView = view as? UIScrollView {
+                    isEnabled = subView.isScrollEnabled
+                }
+            }
+            return isEnabled
+        }
+        set {
+            for view in view.subviews {
+                if let subView = view as? UIScrollView {
+                    subView.isScrollEnabled = newValue
+                }
+            }
+        }
+    }
+}
+
 public extension Int {
-    
     /// Returns a random Int point number between 0 and Int.max.
     public static var random: Int {
         return Int.random(n: Int.max)

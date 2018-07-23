@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1620A0CD443793287B6EBCAE /* Pods_WebblenEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B4D69186349FBDF6A7F2B52 /* Pods_WebblenEvents.framework */; };
 		46094A311FB8EED5008B277D /* DataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46094A301FB8EED5008B277D /* DataStructures.swift */; };
 		46094A351FB94F3F008B277D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46094A341FB94F3F008B277D /* GoogleService-Info.plist */; };
 		4609990A1E384717000DE53F /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460999091E384717000DE53F /* TermsViewController.swift */; };
 		4609990C1E39E38A000DE53F /* BlockedUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4609990B1E39E38A000DE53F /* BlockedUsersViewController.swift */; };
-		4609990E1E3A9530000DE53F /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4609990D1E3A9530000DE53F /* FeedbackViewController.swift */; };
 		460999101E3A9902000DE53F /* BlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4609990F1E3A9902000DE53F /* BlockTableViewCell.swift */; };
 		460CD4A22075BACF002CF5B7 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460CD4A12075BACF002CF5B7 /* WalletViewController.swift */; };
 		460CD4A9207B7E8D002CF5B7 /* FirebaseMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460CD4A8207B7E8D002CF5B7 /* FirebaseMethods.swift */; };
@@ -23,24 +23,16 @@
 		4617E52020B38C04006B45B2 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4617E51F20B38C04006B45B2 /* NotificationsViewController.swift */; };
 		4617E52220B64471006B45B2 /* PermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4617E52120B64471006B45B2 /* PermissionsViewController.swift */; };
 		4617E52520B689CB006B45B2 /* StringMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4617E52420B689CB006B45B2 /* StringMethods.swift */; };
-		4624B9621F67D45D00F4D6E6 /* VerifyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4624B9611F67D45D00F4D6E6 /* VerifyAccountViewController.swift */; };
 		4624B9661F68D2AF00F4D6E6 /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4624B9651F68D2AE00F4D6E6 /* SwiftyStoreKit.framework */; };
 		46374BD820BB5DD200D1E758 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46374BD720BB5DD200D1E758 /* MessagesViewController.swift */; };
 		46374BDA20BB681F00D1E758 /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46374BD920BB681F00D1E758 /* GroupsViewController.swift */; };
 		46374BDC20BC8CC600D1E758 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46374BDB20BC8CC600D1E758 /* SearchViewController.swift */; };
 		46374BDE20C1FF3D00D1E758 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46374BDD20C1FF3D00D1E758 /* UserInfoViewController.swift */; };
 		4642E7371E1E6B6300D65DA5 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4642E7361E1E6B6300D65DA5 /* SignInViewController.swift */; };
-		4642E73D1E1F40E400D65DA5 /* NewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4642E73C1E1F40E400D65DA5 /* NewEventViewController.swift */; };
-		4642E73F1E20604100D65DA5 /* MyEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4642E73E1E20604100D65DA5 /* MyEventsViewController.swift */; };
 		46621B7F1E218750005E5404 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46621B7E1E218750005E5404 /* InitialViewController.swift */; };
-		46621B811E21D11B005E5404 /* MyEventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46621B801E21D11B005E5404 /* MyEventsTableViewCell.swift */; };
-		46621B831E2E9E4A005E5404 /* EventInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46621B821E2E9E4A005E5404 /* EventInfoViewController.swift */; };
-		466FF4CF1FD517EF00ED6E37 /* EventPricingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466FF4CE1FD517EF00ED6E37 /* EventPricingViewController.swift */; };
 		46744D7320D601DF00DA3B36 /* GroupOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46744D7220D601DF00DA3B36 /* GroupOptionsViewController.swift */; };
 		46744D8420E588DB00DA3B36 /* NewEventInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46744D8320E588DB00DA3B36 /* NewEventInfoViewController.swift */; };
-		46744D8620E5890E00DA3B36 /* NewEventShortDescViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46744D8520E5890E00DA3B36 /* NewEventShortDescViewController.swift */; };
 		46744D8820E5895A00DA3B36 /* NewEventAddImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46744D8720E5895A00DA3B36 /* NewEventAddImageViewController.swift */; };
-		46744D8A20E589FB00DA3B36 /* NewEventDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46744D8920E589FB00DA3B36 /* NewEventDescriptionViewController.swift */; };
 		46744D8C20E58D3800DA3B36 /* NewEventPagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46744D8B20E58D3800DA3B36 /* NewEventPagingViewController.swift */; };
 		46744D8E20E5A47B00DA3B36 /* EventPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46744D8D20E5A47B00DA3B36 /* EventPost.swift */; };
 		46744D9020E5B7D400DA3B36 /* AttendanceRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46744D8F20E5B7D400DA3B36 /* AttendanceRecord.swift */; };
@@ -52,12 +44,8 @@
 		4687A0221DFCBC560067F773 /* Logo White No Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 4687A0211DFCBC560067F773 /* Logo White No Background.png */; };
 		4691BD901FAFED4C00056024 /* SWMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4691BD8F1FAFED4C00056024 /* SWMenuViewController.swift */; };
 		4691BD941FB036A200056024 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4691BD931FB036A200056024 /* Utilities.swift */; };
-		469386DC1E2F2E51000AF3D4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469386DB1E2F2E51000AF3D4 /* SettingsViewController.swift */; };
-		46956C6F1E1DB3F9009A8F93 /* InterestSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46956C6E1E1DB3F9009A8F93 /* InterestSetupViewController.swift */; };
 		46956C711E1E0537009A8F93 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46956C701E1E0536009A8F93 /* SetupViewController.swift */; };
 		46956C731E1E10E5009A8F93 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46956C721E1E10E5009A8F93 /* SignUpViewController.swift */; };
-		469E84831F355988002E07AA /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469E84821F355988002E07AA /* MapsViewController.swift */; };
-		469E84851F385180002E07AA /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469E84841F385180002E07AA /* DateViewController.swift */; };
 		46AE15032082B82900CC7EEC /* UIViewXRadialGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE14F92082B82800CC7EEC /* UIViewXRadialGradient.swift */; };
 		46AE15042082B82900CC7EEC /* UITextFieldX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE14FA2082B82800CC7EEC /* UITextFieldX.swift */; };
 		46AE15052082B82900CC7EEC /* UIButtonX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE14FB2082B82800CC7EEC /* UIButtonX.swift */; };
@@ -68,28 +56,32 @@
 		46AE150A2082B82900CC7EEC /* UIViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE15002082B82800CC7EEC /* UIViewX.swift */; };
 		46AE150B2082B82900CC7EEC /* UIVisualEffectViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE15012082B82800CC7EEC /* UIVisualEffectViewX.swift */; };
 		46AE150C2082B82900CC7EEC /* UISliderX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE15022082B82800CC7EEC /* UISliderX.swift */; };
-		46AE150E208F745B00CC7EEC /* EventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE150D208F745B00CC7EEC /* EventsTableViewController.swift */; };
-		46CB51951FA53355009CF2D4 /* SetLocationNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CB51941FA53355009CF2D4 /* SetLocationNotificationViewController.swift */; };
+		46B2442D2105805000ABD3FB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B2442C2105805000ABD3FB /* SettingsViewController.swift */; };
 		46CB519F1FA98F31009CF2D4 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CB519D1FA98F30009CF2D4 /* SWRevealViewController.m */; };
-		46EC3ACD1F7305BE00E4CC06 /* EventCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EC3ACC1F7305BE00E4CC06 /* EventCategoryViewController.swift */; };
+		46DBD23D20E8149C0072866B /* NewEventDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DBD23C20E8149C0072866B /* NewEventDateViewController.swift */; };
+		46DBD23F20E830D40072866B /* NewEventTagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DBD23E20E830D40072866B /* NewEventTagsViewController.swift */; };
+		46DBD24120E875280072866B /* NewEventSearchAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DBD24020E875280072866B /* NewEventSearchAddressViewController.swift */; };
+		46DBD24320E875470072866B /* NewEventConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DBD24220E875470072866B /* NewEventConfirmViewController.swift */; };
+		46DBD24720EBC86B0072866B /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DBD24620EBC86B0072866B /* CalendarCollectionViewCell.swift */; };
+		46DBD24920F931140072866B /* NewEventTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DBD24820F931140072866B /* NewEventTimeViewController.swift */; };
+		46DBD24B20F931340072866B /* NewEventExternalSitesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DBD24A20F931340072866B /* NewEventExternalSitesViewController.swift */; };
+		46DBD24E20FBF2040072866B /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DBD24D20FBF2040072866B /* EventListViewController.swift */; };
+		46DBD2512102C1DC0072866B /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DBD2502102C1DC0072866B /* DateHelper.swift */; };
+		46DBD2532103F5D70072866B /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DBD2522103F5D70072866B /* EventDetailsViewController.swift */; };
+		46DBD25621053AB50072866B /* UserTagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DBD25521053AB50072866B /* UserTagsViewController.swift */; };
 		46F045CA20CD83120069B9E9 /* MapDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F045C920CD83120069B9E9 /* MapDesign.swift */; };
 		46F113BC1E16044800FB7294 /* defaultEventImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 46F113BB1E16044800FB7294 /* defaultEventImage.png */; };
 		46F4D6E81FC381C100F5289B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46F4D6E71FC3819C00F5289B /* CoreLocation.framework */; };
-		896B6EC0189EB8136A913A75 /* Pods_WebblenEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F16637E6297C12AFB8A3F5 /* Pods_WebblenEvents.framework */; };
-		D40A12A41F658F3E00392FF9 /* WhatsNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40A12A31F658F3E00392FF9 /* WhatsNewViewController.swift */; };
-		D40A12A61F659E7300392FF9 /* NotificationSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40A12A51F659E7300392FF9 /* NotificationSettingsViewController.swift */; };
 		D41F1F1D1F9A798E006DE9CE /* GeotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41F1F1C1F9A798E006DE9CE /* GeotificationsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		10F16637E6297C12AFB8A3F5 /* Pods_WebblenEvents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WebblenEvents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		281DA214204E5BF000786054 /* WebblenEvents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebblenEvents.entitlements; sourceTree = "<group>"; };
-		45DB16B53A9398AE185EED97 /* Pods-WebblenEvents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebblenEvents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents.debug.xcconfig"; sourceTree = "<group>"; };
+		3B4D69186349FBDF6A7F2B52 /* Pods_WebblenEvents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WebblenEvents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		46094A301FB8EED5008B277D /* DataStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructures.swift; sourceTree = "<group>"; };
 		46094A341FB94F3F008B277D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		460999091E384717000DE53F /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		4609990B1E39E38A000DE53F /* BlockedUsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockedUsersViewController.swift; sourceTree = "<group>"; };
-		4609990D1E3A9530000DE53F /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		4609990F1E3A9902000DE53F /* BlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTableViewCell.swift; sourceTree = "<group>"; };
 		460CD4A12075BACF002CF5B7 /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		460CD4A8207B7E8D002CF5B7 /* FirebaseMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseMethods.swift; sourceTree = "<group>"; };
@@ -102,24 +94,16 @@
 		4617E51F20B38C04006B45B2 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		4617E52120B64471006B45B2 /* PermissionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsViewController.swift; sourceTree = "<group>"; };
 		4617E52420B689CB006B45B2 /* StringMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringMethods.swift; sourceTree = "<group>"; };
-		4624B9611F67D45D00F4D6E6 /* VerifyAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyAccountViewController.swift; sourceTree = "<group>"; };
 		4624B9651F68D2AE00F4D6E6 /* SwiftyStoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyStoreKit.framework; path = "../../Library/Developer/Xcode/DerivedData/WebblenEvents-aqmxctmtxigagscabsvsxabqegai/Build/Products/Debug-iphoneos/SwiftyStoreKit/SwiftyStoreKit.framework"; sourceTree = "<group>"; };
 		46374BD720BB5DD200D1E758 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		46374BD920BB681F00D1E758 /* GroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
 		46374BDB20BC8CC600D1E758 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		46374BDD20C1FF3D00D1E758 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		4642E7361E1E6B6300D65DA5 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		4642E73C1E1F40E400D65DA5 /* NewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventViewController.swift; sourceTree = "<group>"; };
-		4642E73E1E20604100D65DA5 /* MyEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyEventsViewController.swift; sourceTree = "<group>"; };
 		46621B7E1E218750005E5404 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
-		46621B801E21D11B005E5404 /* MyEventsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyEventsTableViewCell.swift; sourceTree = "<group>"; };
-		46621B821E2E9E4A005E5404 /* EventInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInfoViewController.swift; sourceTree = "<group>"; };
-		466FF4CE1FD517EF00ED6E37 /* EventPricingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPricingViewController.swift; sourceTree = "<group>"; };
 		46744D7220D601DF00DA3B36 /* GroupOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupOptionsViewController.swift; sourceTree = "<group>"; };
 		46744D8320E588DB00DA3B36 /* NewEventInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventInfoViewController.swift; sourceTree = "<group>"; };
-		46744D8520E5890E00DA3B36 /* NewEventShortDescViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventShortDescViewController.swift; sourceTree = "<group>"; };
 		46744D8720E5895A00DA3B36 /* NewEventAddImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventAddImageViewController.swift; sourceTree = "<group>"; };
-		46744D8920E589FB00DA3B36 /* NewEventDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventDescriptionViewController.swift; sourceTree = "<group>"; };
 		46744D8B20E58D3800DA3B36 /* NewEventPagingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventPagingViewController.swift; sourceTree = "<group>"; };
 		46744D8D20E5A47B00DA3B36 /* EventPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPost.swift; sourceTree = "<group>"; };
 		46744D8F20E5B7D400DA3B36 /* AttendanceRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceRecord.swift; sourceTree = "<group>"; };
@@ -133,13 +117,9 @@
 		4687A0211DFCBC560067F773 /* Logo White No Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo White No Background.png"; sourceTree = "<group>"; };
 		4691BD8F1FAFED4C00056024 /* SWMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWMenuViewController.swift; sourceTree = "<group>"; };
 		4691BD931FB036A200056024 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		469386DB1E2F2E51000AF3D4 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		46956C6E1E1DB3F9009A8F93 /* InterestSetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestSetupViewController.swift; sourceTree = "<group>"; };
 		46956C701E1E0536009A8F93 /* SetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
 		46956C721E1E10E5009A8F93 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		46956C741E1E2519009A8F93 /* WebblenEvents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebblenEvents.entitlements; sourceTree = "<group>"; };
-		469E84821F355988002E07AA /* MapsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
-		469E84841F385180002E07AA /* DateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 		46AE14F92082B82800CC7EEC /* UIViewXRadialGradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewXRadialGradient.swift; sourceTree = "<group>"; };
 		46AE14FA2082B82800CC7EEC /* UITextFieldX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldX.swift; sourceTree = "<group>"; };
 		46AE14FB2082B82800CC7EEC /* UIButtonX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonX.swift; sourceTree = "<group>"; };
@@ -150,19 +130,27 @@
 		46AE15002082B82800CC7EEC /* UIViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewX.swift; sourceTree = "<group>"; };
 		46AE15012082B82800CC7EEC /* UIVisualEffectViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIVisualEffectViewX.swift; sourceTree = "<group>"; };
 		46AE15022082B82800CC7EEC /* UISliderX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISliderX.swift; sourceTree = "<group>"; };
-		46AE150D208F745B00CC7EEC /* EventsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewController.swift; sourceTree = "<group>"; };
-		46CB51941FA53355009CF2D4 /* SetLocationNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetLocationNotificationViewController.swift; sourceTree = "<group>"; };
+		46B2442C2105805000ABD3FB /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		46CB519C1FA98F2F009CF2D4 /* WebblenEvents-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WebblenEvents-Bridging-Header.h"; sourceTree = "<group>"; };
 		46CB519D1FA98F30009CF2D4 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		46CB519E1FA98F30009CF2D4 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
-		46EC3ACC1F7305BE00E4CC06 /* EventCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCategoryViewController.swift; sourceTree = "<group>"; };
+		46DBD23C20E8149C0072866B /* NewEventDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventDateViewController.swift; sourceTree = "<group>"; };
+		46DBD23E20E830D40072866B /* NewEventTagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventTagsViewController.swift; sourceTree = "<group>"; };
+		46DBD24020E875280072866B /* NewEventSearchAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventSearchAddressViewController.swift; sourceTree = "<group>"; };
+		46DBD24220E875470072866B /* NewEventConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventConfirmViewController.swift; sourceTree = "<group>"; };
+		46DBD24620EBC86B0072866B /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
+		46DBD24820F931140072866B /* NewEventTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventTimeViewController.swift; sourceTree = "<group>"; };
+		46DBD24A20F931340072866B /* NewEventExternalSitesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventExternalSitesViewController.swift; sourceTree = "<group>"; };
+		46DBD24D20FBF2040072866B /* EventListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListViewController.swift; sourceTree = "<group>"; };
+		46DBD2502102C1DC0072866B /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
+		46DBD2522103F5D70072866B /* EventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
+		46DBD25521053AB50072866B /* UserTagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTagsViewController.swift; sourceTree = "<group>"; };
 		46F045C920CD83120069B9E9 /* MapDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDesign.swift; sourceTree = "<group>"; };
 		46F113BB1E16044800FB7294 /* defaultEventImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultEventImage.png; sourceTree = "<group>"; };
 		46F4D6E71FC3819C00F5289B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		D40A12A31F658F3E00392FF9 /* WhatsNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsNewViewController.swift; sourceTree = "<group>"; };
-		D40A12A51F659E7300392FF9 /* NotificationSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewController.swift; sourceTree = "<group>"; };
+		99D4F1B08BBA226E572BF58B /* Pods-WebblenEvents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebblenEvents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents.debug.xcconfig"; sourceTree = "<group>"; };
+		BA1AF9D0889DB2E2881D5D90 /* Pods-WebblenEvents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebblenEvents.release.xcconfig"; path = "Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents.release.xcconfig"; sourceTree = "<group>"; };
 		D41F1F1C1F9A798E006DE9CE /* GeotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeotificationsViewController.swift; sourceTree = "<group>"; };
-		FA3ADCA2E332BB183E5C2F78 /* Pods-WebblenEvents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebblenEvents.release.xcconfig"; path = "Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,7 +161,7 @@
 				46F4D6E81FC381C100F5289B /* CoreLocation.framework in Frameworks */,
 				4624B9661F68D2AF00F4D6E6 /* SwiftyStoreKit.framework in Frameworks */,
 				4617A7491F3D4D2900926160 /* StoreKit.framework in Frameworks */,
-				896B6EC0189EB8136A913A75 /* Pods_WebblenEvents.framework in Frameworks */,
+				1620A0CD443793287B6EBCAE /* Pods_WebblenEvents.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,9 +216,13 @@
 			children = (
 				46744D8B20E58D3800DA3B36 /* NewEventPagingViewController.swift */,
 				46744D8320E588DB00DA3B36 /* NewEventInfoViewController.swift */,
-				46744D8520E5890E00DA3B36 /* NewEventShortDescViewController.swift */,
 				46744D8720E5895A00DA3B36 /* NewEventAddImageViewController.swift */,
-				46744D8920E589FB00DA3B36 /* NewEventDescriptionViewController.swift */,
+				46DBD23E20E830D40072866B /* NewEventTagsViewController.swift */,
+				46DBD23C20E8149C0072866B /* NewEventDateViewController.swift */,
+				46DBD24820F931140072866B /* NewEventTimeViewController.swift */,
+				46DBD24A20F931340072866B /* NewEventExternalSitesViewController.swift */,
+				46DBD24020E875280072866B /* NewEventSearchAddressViewController.swift */,
+				46DBD24220E875470072866B /* NewEventConfirmViewController.swift */,
 			);
 			path = "New Event";
 			sourceTree = "<group>";
@@ -242,7 +234,7 @@
 				4687A00A1DFCB9A80067F773 /* Products */,
 				EEABF8226ADF07419F0B7844 /* Frameworks */,
 				4609D8FB1F9C1B4C00EABE9E /* Recovered References */,
-				5A82843C0F43F5157D4E3074 /* Pods */,
+				C367D6736A8D10C2170FD040 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -257,6 +249,8 @@
 		4687A00B1DFCB9A80067F773 /* WebblenEvents */ = {
 			isa = PBXGroup;
 			children = (
+				46DBD24F2102C1CA0072866B /* Helpers */,
+				46DBD24420EBC7E90072866B /* Views */,
 				46F045C820CD82F20069B9E9 /* Classe & Structures */,
 				4617E52320B68983006B45B2 /* CustomMethods */,
 				4617E51E20B384D7006B45B2 /* IAP */,
@@ -284,41 +278,17 @@
 		46AE14F72082B78D00CC7EEC /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				46DBD258210577FE0072866B /* Groups */,
+				46DBD257210577240072866B /* Authentication */,
+				46DBD25421053A9E0072866B /* User Info */,
+				46DBD24C20FBF1CF0072866B /* Event Details */,
 				46744D8220E5886900DA3B36 /* New Event */,
-				4609990B1E39E38A000DE53F /* BlockedUsersViewController.swift */,
-				4609990F1E3A9902000DE53F /* BlockTableViewCell.swift */,
 				4617A7461F3D4C6600926160 /* confirmPostViewController.swift */,
 				4610C01720AD140F00F8AD88 /* DashboardViewController.swift */,
-				469E84841F385180002E07AA /* DateViewController.swift */,
-				46EC3ACC1F7305BE00E4CC06 /* EventCategoryViewController.swift */,
-				46621B821E2E9E4A005E5404 /* EventInfoViewController.swift */,
-				466FF4CE1FD517EF00ED6E37 /* EventPricingViewController.swift */,
-				46AE150D208F745B00CC7EEC /* EventsTableViewController.swift */,
-				4609990D1E3A9530000DE53F /* FeedbackViewController.swift */,
 				D41F1F1C1F9A798E006DE9CE /* GeotificationsViewController.swift */,
 				46621B7E1E218750005E5404 /* InitialViewController.swift */,
-				46956C6E1E1DB3F9009A8F93 /* InterestSetupViewController.swift */,
-				469E84821F355988002E07AA /* MapsViewController.swift */,
-				46621B801E21D11B005E5404 /* MyEventsTableViewCell.swift */,
-				4642E73E1E20604100D65DA5 /* MyEventsViewController.swift */,
-				4642E73C1E1F40E400D65DA5 /* NewEventViewController.swift */,
-				D40A12A51F659E7300392FF9 /* NotificationSettingsViewController.swift */,
-				46CB51941FA53355009CF2D4 /* SetLocationNotificationViewController.swift */,
-				469386DB1E2F2E51000AF3D4 /* SettingsViewController.swift */,
-				46956C701E1E0536009A8F93 /* SetupViewController.swift */,
-				4642E7361E1E6B6300D65DA5 /* SignInViewController.swift */,
-				46956C721E1E10E5009A8F93 /* SignUpViewController.swift */,
 				460999091E384717000DE53F /* TermsViewController.swift */,
-				4624B9611F67D45D00F4D6E6 /* VerifyAccountViewController.swift */,
-				460CD4A12075BACF002CF5B7 /* WalletViewController.swift */,
-				D40A12A31F658F3E00392FF9 /* WhatsNewViewController.swift */,
-				4617E51F20B38C04006B45B2 /* NotificationsViewController.swift */,
-				4617E52120B64471006B45B2 /* PermissionsViewController.swift */,
-				46374BD720BB5DD200D1E758 /* MessagesViewController.swift */,
-				46374BD920BB681F00D1E758 /* GroupsViewController.swift */,
 				46374BDB20BC8CC600D1E758 /* SearchViewController.swift */,
-				46374BDD20C1FF3D00D1E758 /* UserInfoViewController.swift */,
-				46744D7220D601DF00DA3B36 /* GroupOptionsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -340,6 +310,74 @@
 			path = DesignableX;
 			sourceTree = "<group>";
 		};
+		46DBD24420EBC7E90072866B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				46DBD24520EBC7F50072866B /* Calendar */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		46DBD24520EBC7F50072866B /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				46DBD24620EBC86B0072866B /* CalendarCollectionViewCell.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		46DBD24C20FBF1CF0072866B /* Event Details */ = {
+			isa = PBXGroup;
+			children = (
+				46DBD24D20FBF2040072866B /* EventListViewController.swift */,
+				46DBD2522103F5D70072866B /* EventDetailsViewController.swift */,
+			);
+			path = "Event Details";
+			sourceTree = "<group>";
+		};
+		46DBD24F2102C1CA0072866B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				46DBD2502102C1DC0072866B /* DateHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		46DBD25421053A9E0072866B /* User Info */ = {
+			isa = PBXGroup;
+			children = (
+				46B2442C2105805000ABD3FB /* SettingsViewController.swift */,
+				4609990F1E3A9902000DE53F /* BlockTableViewCell.swift */,
+				4609990B1E39E38A000DE53F /* BlockedUsersViewController.swift */,
+				46374BDD20C1FF3D00D1E758 /* UserInfoViewController.swift */,
+				4617E52120B64471006B45B2 /* PermissionsViewController.swift */,
+				460CD4A12075BACF002CF5B7 /* WalletViewController.swift */,
+				4617E51F20B38C04006B45B2 /* NotificationsViewController.swift */,
+				46956C701E1E0536009A8F93 /* SetupViewController.swift */,
+				46DBD25521053AB50072866B /* UserTagsViewController.swift */,
+			);
+			path = "User Info";
+			sourceTree = "<group>";
+		};
+		46DBD257210577240072866B /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				4642E7361E1E6B6300D65DA5 /* SignInViewController.swift */,
+				46956C721E1E10E5009A8F93 /* SignUpViewController.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		46DBD258210577FE0072866B /* Groups */ = {
+			isa = PBXGroup;
+			children = (
+				46374BD920BB681F00D1E758 /* GroupsViewController.swift */,
+				46744D7220D601DF00DA3B36 /* GroupOptionsViewController.swift */,
+				46374BD720BB5DD200D1E758 /* MessagesViewController.swift */,
+			);
+			path = Groups;
+			sourceTree = "<group>";
+		};
 		46F045C820CD82F20069B9E9 /* Classe & Structures */ = {
 			isa = PBXGroup;
 			children = (
@@ -351,11 +389,11 @@
 			path = "Classe & Structures";
 			sourceTree = "<group>";
 		};
-		5A82843C0F43F5157D4E3074 /* Pods */ = {
+		C367D6736A8D10C2170FD040 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				45DB16B53A9398AE185EED97 /* Pods-WebblenEvents.debug.xcconfig */,
-				FA3ADCA2E332BB183E5C2F78 /* Pods-WebblenEvents.release.xcconfig */,
+				99D4F1B08BBA226E572BF58B /* Pods-WebblenEvents.debug.xcconfig */,
+				BA1AF9D0889DB2E2881D5D90 /* Pods-WebblenEvents.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -366,7 +404,7 @@
 				46F4D6E71FC3819C00F5289B /* CoreLocation.framework */,
 				4624B9651F68D2AE00F4D6E6 /* SwiftyStoreKit.framework */,
 				4617A7481F3D4D2900926160 /* StoreKit.framework */,
-				10F16637E6297C12AFB8A3F5 /* Pods_WebblenEvents.framework */,
+				3B4D69186349FBDF6A7F2B52 /* Pods_WebblenEvents.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -378,12 +416,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4687A01E1DFCB9A80067F773 /* Build configuration list for PBXNativeTarget "WebblenEvents" */;
 			buildPhases = (
-				7C93EE54012DDE1AD9587121 /* [CP] Check Pods Manifest.lock */,
+				CEF157360100A75EC57AC750 /* [CP] Check Pods Manifest.lock */,
 				4687A0051DFCB9A80067F773 /* Sources */,
 				4687A0061DFCB9A80067F773 /* Frameworks */,
 				4687A0071DFCB9A80067F773 /* Resources */,
-				6E45D62B10D8537E93F986DA /* [CP] Embed Pods Frameworks */,
-				2594111C047ADD9EB1999E94 /* [CP] Copy Pods Resources */,
+				58FF4D28EAE815F140898329 /* [CP] Embed Pods Frameworks */,
+				BBF142AF46D841CB5EF1FD53 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -470,7 +508,81 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2594111C047ADD9EB1999E94 /* [CP] Copy Pods Resources */ = {
+		58FF4D28EAE815F140898329 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GooglePlacesSearchController/GooglePlacesSearchController.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/JTAppleCalendar/JTAppleCalendar.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
+				"${BUILT_PRODUCTS_DIR}/PCLBlurEffectAlert/PCLBlurEffectAlert.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/RSKGrowingTextView/RSKGrowingTextView.framework",
+				"${BUILT_PRODUCTS_DIR}/RSKPlaceholderTextView/RSKPlaceholderTextView.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
+				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
+				"${BUILT_PRODUCTS_DIR}/UIImageCropper/UIImageCropper.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GooglePlacesSearchController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTAppleCalendar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PCLBlurEffectAlert.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RSKGrowingTextView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RSKPlaceholderTextView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIImageCropper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BBF142AF46D841CB5EF1FD53 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -496,75 +608,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6E45D62B10D8537E93F986DA /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
-				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GooglePlacesSearchController/GooglePlacesSearchController.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
-				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
-				"${BUILT_PRODUCTS_DIR}/PCLBlurEffectAlert/PCLBlurEffectAlert.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/RSKGrowingTextView/RSKGrowingTextView.framework",
-				"${BUILT_PRODUCTS_DIR}/RSKPlaceholderTextView/RSKPlaceholderTextView.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
-				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
-				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GooglePlacesSearchController.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PCLBlurEffectAlert.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RSKGrowingTextView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RSKPlaceholderTextView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WebblenEvents/Pods-WebblenEvents-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7C93EE54012DDE1AD9587121 /* [CP] Check Pods Manifest.lock */ = {
+		CEF157360100A75EC57AC750 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -589,66 +633,60 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46621B831E2E9E4A005E5404 /* EventInfoViewController.swift in Sources */,
 				4687A0151DFCB9A80067F773 /* WebblenEvents.xcdatamodeld in Sources */,
 				4691BD901FAFED4C00056024 /* SWMenuViewController.swift in Sources */,
-				466FF4CF1FD517EF00ED6E37 /* EventPricingViewController.swift in Sources */,
+				46DBD24B20F931340072866B /* NewEventExternalSitesViewController.swift in Sources */,
 				46621B7F1E218750005E5404 /* InitialViewController.swift in Sources */,
 				46744D9020E5B7D400DA3B36 /* AttendanceRecord.swift in Sources */,
 				4617E52220B64471006B45B2 /* PermissionsViewController.swift in Sources */,
-				4609990E1E3A9530000DE53F /* FeedbackViewController.swift in Sources */,
 				D41F1F1D1F9A798E006DE9CE /* GeotificationsViewController.swift in Sources */,
 				4617A7471F3D4C6600926160 /* confirmPostViewController.swift in Sources */,
 				461085B61FDE214300E7B2A2 /* WebblenIAPService.swift in Sources */,
+				46DBD24120E875280072866B /* NewEventSearchAddressViewController.swift in Sources */,
 				46374BDE20C1FF3D00D1E758 /* UserInfoViewController.swift in Sources */,
 				46744D8420E588DB00DA3B36 /* NewEventInfoViewController.swift in Sources */,
-				46621B811E21D11B005E5404 /* MyEventsTableViewCell.swift in Sources */,
 				46AE15062082B82900CC7EEC /* UILabelX.swift in Sources */,
+				46DBD24E20FBF2040072866B /* EventListViewController.swift in Sources */,
 				46AE15092082B82900CC7EEC /* UIImageViewX.swift in Sources */,
 				4609990A1E384717000DE53F /* TermsViewController.swift in Sources */,
 				460CD4A9207B7E8D002CF5B7 /* FirebaseMethods.swift in Sources */,
+				46DBD2512102C1DC0072866B /* DateHelper.swift in Sources */,
 				4617E52520B689CB006B45B2 /* StringMethods.swift in Sources */,
 				46AE15052082B82900CC7EEC /* UIButtonX.swift in Sources */,
-				D40A12A41F658F3E00392FF9 /* WhatsNewViewController.swift in Sources */,
 				4610C01820AD140F00F8AD88 /* DashboardViewController.swift in Sources */,
-				469E84851F385180002E07AA /* DateViewController.swift in Sources */,
 				46744D7320D601DF00DA3B36 /* GroupOptionsViewController.swift in Sources */,
 				46AE15032082B82900CC7EEC /* UIViewXRadialGradient.swift in Sources */,
+				46B2442D2105805000ABD3FB /* SettingsViewController.swift in Sources */,
 				46744D8E20E5A47B00DA3B36 /* EventPost.swift in Sources */,
-				4642E73F1E20604100D65DA5 /* MyEventsViewController.swift in Sources */,
 				46AE150C2082B82900CC7EEC /* UISliderX.swift in Sources */,
 				46AE15042082B82900CC7EEC /* UITextFieldX.swift in Sources */,
 				46AE150B2082B82900CC7EEC /* UIVisualEffectViewX.swift in Sources */,
 				46744D8820E5895A00DA3B36 /* NewEventAddImageViewController.swift in Sources */,
-				46744D8620E5890E00DA3B36 /* NewEventShortDescViewController.swift in Sources */,
 				4687A00D1DFCB9A80067F773 /* AppDelegate.swift in Sources */,
+				46DBD2532103F5D70072866B /* EventDetailsViewController.swift in Sources */,
+				46DBD23F20E830D40072866B /* NewEventTagsViewController.swift in Sources */,
 				460CD4A22075BACF002CF5B7 /* WalletViewController.swift in Sources */,
 				46AE15082082B82900CC7EEC /* UIViewControllerX.swift in Sources */,
 				460999101E3A9902000DE53F /* BlockTableViewCell.swift in Sources */,
-				46EC3ACD1F7305BE00E4CC06 /* EventCategoryViewController.swift in Sources */,
-				46744D8A20E589FB00DA3B36 /* NewEventDescriptionViewController.swift in Sources */,
-				46CB51951FA53355009CF2D4 /* SetLocationNotificationViewController.swift in Sources */,
-				46956C6F1E1DB3F9009A8F93 /* InterestSetupViewController.swift in Sources */,
-				4624B9621F67D45D00F4D6E6 /* VerifyAccountViewController.swift in Sources */,
-				4642E73D1E1F40E400D65DA5 /* NewEventViewController.swift in Sources */,
+				46DBD25621053AB50072866B /* UserTagsViewController.swift in Sources */,
+				46DBD23D20E8149C0072866B /* NewEventDateViewController.swift in Sources */,
 				46374BDC20BC8CC600D1E758 /* SearchViewController.swift in Sources */,
 				46AE15072082B82900CC7EEC /* UIViewAnchorPoint.swift in Sources */,
+				46DBD24320E875470072866B /* NewEventConfirmViewController.swift in Sources */,
 				46CB519F1FA98F31009CF2D4 /* SWRevealViewController.m in Sources */,
-				46AE150E208F745B00CC7EEC /* EventsTableViewController.swift in Sources */,
 				4642E7371E1E6B6300D65DA5 /* SignInViewController.swift in Sources */,
-				469386DC1E2F2E51000AF3D4 /* SettingsViewController.swift in Sources */,
 				46744D8C20E58D3800DA3B36 /* NewEventPagingViewController.swift in Sources */,
 				46094A311FB8EED5008B277D /* DataStructures.swift in Sources */,
+				46DBD24920F931140072866B /* NewEventTimeViewController.swift in Sources */,
 				46F045CA20CD83120069B9E9 /* MapDesign.swift in Sources */,
 				46374BD820BB5DD200D1E758 /* MessagesViewController.swift in Sources */,
+				46DBD24720EBC86B0072866B /* CalendarCollectionViewCell.swift in Sources */,
 				4609990C1E39E38A000DE53F /* BlockedUsersViewController.swift in Sources */,
 				4617E52020B38C04006B45B2 /* NotificationsViewController.swift in Sources */,
 				461085B41FDE206D00E7B2A2 /* WebblenIAP.swift in Sources */,
 				46AE150A2082B82900CC7EEC /* UIViewX.swift in Sources */,
-				D40A12A61F659E7300392FF9 /* NotificationSettingsViewController.swift in Sources */,
 				46956C731E1E10E5009A8F93 /* SignUpViewController.swift in Sources */,
 				46374BDA20BB681F00D1E758 /* GroupsViewController.swift in Sources */,
-				469E84831F355988002E07AA /* MapsViewController.swift in Sources */,
 				4691BD941FB036A200056024 /* Utilities.swift in Sources */,
 				46956C711E1E0537009A8F93 /* SetupViewController.swift in Sources */,
 			);
@@ -791,7 +829,7 @@
 		};
 		4687A01F1DFCB9A80067F773 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 45DB16B53A9398AE185EED97 /* Pods-WebblenEvents.debug.xcconfig */;
+			baseConfigurationReference = 99D4F1B08BBA226E572BF58B /* Pods-WebblenEvents.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -817,7 +855,7 @@
 		};
 		4687A0201DFCB9A80067F773 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA3ADCA2E332BB183E5C2F78 /* Pods-WebblenEvents.release.xcconfig */;
+			baseConfigurationReference = BA1AF9D0889DB2E2881D5D90 /* Pods-WebblenEvents.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
