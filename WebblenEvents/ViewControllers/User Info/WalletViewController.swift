@@ -19,8 +19,10 @@ class WalletViewController: UIViewController, UIImagePickerControllerDelegate, U
     var profilePicStorage = Storage.storage().reference(forURL: "gs://webblen-events.appspot.com/profile_pics")
     var imagePicker = UIImagePickerController()
     var userImg:UIImage?
+    var username:String?
     
     //User UI
+    @IBOutlet weak var walletHeaderBackground: UIView!
     @IBOutlet weak var profilePicBtn: UIButton!
     @IBOutlet weak var profileImageShadowView: UIViewX!
     @IBOutlet weak var profileImageView: UIImageView!
@@ -34,21 +36,35 @@ class WalletViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setHeroIDs()
         //image picker
         imagePicker.delegate = self
         
-        //Data
-        loadFirestoreProfileData()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        if userImg != nil && username != nil {
+            profileImageView.image = userImg
+            setImageProperties()
+            profileUsernameLabel.text = username
+        } else {
+            //Data
+            loadFirestoreProfileData()
+        }
+        
     }
     
-    //HERO TRANSITIONS
-    func setHeroIDS(){
-        profileImageView.hero.id = "profile_pic"
+    //Override Status Bar
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    func setHeroIDs(){
+        //Set Hero
+        self.hero.isEnabled = true
+        profileImageView.hero.id = "profileImage"
+        walletHeaderBackground.hero.id = "wallet"
         profileUsernameLabel.hero.id = "username"
     }
     
@@ -69,11 +85,7 @@ class WalletViewController: UIViewController, UIImagePickerControllerDelegate, U
                     if imageURL != nil && currentUsername != nil {
                         let url = NSURL(string: imageURL!)
                         self.profileImageView.sd_setImage(with: url! as URL)
-                        self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
-                        self.profileImageView.clipsToBounds = true
-                        self.profileImageView.layer.borderWidth = 2
-                        self.profileImageView.layer.borderColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0).cgColor
-                        self.profileImageView.isHidden = false
+                        self.setImageProperties()
                         self.profileUsernameLabel.text = "@" +  currentUsername!.lowercased()
                         self.profileUsernameLabel.isHidden = false
                         self.activityIndicator.isHidden = true
@@ -84,6 +96,13 @@ class WalletViewController: UIViewController, UIImagePickerControllerDelegate, U
                 }
             })
         }
+    }
+    
+    func setImageProperties(){
+        profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
+        profileImageView.clipsToBounds = true
+        profileImageView.layer.borderWidth = 2
+        profileImageView.layer.borderColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0).cgColor
     }
     
     //*** BUTTON ACTIONS

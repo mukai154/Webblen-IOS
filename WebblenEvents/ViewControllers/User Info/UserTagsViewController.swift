@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import PCLBlurEffectAlert
 import NVActivityIndicatorView
+import Hero
 
 class UserTagsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource  {
 
@@ -23,18 +24,20 @@ class UserTagsViewController: UIViewController, UICollectionViewDelegate, UIColl
     var userTags = [String]()
     
     //UI
-    @IBOutlet weak var cancelBtn: UIBarButtonItem!
+    @IBOutlet weak var backgroundView: UIImageView!
+    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var tagCollectionView: UICollectionView!
     
     //Colors & LoadingView
     var activeTagColor = UIColor(red: 255/255, green: 121/255, blue: 121/255, alpha: 1.0)
-    var inactiveTagColor = UIColor(red: 242/255, green: 242/255, blue: 246/255, alpha: 1.0)
+    var inactiveTagColor = UIColor.clear
     var loadingView = NVActivityIndicatorView(frame: CGRect(x: (100), y: (100), width: 125, height: 125), type: .ballRotateChase, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1.0), padding: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setHeroIDs()
         if settingUp {
-            cancelBtn.isEnabled = false
+            cancelButton.isHidden = true
         }
         tagCollectionView.alpha = 0.0
         //Activity indicator starts
@@ -47,6 +50,20 @@ class UserTagsViewController: UIViewController, UICollectionViewDelegate, UIColl
         loadingView.startAnimating()
         
         getTagData()
+    }
+    
+    //Override Status Bar
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    func setHeroIDs(){
+        self.hero.isEnabled = true
+        backgroundView.hero.id = "heart"
     }
 
     @IBAction func didPressCancel(_ sender: Any) {
@@ -97,7 +114,20 @@ class UserTagsViewController: UIViewController, UICollectionViewDelegate, UIColl
         loadingView.startAnimating()
         let userCollection = dataBase.collection("users")
         userCollection.document((currentUser?.uid)!).setData(["tags": userTags], options: SetOptions.merge())
-        performSegue(withIdentifier: "dashboardSegue", sender: nil)
+        dismissBlurController()
+    }
+    
+    func dismissBlurController(){
+        let alertController = PCLBlurEffectAlertController(title: "Interests Updated!", message: nil, effect: UIBlurEffect(style: .regular),style: .alert)
+        let backAction = PCLBlurEffectAlertAction(title: "Ok", style: .default) { _ in
+           self.dismiss(animated: true, completion: nil)
+        }
+        alertController.configure(cornerRadius: 15.0)
+        alertController.configure(backgroundColor: .white)
+        alertController.configure(buttonBackgroundColor: .white)
+        alertController.configure(buttonTextColor: [.default: .black, .destructive: .black])
+        alertController.addAction(backAction)
+        alertController.show()
     }
     
     //Tag Collection View
@@ -114,7 +144,7 @@ class UserTagsViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         if !userTags.contains(tag){
             background.backgroundColor = inactiveTagColor
-            tagLabel.textColor = .darkGray
+            tagLabel.textColor = .white
         } else if userTags.contains(tag){
             background.backgroundColor = activeTagColor
             tagLabel.textColor = .white

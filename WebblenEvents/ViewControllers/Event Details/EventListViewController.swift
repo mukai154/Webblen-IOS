@@ -11,6 +11,7 @@ import Firebase
 import NVActivityIndicatorView
 import SDWebImage
 import CoreLocation
+import Hero
 
 class EventListViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource{
 
@@ -52,20 +53,26 @@ class EventListViewController: UIViewController, UICollectionViewDelegate, UICol
     var mileLon = 0.0181818181818182
     
     //UI
-    @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var navigationBackground: UIViewX!
+    @IBOutlet weak var navigationLbl: UILabel!
     @IBOutlet weak var calendarSelectCollectionView: UICollectionView!
     @IBOutlet weak var eventTableView: UITableView!
     @IBOutlet weak var noEventImg: UIImageView!
     @IBOutlet weak var noEventLabel: UILabel!
     
     //Colors & LoadingView
-    var activeBtnColor = UIColor(red: 254/255, green: 202/255, blue: 87/255, alpha: 1.0)
-    var inactiveBtnColor = UIColor(red: 242/255, green: 242/255, blue: 246/255, alpha: 1.0)
+    var myEventsColor = UIColor(red: 104/255, green: 109/255, blue: 224/255, alpha: 1.0)
+    var activeBtnColor = UIColor.white
+    var inactiveBtnColor = UIColor.clear
     var loadingView = NVActivityIndicatorView(frame: CGRect(x: (100), y: (100), width: 125, height: 125), type: .ballRotateChase, color: UIColor(red: 158/255, green: 158/255, blue: 158/255, alpha: 1.0), padding: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setHeroIDs()
+        if myEvents {
+            navigationLbl.text = "My Events"
+            navigationBackground.backgroundColor = myEventsColor
+        }
         let xAxis = self.view.center.x
         let yAxis = self.view.center.y
         
@@ -73,17 +80,36 @@ class EventListViewController: UIViewController, UICollectionViewDelegate, UICol
         loadingView = NVActivityIndicatorView(frame: frame, type: .circleStrokeSpin, color: activeBtnColor, padding: 0)
         self.view.addSubview(loadingView)
         loadingView.startAnimating()
- 
+        locationAccessCheck()
+    }
+    
+    //Override Status Bar
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .lightContent
+        self.calendarSelectCollectionView.delegate = self
+    }
+        
+    
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    func setHeroIDs(){
+        //Set Hero
+        self.hero.isEnabled = true
         if myEvents {
-            navigationBar.topItem?.title = "My Events"
+            navigationBackground.hero.id = "calendar"
+        } else {
+            navigationBackground.hero.id = "list"
         }
         
-        locationAccessCheck()
     }
 
     @IBAction func didPressBack(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
     
     //Load Data from Firestore
     func loadEventData(userLat: Double, userLon: Double, withinDistance: Double){
@@ -329,7 +355,7 @@ class EventListViewController: UIViewController, UICollectionViewDelegate, UICol
             initialLoad = false
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.left)
             background.backgroundColor = activeBtnColor
-            dateLabel.textColor = .white
+            dateLabel.textColor = .darkGray
         }
         dateLabel.text = option
         return cell
@@ -340,7 +366,7 @@ class EventListViewController: UIViewController, UICollectionViewDelegate, UICol
             let background = cell.viewWithTag(1) as! UIViewX
             let dateLabel = cell.viewWithTag(2) as! UILabel
             background.backgroundColor = activeBtnColor
-            dateLabel.textColor = .white
+            dateLabel.textColor = .darkGray
         }
         let option = calendarOptions[indexPath.item]
         selectedCalendarOption = option
@@ -367,9 +393,18 @@ class EventListViewController: UIViewController, UICollectionViewDelegate, UICol
         guard let cell = calendarSelectCollectionView.cellForItem(at: indexPath) else {return}
         let background = cell.viewWithTag(1) as! UIViewX
         let dateLabel = cell.viewWithTag(2) as! UILabel
-        background.backgroundColor = .white
-        dateLabel.textColor = .darkGray
+        background.backgroundColor = inactiveBtnColor
+        dateLabel.textColor = .white
         
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        for cell in calendarSelectCollectionView.visibleCells {
+            let date = cell.viewWithTag(2) as! UILabel
+            if date.text! != selectedCalendarOption {
+                cell.isSelected = false
+            }
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -397,6 +432,12 @@ class EventListViewController: UIViewController, UICollectionViewDelegate, UICol
             let eventAuthorName = cell.viewWithTag(3) as! UILabel
             let eventCaptionText = cell.viewWithTag(4) as! UILabel
             let authorURL = NSURL(string: eventAuthorImageURL)
+            //Set Hero
+            eventAuthorImageView.hero.id = "eventAuthorImage"
+            eventTitleLbl.hero.id = "eventTitle"
+            eventAuthorName.hero.id = "eventAuthorName"
+            eventCaptionText.hero.id = "eventCaption"
+            //Set Views
             eventAuthorImageView.sd_addActivityIndicator()
             eventAuthorImageView.sd_setShowActivityIndicatorView(true)
             eventAuthorImageView.sd_setIndicatorStyle(.gray)
@@ -412,8 +453,14 @@ class EventListViewController: UIViewController, UICollectionViewDelegate, UICol
             let eventAuthorName = cell.viewWithTag(3) as! UILabel
             let eventCaptionText = cell.viewWithTag(4) as! UILabel
             let eventImageView = cell.viewWithTag(5) as! UIImageViewX
-            
             let url = NSURL(string: eventImageURL)
+            //Set Hero
+            eventImageView.hero.id = "eventImageView"
+            eventAuthorImageView.hero.id = "eventAuthorImage"
+            eventTitleLbl.hero.id = "eventTitle"
+            eventAuthorName.hero.id = "eventAuthorName"
+            eventCaptionText.hero.id = "eventCaption"
+            //Set Views
             eventImageView.sd_addActivityIndicator()
             eventImageView.sd_setShowActivityIndicatorView(true)
             eventImageView.sd_setIndicatorStyle(.gray)
@@ -439,6 +486,9 @@ class EventListViewController: UIViewController, UICollectionViewDelegate, UICol
         if (segue.identifier == "EventDetailsSegue"){
             let eventIn = segue.destination as! EventDetailsViewController
             eventIn.event = sender as? EventPost
+            if myEvents {
+                eventIn.myEvents = true
+            }
         }
     }
     
@@ -448,24 +498,29 @@ class EventListViewController: UIViewController, UICollectionViewDelegate, UICol
         } else {
             self.eventTableView.isHidden = false
         }
-        if selectedCalendarOption == "Today" {
+        if myEvents {
             self.noEventImg.image = UIImage(named: "sad1")
-            self.noEventLabel.text = "Shoot! It Doesn't Look Like Anything is Happening Today..."
-        } else if selectedCalendarOption == "Tomorrow" {
-            self.noEventImg.image = UIImage(named: "sad2")
-            self.noEventLabel.text = "Sorry, There isn't Much Going On Tomorrow..."
-        } else if selectedCalendarOption == "This Week" {
-            self.noEventImg.image = UIImage(named: "sad3")
-            self.noEventLabel.text = "How is There Nothing Happening This Week?"
-        } else if selectedCalendarOption == "Next Week" {
-            self.noEventImg.image = UIImage(named: "sad4")
-            self.noEventLabel.text = "This Next is Looking Uneventful"
-        } else if selectedCalendarOption == "This Month" {
-            self.noEventImg.image = UIImage(named: "sad5")
-            self.noEventLabel.text = "This Month is dry"
+            self.noEventLabel.text = "You Have No Events Set for This Time"
         } else {
-            self.noEventImg.image = UIImage(named: "sad5")
-            self.noEventLabel.text = "Wow, This Place is Dead!"
+            if selectedCalendarOption == "Today" {
+                self.noEventImg.image = UIImage(named: "sad1")
+                self.noEventLabel.text = "Shoot! It Doesn't Look Like Anything is Happening Today..."
+            } else if selectedCalendarOption == "Tomorrow" {
+                self.noEventImg.image = UIImage(named: "sad2")
+                self.noEventLabel.text = "Sorry, There isn't Much Going On Tomorrow..."
+            } else if selectedCalendarOption == "This Week" {
+                self.noEventImg.image = UIImage(named: "sad3")
+                self.noEventLabel.text = "How is There Nothing Happening This Week?"
+            } else if selectedCalendarOption == "Next Week" {
+                self.noEventImg.image = UIImage(named: "sad4")
+                self.noEventLabel.text = "This Next Week is Looking Uneventful"
+            } else if selectedCalendarOption == "This Month" {
+                self.noEventImg.image = UIImage(named: "sad5")
+                self.noEventLabel.text = "This Month is Dry"
+            } else {
+                self.noEventImg.image = UIImage(named: "sad5")
+                self.noEventLabel.text = "Wow, This Place is Dead!"
+            }
         }
     }
 }

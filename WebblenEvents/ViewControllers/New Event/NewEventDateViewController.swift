@@ -19,7 +19,7 @@ class NewEventDateViewController: UIViewController {
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     
     //Event Date
-    var eventDate: String?
+    var eventDate = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,7 @@ class NewEventDateViewController: UIViewController {
     func isValid() -> Bool{
         var isValid = true
         dateFormatter.dateFormat = "MM/dd/yyyy"
-        if dateFormatter.date(from: eventDate!)! + 1.day < Date() {
+        if eventDate + 1.day < Date() {
             isValid = false
         }
         return isValid
@@ -52,7 +52,7 @@ class NewEventDateViewController: UIViewController {
         if isValid() {
             if let parentVC = self.parent {
                 if let parentVC = parentVC as? NewEventPagingViewController {
-                    parentVC.newEvent.startDate = eventDate!
+                    parentVC.newEvent.startDate = dateFormatter.string(from: eventDate)
                     parentVC.displayPageForIndex(index: 4)
                 }
             }
@@ -78,18 +78,14 @@ class NewEventDateViewController: UIViewController {
 extension NewEventDateViewController: JTAppleCalendarViewDelegate, JTAppleCalendarViewDataSource {
     
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
-        dateFormatter.dateFormat = "dd/MM/yyyy"
+        dateFormatter.dateFormat = "MM/dd/yyyy"
         dateFormatter.timeZone = Calendar.current.timeZone
         dateFormatter.locale = Calendar.current.locale
         let currentDate = Date() 
         let dateInAYear = Date() + 1.year
-        let formattedDateToday = dateFormatter.string(from: currentDate)
-        let formattedDateInAYear = dateFormatter.string(from: dateInAYear)
-        eventDate = formattedDateToday
-        let startDate = dateFormatter.date(from: formattedDateToday)
-        let endDate = dateFormatter.date(from: formattedDateInAYear)
-
-        let params = ConfigurationParameters(startDate: startDate!, endDate: endDate!)
+        let startDate = currentDate
+        let endDate = dateInAYear
+        let params = ConfigurationParameters(startDate: startDate, endDate: endDate)
         return params
     }
     
@@ -108,8 +104,7 @@ extension NewEventDateViewController: JTAppleCalendarViewDelegate, JTAppleCalend
         guard let dateCell = cell as? CalendarCollectionViewCell else { return }
         dateCell.dateBackgroundView.isHidden = false
         dateCell.dateLabel.textColor = .white
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        eventDate = dateFormatter.string(from: date)
+        eventDate = date
         //print(eventDate!)
     }
     

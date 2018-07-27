@@ -29,13 +29,13 @@ class InitialViewController: UIViewController {
                 let homeViewController: UIViewController = mainStoryBoard.instantiateViewController(withIdentifier: "DashboardViewController")
                 self.present(homeViewController, animated: true, completion: nil)
             } else {
-                UIView.animate(withDuration: 2.0, delay: 1.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                UIView.animate(withDuration: 1.5, delay: 0.5, options: UIViewAnimationOptions.curveEaseIn, animations: {
                     self.welcomeHeadText.alpha = 1.0
                 }, completion: nil)
-                UIView.animate(withDuration: 2.0, delay: 3.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                UIView.animate(withDuration: 1.5, delay: 2.5, options: UIViewAnimationOptions.curveEaseIn, animations: {
                     self.welcomeSubtext.alpha = 1.0
                 }, completion: nil)
-                UIView.animate(withDuration: 1.0, delay: 5.5, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                UIView.animate(withDuration: 1.5, delay: 4.75, options: UIViewAnimationOptions.curveEaseIn, animations: {
                     self.loginBtn.alpha = 1.0
                 }, completion: nil)
             }

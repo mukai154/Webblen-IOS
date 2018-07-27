@@ -104,7 +104,6 @@ class GeotificationsViewController: UIViewController, CLLocationManagerDelegate,
         self.view.addSubview(loadingView)
         loadingView.startAnimating()
         
-        UIApplication.shared.applicationIconBadgeNumber = 0
 
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in }
         

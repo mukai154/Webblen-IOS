@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import PCLBlurEffectAlert
 import MapKit
+import Hero
 
 class EventDetailsViewController: UIViewController {
 
@@ -19,8 +20,11 @@ class EventDetailsViewController: UIViewController {
     
     //Event
     var event:EventPost?
+    var myEvents = false
     
     //UI
+    @IBOutlet weak var navigationBackground: UIView!
+    @IBOutlet weak var navigationLbl: UILabel!
     @IBOutlet weak var detailsScrollView: UIScrollView!
     @IBOutlet weak var eventImage: UIImageViewX!
     @IBOutlet weak var eventImageHeightConstraint: NSLayoutConstraint!
@@ -46,9 +50,26 @@ class EventDetailsViewController: UIViewController {
     @IBOutlet weak var twitterLinkView: UIView!
     @IBOutlet weak var websiteLinkView: UIView!
     @IBOutlet weak var noAdditionalDetailsLbl: UILabel!
+    
+    var myEventsColor = UIColor(red: 104/255, green: 109/255, blue: 224/255, alpha: 1.0)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setHeroIDs()
+        if myEvents {
+            navigationLbl.text = "My Events"
+            navigationBackground.backgroundColor = myEventsColor
+        }
         loadEventData()
+    }
+    
+    //Override Status Bar
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
     }
     
 
@@ -58,7 +79,7 @@ class EventDetailsViewController: UIViewController {
     
     @IBAction func didPressFullDescription(_ sender: Any) {
         if self.eventDescriptionLbl.isHidden {
-            UIView.animate(withDuration: 1.0, animations: {
+            UIView.animate(withDuration: 0.3, animations: {
                 self.eventDescriptionLbl.isHidden = false
                 self.view.layoutIfNeeded()
             })
@@ -75,6 +96,21 @@ class EventDetailsViewController: UIViewController {
         setupMaps()
     }
     
+    func setHeroIDs(){
+        //Set Hero
+        self.hero.isEnabled = true
+        eventImage.hero.id = "eventImageView"
+        eventAuthorImage.hero.id = "eventAuthorImage"
+        eventTitleLbl.hero.id = "eventTitle"
+        eventUsernameLbl.hero.id = "eventAuthorName"
+        eventCaptionLable.hero.id = "eventCaption"
+        if myEvents {
+            navigationBackground.hero.id = "calendar"
+        } else {
+            navigationBackground.hero.id = "list"
+        }
+    }
+    
     func loadEventData(){
         if event != nil {
             var eventDateTime = ""
@@ -87,6 +123,7 @@ class EventDetailsViewController: UIViewController {
                 eventDateTime = (event?.startTime)!
             }
             eventTitleLbl.text = event?.title
+            eventUsernameLbl.text = "@" + (event?.author)!
             eventCaptionLable.text = event?.caption
             eventMonthDayLbl.text = eventDateComponents?[0]
             eventYearLbl.text = eventDateComponents?[1]

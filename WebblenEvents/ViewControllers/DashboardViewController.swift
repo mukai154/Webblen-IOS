@@ -9,9 +9,11 @@
 import UIKit
 import Firebase
 import PCLBlurEffectAlert
+import CoreLocation
+import UserNotifications
 import Hero
 
-class DashboardViewController: UIViewController {
+class DashboardViewController: UIViewController, CLLocationManagerDelegate {
 
     //Firebase References
     var dataBase = Firestore.firestore()
@@ -19,6 +21,7 @@ class DashboardViewController: UIViewController {
     var profilePicStorage = Storage.storage().reference(forURL: "gs://webblen-events.appspot.com/profile_pics")
     var imagePicker = UIImagePickerController()
     var userImg:UIImage?
+    var username:String?
     
     
     @IBOutlet var dashboardView: UIView!
@@ -33,6 +36,13 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var notificationView: UIViewX!
     @IBOutlet weak var notificationCountLbl: UILabel!
     
+    @IBOutlet weak var heartIcon: UIImageView!
+    @IBOutlet weak var calendarIcon: UIImageView!
+    @IBOutlet weak var walletIcon: UIImageView!
+    @IBOutlet weak var mapIcon: UIImageView!
+    @IBOutlet weak var listIcon: UIImageView!
+    
+    
     //QRCODE
     var filter = CIFilter(name: "CIQRCodeGenerator")
     var uidQRCodeImg:UIImage?
@@ -40,27 +50,41 @@ class DashboardViewController: UIViewController {
     var scaleX:CGFloat?
     var scaleY:CGFloat?
     
+    //Location
+    var locationManager = CLLocationManager()
+    
     //App
     var CURRENT_APP_VERSION = "3.4.2"
     var notificationCount:Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        locationAccessCheck()
+        requestPermissions()
         setHeroIDS()
         loadFirestoreProfileData()
     }
     
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    //Override Status Bar
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .default
+    }
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .default
     }
     
     //HERO TRANSITIONS
     func setHeroIDS(){
-        userProfilePic.hero.id = "profile_pic"
+        heartIcon.hero.id = "heart"
+        calendarIcon.hero.id = "calendar"
+        walletIcon.hero.id = "wallet"
+        mapIcon.hero.id = "map"
+        listIcon.hero.id = "list"
+        userProfilePic.hero.id = "profileImage"
         usernameLbl.hero.id = "username"
-        accountValLbl.hero.id = "account_value"
+        accountValLbl.hero.id = "accountValue"
     }
     
     //** FIREBASE
@@ -87,7 +111,8 @@ class DashboardViewController: UIViewController {
                         self.userQRCode.clipsToBounds = true
                         self.userQRBtn.isHidden = false
                         self.userQRCode.isHidden = false
-                        self.usernameLbl.text = "@" +  currentUsername!.lowercased()
+                        self.username = "@" +  currentUsername!.lowercased()
+                        self.usernameLbl.text = self.username
                         self.usernameLbl.isHidden = false
                         self.accountValLbl.isHidden = false
                         self.activityIndicator.isHidden = true
@@ -192,9 +217,34 @@ class DashboardViewController: UIViewController {
         if (segue.identifier == "myEventsSegue"){
             let eventIn = segue.destination as! EventListViewController
             eventIn.myEvents = true
+        } else if (segue.identifier == "walletSegue"){
+            let eventIn = segue.destination as! WalletViewController
+            eventIn.userImg = self.userImg
+            eventIn.username = self.username ?? ""
         }
     }
     
+    func requestPermissions(){
+        //Notification Request
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in }
+        //Location Request
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+    }
     
+    func locationAccessCheck(){
+        func locationAccessCheck(){
+            if CLLocationManager.locationServicesEnabled(){
+                switch CLLocationManager.authorizationStatus() {
+                case .notDetermined, .restricted, .denied:
+                    showBlurAlert(title: "Not Able to Retrieve Your Location", message: "It looks like this device has location services disabled. Enable them to Know What is Happening Around You")
+                case .authorizedAlways:
+                    break
+                case .authorizedWhenInUse:
+                    break
+                }
+            }
+        }
+    }
     
 }
